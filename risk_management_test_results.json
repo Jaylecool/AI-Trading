@@ -1,0 +1,1647 @@
+[
+  {
+    "scenario": "Extreme Volatility Spike",
+    "test": "STOP_LOSS_TRIGGER",
+    "entry_price": 102.3060320136544,
+    "stop_loss_price": 100.77144153344959,
+    "stop_loss_percent": 0.015,
+    "triggered": true,
+    "triggered_day": 9,
+    "triggered_price": 99.21839873059916,
+    "max_profit": 0.110587426167947,
+    "max_drawdown": -0.030180363975441302,
+    "price_path": [
+      {
+        "day": 5,
+        "price": 102.3060320136544,
+        "pnl_percent": 0.0,
+        "distance_to_sl": 0.01522842639593905
+      },
+      {
+        "day": 6,
+        "price": 101.10835086299328,
+        "pnl_percent": -0.01170684784745904,
+        "distance_to_sl": 0.003343301677706524
+      },
+      {
+        "day": 7,
+        "price": 109.09193103487611,
+        "pnl_percent": 0.06632941272041536,
+        "distance_to_sl": 0.08256793169585312
+      },
+      {
+        "day": 8,
+        "price": 113.27797786220201,
+        "pnl_percent": 0.10724632392235896,
+        "distance_to_sl": 0.12410794306838469
+      },
+      {
+        "day": 9,
+        "price": 110.6189224073615,
+        "pnl_percent": 0.0812551345222499,
+        "distance_to_sl": 0.09772094875355315
+      },
+      {
+        "day": 10,
+        "price": 113.61979277550003,
+        "pnl_percent": 0.110587426167947,
+        "distance_to_sl": 0.12749992504360097
+      },
+      {
+        "day": 11,
+        "price": 110.98712166420742,
+        "pnl_percent": 0.08485413303288301,
+        "distance_to_sl": 0.10137475434810454
+      },
+      {
+        "day": 12,
+        "price": 108.40262142310026,
+        "pnl_percent": 0.05959169063102913,
+        "distance_to_sl": 0.07572760470155238
+      },
+      {
+        "day": 13,
+        "price": 109.71408864926258,
+        "pnl_percent": 0.07241075125090816,
+        "distance_to_sl": 0.08874187944254631
+      },
+      {
+        "day": 14,
+        "price": 99.21839873059916,
+        "pnl_percent": -0.030180363975441302,
+        "distance_to_sl": -0.01541153703090491
+      }
+    ],
+    "exit_pnl": -0.030180363975441302
+  },
+  {
+    "scenario": "Extreme Volatility Spike",
+    "test": "TRAILING_STOP",
+    "entry_price": 102.3060320136544,
+    "trailing_percent": 0.03,
+    "max_price_reached": 113.61979277550003,
+    "triggered": true,
+    "triggered_day": 7,
+    "triggered_price": 108.40262142310026,
+    "max_profit": 0.110587426167947,
+    "price_path": [
+      {
+        "day": 5,
+        "price": 102.3060320136544,
+        "trailing_stop": 99.23685105324476,
+        "distance_to_trailing_sl": 0.030927835051546466
+      },
+      {
+        "day": 6,
+        "price": 101.10835086299328,
+        "trailing_stop": 99.23685105324476,
+        "distance_to_trailing_sl": 0.01885891974488766
+      },
+      {
+        "day": 7,
+        "price": 109.09193103487611,
+        "trailing_stop": 105.81917310382983,
+        "distance_to_trailing_sl": 0.030927835051546414
+      },
+      {
+        "day": 8,
+        "price": 113.27797786220201,
+        "trailing_stop": 109.87963852633594,
+        "distance_to_trailing_sl": 0.030927835051546476
+      },
+      {
+        "day": 9,
+        "price": 110.6189224073615,
+        "trailing_stop": 109.87963852633594,
+        "distance_to_trailing_sl": 0.006728124436342821
+      },
+      {
+        "day": 10,
+        "price": 113.61979277550003,
+        "trailing_stop": 110.21119899223503,
+        "distance_to_trailing_sl": 0.030927835051546428
+      },
+      {
+        "day": 11,
+        "price": 110.98712166420742,
+        "trailing_stop": 110.21119899223503,
+        "distance_to_trailing_sl": 0.007040325112759761
+      },
+      {
+        "day": 12,
+        "price": 108.40262142310026,
+        "trailing_stop": 108.40262142310026,
+        "distance_to_trailing_sl": 0.0
+      }
+    ],
+    "exit_pnl": 0.05959169063102913
+  },
+  {
+    "scenario": "Extreme Volatility Spike",
+    "test": "DYNAMIC_POSITION_SIZING",
+    "portfolio_value": 100000,
+    "sizing_analysis": [
+      {
+        "day": 5,
+        "price": 102.3060320136544,
+        "volatility": 0.006334621540984467,
+        "volatility_category": "VERY_LOW",
+        "confidence": 0.7912139968434071,
+        "base_shares": 146,
+        "adjusted_shares": 146,
+        "size_reduction_pct": 0.0,
+        "position_value": 14936.680673993542,
+        "position_pct": 0.1493668067399354
+      },
+      {
+        "day": 6,
+        "price": 101.10835086299328,
+        "volatility": 0.008386106231370687,
+        "volatility_category": "VERY_LOW",
+        "confidence": 0.8570351922786027,
+        "base_shares": 148,
+        "adjusted_shares": 148,
+        "size_reduction_pct": 0.0,
+        "position_value": 14964.035927723005,
+        "position_pct": 0.14964035927723005
+      },
+      {
+        "day": 7,
+        "price": 109.09193103487611,
+        "volatility": 0.030117144203400024,
+        "volatility_category": "HIGH",
+        "confidence": 0.739934756431672,
+        "base_shares": 137,
+        "adjusted_shares": 136,
+        "size_reduction_pct": 0.7299270072992692,
+        "position_value": 14836.502620743151,
+        "position_pct": 0.1483650262074315
+      },
+      {
+        "day": 8,
+        "price": 113.27797786220201,
+        "volatility": 0.030331004196914035,
+        "volatility_category": "HIGH",
+        "confidence": 0.8028468876827223,
+        "base_shares": 132,
+        "adjusted_shares": 131,
+        "size_reduction_pct": 0.7575757575757569,
+        "position_value": 14839.415099948463,
+        "position_pct": 0.14839415099948464
+      },
+      {
+        "day": 9,
+        "price": 110.6189224073615,
+        "volatility": 0.03446551826621359,
+        "volatility_category": "HIGH",
+        "confidence": 0.8184829137724084,
+        "base_shares": 135,
+        "adjusted_shares": 131,
+        "size_reduction_pct": 2.9629629629629672,
+        "position_value": 14491.078835364357,
+        "position_pct": 0.14491078835364357
+      },
+      {
+        "day": 10,
+        "price": 113.61979277550003,
+        "volatility": 0.03471475218342454,
+        "volatility_category": "HIGH",
+        "confidence": 0.7092900825439995,
+        "base_shares": 132,
+        "adjusted_shares": 128,
+        "size_reduction_pct": 3.0303030303030276,
+        "position_value": 14543.333475264004,
+        "position_pct": 0.14543333475264003
+      },
+      {
+        "day": 11,
+        "price": 110.98712166420742,
+        "volatility": 0.037488366852608535,
+        "volatility_category": "HIGH",
+        "confidence": 0.8215089703802876,
+        "base_shares": 135,
+        "adjusted_shares": 129,
+        "size_reduction_pct": 4.444444444444439,
+        "position_value": 14317.338694682758,
+        "position_pct": 0.14317338694682757
+      },
+      {
+        "day": 12,
+        "price": 108.40262142310026,
+        "volatility": 0.039045909368512495,
+        "volatility_category": "HIGH",
+        "confidence": 0.7341048247374583,
+        "base_shares": 138,
+        "adjusted_shares": 131,
+        "size_reduction_pct": 5.072463768115942,
+        "position_value": 14200.743406426134,
+        "position_pct": 0.14200743406426133
+      },
+      {
+        "day": 13,
+        "price": 109.71408864926258,
+        "volatility": 0.025739244931535996,
+        "volatility_category": "NORMAL",
+        "confidence": 0.7130103185970559,
+        "base_shares": 136,
+        "adjusted_shares": 136,
+        "size_reduction_pct": 0.0,
+        "position_value": 14921.11605629971,
+        "position_pct": 0.1492111605629971
+      },
+      {
+        "day": 14,
+        "price": 99.21839873059916,
+        "volatility": 0.03873530215896216,
+        "volatility_category": "HIGH",
+        "confidence": 0.8897771074506666,
+        "base_shares": 151,
+        "adjusted_shares": 144,
+        "size_reduction_pct": 4.635761589403975,
+        "position_value": 14287.449417206279,
+        "position_pct": 0.1428744941720628
+      }
+    ]
+  },
+  {
+    "scenario": "Rapid Market Drawdown",
+    "test": "STOP_LOSS_TRIGGER",
+    "entry_price": 90.39207968,
+    "stop_loss_price": 89.0361984848,
+    "stop_loss_percent": 0.015,
+    "triggered": true,
+    "triggered_day": 2,
+    "triggered_price": 88.96448010511635,
+    "max_profit": 0,
+    "max_drawdown": -0.015793414422342493,
+    "price_path": [
+      {
+        "day": 5,
+        "price": 90.39207968,
+        "pnl_percent": 0.0,
+        "distance_to_sl": 0.01522842639593907
+      },
+      {
+        "day": 6,
+        "price": 89.39661215331937,
+        "pnl_percent": -0.01101277379837609,
+        "distance_to_sl": 0.004047945382359284
+      },
+      {
+        "day": 7,
+        "price": 88.96448010511635,
+        "pnl_percent": -0.015793414422342493,
+        "distance_to_sl": -0.0008054968754746273
+      }
+    ],
+    "exit_pnl": -0.015793414422342493
+  },
+  {
+    "scenario": "Rapid Market Drawdown",
+    "test": "TRAILING_STOP",
+    "entry_price": 90.39207968,
+    "trailing_percent": 0.03,
+    "max_price_reached": 90.39207968,
+    "triggered": true,
+    "triggered_day": 2,
+    "triggered_price": 87.36855221739894,
+    "max_profit": 0,
+    "price_path": [
+      {
+        "day": 5,
+        "price": 90.39207968,
+        "trailing_stop": 87.6803172896,
+        "distance_to_trailing_sl": 0.030927835051546358
+      },
+      {
+        "day": 6,
+        "price": 89.93812397480701,
+        "trailing_stop": 87.6803172896,
+        "distance_to_trailing_sl": 0.02575043926620028
+      },
+      {
+        "day": 7,
+        "price": 87.36855221739894,
+        "trailing_stop": 87.36855221739894,
+        "distance_to_trailing_sl": 0.0
+      }
+    ],
+    "exit_pnl": -0.03344903085872946
+  },
+  {
+    "scenario": "Rapid Market Drawdown",
+    "test": "DYNAMIC_POSITION_SIZING",
+    "portfolio_value": 100000,
+    "sizing_analysis": [
+      {
+        "day": 5,
+        "price": 90.39207968,
+        "volatility": 7.021666937153402e-17,
+        "volatility_category": "VERY_LOW",
+        "confidence": 0.8045465658763988,
+        "base_shares": 165,
+        "adjusted_shares": 165,
+        "size_reduction_pct": 0.0,
+        "position_value": 14914.6931472,
+        "position_pct": 0.149146931472
+      },
+      {
+        "day": 6,
+        "price": 91.08134356941002,
+        "volatility": 0.01029532975817665,
+        "volatility_category": "LOW",
+        "confidence": 0.7855082036717099,
+        "base_shares": 164,
+        "adjusted_shares": 164,
+        "size_reduction_pct": 0.0,
+        "position_value": 14937.340345383243,
+        "position_pct": 0.14937340345383243
+      },
+      {
+        "day": 7,
+        "price": 92.94950413079735,
+        "volatility": 0.016485005246925977,
+        "volatility_category": "LOW",
+        "confidence": 0.705083825348819,
+        "base_shares": 161,
+        "adjusted_shares": 161,
+        "size_reduction_pct": 0.0,
+        "position_value": 14964.870165058373,
+        "position_pct": 0.14964870165058372
+      },
+      {
+        "day": 8,
+        "price": 92.1516734789287,
+        "volatility": 0.015704849883973176,
+        "volatility_category": "LOW",
+        "confidence": 0.7215782853986609,
+        "base_shares": 162,
+        "adjusted_shares": 162,
+        "size_reduction_pct": 0.0,
+        "position_value": 14928.57110358645,
+        "position_pct": 0.1492857110358645
+      },
+      {
+        "day": 9,
+        "price": 91.90164944448851,
+        "volatility": 0.014551506173952747,
+        "volatility_category": "LOW",
+        "confidence": 0.7062858371373468,
+        "base_shares": 163,
+        "adjusted_shares": 163,
+        "size_reduction_pct": 0.0,
+        "position_value": 14979.968859451628,
+        "position_pct": 0.14979968859451628
+      },
+      {
+        "day": 10,
+        "price": 89.96007091494741,
+        "volatility": 0.01476428992555272,
+        "volatility_category": "LOW",
+        "confidence": 0.827282082252756,
+        "base_shares": 166,
+        "adjusted_shares": 166,
+        "size_reduction_pct": 0.0,
+        "position_value": 14933.37177188127,
+        "position_pct": 0.1493337177188127
+      },
+      {
+        "day": 11,
+        "price": 88.79570877855375,
+        "volatility": 0.013688560655982914,
+        "volatility_category": "LOW",
+        "confidence": 0.7628711962152653,
+        "base_shares": 168,
+        "adjusted_shares": 168,
+        "size_reduction_pct": 0.0,
+        "position_value": 14917.67907479703,
+        "position_pct": 0.1491767907479703
+      },
+      {
+        "day": 12,
+        "price": 90.32191941695207,
+        "volatility": 0.015281909408808959,
+        "volatility_category": "LOW",
+        "confidence": 0.8017141382329405,
+        "base_shares": 166,
+        "adjusted_shares": 166,
+        "size_reduction_pct": 0.0,
+        "position_value": 14993.438623214044,
+        "position_pct": 0.14993438623214045
+      },
+      {
+        "day": 13,
+        "price": 92.6110020525961,
+        "volatility": 0.016488788338757224,
+        "volatility_category": "LOW",
+        "confidence": 0.8815132947852186,
+        "base_shares": 161,
+        "adjusted_shares": 161,
+        "size_reduction_pct": 0.0,
+        "position_value": 14910.371330467973,
+        "position_pct": 0.14910371330467972
+      },
+      {
+        "day": 14,
+        "price": 92.97402312009683,
+        "volatility": 0.01611794980579419,
+        "volatility_category": "LOW",
+        "confidence": 0.7498584458297749,
+        "base_shares": 161,
+        "adjusted_shares": 161,
+        "size_reduction_pct": 0.0,
+        "position_value": 14968.81772233559,
+        "position_pct": 0.1496881772233559
+      }
+    ]
+  },
+  {
+    "scenario": "Sector Crash",
+    "test": "STOP_LOSS_TRIGGER",
+    "entry_price": 86.42012653245926,
+    "stop_loss_price": 85.12382463447237,
+    "stop_loss_percent": 0.015,
+    "triggered": true,
+    "triggered_day": 1,
+    "triggered_price": 83.23294279487739,
+    "max_profit": 0,
+    "max_drawdown": -0.036880109593275985,
+    "price_path": [
+      {
+        "day": 5,
+        "price": 86.42012653245926,
+        "pnl_percent": 0.0,
+        "distance_to_sl": 0.015228426395939139
+      },
+      {
+        "day": 6,
+        "price": 83.23294279487739,
+        "pnl_percent": -0.036880109593275985,
+        "distance_to_sl": -0.022213309231752222
+      }
+    ],
+    "exit_pnl": -0.036880109593275985
+  },
+  {
+    "scenario": "Sector Crash",
+    "test": "TRAILING_STOP",
+    "entry_price": 86.42012653245926,
+    "trailing_percent": 0.03,
+    "max_price_reached": 86.42012653245926,
+    "triggered": true,
+    "triggered_day": 1,
+    "triggered_price": 83.23294279487739,
+    "max_profit": 0,
+    "price_path": [
+      {
+        "day": 5,
+        "price": 86.42012653245926,
+        "trailing_stop": 83.82752273648548,
+        "distance_to_trailing_sl": 0.0309278350515465
+      },
+      {
+        "day": 6,
+        "price": 83.23294279487739,
+        "trailing_stop": 83.23294279487739,
+        "distance_to_trailing_sl": 0.0
+      }
+    ],
+    "exit_pnl": -0.036880109593275985
+  },
+  {
+    "scenario": "Sector Crash",
+    "test": "DYNAMIC_POSITION_SIZING",
+    "portfolio_value": 100000,
+    "sizing_analysis": [
+      {
+        "day": 5,
+        "price": 86.42012653245926,
+        "volatility": 0.005523056592650495,
+        "volatility_category": "VERY_LOW",
+        "confidence": 0.8570351922786027,
+        "base_shares": 173,
+        "adjusted_shares": 173,
+        "size_reduction_pct": 0.0,
+        "position_value": 14950.681890115453,
+        "position_pct": 0.14950681890115453
+      },
+      {
+        "day": 6,
+        "price": 83.23294279487739,
+        "volatility": 0.005881777951983437,
+        "volatility_category": "VERY_LOW",
+        "confidence": 0.739934756431672,
+        "base_shares": 180,
+        "adjusted_shares": 180,
+        "size_reduction_pct": 0.0,
+        "position_value": 14981.92970307793,
+        "position_pct": 0.1498192970307793
+      },
+      {
+        "day": 7,
+        "price": 80.00031448246061,
+        "volatility": 0.006725101386057075,
+        "volatility_category": "VERY_LOW",
+        "confidence": 0.8028468876827223,
+        "base_shares": 187,
+        "adjusted_shares": 187,
+        "size_reduction_pct": 0.0,
+        "position_value": 14960.058808220134,
+        "position_pct": 0.14960058808220134
+      },
+      {
+        "day": 8,
+        "price": 81.11648403894077,
+        "volatility": 0.01825571952570022,
+        "volatility_category": "LOW",
+        "confidence": 0.8184829137724084,
+        "base_shares": 184,
+        "adjusted_shares": 184,
+        "size_reduction_pct": 0.0,
+        "position_value": 14925.433063165101,
+        "position_pct": 0.149254330631651
+      },
+      {
+        "day": 9,
+        "price": 85.21495638749649,
+        "volatility": 0.0336533438686374,
+        "volatility_category": "HIGH",
+        "confidence": 0.7092900825439995,
+        "base_shares": 176,
+        "adjusted_shares": 172,
+        "size_reduction_pct": 2.2727272727272707,
+        "position_value": 14656.972498649395,
+        "position_pct": 0.14656972498649395
+      },
+      {
+        "day": 10,
+        "price": 82.73998114463328,
+        "volatility": 0.03373263113203582,
+        "volatility_category": "HIGH",
+        "confidence": 0.8215089703802876,
+        "base_shares": 181,
+        "adjusted_shares": 177,
+        "size_reduction_pct": 2.209944751381221,
+        "position_value": 14644.97666260009,
+        "position_pct": 0.1464497666260009
+      },
+      {
+        "day": 11,
+        "price": 80.56735414745074,
+        "volatility": 0.03268825658925882,
+        "volatility_category": "HIGH",
+        "confidence": 0.7341048247374583,
+        "base_shares": 186,
+        "adjusted_shares": 183,
+        "size_reduction_pct": 1.6129032258064502,
+        "position_value": 14743.825808983485,
+        "position_pct": 0.14743825808983485
+      },
+      {
+        "day": 12,
+        "price": 78.2656247390936,
+        "volatility": 0.031728049148571254,
+        "volatility_category": "HIGH",
+        "confidence": 0.7130103185970559,
+        "base_shares": 191,
+        "adjusted_shares": 189,
+        "size_reduction_pct": 1.0471204188481686,
+        "position_value": 14792.203075688689,
+        "position_pct": 0.1479220307568869
+      },
+      {
+        "day": 13,
+        "price": 77.46411990828499,
+        "volatility": 0.029026614989133403,
+        "volatility_category": "NORMAL",
+        "confidence": 0.8897771074506666,
+        "base_shares": 193,
+        "adjusted_shares": 193,
+        "size_reduction_pct": 0.0,
+        "position_value": 14950.575142299002,
+        "position_pct": 0.14950575142299002
+      },
+      {
+        "day": 14,
+        "price": 75.36286768852102,
+        "volatility": 0.028604781537355618,
+        "volatility_category": "NORMAL",
+        "confidence": 0.8931264066149118,
+        "base_shares": 199,
+        "adjusted_shares": 199,
+        "size_reduction_pct": 0.0,
+        "position_value": 14997.210670015684,
+        "position_pct": 0.14997210670015684
+      }
+    ]
+  },
+  {
+    "scenario": "Flash Crash Event",
+    "test": "STOP_LOSS_TRIGGER",
+    "entry_price": 102.3060320136544,
+    "stop_loss_price": 100.77144153344959,
+    "stop_loss_percent": 0.015,
+    "triggered": true,
+    "triggered_day": 6,
+    "triggered_price": 83.63816075930234,
+    "max_profit": 0.021911405333111988,
+    "max_drawdown": -0.18247087573351037,
+    "price_path": [
+      {
+        "day": 5,
+        "price": 102.3060320136544,
+        "pnl_percent": 0.0,
+        "distance_to_sl": 0.01522842639593905
+      },
+      {
+        "day": 6,
+        "price": 102.06649578352217,
+        "pnl_percent": -0.0023413695694918632,
+        "distance_to_sl": 0.012851401452292488
+      },
+      {
+        "day": 7,
+        "price": 103.67834296527487,
+        "pnl_percent": 0.01341378337728225,
+        "distance_to_sl": 0.028846480586073312
+      },
+      {
+        "day": 8,
+        "price": 104.47400657580064,
+        "pnl_percent": 0.021191072700941917,
+        "distance_to_sl": 0.036742205787758254
+      },
+      {
+        "day": 9,
+        "price": 103.98352787496727,
+        "pnl_percent": 0.01639684218315665,
+        "distance_to_sl": 0.03187496668340773
+      },
+      {
+        "day": 10,
+        "price": 104.54770094912791,
+        "pnl_percent": 0.021911405333111988,
+        "distance_to_sl": 0.03747350795239792
+      },
+      {
+        "day": 11,
+        "price": 83.63816075930234,
+        "pnl_percent": -0.18247087573351037,
+        "distance_to_sl": -0.1700211936380816
+      }
+    ],
+    "exit_pnl": -0.18247087573351037
+  },
+  {
+    "scenario": "Flash Crash Event",
+    "test": "TRAILING_STOP",
+    "entry_price": 102.3060320136544,
+    "trailing_percent": 0.03,
+    "max_price_reached": 104.54770094912791,
+    "triggered": true,
+    "triggered_day": 6,
+    "triggered_price": 83.63816075930234,
+    "max_profit": 0.021911405333111988,
+    "price_path": [
+      {
+        "day": 5,
+        "price": 102.3060320136544,
+        "trailing_stop": 99.23685105324476,
+        "distance_to_trailing_sl": 0.030927835051546466
+      },
+      {
+        "day": 6,
+        "price": 102.06649578352217,
+        "trailing_stop": 99.23685105324476,
+        "distance_to_trailing_sl": 0.02851405199021465
+      },
+      {
+        "day": 7,
+        "price": 103.67834296527487,
+        "trailing_stop": 100.56799267631662,
+        "distance_to_trailing_sl": 0.030927835051546376
+      },
+      {
+        "day": 8,
+        "price": 104.47400657580064,
+        "trailing_stop": 101.33978637852663,
+        "distance_to_trailing_sl": 0.030927835051546382
+      },
+      {
+        "day": 9,
+        "price": 103.98352787496727,
+        "trailing_stop": 101.33978637852663,
+        "distance_to_trailing_sl": 0.02608789292850567
+      },
+      {
+        "day": 10,
+        "price": 104.54770094912791,
+        "trailing_stop": 101.41126992065408,
+        "distance_to_trailing_sl": 0.030927835051546382
+      },
+      {
+        "day": 11,
+        "price": 83.63816075930234,
+        "trailing_stop": 83.63816075930234,
+        "distance_to_trailing_sl": 0.0
+      }
+    ],
+    "exit_pnl": -0.18247087573351037
+  },
+  {
+    "scenario": "Flash Crash Event",
+    "test": "DYNAMIC_POSITION_SIZING",
+    "portfolio_value": 100000,
+    "sizing_analysis": [
+      {
+        "day": 5,
+        "price": 102.3060320136544,
+        "volatility": 0.006334621540984467,
+        "volatility_category": "VERY_LOW",
+        "confidence": 0.8184829137724084,
+        "base_shares": 146,
+        "adjusted_shares": 146,
+        "size_reduction_pct": 0.0,
+        "position_value": 14936.680673993542,
+        "position_pct": 0.1493668067399354
+      },
+      {
+        "day": 6,
+        "price": 102.06649578352217,
+        "volatility": 0.0063334306663322916,
+        "volatility_category": "VERY_LOW",
+        "confidence": 0.7092900825439995,
+        "base_shares": 146,
+        "adjusted_shares": 146,
+        "size_reduction_pct": 0.0,
+        "position_value": 14901.708384394236,
+        "position_pct": 0.14901708384394236
+      },
+      {
+        "day": 7,
+        "price": 103.67834296527487,
+        "volatility": 0.007868709889375615,
+        "volatility_category": "VERY_LOW",
+        "confidence": 0.8215089703802876,
+        "base_shares": 144,
+        "adjusted_shares": 144,
+        "size_reduction_pct": 0.0,
+        "position_value": 14929.68138699958,
+        "position_pct": 0.1492968138699958
+      },
+      {
+        "day": 8,
+        "price": 104.47400657580064,
+        "volatility": 0.007301980634317182,
+        "volatility_category": "VERY_LOW",
+        "confidence": 0.7341048247374583,
+        "base_shares": 143,
+        "adjusted_shares": 143,
+        "size_reduction_pct": 0.0,
+        "position_value": 14939.782940339492,
+        "position_pct": 0.1493978294033949
+      },
+      {
+        "day": 9,
+        "price": 103.98352787496727,
+        "volatility": 0.008465476861605477,
+        "volatility_category": "VERY_LOW",
+        "confidence": 0.7130103185970559,
+        "base_shares": 144,
+        "adjusted_shares": 144,
+        "size_reduction_pct": 0.0,
+        "position_value": 14973.628013995287,
+        "position_pct": 0.14973628013995288
+      },
+      {
+        "day": 10,
+        "price": 104.54770094912791,
+        "volatility": 0.007156123816619161,
+        "volatility_category": "VERY_LOW",
+        "confidence": 0.8897771074506666,
+        "base_shares": 143,
+        "adjusted_shares": 143,
+        "size_reduction_pct": 0.0,
+        "position_value": 14950.321235725292,
+        "position_pct": 0.14950321235725292
+      },
+      {
+        "day": 11,
+        "price": 83.63816075930234,
+        "volatility": 0.07645917247922991,
+        "volatility_category": "VERY_HIGH",
+        "confidence": 0.8931264066149118,
+        "base_shares": 179,
+        "adjusted_shares": 137,
+        "size_reduction_pct": 23.463687150837988,
+        "position_value": 11458.42802402442,
+        "position_pct": 0.11458428024024421
+      },
+      {
+        "day": 12,
+        "price": 96.18388487319768,
+        "volatility": 0.10226501660899176,
+        "volatility_category": "VERY_HIGH",
+        "confidence": 0.8616794696232922,
+        "base_shares": 155,
+        "adjusted_shares": 98,
+        "size_reduction_pct": 36.7741935483871,
+        "position_value": 9426.020717573372,
+        "position_pct": 0.09426020717573372
+      },
+      {
+        "day": 13,
+        "price": 95.38860247779735,
+        "volatility": 0.10186948356220311,
+        "volatility_category": "VERY_HIGH",
+        "confidence": 0.7609227538346741,
+        "base_shares": 157,
+        "adjusted_shares": 100,
+        "size_reduction_pct": 36.30573248407644,
+        "position_value": 9538.860247779736,
+        "position_pct": 0.09538860247779736
+      },
+      {
+        "day": 14,
+        "price": 94.59548487376723,
+        "volatility": 0.10162531365171014,
+        "volatility_category": "VERY_HIGH",
+        "confidence": 0.7195344228012768,
+        "base_shares": 158,
+        "adjusted_shares": 101,
+        "size_reduction_pct": 36.07594936708861,
+        "position_value": 9554.143972250491,
+        "position_pct": 0.09554143972250491
+      }
+    ]
+  },
+  {
+    "scenario": "Volatility Clustering",
+    "test": "STOP_LOSS_TRIGGER",
+    "entry_price": 102.3060320136544,
+    "stop_loss_price": 100.77144153344959,
+    "stop_loss_percent": 0.015,
+    "triggered": true,
+    "triggered_day": 9,
+    "triggered_price": 87.28921587387984,
+    "max_profit": 0.06605281669547346,
+    "max_drawdown": -0.1467832917004378,
+    "price_path": [
+      {
+        "day": 5,
+        "price": 102.3060320136544,
+        "pnl_percent": 0.0,
+        "distance_to_sl": 0.01522842639593905
+      },
+      {
+        "day": 6,
+        "price": 101.58742332325774,
+        "pnl_percent": -0.0070241087084753125,
+        "distance_to_sl": 0.008097351564999647
+      },
+      {
+        "day": 7,
+        "price": 106.40026814745163,
+        "pnl_percent": 0.04001949888204815,
+        "distance_to_sl": 0.055857359271114834
+      },
+      {
+        "day": 8,
+        "price": 108.84992597647773,
+        "pnl_percent": 0.06396391135519697,
+        "distance_to_sl": 0.080166407467205
+      },
+      {
+        "day": 9,
+        "price": 107.31685841177158,
+        "pnl_percent": 0.04897879723698401,
+        "distance_to_sl": 0.0649530936416081
+      },
+      {
+        "day": 10,
+        "price": 109.06363359309356,
+        "pnl_percent": 0.06605281669547346,
+        "distance_to_sl": 0.08228712354870399
+      },
+      {
+        "day": 11,
+        "price": 105.02027219713715,
+        "pnl_percent": 0.02653059775713405,
+        "distance_to_sl": 0.04216304340825788
+      },
+      {
+        "day": 12,
+        "price": 101.10738695791683,
+        "pnl_percent": -0.011716269628926603,
+        "distance_to_sl": 0.003333736417333362
+      },
+      {
+        "day": 13,
+        "price": 103.06452079955233,
+        "pnl_percent": 0.007413920479260614,
+        "distance_to_sl": 0.022755249217523428
+      },
+      {
+        "day": 14,
+        "price": 87.28921587387984,
+        "pnl_percent": -0.1467832917004378,
+        "distance_to_sl": -0.1337901438583125
+      }
+    ],
+    "exit_pnl": -0.1467832917004378
+  },
+  {
+    "scenario": "Volatility Clustering",
+    "test": "TRAILING_STOP",
+    "entry_price": 102.3060320136544,
+    "trailing_percent": 0.03,
+    "max_price_reached": 109.06363359309356,
+    "triggered": true,
+    "triggered_day": 6,
+    "triggered_price": 105.02027219713715,
+    "max_profit": 0.06605281669547346,
+    "price_path": [
+      {
+        "day": 5,
+        "price": 102.3060320136544,
+        "trailing_stop": 99.23685105324476,
+        "distance_to_trailing_sl": 0.030927835051546466
+      },
+      {
+        "day": 6,
+        "price": 101.58742332325774,
+        "trailing_stop": 99.23685105324476,
+        "distance_to_trailing_sl": 0.0236864858675513
+      },
+      {
+        "day": 7,
+        "price": 106.40026814745163,
+        "trailing_stop": 103.20826010302808,
+        "distance_to_trailing_sl": 0.030927835051546355
+      },
+      {
+        "day": 8,
+        "price": 108.84992597647773,
+        "trailing_stop": 105.5844281971834,
+        "distance_to_trailing_sl": 0.030927835051546428
+      },
+      {
+        "day": 9,
+        "price": 107.31685841177158,
+        "trailing_stop": 105.5844281971834,
+        "distance_to_trailing_sl": 0.016408008682424178
+      },
+      {
+        "day": 10,
+        "price": 109.06363359309356,
+        "trailing_stop": 105.79172458530074,
+        "distance_to_trailing_sl": 0.030927835051546466
+      },
+      {
+        "day": 11,
+        "price": 105.02027219713715,
+        "trailing_stop": 105.02027219713715,
+        "distance_to_trailing_sl": 0.0
+      }
+    ],
+    "exit_pnl": 0.02653059775713405
+  },
+  {
+    "scenario": "Volatility Clustering",
+    "test": "DYNAMIC_POSITION_SIZING",
+    "portfolio_value": 100000,
+    "sizing_analysis": [
+      {
+        "day": 5,
+        "price": 102.3060320136544,
+        "volatility": 0.006334621540984467,
+        "volatility_category": "VERY_LOW",
+        "confidence": 0.7912139968434071,
+        "base_shares": 146,
+        "adjusted_shares": 146,
+        "size_reduction_pct": 0.0,
+        "position_value": 14936.680673993542,
+        "position_pct": 0.1493668067399354
+      },
+      {
+        "day": 6,
+        "price": 101.58742332325774,
+        "volatility": 0.00722315713118512,
+        "volatility_category": "VERY_LOW",
+        "confidence": 0.8570351922786027,
+        "base_shares": 147,
+        "adjusted_shares": 147,
+        "size_reduction_pct": 0.0,
+        "position_value": 14933.351228518888,
+        "position_pct": 0.14933351228518887
+      },
+      {
+        "day": 7,
+        "price": 106.40026814745163,
+        "volatility": 0.018293891919545946,
+        "volatility_category": "LOW",
+        "confidence": 0.739934756431672,
+        "base_shares": 140,
+        "adjusted_shares": 140,
+        "size_reduction_pct": 0.0,
+        "position_value": 14896.037540643229,
+        "position_pct": 0.14896037540643228
+      },
+      {
+        "day": 8,
+        "price": 108.84992597647773,
+        "volatility": 0.018084541701399923,
+        "volatility_category": "LOW",
+        "confidence": 0.8028468876827223,
+        "base_shares": 137,
+        "adjusted_shares": 137,
+        "size_reduction_pct": 0.0,
+        "position_value": 14912.43985877745,
+        "position_pct": 0.14912439858777451
+      },
+      {
+        "day": 9,
+        "price": 107.31685841177158,
+        "volatility": 0.020877985787998626,
+        "volatility_category": "NORMAL",
+        "confidence": 0.8184829137724084,
+        "base_shares": 139,
+        "adjusted_shares": 139,
+        "size_reduction_pct": 0.0,
+        "position_value": 14917.043319236249,
+        "position_pct": 0.14917043319236248
+      },
+      {
+        "day": 10,
+        "price": 109.06363359309356,
+        "volatility": 0.020922241038072692,
+        "volatility_category": "NORMAL",
+        "confidence": 0.7092900825439995,
+        "base_shares": 137,
+        "adjusted_shares": 137,
+        "size_reduction_pct": 0.0,
+        "position_value": 14941.717802253817,
+        "position_pct": 0.14941717802253818
+      },
+      {
+        "day": 11,
+        "price": 105.02027219713715,
+        "volatility": 0.027466148401395576,
+        "volatility_category": "NORMAL",
+        "confidence": 0.8215089703802876,
+        "base_shares": 142,
+        "adjusted_shares": 142,
+        "size_reduction_pct": 0.0,
+        "position_value": 14912.878651993475,
+        "position_pct": 0.14912878651993475
+      },
+      {
+        "day": 12,
+        "price": 101.10738695791683,
+        "volatility": 0.031622783587917806,
+        "volatility_category": "HIGH",
+        "confidence": 0.7341048247374583,
+        "base_shares": 148,
+        "adjusted_shares": 146,
+        "size_reduction_pct": 1.3513513513513487,
+        "position_value": 14761.678495855856,
+        "position_pct": 0.14761678495855857
+      },
+      {
+        "day": 13,
+        "price": 103.06452079955233,
+        "volatility": 0.025765210341586114,
+        "volatility_category": "NORMAL",
+        "confidence": 0.7130103185970559,
+        "base_shares": 145,
+        "adjusted_shares": 145,
+        "size_reduction_pct": 0.0,
+        "position_value": 14944.355515935087,
+        "position_pct": 0.14944355515935087
+      },
+      {
+        "day": 14,
+        "price": 87.28921587387984,
+        "volatility": 0.057686967951414654,
+        "volatility_category": "VERY_HIGH",
+        "confidence": 0.8897771074506666,
+        "base_shares": 171,
+        "adjusted_shares": 147,
+        "size_reduction_pct": 14.035087719298245,
+        "position_value": 12831.514733460337,
+        "position_pct": 0.12831514733460336
+      }
+    ]
+  },
+  {
+    "scenario": "Mean Reversion Trap",
+    "test": "STOP_LOSS_TRIGGER",
+    "entry_price": 85.87340257,
+    "stop_loss_price": 84.58530153145,
+    "stop_loss_percent": 0.015,
+    "triggered": true,
+    "triggered_day": 5,
+    "triggered_price": 82.24441146954035,
+    "max_profit": 0.06120800000000006,
+    "max_drawdown": -0.0422597800000001,
+    "price_path": [
+      {
+        "day": 5,
+        "price": 85.87340257,
+        "pnl_percent": 0.0,
+        "distance_to_sl": 0.015228426395939042
+      },
+      {
+        "day": 6,
+        "price": 87.5908706214,
+        "pnl_percent": 0.020000000000000052,
+        "distance_to_sl": 0.03553299492385788
+      },
+      {
+        "day": 7,
+        "price": 89.342688033828,
+        "pnl_percent": 0.04040000000000001,
+        "distance_to_sl": 0.056243654822334996
+      },
+      {
+        "day": 8,
+        "price": 91.12954179450456,
+        "pnl_percent": 0.06120800000000006,
+        "distance_to_sl": 0.07736852791878174
+      },
+      {
+        "day": 9,
+        "price": 86.57306470477933,
+        "pnl_percent": 0.008147599999999986,
+        "distance_to_sl": 0.02350010152284258
+      },
+      {
+        "day": 10,
+        "price": 82.24441146954035,
+        "pnl_percent": -0.0422597800000001,
+        "distance_to_sl": -0.02767490355329964
+      }
+    ],
+    "exit_pnl": -0.0422597800000001
+  },
+  {
+    "scenario": "Mean Reversion Trap",
+    "test": "TRAILING_STOP",
+    "entry_price": 85.87340257,
+    "trailing_percent": 0.03,
+    "max_price_reached": 91.12954179450456,
+    "triggered": true,
+    "triggered_day": 4,
+    "triggered_price": 86.57306470477933,
+    "max_profit": 0.06120800000000006,
+    "price_path": [
+      {
+        "day": 5,
+        "price": 85.87340257,
+        "trailing_stop": 83.29720049289999,
+        "distance_to_trailing_sl": 0.030927835051546476
+      },
+      {
+        "day": 6,
+        "price": 87.5908706214,
+        "trailing_stop": 84.963144502758,
+        "distance_to_trailing_sl": 0.030927835051546417
+      },
+      {
+        "day": 7,
+        "price": 89.342688033828,
+        "trailing_stop": 86.66240739281315,
+        "distance_to_trailing_sl": 0.03092783505154647
+      },
+      {
+        "day": 8,
+        "price": 91.12954179450456,
+        "trailing_stop": 88.39565554066942,
+        "distance_to_trailing_sl": 0.030927835051546403
+      },
+      {
+        "day": 9,
+        "price": 86.57306470477933,
+        "trailing_stop": 86.57306470477933,
+        "distance_to_trailing_sl": 0.0
+      }
+    ],
+    "exit_pnl": 0.008147599999999986
+  },
+  {
+    "scenario": "Mean Reversion Trap",
+    "test": "DYNAMIC_POSITION_SIZING",
+    "portfolio_value": 100000,
+    "sizing_analysis": [
+      {
+        "day": 5,
+        "price": 85.87340257,
+        "volatility": 7.021666937153402e-17,
+        "volatility_category": "VERY_LOW",
+        "confidence": 0.7777354579378963,
+        "base_shares": 174,
+        "adjusted_shares": 174,
+        "size_reduction_pct": 0.0,
+        "position_value": 14941.97204718,
+        "position_pct": 0.1494197204718
+      },
+      {
+        "day": 6,
+        "price": 87.5908706214,
+        "volatility": 0.018633899812498262,
+        "volatility_category": "LOW",
+        "confidence": 0.7542698063547791,
+        "base_shares": 171,
+        "adjusted_shares": 171,
+        "size_reduction_pct": 0.0,
+        "position_value": 14978.0388762594,
+        "position_pct": 0.149780388762594
+      },
+      {
+        "day": 7,
+        "price": 89.342688033828,
+        "volatility": 0.023570226039551605,
+        "volatility_category": "NORMAL",
+        "confidence": 0.8657475018303858,
+        "base_shares": 167,
+        "adjusted_shares": 167,
+        "size_reduction_pct": 0.0,
+        "position_value": 14920.228901649276,
+        "position_pct": 0.14920228901649277
+      },
+      {
+        "day": 8,
+        "price": 91.12954179450456,
+        "volatility": 0.02500000000000004,
+        "volatility_category": "NORMAL",
+        "confidence": 0.7713506653387178,
+        "base_shares": 164,
+        "adjusted_shares": 164,
+        "size_reduction_pct": 0.0,
+        "position_value": 14945.244854298748,
+        "position_pct": 0.14945244854298748
+      },
+      {
+        "day": 9,
+        "price": 86.57306470477933,
+        "volatility": 0.029107081994288343,
+        "volatility_category": "NORMAL",
+        "confidence": 0.7561869019374761,
+        "base_shares": 173,
+        "adjusted_shares": 173,
+        "size_reduction_pct": 0.0,
+        "position_value": 14977.140193926823,
+        "position_pct": 0.14977140193926824
+      },
+      {
+        "day": 10,
+        "price": 82.24441146954035,
+        "volatility": 0.032360813064912695,
+        "volatility_category": "HIGH",
+        "confidence": 0.8085392166316496,
+        "base_shares": 182,
+        "adjusted_shares": 179,
+        "size_reduction_pct": 1.6483516483516536,
+        "position_value": 14721.749653047724,
+        "position_pct": 0.14721749653047725
+      },
+      {
+        "day": 11,
+        "price": 78.13219089606334,
+        "volatility": 0.03500000000000003,
+        "volatility_category": "HIGH",
+        "confidence": 0.7281848449949525,
+        "base_shares": 191,
+        "adjusted_shares": 186,
+        "size_reduction_pct": 2.617801047120416,
+        "position_value": 14532.58750666778,
+        "position_pct": 0.1453258750666778
+      },
+      {
+        "day": 12,
+        "price": 74.22558135126016,
+        "volatility": 0.03299831645537226,
+        "volatility_category": "HIGH",
+        "confidence": 0.8604393961508079,
+        "base_shares": 202,
+        "adjusted_shares": 198,
+        "size_reduction_pct": 1.980198019801982,
+        "position_value": 14696.665107549512,
+        "position_pct": 0.1469666510754951
+      },
+      {
+        "day": 13,
+        "price": 70.51430228369715,
+        "volatility": 0.026087459737497577,
+        "volatility_category": "NORMAL",
+        "confidence": 0.7149101287359542,
+        "base_shares": 212,
+        "adjusted_shares": 212,
+        "size_reduction_pct": 0.0,
+        "position_value": 14949.032084143795,
+        "position_pct": 0.14949032084143796
+      },
+      {
+        "day": 14,
+        "price": 66.98858716951229,
+        "volatility": 4.144016811917255e-17,
+        "volatility_category": "VERY_LOW",
+        "confidence": 0.8973773873201034,
+        "base_shares": 223,
+        "adjusted_shares": 223,
+        "size_reduction_pct": 0.0,
+        "position_value": 14938.45493880124,
+        "position_pct": 0.1493845493880124
+      }
+    ]
+  },
+  {
+    "scenario": "DIVERSIFICATION_TEST",
+    "test": "DIVERSIFICATION_LIMITS",
+    "portfolio_value": 100000,
+    "existing_positions": [
+      {
+        "symbol": "AAPL",
+        "sector": "TECHNOLOGY",
+        "exposure": 0.15,
+        "position_value": 15000
+      },
+      {
+        "symbol": "MSFT",
+        "sector": "TECHNOLOGY",
+        "exposure": 0.165,
+        "position_value": 16500
+      },
+      {
+        "symbol": "GOOGL",
+        "sector": "TECHNOLOGY",
+        "exposure": 0.084,
+        "position_value": 8400
+      }
+    ],
+    "new_position_tests": [
+      {
+        "symbol": "TSLA",
+        "proposed_value": 15000,
+        "proposed_pct": 0.15,
+        "stock_limit_check": {
+          "allowed": true,
+          "reason": "Stock TSLA exposure OK at 15.0%"
+        },
+        "sector_limit_check": {
+          "allowed": true,
+          "reason": "Sector AUTOMOTIVE exposure OK at 15.0%"
+        },
+        "approved": true
+      },
+      {
+        "symbol": "JPM",
+        "proposed_value": 15000,
+        "proposed_pct": 0.15,
+        "stock_limit_check": {
+          "allowed": true,
+          "reason": "Stock JPM exposure OK at 15.0%"
+        },
+        "sector_limit_check": {
+          "allowed": true,
+          "reason": "Sector FINANCE exposure OK at 15.0%"
+        },
+        "approved": true
+      },
+      {
+        "symbol": "JNJ",
+        "proposed_value": 15000,
+        "proposed_pct": 0.15,
+        "stock_limit_check": {
+          "allowed": true,
+          "reason": "Stock JNJ exposure OK at 15.0%"
+        },
+        "sector_limit_check": {
+          "allowed": true,
+          "reason": "Sector HEALTHCARE exposure OK at 15.0%"
+        },
+        "approved": true
+      },
+      {
+        "symbol": "META",
+        "proposed_value": 15000,
+        "proposed_pct": 0.15,
+        "stock_limit_check": {
+          "allowed": true,
+          "reason": "Stock META exposure OK at 15.0%"
+        },
+        "sector_limit_check": {
+          "allowed": true,
+          "reason": "Sector OTHER exposure OK at 15.0%"
+        },
+        "approved": true
+      }
+    ]
+  },
+  {
+    "scenario": "Extreme Volatility Spike",
+    "test": "PORTFOLIO_RISK_MONITORING",
+    "monitoring_history": [
+      {
+        "day": 0,
+        "portfolio_value": 84400.0,
+        "drawdown": -0.156,
+        "risk_level": "CRITICAL",
+        "heat_score": 35.56872037914692,
+        "cash_percent": 0.8886255924170616,
+        "max_loss_breached": true,
+        "volatility": 0.0
+      },
+      {
+        "day": 1,
+        "portfolio_value": 84400.0,
+        "drawdown": -0.156,
+        "risk_level": "CRITICAL",
+        "heat_score": 35.56872037914692,
+        "cash_percent": 0.8886255924170616,
+        "max_loss_breached": true,
+        "volatility": 0.0
+      },
+      {
+        "day": 2,
+        "portfolio_value": 84400.0,
+        "drawdown": -0.156,
+        "risk_level": "CRITICAL",
+        "heat_score": 35.56872037914692,
+        "cash_percent": 0.8886255924170616,
+        "max_loss_breached": true,
+        "volatility": 0.0031748922709120553
+      },
+      {
+        "day": 3,
+        "portfolio_value": 84400.0,
+        "drawdown": -0.156,
+        "risk_level": "CRITICAL",
+        "heat_score": 35.56872037914692,
+        "cash_percent": 0.8886255924170616,
+        "max_loss_breached": true,
+        "volatility": 0.003405408717170946
+      },
+      {
+        "day": 4,
+        "portfolio_value": 84400.0,
+        "drawdown": -0.156,
+        "risk_level": "CRITICAL",
+        "heat_score": 35.56872037914692,
+        "cash_percent": 0.8886255924170616,
+        "max_loss_breached": true,
+        "volatility": 0.005928299393781826
+      },
+      {
+        "day": 5,
+        "portfolio_value": 84400.0,
+        "drawdown": -0.156,
+        "risk_level": "CRITICAL",
+        "heat_score": 35.56872037914692,
+        "cash_percent": 0.8886255924170616,
+        "max_loss_breached": true,
+        "volatility": 0.006334621540984467
+      },
+      {
+        "day": 6,
+        "portfolio_value": 84400.0,
+        "drawdown": -0.156,
+        "risk_level": "CRITICAL",
+        "heat_score": 35.56872037914692,
+        "cash_percent": 0.8886255924170616,
+        "max_loss_breached": true,
+        "volatility": 0.008386106231370687
+      },
+      {
+        "day": 7,
+        "portfolio_value": 84400.0,
+        "drawdown": -0.156,
+        "risk_level": "CRITICAL",
+        "heat_score": 10.56872037914692,
+        "cash_percent": 0.8886255924170616,
+        "max_loss_breached": true,
+        "volatility": 0.030117144203400024
+      },
+      {
+        "day": 8,
+        "portfolio_value": 84400.0,
+        "drawdown": -0.156,
+        "risk_level": "CRITICAL",
+        "heat_score": 10.56872037914692,
+        "cash_percent": 0.8886255924170616,
+        "max_loss_breached": true,
+        "volatility": 0.030331004196914035
+      },
+      {
+        "day": 9,
+        "portfolio_value": 84400.0,
+        "drawdown": -0.156,
+        "risk_level": "CRITICAL",
+        "heat_score": 10.56872037914692,
+        "cash_percent": 0.8886255924170616,
+        "max_loss_breached": true,
+        "volatility": 0.03446551826621359
+      },
+      {
+        "day": 10,
+        "portfolio_value": 84400.0,
+        "drawdown": -0.156,
+        "risk_level": "CRITICAL",
+        "heat_score": 10.56872037914692,
+        "cash_percent": 0.8886255924170616,
+        "max_loss_breached": true,
+        "volatility": 0.03471475218342454
+      },
+      {
+        "day": 11,
+        "portfolio_value": 84400.0,
+        "drawdown": -0.156,
+        "risk_level": "CRITICAL",
+        "heat_score": 10.56872037914692,
+        "cash_percent": 0.8886255924170616,
+        "max_loss_breached": true,
+        "volatility": 0.037488366852608535
+      },
+      {
+        "day": 12,
+        "portfolio_value": 84400.0,
+        "drawdown": -0.156,
+        "risk_level": "CRITICAL",
+        "heat_score": 18.06872037914692,
+        "cash_percent": 0.8886255924170616,
+        "max_loss_breached": true,
+        "volatility": 0.039045909368512495
+      },
+      {
+        "day": 13,
+        "portfolio_value": 84400.0,
+        "drawdown": -0.156,
+        "risk_level": "CRITICAL",
+        "heat_score": 10.56872037914692,
+        "cash_percent": 0.8886255924170616,
+        "max_loss_breached": true,
+        "volatility": 0.025739244931535996
+      },
+      {
+        "day": 14,
+        "portfolio_value": 84400.0,
+        "drawdown": -0.156,
+        "risk_level": "CRITICAL",
+        "heat_score": 36.350321648547755,
+        "cash_percent": 0.8886255924170616,
+        "max_loss_breached": true,
+        "volatility": 0.03873530215896216
+      },
+      {
+        "day": 15,
+        "portfolio_value": 84400.0,
+        "drawdown": -0.156,
+        "risk_level": "CRITICAL",
+        "heat_score": 44.90750091273771,
+        "cash_percent": 0.8886255924170616,
+        "max_loss_breached": true,
+        "volatility": 0.04580575635061849
+      },
+      {
+        "day": 16,
+        "portfolio_value": 84400.0,
+        "drawdown": -0.156,
+        "risk_level": "CRITICAL",
+        "heat_score": 45.417277643655126,
+        "cash_percent": 0.8886255924170616,
+        "max_loss_breached": true,
+        "volatility": 0.04008548322919404
+      },
+      {
+        "day": 17,
+        "portfolio_value": 84400.0,
+        "drawdown": -0.156,
+        "risk_level": "CRITICAL",
+        "heat_score": 46.33035951111065,
+        "cash_percent": 0.8886255924170616,
+        "max_loss_breached": true,
+        "volatility": 0.04111588946688087
+      },
+      {
+        "day": 18,
+        "portfolio_value": 84400.0,
+        "drawdown": -0.156,
+        "risk_level": "CRITICAL",
+        "heat_score": 46.04993034243112,
+        "cash_percent": 0.8886255924170616,
+        "max_loss_breached": true,
+        "volatility": 0.04346299054773308
+      },
+      {
+        "day": 19,
+        "portfolio_value": 84400.0,
+        "drawdown": -0.156,
+        "risk_level": "CRITICAL",
+        "heat_score": 46.86278250807978,
+        "cash_percent": 0.8886255924170616,
+        "max_loss_breached": true,
+        "volatility": 0.04063605385102311
+      }
+    ]
+  }
+]

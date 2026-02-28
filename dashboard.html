@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TradingPro Dashboard - AI Trading System</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0F1419;
+            --bg-secondary: #1A1F26;
+            --bg-tertiary: #2A3039;
+            --text-primary: #FFFFFF;
+            --text-secondary: #E4E6EB;
+            --text-tertiary: #A0A9B8;
+            --accent-blue: #007AFF;
+            --accent-green: #00D084;
+            --accent-red: #FF3B30;
+            --accent-yellow: #FFCC33;
+            --border-color: #3A444F;
+            --spacing-unit: 8px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            padding: var(--spacing-unit) 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1920px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--accent-blue);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            padding: 8px 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--accent-blue);
+            border-bottom-color: var(--accent-blue);
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1920px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        /* Layout Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .dashboard-grid.full {
+            grid-template-columns: 1fr;
+        }
+
+        .dashboard-grid.three-col {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        /* Card Styles */
+        .card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: var(--accent-blue);
+            box-shadow: 0 4px 12px rgba(0, 122, 255, 0.1);
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-title i {
+            color: var(--accent-blue);
+        }
+
+        /* Price Display Component */
+        .price-display {
+            display: flex;
+            align-items: baseline;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .price-value {
+            font-size: 48px;
+            font-weight: bold;
+            color: var(--text-primary);
+        }
+
+        .price-change {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 20px;
+        }
+
+        .price-change.positive {
+            color: var(--accent-green);
+        }
+
+        .price-change.negative {
+            color: var(--accent-red);
+        }
+
+        .price-symbol {
+            font-size: 16px;
+            color: var(--text-tertiary);
+        }
+
+        /* Prediction Panel */
+        .prediction-panel {
+            background: linear-gradient(135deg, #1A1F26 0%, #2A3039 100%);
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 24px;
+        }
+
+        .prediction-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .prediction-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .prediction-label {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .prediction-value {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--text-primary);
+        }
+
+        .confidence-bar {
+            margin-top: 12px;
+            height: 6px;
+            background-color: var(--bg-tertiary);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .confidence-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-yellow));
+            width: 76%;
+        }
+
+        /* Signal Display */
+        .signal-display {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: var(--bg-tertiary);
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 16px;
+        }
+
+        .signal-type {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .signal-badge {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        .signal-badge.bullish {
+            background-color: rgba(0, 208, 132, 0.2);
+            color: var(--accent-green);
+        }
+
+        .signal-badge.bearish {
+            background-color: rgba(255, 59, 48, 0.2);
+            color: var(--accent-red);
+        }
+
+        .signal-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .signal-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .signal-strength {
+            font-size: 12px;
+            color: var(--text-tertiary);
+        }
+
+        .signal-timestamp {
+            font-size: 12px;
+            color: var(--text-tertiary);
+        }
+
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .metric-box {
+            background-color: var(--bg-tertiary);
+            border-radius: 8px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .metric-label {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .metric-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--text-primary);
+        }
+
+        .metric-value.positive {
+            color: var(--accent-green);
+        }
+
+        .metric-value.negative {
+            color: var(--accent-red);
+        }
+
+        .metric-subtext {
+            font-size: 11px;
+            color: var(--text-tertiary);
+            margin-top: 4px;
+        }
+
+        /* Charts */
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin: 16px 0;
+        }
+
+        .chart-controls {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-tertiary);
+            color: var(--text-secondary);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-blue);
+            color: var(--text-primary);
+            border-color: var(--accent-blue);
+        }
+
+        .btn.active {
+            background-color: var(--accent-blue);
+            color: var(--text-primary);
+            border-color: var(--accent-blue);
+        }
+
+        /* Table Styles */
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        th {
+            background-color: var(--bg-tertiary);
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-color);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        th:hover {
+            background-color: #3A444F;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        tbody tr:hover {
+            background-color: var(--bg-tertiary);
+        }
+
+        .action-buy {
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+
+        .action-sell {
+            color: var(--accent-red);
+            font-weight: 600;
+        }
+
+        .status-open {
+            color: var(--accent-yellow);
+            font-weight: 600;
+        }
+
+        .status-closed {
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+
+        .pnl-positive {
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+
+        .pnl-negative {
+            color: var(--accent-red);
+            font-weight: 600;
+        }
+
+        /* Risk Gauge */
+        .risk-gauge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .gauge-value {
+            font-size: 48px;
+            font-weight: bold;
+            color: var(--accent-blue);
+        }
+
+        .gauge-label {
+            font-size: 14px;
+            color: var(--text-tertiary);
+        }
+
+        .risk-level-indicator {
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-yellow), var(--accent-red));
+            border-radius: 4px;
+            position: relative;
+            margin-top: 16px;
+        }
+
+        .risk-level-indicator::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 16px;
+            background-color: var(--text-primary);
+            top: -4px;
+            left: 35%;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1440px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 16px;
+            }
+
+            .header-container {
+                padding: 0 16px;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .price-display {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chart-container {
+                height: 300px;
+            }
+
+            .prediction-grid {
+                grid-template-columns: 1fr;
+            }
+
+            table {
+                font-size: 12px;
+            }
+
+            th, td {
+                padding: 8px;
+            }
+        }
+
+        /* Loading State */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid var(--border-color);
+            border-radius: 50%;
+            border-top-color: var(--accent-blue);
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Alert Styles */
+        .alert {
+            padding: 12px 16px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .alert.info {
+            background-color: rgba(0, 122, 255, 0.1);
+            border: 1px solid var(--accent-blue);
+            color: var(--accent-blue);
+        }
+
+        .alert.success {
+            background-color: rgba(0, 208, 132, 0.1);
+            border: 1px solid var(--accent-green);
+            color: var(--accent-green);
+        }
+
+        .alert.warning {
+            background-color: rgba(255, 204, 51, 0.1);
+            border: 1px solid var(--accent-yellow);
+            color: var(--accent-yellow);
+        }
+
+        .alert.danger {
+            background-color: rgba(255, 59, 48, 0.1);
+            border: 1px solid var(--accent-red);
+            color: var(--accent-red);
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--text-tertiary);
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-chart-line"></i>
+                TradingPro
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#" class="active">Dashboard</a></li>
+                <li><a href="#">Simulator</a></li>
+                <li><a href="#">Reports</a></li>
+                <li><a href="#">Alerts</a></li>
+            </ul>
+            <div class="user-menu">
+                <i class="fas fa-bell"></i>
+                <i class="fas fa-user-circle"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Alerts Section -->
+        <div id="alerts-container" style="margin-bottom: 24px;"></div>
+
+        <!-- Price and Prediction Section -->
+        <div class="dashboard-grid">
+            <!-- Price Chart -->
+            <div class="card">
+                <div class="card-title">
+                    <i class="fas fa-chart-area"></i>
+                    Stock Price & Technical Analysis
+                </div>
+                <div class="price-display">
+                    <div>
+                        <div class="price-value" id="current-price">$179.66</div>
+                        <div class="price-symbol">AAPL • Apple Inc.</div>
+                    </div>
+                    <div class="price-change positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span id="price-change">+1.32%</span>
+                    </div>
+                </div>
+                <div class="chart-controls">
+                    <button class="btn active" data-period="1m">1M</button>
+                    <button class="btn" data-period="3m">3M</button>
+                    <button class="btn" data-period="6m">6M</button>
+                    <button class="btn" data-period="1y">1Y</button>
+                    <button class="btn" data-indicator="sma">SMA</button>
+                    <button class="btn" data-indicator="ema">EMA</button>
+                </div>
+                <div class="chart-container">
+                    <div id="price-chart"></div>
+                </div>
+            </div>
+
+            <!-- Prediction Panel -->
+            <div class="card">
+                <div class="card-title">
+                    <i class="fas fa-crystal-ball"></i>
+                    Next Day Prediction
+                </div>
+                <div class="prediction-panel">
+                    <div class="prediction-grid">
+                        <div class="prediction-item">
+                            <div class="prediction-label">Forecast Price</div>
+                            <div class="prediction-value" id="forecast-price">$184.15</div>
+                        </div>
+                        <div class="prediction-item">
+                            <div class="prediction-label">Expected Movement</div>
+                            <div class="prediction-value positive" id="expected-movement">+2.50%</div>
+                        </div>
+                    </div>
+                    <div class="confidence-bar">
+                        <div class="confidence-fill" id="confidence-bar"></div>
+                    </div>
+                    <div class="prediction-label" style="margin-top: 12px;">Confidence: <span id="confidence-value">76%</span></div>
+                </div>
+
+                <!-- Signal Display -->
+                <div class="signal-display">
+                    <div class="signal-type">
+                        <div class="signal-badge bullish">
+                            <i class="fas fa-arrow-up"></i>
+                        </div>
+                        <div class="signal-text">
+                            <div class="signal-name" id="signal-type">BULLISH</div>
+                            <div class="signal-strength">RSI Oversold</div>
+                        </div>
+                    </div>
+                    <div class="signal-timestamp">Now</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Portfolio Metrics Section -->
+        <div class="dashboard-grid">
+            <!-- Portfolio Metrics -->
+            <div class="card">
+                <div class="card-title">
+                    <i class="fas fa-wallet"></i>
+                    Portfolio Metrics
+                </div>
+                <div class="metrics-grid">
+                    <div class="metric-box">
+                        <div class="metric-label">Balance</div>
+                        <div class="metric-value">$125,480</div>
+                        <div class="metric-subtext">Current total</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-label">Gains/Losses</div>
+                        <div class="metric-value positive">+$18,420</div>
+                        <div class="metric-subtext">+17.21%</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-label">Sharpe Ratio</div>
+                        <div class="metric-value">1.85</div>
+                        <div class="metric-subtext">Risk-adjusted</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-label">Max Drawdown</div>
+                        <div class="metric-value negative">-8.32%</div>
+                        <div class="metric-subtext">Peak to trough</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-label">Win Rate</div>
+                        <div class="metric-value">23.53%</div>
+                        <div class="metric-subtext">Winning trades</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-label">Total Trades</div>
+                        <div class="metric-value">51</div>
+                        <div class="metric-subtext">Closed positions</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Risk Indicators -->
+            <div class="card">
+                <div class="card-title">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Risk Indicators
+                </div>
+                <div class="risk-gauge">
+                    <div class="gauge-value" id="heat-score">35</div>
+                    <div class="gauge-label">Heat Score</div>
+                    <div class="risk-level-indicator"></div>
+                    <div class="gauge-label">Risk Level: <strong id="risk-level">MODERATE</strong></div>
+                </div>
+                <div class="metrics-grid" style="margin-top: 24px;">
+                    <div class="metric-box">
+                        <div class="metric-label">Volatility</div>
+                        <div class="metric-value">2.34%</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-label">Sortino Ratio</div>
+                        <div class="metric-value">2.12</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trade History Section -->
+        <div class="card" style="margin-top: 24px;">
+            <div class="card-title">
+                <i class="fas fa-history"></i>
+                Trade History
+            </div>
+            <div class="table-container">
+                <table id="trade-history-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Action</th>
+                            <th>Price</th>
+                            <th>Stop Loss</th>
+                            <th>Take Profit</th>
+                            <th>Status</th>
+                            <th>P&L</th>
+                            <th>Duration</th>
+                        </tr>
+                    </thead>
+                    <tbody id="trade-history-body">
+                        <!-- Populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+            <div style="margin-top: 16px; text-align: center; color: var(--text-tertiary);">
+                <small>Showing latest 25 trades • <a href="#" style="color: var(--accent-blue);">View all</a></small>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>TradingPro Dashboard © 2026 • Real-time data updated every minute</p>
+        </footer>
+    </main>
+
+    <script>
+        // Sample Data from Backtesting Results
+        const mockData = {
+            currentPrice: 179.66,
+            forecastPrice: 184.15,
+            confidence: 0.76,
+            signal: 'BULLISH',
+            portfolio: {
+                balance: 125480,
+                gains: 18420,
+                roi: 0.1721,
+                sharpe: 1.85,
+                drawdown: 0.0832,
+                winRate: 0.2353,
+                trades: 51
+            },
+            riskMetrics: {
+                heatScore: 35,
+                volatility: 0.0234,
+                sortino: 2.12
+            },
+            priceHistory: [
+                // Simulated historical prices
+                ...Array.from({length: 60}, (_, i) => ({
+                    date: new Date(Date.now() - (60 - i) * 86400000).toISOString().split('T')[0],
+                    price: 170 + Math.sin(i / 10) * 10 + Math.random() * 5,
+                    sma20: 172 + Math.sin(i / 10) * 8,
+                    ema12: 173 + Math.sin(i / 10) * 9
+                }))
+            ],
+            trades: [
+                { date: '2026-02-18', action: 'BUY', price: 188.45, sl: 185.20, tp: 192.00, status: 'OPEN', pnl: null },
+                { date: '2026-02-17', action: 'SELL', price: 186.30, sl: 188.00, tp: 182.00, status: 'CLOSED', pnl: 1250 },
+                { date: '2026-02-15', action: 'BUY', price: 183.50, sl: 180.00, tp: 190.00, status: 'CLOSED', pnl: -850 },
+                { date: '2026-02-12', action: 'SELL', price: 181.20, sl: 183.50, tp: 177.00, status: 'CLOSED', pnl: 2100 },
+                { date: '2026-02-10', action: 'BUY', price: 180.00, sl: 177.00, tp: 185.00, status: 'CLOSED', pnl: -950 },
+            ]
+        };
+
+        // Initialize Dashboard
+        function initDashboard() {
+            updatePriceDisplay();
+            updatePredictionPanel();
+            updatePortfolioMetrics();
+            updateRiskIndicators();
+            updateTradeHistory();
+            renderPriceChart();
+            displayAlert('Dashboard loaded successfully', 'success');
+        }
+
+        // Update Price Display
+        function updatePriceDisplay() {
+            const priceChange = ((mockData.currentPrice - 177) / 177) * 100;
+            document.getElementById('current-price').textContent = `$${mockData.currentPrice.toFixed(2)}`;
+            document.getElementById('price-change').textContent = `${priceChange > 0 ? '+' : ''}${priceChange.toFixed(2)}%`;
+        }
+
+        // Update Prediction Panel
+        function updatePredictionPanel() {
+            const expectedMovement = ((mockData.forecastPrice - mockData.currentPrice) / mockData.currentPrice) * 100;
+            document.getElementById('forecast-price').textContent = `$${mockData.forecastPrice.toFixed(2)}`;
+            document.getElementById('expected-movement').textContent = `${expectedMovement > 0 ? '+' : ''}${expectedMovement.toFixed(2)}%`;
+            document.getElementById('confidence-value').textContent = `${(mockData.confidence * 100).toFixed(0)}%`;
+            document.getElementById('confidence-bar').style.width = `${mockData.confidence * 100}%`;
+            document.getElementById('signal-type').textContent = mockData.signal;
+        }
+
+        // Update Portfolio Metrics
+        function updatePortfolioMetrics() {
+            // Already displayed in HTML via hardcoded values
+            // In real implementation, these would update dynamically
+        }
+
+        // Update Risk Indicators
+        function updateRiskIndicators() {
+            document.getElementById('heat-score').textContent = mockData.riskMetrics.heatScore;
+            const riskLevel = mockData.riskMetrics.heatScore <= 25 ? 'LOW' : 
+                             mockData.riskMetrics.heatScore <= 50 ? 'MODERATE' : 
+                             mockData.riskMetrics.heatScore <= 75 ? 'HIGH' : 'CRITICAL';
+            document.getElementById('risk-level').textContent = riskLevel;
+        }
+
+        // Update Trade History
+        function updateTradeHistory() {
+            const tbody = document.getElementById('trade-history-body');
+            tbody.innerHTML = mockData.trades.map(trade => `
+                <tr>
+                    <td>${trade.date}</td>
+                    <td><span class="action-${trade.action.toLowerCase()}">${trade.action}</span></td>
+                    <td>$${trade.price.toFixed(2)}</td>
+                    <td>$${trade.sl.toFixed(2)}</td>
+                    <td>$${trade.tp.toFixed(2)}</td>
+                    <td><span class="status-${trade.status.toLowerCase()}">${trade.status}</span></td>
+                    <td>${trade.pnl ? `<span class="pnl-${trade.pnl > 0 ? 'positive' : 'negative'}">$${trade.pnl.toFixed(2)}</span>` : '—'}</td>
+                    <td>${trade.status === 'OPEN' ? '—' : '4 days'}</td>
+                </tr>
+            `).join('');
+        }
+
+        // Render Price Chart
+        function renderPriceChart() {
+            const priceData = mockData.priceHistory;
+            const dates = priceData.map(d => d.date);
+            const prices = priceData.map(d => d.price);
+            const sma20 = priceData.map(d => d.sma20);
+            const ema12 = priceData.map(d => d.ema12);
+
+            const trace1 = {
+                x: dates,
+                y: prices,
+                type: 'scatter',
+                mode: 'lines',
+                name: 'AAPL',
+                line: { color: '#007AFF', width: 2 }
+            };
+
+            const trace2 = {
+                x: dates,
+                y: sma20,
+                type: 'scatter',
+                mode: 'lines',
+                name: 'SMA(20)',
+                line: { color: '#00D084', width: 1, dash: 'dash' }
+            };
+
+            const trace3 = {
+                x: dates,
+                y: ema12,
+                type: 'scatter',
+                mode: 'lines',
+                name: 'EMA(12)',
+                line: { color: '#FF3B30', width: 1, dash: 'dash' }
+            };
+
+            const layout = {
+                title: '',
+                xaxis: { color: '#A0A9B8', gridcolor: '#3A444F' },
+                yaxis: { color: '#A0A9B8', gridcolor: '#3A444F' },
+                plot_bgcolor: '#1A1F26',
+                paper_bgcolor: '#1A1F26',
+                font: { color: '#FFFFFF' },
+                hovermode: 'x unified',
+                margin: { l: 50, r: 50, t: 20, b: 50 },
+                legend: { x: 0.01, y: 0.99, bgcolor: 'rgba(0,0,0,0.3)' }
+            };
+
+            const config = {
+                responsive: true,
+                displayModeBar: false
+            };
+
+            Plotly.newPlot('price-chart', [trace1, trace2, trace3], layout, config);
+        }
+
+        // Display Alert
+        function displayAlert(message, type = 'info') {
+            const alertContainer = document.getElementById('alerts-container');
+            const icon = type === 'success' ? 'fa-check-circle' : 
+                        type === 'danger' ? 'fa-exclamation-circle' :
+                        type === 'warning' ? 'fa-exclamation-triangle' : 'fa-info-circle';
+            const alertHTML = `
+                <div class="alert ${type}">
+                    <i class="fas ${icon}"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            alertContainer.insertAdjacentHTML('beforeend', alertHTML);
+            setTimeout(() => {
+                alertContainer.firstChild?.remove();
+            }, 5000);
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', initDashboard);
+
+        // Handle chart period buttons
+        document.querySelectorAll('[data-period]').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('[data-period]').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                displayAlert(`Chart changed to ${this.textContent}`, 'info');
+            });
+        });
+
+        // Handle indicator buttons
+        document.querySelectorAll('[data-indicator]').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.classList.toggle('active');
+                displayAlert(`${this.textContent} indicator ${this.classList.contains('active') ? 'enabled' : 'disabled'}`, 'info');
+            });
+        });
+    </script>
+</body>
+</html>

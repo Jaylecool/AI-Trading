@@ -1,0 +1,150 @@
+
+================================================================================
+TASK 3.2: BASELINE MODEL TRAINING REPORT
+Stock Price Forecasting - AAPL Stock
+================================================================================
+
+EXECUTION DATE: 2026-02-10 10:09:10
+
+--------------------------------------------------------------------------------
+DATASET SUMMARY:
+--------------------------------------------------------------------------------
+Training Set:
+  - Samples: 741
+  - Date Range: 2020-10-15 00:00:00 to 2023-09-26 00:00:00
+  - Features: 22
+
+Validation Set:
+  - Samples: 158
+  - Date Range: 2023-09-27 00:00:00 to 2024-05-13 00:00:00
+  - Features: 22
+
+Target Variable:
+  - Column: Close_AAPL
+  - Type: Continuous (Regression)
+  - Training Range: $105.70 - $194.09
+  - Validation Range: $163.66 - $196.26
+  - Training Mean: $148.29
+  - Validation Mean: $179.44
+
+--------------------------------------------------------------------------------
+FEATURE SCALING:
+--------------------------------------------------------------------------------
+Method: StandardScaler
+- Training Set Mean: 0.000000
+- Training Set Std: 1.000000
+- Validation Set Mean: 0.933186
+- Validation Set Std: 1.128570
+
+--------------------------------------------------------------------------------
+MODEL CONFIGURATIONS:
+--------------------------------------------------------------------------------
+
+1. LINEAR REGRESSION
+   - Type: Linear regression model
+   - Hyperparameters: Default
+   - Training Time: 0.03s
+   
+2. RANDOM FOREST REGRESSOR
+   - Type: Ensemble of decision trees
+   - Hyperparameters:
+     * n_estimators: 200
+     * max_depth: 15
+     * min_samples_split: 5
+     * min_samples_leaf: 2
+     * max_features: sqrt
+   - Training Time: 0.32s
+
+3. SUPPORT VECTOR REGRESSION (SVR)
+   - Type: Support vector machine (regression)
+   - Hyperparameters:
+     * kernel: rbf
+     * C: 100
+     * epsilon: 0.1
+     * gamma: scale
+   - Training Time: 0.09s
+
+--------------------------------------------------------------------------------
+VALIDATION SET PERFORMANCE METRICS:
+--------------------------------------------------------------------------------
+
+LINEAR REGRESSION:
+  Regression Metrics:
+    - R² Score:           0.931587
+    - RMSE (Root MSE):    $2.32
+    - MAE (Mean Abs Error): $1.74
+    - MAPE (%):            0.0097%
+  
+  Error Analysis:
+    - Mean Residual:       $0.09
+    - Std Residual:        $2.33
+    - Max Error:           $10.47
+    - Training Time:       0.03s
+
+
+RANDOM FOREST REGRESSOR:
+  Regression Metrics:
+    - R² Score:           0.865667
+    - RMSE (Root MSE):    $3.25
+    - MAE (Mean Abs Error): $2.58
+    - MAPE (%):            0.0142%
+  
+  Error Analysis:
+    - Mean Residual:       $1.39
+    - Std Residual:        $2.95
+    - Max Error:           $11.57
+    - Training Time:       0.32s
+
+
+SUPPORT VECTOR REGRESSION:
+  Regression Metrics:
+    - R² Score:           0.234605
+    - RMSE (Root MSE):    $7.77
+    - MAE (Mean Abs Error): $6.61
+    - MAPE (%):            0.0367%
+  
+  Error Analysis:
+    - Mean Residual:       $1.75
+    - Std Residual:        $7.59
+    - Max Error:           $20.04
+    - Training Time:       0.09s
+
+
+--------------------------------------------------------------------------------
+COMPARATIVE SUMMARY:
+--------------------------------------------------------------------------------
+                    Model  R² Score  RMSE ($)  MAE ($)  MAPE (%)  Training Time (s)
+        Linear Regression  0.931587  2.322393 1.738402  0.009745           0.033729
+  Random Forest Regressor  0.865667  3.254302 2.578727  0.014250           0.318299
+Support Vector Regression  0.234605  7.768002 6.612186  0.036673           0.086681
+
+--------------------------------------------------------------------------------
+KEY FINDINGS:
+--------------------------------------------------------------------------------
+1. Best Overall Performance: Linear Regression
+   - R² Score: 0.931587
+   
+2. Most Accurate Predictions: Linear Regression
+   - MAE: $1.74
+   
+3. Fastest Training: Linear Regression
+   - Time: 0.03s
+
+4. Best for Production:
+   - Linear Regression: Fastest, most interpretable
+   - Random Forest: Balanced performance and speed
+   - SVR: Best for complex patterns (if R² permits)
+
+--------------------------------------------------------------------------------
+NEXT STEPS (Task 3.3 & Beyond):
+--------------------------------------------------------------------------------
+1. Deep Learning Models (LSTM, GRU) implementation
+2. Hyperparameter tuning via GridSearchCV/RandomSearchCV
+3. Cross-validation for robustness assessment
+4. Feature importance analysis
+5. Model ensemble methods
+6. Final model selection and deployment
+
+================================================================================
+REPORT GENERATED: 2026-02-10 10:09:10
+================================================================================

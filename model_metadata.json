@@ -1,0 +1,133 @@
+{
+  "dataset": {
+    "name": "AAPL Stock Data",
+    "samples": 1058,
+    "date_range": {
+      "start": "2020-10-15 00:00:00",
+      "end": "2024-12-30 00:00:00"
+    }
+  },
+  "features": {
+    "total": 23,
+    "price_features": [
+      "Close_AAPL",
+      "High_AAPL",
+      "Low_AAPL",
+      "Open_AAPL",
+      "Volume_AAPL",
+      "BB_Lower",
+      "Target_Close_Price"
+    ],
+    "technical_indicators": [
+      "SMA_10",
+      "SMA_20",
+      "SMA_50",
+      "SMA_200",
+      "EMA_10",
+      "EMA_20",
+      "EMA_50",
+      "RSI_14",
+      "MACD",
+      "MACD_Signal",
+      "MACD_Histogram",
+      "ROC_12",
+      "BB_Upper",
+      "BB_Middle",
+      "ATR_14",
+      "Volatility_20"
+    ]
+  },
+  "targets": {
+    "close_price": {
+      "type": "Regression",
+      "description": "Next day close price prediction",
+      "min": 105.7000503540039,
+      "max": 257.8537902832031,
+      "mean": 164.09315573650858,
+      "std": 32.40976991254931
+    },
+    "direction": {
+      "type": "Classification",
+      "description": "Up/Down directional movement",
+      "classes": [
+        "Down (0)",
+        "Up (1)"
+      ],
+      "class_distribution": {
+        "up": 560,
+        "down": 498
+      }
+    },
+    "return_pct": {
+      "type": "Regression",
+      "description": "Daily return percentage",
+      "min": -5.867954041302681,
+      "max": 8.89745674895266,
+      "mean": 0.08561302592735116,
+      "std": 1.6954098870904675
+    }
+  },
+  "baseline_models": {
+    "Linear_Regression": {
+      "name": "Linear Regression",
+      "description": "Simple linear regression model",
+      "complexity": "Low",
+      "interpretability": "Very High",
+      "hyperparameters": {}
+    },
+    "Random_Forest": {
+      "name": "Random Forest",
+      "description": "Ensemble of decision trees",
+      "complexity": "Medium",
+      "interpretability": "Medium",
+      "hyperparameters": {
+        "n_estimators": 100,
+        "max_depth": 15,
+        "min_samples_split": 5,
+        "min_samples_leaf": 2
+      }
+    },
+    "SVR": {
+      "name": "Support Vector Regression",
+      "description": "SVM regression with RBF kernel",
+      "complexity": "Medium-High",
+      "interpretability": "Low",
+      "hyperparameters": {
+        "kernel": "rbf",
+        "C": 100,
+        "epsilon": 0.1,
+        "gamma": "scale"
+      }
+    }
+  },
+  "advanced_models": {
+    "LSTM": {
+      "name": "LSTM (RNN)",
+      "description": "Long Short-Term Memory Neural Network",
+      "type": "RNN",
+      "complexity": "High",
+      "interpretability": "Very Low",
+      "hyperparameters": {
+        "sequence_length": 30,
+        "batch_size": 32,
+        "epochs": 50,
+        "learning_rate": 0.001,
+        "dropout": 0.2
+      }
+    },
+    "GRU": {
+      "name": "GRU (RNN)",
+      "description": "Gated Recurrent Unit Neural Network",
+      "type": "RNN",
+      "complexity": "High",
+      "interpretability": "Very Low",
+      "hyperparameters": {
+        "sequence_length": 30,
+        "batch_size": 32,
+        "epochs": 50,
+        "learning_rate": 0.001,
+        "dropout": 0.2
+      }
+    }
+  }
+}

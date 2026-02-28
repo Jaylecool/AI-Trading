@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TradingPro - AI Trading Dashboard</title>
+    
+    <!-- External Libraries -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0F1419;
+            --bg-secondary: #1A1F26;
+            --bg-tertiary: #2A3039;
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B8C1;
+            --accent-blue: #007AFF;
+            --accent-green: #00D084;
+            --accent-red: #FF3B30;
+            --accent-yellow: #FFCC33;
+            --border-color: #3A444F;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        /* ============================================================================ */
+        /* HEADER & NAVIGATION */
+        /* ============================================================================ */
+        .header {
+            background-color: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            display: none;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--accent-blue);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 0;
+        }
+
+        .nav-tab, .nav-tabs button, .nav-btn {
+            background: none;
+            border: none;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-size: 1rem;
+            color: var(--text-secondary);
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-tab:hover, .nav-tabs button:hover, .nav-btn:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-tab.active, .nav-tabs button.active, .nav-btn.active {
+            color: var(--accent-blue);
+            border-bottom-color: var(--accent-blue);
+        }
+
+        /* ============================================================================ */
+        /* CONTAINER & LAYOUT */
+        /* ============================================================================ */
+        .container {
+            max-width: 1920px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* ============================================================================ */
+        /* DASHBOARD TAB */
+        /* ============================================================================ */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        #dashboard #portfolio {
+            display: none;
+        }
+
+        #dashboard.tab-content {
+            display: block;
+        }
+
+        /* Stock Price Card */
+        .stock-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stock-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .stock-info h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .stock-info p {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .stock-price {
+            text-align: right;
+        }
+
+        .stock-price .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stock-price .change {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .change-percent {
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+
+        .change-dollar {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card h2 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .metric-card {
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            padding: 1.25rem;
+            border-left: 4px solid var(--accent-blue);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent-blue);
+        }
+
+        .metric-card.success {
+            border-left-color: var(--accent-green);
+        }
+
+        .metric-card.danger {
+            border-left-color: var(--accent-red);
+        }
+
+        .metric-card.warning {
+            border-left-color: var(--accent-yellow);
+        }
+
+        .metric-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-value {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .metric-change {
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+
+        .metric-change.positive {
+            color: var(--accent-green);
+        }
+
+        .metric-change.negative {
+            color: var(--accent-red);
+        }
+
+        /* Chart Container */
+        .chart-container {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            height: 600px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #chartPlot {
+            width: 100%;
+            height: 100%;
+        }
+
+        .chart-wrapper {
+            width: 100%;
+            height: 400px;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        /* Next-Day Prediction Panel */
+        .prediction-panel {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            height: fit-content;
+        }
+
+        .panel-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .prediction-section {
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .prediction-section:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+        }
+
+        .forecast-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .forecast-change {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .forecast-change .percent {
+            color: var(--accent-green);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .forecast-change .dollar {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .forecast-change .arrow {
+            color: var(--accent-green);
+            font-size: 1.25rem;
+        }
+
+        .forecast-change.bearish .percent,
+        .forecast-change.bearish .arrow {
+            color: var(--accent-red);
+        }
+
+        /* Confidence Level */
+        .confidence-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .confidence-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--bg-tertiary);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .confidence-fill {
+            height: 100%;
+            background: var(--accent-green);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        /* Current Price */
+        .current-price-value {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Signal */
+        .signal-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            text-align: center;
+            display: inline-block;
+            min-width: 150px;
+        }
+
+        .signal-value.bullish {
+            background: rgba(0, 208, 132, 0.15);
+            color: var(--accent-green);
+        }
+
+        .signal-value.bearish {
+            background: rgba(255, 59, 48, 0.15);
+            color: var(--accent-red);
+        }
+
+        .signal-value.neutral {
+            background: rgba(255, 204, 51, 0.15);
+            color: var(--accent-yellow);
+        }
+
+        /* Trade History Table */
+        .table-container {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .table-header {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .table-header h3 {
+            font-size: 1.125rem;
+            color: var(--text-primary);
+        }
+
+        .filter-controls {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-input {
+            padding: 0.5rem 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 0.875rem;
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        .filter-input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            background: var(--accent-blue);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: background 0.3s ease;
+        }
+
+        .filter-btn:hover {
+            background: #0056b3;
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: var(--bg-tertiary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.875rem;
+            color: var(--text-primary);
+        }
+
+        tbody tr:hover {
+            background: var(--bg-tertiary);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .badge-buy {
+            background: rgba(0, 122, 255, 0.2);
+            color: var(--accent-blue);
+        }
+
+        .badge-sell {
+            background: rgba(255, 59, 48, 0.2);
+            color: var(--accent-red);
+        }
+
+        .badge-open {
+            background: rgba(255, 204, 51, 0.2);
+            color: var(--accent-yellow);
+        }
+
+        .badge-closed {
+            background: rgba(0, 208, 132, 0.2);
+            color: var(--accent-green);
+        }
+
+        .pnl-positive {
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+
+        .pnl-negative {
+            color: var(--accent-red);
+            font-weight: 600;
+        }
+
+        /* Filter Panel */
+        .filter-panel {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filter-group label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .filter-group input,
+        .filter-group select {
+            padding: 0.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 0.875rem;
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        .filter-group input::placeholder,
+        .filter-group select {
+            color: var(--text-secondary);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--accent-blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0056b3;
+        }
+
+        .btn-secondary {
+            background: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background: #4a5568;
+        }
+
+        /* Charts Grid */
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Tab Placeholder */
+        .tab-placeholder {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 3rem;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        .tab-placeholder h2 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        /* ============================================================================ */
+        /* RESPONSIVE */
+        /* ============================================================================ */
+        @media (max-width: 1200px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .prediction-panel {
+                height: auto;
+            }
+
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+
+            .logo {
+                font-size: 1.25rem;
+            }
+
+            .nav-tabs {
+                width: 100%;
+                overflow-x: auto;
+            }
+
+            .nav-tab, .nav-tabs button {
+                padding: 0.75rem 1rem;
+                font-size: 0.9rem;
+                white-space: nowrap;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .stock-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .stock-price {
+                text-align: left;
+            }
+
+            .chart-container {
+                height: 400px;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-controls {
+                flex-direction: column;
+            }
+
+            .filter-input {
+                width: 100%;
+            }
+
+            table {
+                font-size: 0.75rem;
+            }
+
+            th, td {
+                padding: 0.5rem;
+            }
+        }
+
+        /* Loading & Status */
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 300px;
+        }
+
+        .spinner {
+            border: 4px solid var(--border);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1.5rem;
+            color: #9ca3af;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* Table Header with Export Button */
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .table-header h3 {
+            margin: 0;
+        }
+
+        .table-actions {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .btn-export {
+            background: var(--success);
+            color: white;
+            padding: 0.75rem 1.25rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-export:hover {
+            background: #059669;
+            box-shadow: 0 2px 4px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Chart Filter Controls */
+        .chart-controls {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .chart-filter-btn {
+            padding: 0.5rem 1rem;
+            background: var(--light);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .chart-filter-btn:hover {
+            background: var(--border);
+            border-color: var(--primary);
+        }
+
+        .chart-filter-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .chart-filter-select {
+            padding: 0.5rem 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 0.875rem;
+            background: white;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .pagination button {
+            padding: 0.5rem 0.75rem;
+            border: 1px solid var(--border);
+            background: white;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 0.875rem;
+        }
+
+        .pagination button.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .pagination button:hover {
+            border-color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Debug Console -->
+    <div id="debug-console" style="position: fixed; bottom: 20px; right: 20px; background: rgba(0,0,0,0.9); color: #0f0; padding: 20px; border: 1px solid #0f0; border-radius: 8px; max-width: 400px; max-height: 300px; overflow-y: auto; font-family: monospace; font-size: 12px; z-index: 9999; display: none;">
+        <div style="margin-bottom: 10px; color: #0f0;">Debug Console</div>
+        <div id="debug-messages"></div>
+    </div>
+    
+    <script>
+        // Debug helper
+        const debugMessages = [];
+        const debugDiv = document.getElementById('debug-console');
+        const debugContent = document.getElementById('debug-messages');
+        
+        function addDebug(msg) {
+            const timestamp = new Date().toLocaleTimeString();
+            debugMessages.push(`[${timestamp}] ${msg}`);
+            debugContent.innerHTML = debugMessages.map(m => `<div>${m}</div>`).join('');
+            debugDiv.style.display = 'block';
+            debugContent.scrollTop = debugContent.scrollHeight;
+        }
+        
+        // Override console.log
+        const originalLog = console.log;
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            addDebug(args.map(a => typeof a === 'object' ? JSON.stringify(a).substring(0, 100) : String(a)).join(' '));
+        };
+    </script>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <span>TradingPro</span>
+        </div>
+        <div class="nav-tabs">
+            <button class="nav-tab active" data-tab="dashboard">
+                <i class="fas fa-home"></i> Dashboard
+            </button>
+            <button class="nav-tab" data-tab="simulator">
+                <i class="fas fa-gamepad"></i> Simulator
+            </button>
+            <button class="nav-tab" data-tab="reports">
+                <i class="fas fa-file-chart-line"></i> Reports
+            </button>
+            <button class="nav-tab" data-tab="settings">
+                <i class="fas fa-cog"></i> Settings
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Dashboard Tab -->
+        <div id="dashboard" class="tab-content active">
+            <div class="dashboard-grid">
+                <!-- Left Column: Chart -->
+                <div>
+                    <!-- Stock Price Card -->
+                    <div class="stock-card">
+                        <div class="stock-header">
+                            <div class="stock-info">
+                                <h3 id="ticker">AAPL</h3>
+                                <p id="company">Apple Inc.</p>
+                            </div>
+                            <div class="stock-price">
+                                <div class="price" id="currentPrice">$0.00</div>
+                                <div class="change">
+                                    <span class="change-percent" id="changePercent">+0.00%</span>
+                                    <span class="change-dollar" id="changeDollar">(+$0.00)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chart -->
+                    <div class="chart-container" style="height: 600px; min-height: 600px;">
+                        <div id="chartPlot" style="width: 100%; height: 600px;"></div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Prediction Panel -->
+                <div class="prediction-panel">
+                    <div class="panel-title">Next-Day Prediction</div>
+
+                    <!-- Forecast Price -->
+                    <div class="prediction-section">
+                        <div class="section-label">Forecast Price</div>
+                        <div class="forecast-price" id="forecastPrice">$0.00</div>
+                        <div class="forecast-change" id="forecastChange">
+                            <span class="arrow">↑</span>
+                            <span class="percent">0.00%</span>
+                            <span class="dollar">(+$0.00)</span>
+                        </div>
+                    </div>
+
+                    <!-- Confidence Level -->
+                    <div class="prediction-section">
+                        <div class="section-label">Confidence Level</div>
+                        <div class="confidence-value" id="confidenceValue">0%</div>
+                        <div class="confidence-bar">
+                            <div class="confidence-fill" id="confidenceFill" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Current Price -->
+                    <div class="prediction-section">
+                        <div class="section-label">Current Price</div>
+                        <div class="current-price-value" id="panelCurrentPrice">$0.00</div>
+                    </div>
+
+                    <!-- Signal -->
+                    <div class="prediction-section">
+                        <div class="section-label">Signal</div>
+                        <div class="signal-value bullish" id="signalValue">BULLISH</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Simulator Tab -->
+        <div id="simulator" class="tab-content">
+            <div class="tab-placeholder">
+                <h2>Simulator</h2>
+                <p>Test your trading strategies with historical data.</p>
+            </div>
+        </div>
+
+        <!-- Reports Tab -->
+        <div id="reports" class="tab-content">
+            <div class="tab-placeholder">
+                <h2>Reports</h2>
+                <p>View detailed trading reports and analytics.</p>
+            </div>
+        </div>
+
+        <!-- Settings Tab -->
+        <div id="settings" class="tab-content">
+            <div class="tab-placeholder">
+                <h2>Settings</h2>
+                <p>Configure your dashboard preferences and alerts.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        const API_BASE_URL = 'http://localhost:5000';
+        const REFRESH_INTERVAL = 60000; // 60 seconds
+
+        // Tab Switching
+        document.querySelectorAll('.nav-tab').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const tabName = this.dataset.tab;
+                
+                // Update active tab button
+                document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Update active content
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                document.getElementById(tabName).classList.add('active');
+            });
+        });
+
+        // Fetch and display data
+        async function updateDashboard() {
+            try {
+                console.log('updateDashboard() called');
+
+                // Fetch equity curve data
+                let equityData = null;
+                let stockData = null;
+                let predData = null;
+
+                // Equity curve
+                const equityRes = await fetch(`${API_BASE_URL}/api/portfolio/equity-curve`);
+                if (equityRes.ok) {
+                    equityData = await equityRes.json();
+                    console.log('Equity curve fetched:', equityData?.dates?.length, 'dates,', equityData?.equity?.length, 'values');
+                } else {
+                    console.error('Equity curve API error:', equityRes.status);
+                }
+
+                // Stock info
+                const stockRes = await fetch(`${API_BASE_URL}/api/chart-data`);
+                if (stockRes.ok) {
+                    stockData = await stockRes.json();
+                    console.log('Stock data fetched');
+                } else {
+                    console.error('Stock API error:', stockRes.status);
+                }
+
+                // Prediction
+                const predRes = await fetch(`${API_BASE_URL}/api/next-day-prediction`);
+                if (predRes.ok) {
+                    predData = await predRes.json();
+                    console.log('Prediction data fetched');
+                } else {
+                    console.error('Prediction API error:', predRes.status);
+                }
+
+                // Update UI
+                if (equityData) {
+                    console.log('Calling updateChart with equity data');
+                    updateChart(equityData);
+                }
+                if (stockData) updateStockInfo(stockData);
+                if (predData) updatePredictionPanel(predData);
+            } catch (error) {
+                console.error('Error updating dashboard:', error);
+            }
+        }
+
+        function updateChart(data) {
+            const chartDiv = document.getElementById('chartPlot');
+            console.log('updateChart() called with data:', data);
+            console.log('chartDiv element exists:', !!chartDiv);
+            
+            if (!data || !data.dates || !data.equity) {
+                console.log('Missing chart data');
+                return;
+            }
+
+            console.log(`Rendering ${data.equity.length} points`);
+            
+            try {
+                // Simple trace
+                const trace = {
+                    x: data.dates,
+                    y: data.equity,
+                    type: 'scatter',
+                    mode: 'lines',
+                    line: { color: '#00D084' }
+                };
+                
+                // Minimal layout
+                const layout = {
+                    margin: { l: 50, r: 50, t: 50, b: 50 },
+                    plot_bgcolor: '#1A1F26',
+                    paper_bgcolor: '#1A1F26',
+                    font: { color: 'white' }
+                };
+                
+                // Render
+                Plotly.newPlot('chartPlot', [trace], layout, { responsive: true });
+                console.log('Chart rendered');
+            } catch (error) {
+                console.error('Chart error:', error);
+            }
+        }
+
+        function updateStockInfo(data) {
+            if (!data.current_price) return;
+
+            const price = data.current_price;
+            const prevClose = data.previous_close || price;
+            const change = price - prevClose;
+            const changePercent = (change / prevClose * 100).toFixed(2);
+
+            document.getElementById('currentPrice').textContent = `$${price.toFixed(2)}`;
+            document.getElementById('changePercent').textContent = 
+                `${change >= 0 ? '+' : ''}${changePercent}%`;
+            document.getElementById('changeDollar').textContent = 
+                `(${change >= 0 ? '+' : ''}$${Math.abs(change).toFixed(2)})`;
+        }
+
+        function updatePredictionPanel(data) {
+            if (!data) return;
+
+            const forecastPrice = data.forecast_price || 0;
+            const currentPrice = data.current_price || 0;
+            const confidence = data.confidence_level || 0;
+            const signal = data.signal || 'NEUTRAL';
+
+            // Forecast price and change
+            const priceChange = forecastPrice - currentPrice;
+            const percentChange = (priceChange / currentPrice * 100).toFixed(2);
+            const isBullish = priceChange >= 0;
+
+            document.getElementById('forecastPrice').textContent = `$${forecastPrice.toFixed(2)}`;
+            document.getElementById('panelCurrentPrice').textContent = `$${currentPrice.toFixed(2)}`;
+            
+            const forecastChangeEl = document.getElementById('forecastChange');
+            forecastChangeEl.className = `forecast-change ${isBullish ? 'bullish' : 'bearish'}`;
+            forecastChangeEl.innerHTML = `
+                <span class="arrow">${isBullish ? '↑' : '↓'}</span>
+                <span class="percent">${isBullish ? '+' : ''}${percentChange}%</span>
+                <span class="dollar">(${isBullish ? '+' : ''}$${Math.abs(priceChange).toFixed(2)})</span>
+            `;
+
+            // Confidence level
+            document.getElementById('confidenceValue').textContent = `${confidence}%`;
+            document.getElementById('confidenceFill').style.width = `${confidence}%`;
+
+            // Signal
+            const signalEl = document.getElementById('signalValue');
+            signalEl.textContent = signal;
+            signalEl.className = `signal-value ${signal.toLowerCase()}`;
+        }
+
+        // Initial load and periodic updates
+        updateDashboard();
+        setInterval(updateDashboard, REFRESH_INTERVAL);
+    </script>
+</body>
+</html>

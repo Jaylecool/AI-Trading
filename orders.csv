@@ -1,0 +1,4 @@
+Timestamp,Order_ID,Symbol,Type,Side,Quantity,Entry_Price,Limit_Price,Stop_Price,Status,Filled,Avg_Fill_Price,Position_ID,Reason
+2026-02-24 10:19:08,1000,AAPL,MARKET,BUY,75,200.0,,,PENDING,0,0.0,,BUY signal (confidence: 100%)
+2026-02-24 10:19:08,1001,AAPL,STOP_LOSS,SELL,75,,,197.0,PENDING,0,0.0,1000.0,Stop-loss order
+2026-02-24 10:19:08,1002,AAPL,TAKE_PROFIT,SELL,75,,,204.99999999999997,PENDING,0,0.0,1000.0,Take-profit order

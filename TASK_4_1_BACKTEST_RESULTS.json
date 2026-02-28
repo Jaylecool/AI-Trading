@@ -1,0 +1,74 @@
+{
+  "trading_parameters": {
+    "buy_threshold": 0.02,
+    "sell_threshold": 0.02,
+    "take_profit_target": 0.025,
+    "stop_loss_percent": 0.015,
+    "risk_percentage": 0.02,
+    "max_position_value_percent": 0.15,
+    "max_cash_allocation_percent": 0.5,
+    "min_position_size": 10,
+    "portfolio_max_loss_percent": -0.05,
+    "max_concurrent_positions": 3,
+    "minimum_hold_days": 1,
+    "trailing_stop_percent": 0.0075,
+    "volatility_threshold": 0.03,
+    "volatility_threshold_multiplier": 1.5,
+    "confidence_threshold": 0.5
+  },
+  "trade_statistics": {
+    "total_trades": 0,
+    "winning_trades": 0,
+    "losing_trades": 0,
+    "win_rate": 0.0,
+    "profit_factor": 0.0,
+    "avg_profit": 0.0,
+    "avg_loss": 0.0,
+    "avg_duration": 0,
+    "largest_win": 0.0,
+    "largest_loss": 0.0,
+    "total_pnl": 0
+  },
+  "portfolio_statistics": {
+    "initial_capital": 100000,
+    "final_value": 100000,
+    "total_return": 0.0,
+    "total_pnl": 0,
+    "max_drawdown": 0.0,
+    "peak_value": 100000,
+    "open_positions": 0
+  },
+  "validation_results": {
+    "criteria_met": 2,
+    "criteria_total": 6,
+    "details": {
+      "win_rate": {
+        "value": 0.0,
+        "threshold": 0.45,
+        "pass": false
+      },
+      "profit_factor": {
+        "value": 0.0,
+        "threshold": 0.8,
+        "pass": false
+      },
+      "max_drawdown": {
+        "value": 0.0,
+        "threshold": -0.15,
+        "pass": true
+      },
+      "avg_winning_trade": {
+        "value": 0.0,
+        "threshold": 0.005,
+        "pass": false
+      },
+      "avg_losing_trade": {
+        "value": 0.0,
+        "threshold": -0.015,
+        "pass": true
+      }
+    },
+    "overall_pass": false
+  },
+  "trades": []
+}
