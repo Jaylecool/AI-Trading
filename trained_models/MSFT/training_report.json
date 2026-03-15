@@ -1,0 +1,42 @@
+{
+  "symbol": "MSFT",
+  "test_samples": 201,
+  "prediction_target": "daily_return",
+  "lr": {
+    "mae_return": 0.010375745386659318,
+    "direction_accuracy": 0.46766169154228854
+  },
+  "rf": {
+    "mae_return": 0.009897019056885696,
+    "direction_accuracy": 0.48756218905472637
+  },
+  "ensemble": {
+    "mae_return": 0.010024459597931083,
+    "direction_accuracy": 0.46766169154228854
+  },
+  "direction_classifier": {
+    "accuracy": 0.5472636815920398
+  },
+  "feature_cols": [
+    "RSI_14",
+    "MACD_Histogram",
+    "ROC_12",
+    "Volatility_20",
+    "Intraday_Range",
+    "Open_Close_Ratio",
+    "High_Close_Ratio",
+    "Low_Close_Ratio",
+    "Volume_Ratio",
+    "Price_SMA10_Ratio",
+    "Price_SMA20_Ratio",
+    "Price_SMA50_Ratio",
+    "Price_SMA200_Ratio",
+    "EMA10_EMA20_Cross",
+    "BB_Width",
+    "BB_Position",
+    "ATR_Pct",
+    "Return_1d",
+    "Return_5d",
+    "Return_10d"
+  ]
+}

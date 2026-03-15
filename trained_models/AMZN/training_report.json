@@ -1,0 +1,42 @@
+{
+  "symbol": "AMZN",
+  "test_samples": 201,
+  "prediction_target": "daily_return",
+  "lr": {
+    "mae_return": 0.014365148962017129,
+    "direction_accuracy": 0.5024875621890548
+  },
+  "rf": {
+    "mae_return": 0.013341434183194788,
+    "direction_accuracy": 0.5422885572139303
+  },
+  "ensemble": {
+    "mae_return": 0.013754760846654192,
+    "direction_accuracy": 0.5124378109452736
+  },
+  "direction_classifier": {
+    "accuracy": 0.5223880597014925
+  },
+  "feature_cols": [
+    "RSI_14",
+    "MACD_Histogram",
+    "ROC_12",
+    "Volatility_20",
+    "Intraday_Range",
+    "Open_Close_Ratio",
+    "High_Close_Ratio",
+    "Low_Close_Ratio",
+    "Volume_Ratio",
+    "Price_SMA10_Ratio",
+    "Price_SMA20_Ratio",
+    "Price_SMA50_Ratio",
+    "Price_SMA200_Ratio",
+    "EMA10_EMA20_Cross",
+    "BB_Width",
+    "BB_Position",
+    "ATR_Pct",
+    "Return_1d",
+    "Return_5d",
+    "Return_10d"
+  ]
+}

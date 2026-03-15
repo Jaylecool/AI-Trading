@@ -1,0 +1,42 @@
+{
+  "symbol": "AAPL",
+  "test_samples": 201,
+  "prediction_target": "daily_return",
+  "lr": {
+    "mae_return": 0.010308575848637225,
+    "direction_accuracy": 0.527363184079602
+  },
+  "rf": {
+    "mae_return": 0.009879250659946937,
+    "direction_accuracy": 0.5771144278606966
+  },
+  "ensemble": {
+    "mae_return": 0.01004762232205361,
+    "direction_accuracy": 0.5323383084577115
+  },
+  "direction_classifier": {
+    "accuracy": 0.5771144278606966
+  },
+  "feature_cols": [
+    "RSI_14",
+    "MACD_Histogram",
+    "ROC_12",
+    "Volatility_20",
+    "Intraday_Range",
+    "Open_Close_Ratio",
+    "High_Close_Ratio",
+    "Low_Close_Ratio",
+    "Volume_Ratio",
+    "Price_SMA10_Ratio",
+    "Price_SMA20_Ratio",
+    "Price_SMA50_Ratio",
+    "Price_SMA200_Ratio",
+    "EMA10_EMA20_Cross",
+    "BB_Width",
+    "BB_Position",
+    "ATR_Pct",
+    "Return_1d",
+    "Return_5d",
+    "Return_10d"
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "symbol": "TSLA",
+  "test_samples": 201,
+  "prediction_target": "daily_return",
+  "lr": {
+    "mae_return": 0.023702595585098237,
+    "direction_accuracy": 0.4925373134328358
+  },
+  "rf": {
+    "mae_return": 0.023499164326037603,
+    "direction_accuracy": 0.5373134328358209
+  },
+  "ensemble": {
+    "mae_return": 0.023426846494689957,
+    "direction_accuracy": 0.48756218905472637
+  },
+  "direction_classifier": {
+    "accuracy": 0.5174129353233831
+  },
+  "feature_cols": [
+    "RSI_14",
+    "MACD_Histogram",
+    "ROC_12",
+    "Volatility_20",
+    "Intraday_Range",
+    "Open_Close_Ratio",
+    "High_Close_Ratio",
+    "Low_Close_Ratio",
+    "Volume_Ratio",
+    "Price_SMA10_Ratio",
+    "Price_SMA20_Ratio",
+    "Price_SMA50_Ratio",
+    "Price_SMA200_Ratio",
+    "EMA10_EMA20_Cross",
+    "BB_Width",
+    "BB_Position",
+    "ATR_Pct",
+    "Return_1d",
+    "Return_5d",
+    "Return_10d"
+  ]
+}
