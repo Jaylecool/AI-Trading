@@ -23,6 +23,9 @@ Thumbs.db
 Desktop.ini
 .DS_Store
 
+# Trained model binaries (large files)
+trained_models/**/*.pkl
+
 # Runtime state (regenerated)
 results/live_auto_state.json
 results/live_trades.json
