@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TradingPro Dashboard - Prediction Display (Task 5.2)</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0F1419;
+            --bg-secondary: #1A1F26;
+            --bg-tertiary: #2A3039;
+            --text-primary: #FFFFFF;
+            --text-secondary: #E4E6EB;
+            --text-tertiary: #A0A9B8;
+            --accent-blue: #007AFF;
+            --accent-green: #00D084;
+            --accent-red: #FF3B30;
+            --accent-yellow: #FFCC33;
+            --border-color: #3A444F;
+            --spacing-unit: 8px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background-color: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1920px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--accent-blue);
+        }
+
+        .logo-badge {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            color: var(--text-primary);
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--accent-green);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1920px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        /* Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        /* Card */
+        .card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: var(--accent-blue);
+            box-shadow: 0 4px 12px rgba(0, 122, 255, 0.1);
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Prediction Display */
+        .prediction-section {
+            background: linear-gradient(135deg, #1A1F26 0%, #2A3039 100%);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .prediction-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .prediction-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .prediction-label {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .prediction-value {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--text-primary);
+        }
+
+        .prediction-value.positive {
+            color: var(--accent-green);
+        }
+
+        .prediction-value.negative {
+            color: var(--accent-red);
+        }
+
+        /* Confidence Band Visualization */
+        .confidence-band {
+            margin-top: 16px;
+            padding: 16px;
+            background-color: var(--bg-tertiary);
+            border-radius: 8px;
+        }
+
+        .confidence-label {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            margin-bottom: 8px;
+        }
+
+        .confidence-bar-container {
+            height: 4px;
+            background-color: var(--bg-primary);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .confidence-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-yellow));
+            border-radius: 2px;
+        }
+
+        .confidence-bar.high {
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-blue));
+        }
+
+        .confidence-bar.low {
+            background: linear-gradient(90deg, var(--accent-yellow), var(--accent-red));
+        }
+
+        .confidence-text {
+            font-size: 13px;
+            color: var(--text-secondary);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Signal Display */
+        .signal-display {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background-color: var(--bg-tertiary);
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 16px;
+        }
+
+        .signal-badge {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .signal-badge.bullish {
+            background-color: rgba(0, 208, 132, 0.2);
+            color: var(--accent-green);
+        }
+
+        .signal-badge.bearish {
+            background-color: rgba(255, 59, 48, 0.2);
+            color: var(--accent-red);
+        }
+
+        .signal-badge.neutral {
+            background-color: rgba(255, 204, 51, 0.2);
+            color: var(--accent-yellow);
+        }
+
+        .signal-info {
+            flex: 1;
+        }
+
+        .signal-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .signal-details {
+            font-size: 13px;
+            color: var(--text-tertiary);
+        }
+
+        .signal-strength {
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        /* Multi-Day Forecast Table */
+        .forecast-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+            font-size: 13px;
+        }
+
+        .forecast-table th {
+            background-color: var(--bg-tertiary);
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .forecast-table td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .forecast-table tbody tr:hover {
+            background-color: var(--bg-tertiary);
+        }
+
+        .forecast-price {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .forecast-movement.positive {
+            color: var(--accent-green);
+        }
+
+        .forecast-movement.negative {
+            color: var(--accent-red);
+        }
+
+        .confidence-chip {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            background-color: var(--bg-tertiary);
+        }
+
+        .confidence-chip.high {
+            background-color: rgba(0, 208, 132, 0.2);
+            color: var(--accent-green);
+        }
+
+        .confidence-chip.medium {
+            background-color: rgba(255, 204, 51, 0.2);
+            color: var(--accent-yellow);
+        }
+
+        .confidence-chip.low {
+            background-color: rgba(255, 59, 48, 0.2);
+            color: var(--accent-red);
+        }
+
+        /* Chart Container */
+        .chart-container {
+            position: relative;
+            height: 500px;
+            margin: 24px 0;
+            background-color: var(--bg-tertiary);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .chart-controls {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-tertiary);
+            color: var(--text-secondary);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-blue);
+            color: var(--text-primary);
+            border-color: var(--accent-blue);
+        }
+
+        .btn.active {
+            background-color: var(--accent-blue);
+            color: var(--text-primary);
+            border-color: var(--accent-blue);
+        }
+
+        /* Technical Indicators */
+        .indicators-panel {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .indicator-box {
+            background-color: var(--bg-tertiary);
+            padding: 12px;
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .indicator-label {
+            font-size: 11px;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .indicator-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--text-primary);
+        }
+
+        .indicator-value.overbought {
+            color: var(--accent-red);
+        }
+
+        .indicator-value.oversold {
+            color: var(--accent-green);
+        }
+
+        /* Real-time Status */
+        .real-time-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--text-tertiary);
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .update-interval {
+            display: inline-block;
+            background-color: var(--bg-tertiary);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        /* Alerts */
+        .alert {
+            padding: 12px 16px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .alert.info {
+            background-color: rgba(0, 122, 255, 0.1);
+            border: 1px solid var(--accent-blue);
+            color: var(--accent-blue);
+        }
+
+        .alert.success {
+            background-color: rgba(0, 208, 132, 0.1);
+            border: 1px solid var(--accent-green);
+            color: var(--accent-green);
+        }
+
+        .alert.warning {
+            background-color: rgba(255, 204, 51, 0.1);
+            border: 1px solid var(--accent-yellow);
+            color: var(--accent-yellow);
+        }
+
+        .alert.danger {
+            background-color: rgba(255, 59, 48, 0.1);
+            border: 1px solid var(--accent-red);
+            color: var(--accent-red);
+        }
+
+        /* Loading */
+        .loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--border-color);
+            border-top-color: var(--accent-blue);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 1440px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .prediction-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 16px;
+            }
+
+            .prediction-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .chart-container {
+                height: 350px;
+            }
+
+            .signal-display {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .indicators-panel {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-chart-line"></i>
+                TradingPro
+                <span class="logo-badge">5.2</span>
+            </div>
+            <div class="status-indicator">
+                <span class="status-dot"></span>
+                <span>Real-time Updates Active</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Alerts -->
+        <div id="alerts-container"></div>
+
+        <!-- Prediction Section -->
+        <div class="card prediction-section">
+            <div class="card-title">
+                <i class="fas fa-crystal-ball"></i>
+                Enhanced Prediction Display (Task 5.2)
+            </div>
+
+            <!-- Prediction Grid -->
+            <div class="prediction-grid">
+                <div class="prediction-item">
+                    <div class="prediction-label">Current Price</div>
+                    <div class="prediction-value" id="current-price">$179.66</div>
+                </div>
+                <div class="prediction-item">
+                    <div class="prediction-label">Next Day Forecast</div>
+                    <div class="prediction-value" id="forecast-price">$184.15</div>
+                </div>
+                <div class="prediction-item">
+                    <div class="prediction-label">Expected Movement</div>
+                    <div class="prediction-value positive" id="expected-movement">+2.50%</div>
+                </div>
+                <div class="prediction-item">
+                    <div class="prediction-label">Forecast Confidence</div>
+                    <div class="prediction-value" id="confidence-value">76%</div>
+                </div>
+            </div>
+
+            <!-- Confidence Interval Band -->
+            <div class="confidence-band">
+                <div class="confidence-label">Price Prediction Band (95% Confidence)</div>
+                <div class="confidence-bar-container">
+                    <div class="confidence-bar high" id="confidence-bar" style="width: 76%;"></div>
+                </div>
+                <div class="confidence-text">
+                    <span id="band-lower">$182.30</span>
+                    <span id="band-upper">$186.00</span>
+                </div>
+            </div>
+
+            <!-- Signal Display -->
+            <div class="signal-display" id="signal-display">
+                <div class="signal-badge bullish">
+                    <i class="fas fa-arrow-up"></i>
+                </div>
+                <div class="signal-info">
+                    <div class="signal-name">BULLISH Signal</div>
+                    <div class="signal-details">Based on RSI, MACD, and Bollinger Bands analysis</div>
+                    <div class="signal-strength">Signal Strength: 78%</div>
+                </div>
+            </div>
+
+            <!-- Real-time Update Status -->
+            <div class="real-time-status">
+                <i class="fas fa-sync-alt" id="sync-icon"></i>
+                <span>Last updated:</span>
+                <span id="last-update">Just now</span>
+                <span>Next update in:</span>
+                <span class="update-interval" id="next-update">5:00</span>
+            </div>
+        </div>
+
+        <!-- Price Chart with Predictions -->
+        <div class="card">
+            <div class="card-title">
+                <i class="fas fa-chart-area"></i>
+                Historical Prices + Multi-Day Forecast with Confidence Bands
+            </div>
+
+            <!-- Chart Controls -->
+            <div class="chart-controls">
+                <button class="btn active" data-indicator="sma">SMA (20)</button>
+                <button class="btn" data-indicator="ema">EMA (12)</button>
+                <button class="btn" data-indicator="bb">Bollinger Bands</button>
+                <button class="btn" data-update="1m">Refresh (1m)</button>
+                <button class="btn" data-update="5m">Refresh (5m)</button>
+                <button class="btn" data-update="manual">Manual</button>
+            </div>
+
+            <!-- Chart -->
+            <div class="chart-container" id="price-chart"></div>
+        </div>
+
+        <!-- Technical Indicators -->
+        <div class="card">
+            <div class="card-title">
+                <i class="fas fa-chart-bar"></i>
+                Technical Indicators Panel
+            </div>
+
+            <div class="indicators-panel">
+                <div class="indicator-box">
+                    <div class="indicator-label">RSI (14)</div>
+                    <div class="indicator-value" id="rsi-value">54.2</div>
+                    <div style="font-size: 11px; color: var(--text-tertiary); margin-top: 4px;">Neutral Zone</div>
+                </div>
+
+                <div class="indicator-box">
+                    <div class="indicator-label">MACD</div>
+                    <div class="indicator-value" id="macd-value">+0.0234</div>
+                    <div style="font-size: 11px; color: var(--text-tertiary); margin-top: 4px;">Positive</div>
+                </div>
+
+                <div class="indicator-box">
+                    <div class="indicator-label">BB Position</div>
+                    <div class="indicator-value" id="bb-position">62%</div>
+                    <div style="font-size: 11px; color: var(--text-tertiary); margin-top: 4px;">Upper Half</div>
+                </div>
+
+                <div class="indicator-box">
+                    <div class="indicator-label">Volatility (Ann.)</div>
+                    <div class="indicator-value" id="volatility-value">18.5%</div>
+                    <div style="font-size: 11px; color: var(--text-tertiary); margin-top: 4px;">Moderate</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Multi-Day Forecast Table -->
+        <div class="card">
+            <div class="card-title">
+                <i class="fas fa-calendar"></i>
+                5-Day Price Forecast with Confidence Intervals
+            </div>
+
+            <table class="forecast-table">
+                <thead>
+                    <tr>
+                        <th>Date (Day)</th>
+                        <th>Forecast Price</th>
+                        <th>Lower Bound (95%)</th>
+                        <th>Upper Bound (95%)</th>
+                        <th>Expected Move</th>
+                        <th>Confidence</th>
+                    </tr>
+                </thead>
+                <tbody id="forecast-body">
+                    <!-- Populated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script>
+        // ====================================================================
+        // CONFIGURATION
+        // ====================================================================
+
+        const CONFIG = {
+            apiBase: 'http://localhost:5000/api',
+            updateInterval: 300000, // 5 minutes in milliseconds
+            refreshRate: 60000, // 1 minute for display updates
+            autoRefresh: true
+        };
+
+        let state = {
+            predictions: null,
+            indicators: null,
+            lastUpdate: new Date(),
+            updateCountdown: CONFIG.updateInterval / 1000
+        };
+
+        // ====================================================================
+        // API CALLS
+        // ====================================================================
+
+        async function fetchNextDayPrediction() {
+            try {
+                const response = await fetch(`${CONFIG.apiBase}/predictions/next-day`);
+                const data = await response.json();
+                if (data.success) {
+                    updatePredictionDisplay(data);
+                    return data;
+                }
+            } catch (error) {
+                console.error('Error fetching prediction:', error);
+                showAlert('Failed to fetch prediction data', 'danger');
+            }
+        }
+
+        async function fetchMultiDayPredictions() {
+            try {
+                const response = await fetch(`${CONFIG.apiBase}/predictions/multi-day?days=5`);
+                const data = await response.json();
+                if (data.success) {
+                    state.predictions = data;
+                    updateForecastTable(data.forecasts);
+                    return data;
+                }
+            } catch (error) {
+                console.error('Error fetching multi-day predictions:', error);
+            }
+        }
+
+        async function fetchChartData() {
+            try {
+                const response = await fetch(`${CONFIG.apiBase}/predictions/chart-data`);
+                const data = await response.json();
+                if (data.success) {
+                    renderChart(data);
+                    return data;
+                }
+            } catch (error) {
+                console.error('Error fetching chart data:', error);
+            }
+        }
+
+        async function fetchTechnicalIndicators() {
+            try {
+                const response = await fetch(`${CONFIG.apiBase}/predictions/signals`);
+                const data = await response.json();
+                if (data.success) {
+                    state.indicators = data;
+                    updateIndicatorsDisplay(data);
+                    return data;
+                }
+            } catch (error) {
+                console.error('Error fetching indicators:', error);
+            }
+        }
+
+        // ====================================================================
+        // DISPLAY UPDATES
+        // ====================================================================
+
+        function updatePredictionDisplay(data) {
+            document.getElementById('current-price').textContent = `$${data.current_price.toFixed(2)}`;
+            document.getElementById('forecast-price').textContent = `$${data.forecast_price.toFixed(2)}`;
+            
+            const movement = parseFloat(data.expected_movement);
+            const movementEl = document.getElementById('expected-movement');
+            movementEl.textContent = `${movement > 0 ? '+' : ''}${movement.toFixed(2)}%`;
+            movementEl.className = `prediction-value ${movement > 0 ? 'positive' : 'negative'}`;
+            
+            document.getElementById('confidence-value').textContent = `${(data.confidence * 100).toFixed(0)}%`;
+            document.getElementById('confidence-bar').style.width = `${data.confidence * 100}%`;
+            
+            // Confidence band
+            document.getElementById('band-lower').textContent = `$${data.lower_bound.toFixed(2)}`;
+            document.getElementById('band-upper').textContent = `$${data.upper_bound.toFixed(2)}`;
+            
+            // Signal display
+            const signalDisplay = document.getElementById('signal-display');
+            const signalColor = data.signal === 'BULLISH' ? 'bullish' : data.signal === 'BEARISH' ? 'bearish' : 'neutral';
+            const signalIcon = data.signal === 'BULLISH' ? '▲' : data.signal === 'BEARISH' ? '▼' : '◆';
+            
+            signalDisplay.innerHTML = `
+                <div class="signal-badge ${signalColor}">
+                    ${signalIcon}
+                </div>
+                <div class="signal-info">
+                    <div class="signal-name">${data.signal} Signal</div>
+                    <div class="signal-details">RSI: ${data.rsi.toFixed(1)} • MACD: ${data.macd.toFixed(4)}</div>
+                    <div class="signal-strength">Signal Strength: ${(data.signal_strength * 100).toFixed(0)}%</div>
+                </div>
+            `;
+            
+            state.lastUpdate = new Date();
+            updateLastUpdateTime();
+        }
+
+        function updateForecastTable(forecasts) {
+            const tbody = document.getElementById('forecast-body');
+            tbody.innerHTML = forecasts.map(f => {
+                const movement = parseFloat(f.movement);
+                const movementClass = movement > 0 ? 'positive' : 'negative';
+                const confidenceClass = f.confidence > 0.75 ? 'high' : f.confidence > 0.5 ? 'medium' : 'low';
+                
+                return `
+                    <tr>
+                        <td>${f.date}</td>
+                        <td class="forecast-price">$${f.forecast_price.toFixed(2)}</td>
+                        <td>$${f.lower_bound.toFixed(2)}</td>
+                        <td>$${f.upper_bound.toFixed(2)}</td>
+                        <td class="forecast-movement ${movementClass}">${movement > 0 ? '+' : ''}${movement.toFixed(2)}%</td>
+                        <td><span class="confidence-chip ${confidenceClass}">${(f.confidence * 100).toFixed(0)}%</span></td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function updateIndicatorsDisplay(data) {
+            const indicators = data.indicators;
+            
+            // RSI
+            const rsiValue = indicators.rsi;
+            const rsiEl = document.getElementById('rsi-value');
+            rsiEl.textContent = rsiValue.toFixed(1);
+            rsiEl.className = `indicator-value ${rsiValue < 30 ? 'oversold' : rsiValue > 70 ? 'overbought' : ''}`;
+            
+            // MACD
+            document.getElementById('macd-value').textContent = indicators.macd.toFixed(4);
+            
+            // Bollinger Bands Position
+            const current = 179.66; // Mock current price
+            const bb_position = ((current - indicators.bb_lower) / (indicators.bb_upper - indicators.bb_lower)) * 100;
+            document.getElementById('bb-position').textContent = `${Math.round(bb_position)}%`;
+            
+            // Volatility
+            document.getElementById('volatility-value').textContent = `${(indicators.volatility * 100).toFixed(1)}%`;
+        }
+
+        function updateLastUpdateTime() {
+            const now = new Date();
+            const elapsedSeconds = Math.floor((now - state.lastUpdate) / 1000);
+            
+            if (elapsedSeconds < 60) {
+                document.getElementById('last-update').textContent = 'Just now';
+            } else {
+                document.getElementById('last-update').textContent = `${Math.floor(elapsedSeconds / 60)}m ago`;
+            }
+        }
+
+        // ====================================================================
+        // CHART RENDERING
+        // ====================================================================
+
+        function renderChart(data) {
+            const historical = data.historical;
+            const forecast = data.forecast;
+            
+            // Historical prices
+            const trace1 = {
+                x: historical.dates,
+                y: historical.prices,
+                type: 'scatter',
+                mode: 'lines',
+                name: 'AAPL Price',
+                line: { color: '#007AFF', width: 2 }
+            };
+            
+            // SMA
+            const trace2 = {
+                x: historical.dates,
+                y: historical.sma20,
+                type: 'scatter',
+                mode: 'lines',
+                name: 'SMA (20)',
+                line: { color: '#00D084', width: 1, dash: 'dash' },
+                visible: true
+            };
+            
+            // EMA
+            const trace3 = {
+                x: historical.dates,
+                y: historical.ema12,
+                type: 'scatter',
+                mode: 'lines',
+                name: 'EMA (12)',
+                line: { color: '#FF3B30', width: 1, dash: 'dot' },
+                visible: false
+            };
+            
+            // Forecast line
+            const trace4 = {
+                x: forecast.dates,
+                y: forecast.prices,
+                type: 'scatter',
+                mode: 'lines+markers',
+                name: 'Forecast',
+                line: { color: '#FF9500', width: 2, dash: 'dashdot' },
+                marker: { size: 6 }
+            };
+            
+            // Confidence upper band
+            const trace5 = {
+                x: forecast.dates,
+                y: forecast.upper_band,
+                type: 'scatter',
+                mode: 'lines',
+                name: 'Upper Band (95%)',
+                line: { color: 'rgba(255, 59, 48, 0.3)', width: 1 },
+                showlegend: false
+            };
+            
+            // Confidence lower band
+            const trace6 = {
+                x: forecast.dates,
+                y: forecast.lower_band,
+                type: 'scatter',
+                mode: 'lines',
+                name: 'Lower Band (95%)',
+                line: { color: 'rgba(255, 59, 48, 0.3)', width: 1 },
+                fill: 'tonexty',
+                fillcolor: 'rgba(255, 59, 48, 0.1)',
+                showlegend: false
+            };
+            
+            const layout = {
+                title: 'Historical Prices + Multi-Day Forecast with Confidence Intervals',
+                xaxis: { color: '#A0A9B8', gridcolor: '#3A444F' },
+                yaxis: { color: '#A0A9B8', gridcolor: '#3A444F' },
+                plot_bgcolor: '#1A1F26',
+                paper_bgcolor: '#1A1F26',
+                font: { color: '#FFFFFF' },
+                hovermode: 'x unified',
+                margin: { l: 50, r: 50, t: 40, b: 50 },
+                legend: { x: 0.01, y: 0.99, bgcolor: 'rgba(0,0,0,0.3)' }
+            };
+            
+            const config = {
+                responsive: true,
+                displayModeBar: false
+            };
+            
+            Plotly.newPlot('price-chart', [trace1, trace2, trace3, trace5, trace6, trace4], layout, config);
+        }
+
+        // ====================================================================
+        // REAL-TIME UPDATES
+        // ====================================================================
+
+        function updateCountdown() {
+            state.updateCountdown--;
+            
+            const minutes = Math.floor(state.updateCountdown / 60);
+            const seconds = state.updateCountdown % 60;
+            
+            document.getElementById('next-update').textContent = 
+                `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (state.updateCountdown <= 0) {
+                fetchAllData();
+                state.updateCountdown = CONFIG.updateInterval / 1000;
+            }
+        }
+
+        async function fetchAllData() {
+            showAlert('Fetching latest predictions...', 'info');
+            
+            // Fetch all data in parallel
+            await Promise.all([
+                fetchNextDayPrediction(),
+                fetchMultiDayPredictions(),
+                fetchChartData(),
+                fetchTechnicalIndicators()
+            ]);
+            
+            showAlert('Predictions updated successfully!', 'success');
+        }
+
+        function showAlert(message, type = 'info') {
+            const container = document.getElementById('alerts-container');
+            const icon = type === 'success' ? 'fa-check-circle' : 
+                        type === 'danger' ? 'fa-exclamation-circle' :
+                        type === 'warning' ? 'fa-exclamation-triangle' : 'fa-info-circle';
+            
+            const alert = document.createElement('div');
+            alert.className = `alert ${type}`;
+            alert.innerHTML = `
+                <i class="fas ${icon}"></i>
+                <span>${message}</span>
+            `;
+            
+            container.insertBefore(alert, container.firstChild);
+            
+            setTimeout(() => alert.remove(), 5000);
+        }
+
+        // ====================================================================
+        // INITIALIZATION
+        // ====================================================================
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            showAlert('Initializing dashboard with enhanced predictions...', 'info');
+            
+            // Fetch initial data
+            await fetchAllData();
+            
+            // Start real-time updates
+            setInterval(updateLastUpdateTime, 1000);
+            setInterval(updateCountdown, 1000);
+            
+            // Control buttons
+            document.querySelectorAll('[data-indicator]').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    showAlert(`${this.textContent} ${this.classList.contains('active') ? 'enabled' : 'disabled'}`, 'info');
+                });
+            });
+            
+            document.querySelectorAll('[data-update]').forEach(btn => {
+                btn.addEventListener('click', async function() {
+                    const updateType = this.dataset.update;
+                    if (updateType === 'manual') {
+                        await fetchAllData();
+                        state.updateCountdown = CONFIG.updateInterval / 1000;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

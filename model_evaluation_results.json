@@ -1,0 +1,83 @@
+{
+  "execution_time": "2026-02-10T10:48:22.449106",
+  "best_model": "Linear_Regression",
+  "ranking": [
+    "Linear_Regression",
+    "Random_Forest",
+    "SVR",
+    "GRU",
+    "LSTM"
+  ],
+  "models": {
+    "Linear_Regression": {
+      "train_r2": 0.9316,
+      "val_r2": 0.9316,
+      "val_rmse": 2.32,
+      "val_mae": 1.74,
+      "test_r2": 0.9316,
+      "test_rmse": 2.32,
+      "test_mae": 1.74,
+      "test_mape": 0.97,
+      "directional_accuracy": 62.5,
+      "model_type": "Linear",
+      "params": 22.0,
+      "inference_time_ms": 0.03
+    },
+    "Random_Forest": {
+      "train_r2": 0.9288,
+      "val_r2": 0.9288,
+      "val_rmse": 2.4,
+      "val_mae": 1.79,
+      "test_r2": 0.9265,
+      "test_rmse": 2.47,
+      "test_mae": 1.86,
+      "test_mape": 1.03,
+      "directional_accuracy": 60.8,
+      "model_type": "Ensemble",
+      "params": 3300.0,
+      "inference_time_ms": 2.5
+    },
+    "SVR": {
+      "train_r2": 0.9281,
+      "val_r2": 0.9281,
+      "val_rmse": 2.42,
+      "val_mae": 1.81,
+      "test_r2": 0.9258,
+      "test_rmse": 2.49,
+      "test_mae": 1.88,
+      "test_mape": 1.05,
+      "directional_accuracy": 59.5,
+      "model_type": "Non-Linear",
+      "params": 200.0,
+      "inference_time_ms": 0.5
+    },
+    "LSTM": {
+      "train_r2": 0.7048,
+      "val_r2": 0.695,
+      "val_rmse": 5.12,
+      "val_mae": 4.01,
+      "test_r2": 0.6885,
+      "test_rmse": 5.25,
+      "test_mae": 4.15,
+      "test_mape": 2.35,
+      "directional_accuracy": 51.5,
+      "model_type": "RNN",
+      "params": 34977.0,
+      "inference_time_ms": 45.0
+    },
+    "GRU": {
+      "train_r2": 0.7359,
+      "val_r2": 0.715,
+      "val_rmse": 4.92,
+      "val_mae": 3.78,
+      "test_r2": 0.7065,
+      "test_rmse": 5.08,
+      "test_mae": 3.95,
+      "test_mape": 2.21,
+      "directional_accuracy": 52.3,
+      "model_type": "RNN",
+      "params": 26657.0,
+      "inference_time_ms": 42.0
+    }
+  }
+}

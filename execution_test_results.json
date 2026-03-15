@@ -1,0 +1,362 @@
+[
+  {
+    "scenario": "Normal Trading Day",
+    "initial_capital": 100000,
+    "steps": [
+      {
+        "step": 1,
+        "time": "09:30",
+        "current_price": 195.0,
+        "predicted_price": 195.5,
+        "signal": null,
+        "executed": false,
+        "portfolio_value": 100000,
+        "open_positions": 0,
+        "pnl": 0,
+        "cash": 100000
+      },
+      {
+        "step": 2,
+        "time": "10:00",
+        "current_price": 196.5,
+        "predicted_price": 200.5,
+        "signal": "BUY",
+        "executed": true,
+        "portfolio_value": 100000.0,
+        "open_positions": 1,
+        "pnl": 0.0,
+        "cash": 85066.0
+      },
+      {
+        "step": 3,
+        "time": "11:00",
+        "current_price": 199.0,
+        "predicted_price": 200.0,
+        "signal": null,
+        "executed": false,
+        "portfolio_value": 100190.0,
+        "open_positions": 1,
+        "pnl": 190.0,
+        "cash": 85066.0
+      },
+      {
+        "step": 4,
+        "time": "14:00",
+        "current_price": 201.5,
+        "predicted_price": 197.0,
+        "signal": null,
+        "executed": false,
+        "portfolio_value": 100380.0,
+        "open_positions": 1,
+        "pnl": 380.0,
+        "cash": 85066.0
+      }
+    ],
+    "final_status": {
+      "timestamp": "2026-02-24T10:21:56.982232",
+      "portfolio_value": 100380.0,
+      "cash": 85066.0,
+      "open_positions_value": 15314.0,
+      "num_open_positions": 1,
+      "daily_pnl": 0.0,
+      "total_pnl": 380.0,
+      "return_percent": 0.0038,
+      "buy_signals": 1,
+      "sell_signals": 0,
+      "buy_orders_executed": 1,
+      "sell_orders_executed": 0
+    },
+    "trades": [],
+    "signals": []
+  },
+  {
+    "scenario": "High Volatility Handling",
+    "initial_capital": 100000,
+    "steps": [
+      {
+        "step": 1,
+        "time": "09:30",
+        "current_price": 200.0,
+        "predicted_price": 204.0,
+        "signal": null,
+        "executed": false,
+        "portfolio_value": 100000,
+        "open_positions": 0,
+        "pnl": 0,
+        "cash": 100000
+      },
+      {
+        "step": 2,
+        "time": "10:00",
+        "current_price": 203.0,
+        "predicted_price": 206.5,
+        "signal": null,
+        "executed": false,
+        "portfolio_value": 100000,
+        "open_positions": 0,
+        "pnl": 0,
+        "cash": 100000
+      }
+    ],
+    "final_status": {
+      "timestamp": "2026-02-24T10:21:56.988567",
+      "portfolio_value": 100000,
+      "cash": 100000,
+      "open_positions_value": 0,
+      "num_open_positions": 0,
+      "daily_pnl": 0.0,
+      "total_pnl": 0,
+      "return_percent": 0.0,
+      "buy_signals": 0,
+      "sell_signals": 0,
+      "buy_orders_executed": 0,
+      "sell_orders_executed": 0
+    },
+    "trades": [],
+    "signals": []
+  },
+  {
+    "scenario": "Stop-Loss Trigger",
+    "initial_capital": 100000,
+    "steps": [
+      {
+        "step": 1,
+        "time": "09:30",
+        "current_price": 200.0,
+        "predicted_price": 204.0,
+        "signal": null,
+        "executed": false,
+        "portfolio_value": 100000,
+        "open_positions": 0,
+        "pnl": 0,
+        "cash": 100000
+      },
+      {
+        "step": 2,
+        "time": "10:00",
+        "current_price": 198.0,
+        "predicted_price": 197.0,
+        "signal": null,
+        "executed": false,
+        "portfolio_value": 100000,
+        "open_positions": 0,
+        "pnl": 0,
+        "cash": 100000
+      },
+      {
+        "step": 3,
+        "time": "11:00",
+        "current_price": 197.0,
+        "predicted_price": 196.0,
+        "signal": null,
+        "executed": false,
+        "portfolio_value": 100000,
+        "open_positions": 0,
+        "pnl": 0,
+        "cash": 100000
+      }
+    ],
+    "final_status": {
+      "timestamp": "2026-02-24T10:21:56.994568",
+      "portfolio_value": 100000,
+      "cash": 100000,
+      "open_positions_value": 0,
+      "num_open_positions": 0,
+      "daily_pnl": 0.0,
+      "total_pnl": 0,
+      "return_percent": 0.0,
+      "buy_signals": 0,
+      "sell_signals": 0,
+      "buy_orders_executed": 0,
+      "sell_orders_executed": 0
+    },
+    "trades": [],
+    "signals": []
+  },
+  {
+    "scenario": "Take-Profit Trigger",
+    "initial_capital": 100000,
+    "steps": [
+      {
+        "step": 1,
+        "time": "09:30",
+        "current_price": 200.0,
+        "predicted_price": 203.0,
+        "signal": null,
+        "executed": false,
+        "portfolio_value": 100000,
+        "open_positions": 0,
+        "pnl": 0,
+        "cash": 100000
+      },
+      {
+        "step": 2,
+        "time": "10:00",
+        "current_price": 202.5,
+        "predicted_price": 204.0,
+        "signal": null,
+        "executed": false,
+        "portfolio_value": 100000,
+        "open_positions": 0,
+        "pnl": 0,
+        "cash": 100000
+      },
+      {
+        "step": 3,
+        "time": "11:00",
+        "current_price": 205.15,
+        "predicted_price": 205.0,
+        "signal": null,
+        "executed": false,
+        "portfolio_value": 100000,
+        "open_positions": 0,
+        "pnl": 0,
+        "cash": 100000
+      }
+    ],
+    "final_status": {
+      "timestamp": "2026-02-24T10:21:57.001399",
+      "portfolio_value": 100000,
+      "cash": 100000,
+      "open_positions_value": 0,
+      "num_open_positions": 0,
+      "daily_pnl": 0.0,
+      "total_pnl": 0,
+      "return_percent": 0.0,
+      "buy_signals": 0,
+      "sell_signals": 0,
+      "buy_orders_executed": 0,
+      "sell_orders_executed": 0
+    },
+    "trades": [],
+    "signals": []
+  },
+  {
+    "scenario": "Multiple Concurrent Positions",
+    "initial_capital": 100000,
+    "steps": [
+      {
+        "step": 1,
+        "time": "09:30",
+        "current_price": 200.0,
+        "predicted_price": 204.0,
+        "signal": null,
+        "executed": false,
+        "portfolio_value": 100000,
+        "open_positions": 0,
+        "pnl": 0,
+        "cash": 100000
+      },
+      {
+        "step": 2,
+        "time": "10:00",
+        "current_price": 201.5,
+        "predicted_price": 205.5,
+        "signal": null,
+        "executed": false,
+        "portfolio_value": 100000,
+        "open_positions": 0,
+        "pnl": 0,
+        "cash": 100000
+      },
+      {
+        "step": 3,
+        "time": "11:00",
+        "current_price": 203.0,
+        "predicted_price": 206.5,
+        "signal": null,
+        "executed": false,
+        "portfolio_value": 100000,
+        "open_positions": 0,
+        "pnl": 0,
+        "cash": 100000
+      },
+      {
+        "step": 4,
+        "time": "12:00",
+        "current_price": 204.5,
+        "predicted_price": 208.0,
+        "signal": null,
+        "executed": false,
+        "portfolio_value": 100000,
+        "open_positions": 0,
+        "pnl": 0,
+        "cash": 100000
+      }
+    ],
+    "final_status": {
+      "timestamp": "2026-02-24T10:21:57.008777",
+      "portfolio_value": 100000,
+      "cash": 100000,
+      "open_positions_value": 0,
+      "num_open_positions": 0,
+      "daily_pnl": 0.0,
+      "total_pnl": 0,
+      "return_percent": 0.0,
+      "buy_signals": 0,
+      "sell_signals": 0,
+      "buy_orders_executed": 0,
+      "sell_orders_executed": 0
+    },
+    "trades": [],
+    "signals": []
+  },
+  {
+    "scenario": "Circuit Breaker Activation",
+    "initial_capital": 100000,
+    "steps": [
+      {
+        "step": 1,
+        "time": "09:30",
+        "current_price": 200.0,
+        "predicted_price": 204.0,
+        "signal": null,
+        "executed": false,
+        "portfolio_value": 100000,
+        "open_positions": 0,
+        "pnl": 0,
+        "cash": 100000
+      },
+      {
+        "step": 2,
+        "time": "10:00",
+        "current_price": 201.0,
+        "predicted_price": 205.0,
+        "signal": null,
+        "executed": false,
+        "portfolio_value": 100000,
+        "open_positions": 0,
+        "pnl": 0,
+        "cash": 100000
+      },
+      {
+        "step": 3,
+        "time": "10:30",
+        "current_price": 195.0,
+        "predicted_price": 190.0,
+        "signal": null,
+        "executed": false,
+        "portfolio_value": 100000,
+        "open_positions": 0,
+        "pnl": 0,
+        "cash": 100000
+      }
+    ],
+    "final_status": {
+      "timestamp": "2026-02-24T10:21:57.015778",
+      "portfolio_value": 100000,
+      "cash": 100000,
+      "open_positions_value": 0,
+      "num_open_positions": 0,
+      "daily_pnl": 0.0,
+      "total_pnl": 0,
+      "return_percent": 0.0,
+      "buy_signals": 0,
+      "sell_signals": 0,
+      "buy_orders_executed": 0,
+      "sell_orders_executed": 0
+    },
+    "trades": [],
+    "signals": []
+  }
+]

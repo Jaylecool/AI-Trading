@@ -1,0 +1,85 @@
+{
+  "execution_date": "2026-02-10T10:09:10.691005",
+  "dataset": {
+    "training_samples": 741,
+    "validation_samples": 158,
+    "total_features": 22,
+    "train_date_range": {
+      "start": "2020-10-15 00:00:00",
+      "end": "2023-09-26 00:00:00"
+    },
+    "val_date_range": {
+      "start": "2023-09-27 00:00:00",
+      "end": "2024-05-13 00:00:00"
+    }
+  },
+  "target_statistics": {
+    "training": {
+      "min": 105.7000503540039,
+      "max": 194.0939178466797,
+      "mean": 148.29145395997082,
+      "std": 19.944960917265718
+    },
+    "validation": {
+      "min": 163.66490173339844,
+      "max": 196.25657653808597,
+      "mean": 179.4411289842823,
+      "std": 8.90728495447202
+    }
+  },
+  "models": {
+    "Linear_Regression": {
+      "model_name": "Linear Regression",
+      "hyperparameters": {},
+      "metrics": {
+        "r2_score": 0.931587058019956,
+        "rmse": 2.3223932593734946,
+        "mae": 1.7384015499143037,
+        "mape": 0.009744577135496103,
+        "mean_residual": 0.08544034408936844,
+        "std_residual": 2.3282004792090096,
+        "max_error": 10.4739442724441
+      },
+      "training_time_seconds": 0.033728837966918945
+    },
+    "Random_Forest": {
+      "model_name": "Random Forest Regressor",
+      "hyperparameters": {
+        "n_estimators": 200,
+        "max_depth": 15,
+        "min_samples_split": 5,
+        "min_samples_leaf": 2,
+        "max_features": "sqrt"
+      },
+      "metrics": {
+        "r2_score": 0.8656670788608472,
+        "rmse": 3.254302038648101,
+        "mae": 2.5787272196381905,
+        "mape": 0.01424950273945261,
+        "mean_residual": 1.3913436650098054,
+        "std_residual": 2.9512318934982846,
+        "max_error": 11.56723198086732
+      },
+      "training_time_seconds": 0.3182988166809082
+    },
+    "SVR": {
+      "model_name": "Support Vector Regression",
+      "hyperparameters": {
+        "kernel": "rbf",
+        "C": 100,
+        "epsilon": 0.1,
+        "gamma": "scale"
+      },
+      "metrics": {
+        "r2_score": 0.23460530168256155,
+        "rmse": 7.768002446573008,
+        "mae": 6.612185740671273,
+        "mape": 0.036672610122649565,
+        "mean_residual": 1.745491844242771,
+        "std_residual": 7.5934219758410215,
+        "max_error": 20.039783932414423
+      },
+      "training_time_seconds": 0.08668112754821777
+    }
+  }
+}
