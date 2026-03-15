@@ -23,7 +23,8 @@ from typing import Dict, List, Optional, Tuple
 
 import numpy as np
 import pandas as pd
-from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
+from sklearn.ensemble import (GradientBoostingClassifier,
+                              RandomForestClassifier, RandomForestRegressor)
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import (accuracy_score, mean_absolute_error,
                              mean_absolute_percentage_error, r2_score)
@@ -90,10 +91,30 @@ def _prepare_dataset(df: pd.DataFrame, symbol: str) -> Tuple[
     df['BB_Width'] = (df['BB_Upper'] - df['BB_Lower']) / df['BB_Middle']
     df['BB_Position'] = (close - df['BB_Lower']) / (df['BB_Upper'] - df['BB_Lower']).replace(0, np.nan)
     df['ATR_Pct'] = df['ATR_14'] / close
-    # Past 1/5/10 day returns (momentum features)
+    # Past 1/5/10/20 day returns (momentum features)
     df['Return_1d'] = close.pct_change(1)
     df['Return_5d'] = close.pct_change(5)
     df['Return_10d'] = close.pct_change(10)
+    df['Return_20d'] = close.pct_change(20)
+
+    # --- NEW: additional discriminative features ---
+    # Momentum crossovers (relative difference between fast/slow MA)
+    df['SMA10_SMA20_Cross'] = (df['SMA_10'] - df['SMA_20']) / df['SMA_20'].replace(0, np.nan)
+    df['SMA50_SMA200_Cross'] = (df['SMA_50'] - df['SMA_200']) / df['SMA_200'].replace(0, np.nan)
+    # RSI momentum (change in RSI over 5 days — momentum of momentum)
+    df['RSI_Change_5d'] = df['RSI_14'].diff(5)
+    # Volume acceleration
+    df['Volume_Change_5d'] = df[vol_col].pct_change(5)
+    # Mean reversion signals
+    df['Price_vs_20d_High'] = close / close.rolling(20).max()
+    df['Price_vs_20d_Low'] = close / close.rolling(20).min()
+    # Volatility regime (current volatility vs its own 60-day mean)
+    vol_60_mean = df['Volatility_20'].rolling(60).mean()
+    df['Volatility_Ratio'] = df['Volatility_20'] / vol_60_mean.replace(0, np.nan)
+    # MACD histogram momentum
+    df['MACD_Hist_Change'] = df['MACD_Histogram'].diff(5)
+    # Return consistency (fraction of positive days in last 5)
+    df['Pos_Days_5d'] = close.diff().gt(0).rolling(5).mean()
 
     feature_cols = [
         # Technical indicators (absolute values still useful)
@@ -103,7 +124,12 @@ def _prepare_dataset(df: pd.DataFrame, symbol: str) -> Tuple[
         'Volume_Ratio',
         'Price_SMA10_Ratio', 'Price_SMA20_Ratio', 'Price_SMA50_Ratio', 'Price_SMA200_Ratio',
         'EMA10_EMA20_Cross', 'BB_Width', 'BB_Position', 'ATR_Pct',
-        'Return_1d', 'Return_5d', 'Return_10d',
+        'Return_1d', 'Return_5d', 'Return_10d', 'Return_20d',
+        # NEW features
+        'SMA10_SMA20_Cross', 'SMA50_SMA200_Cross',
+        'RSI_Change_5d', 'Volume_Change_5d',
+        'Price_vs_20d_High', 'Price_vs_20d_Low',
+        'Volatility_Ratio', 'MACD_Hist_Change', 'Pos_Days_5d',
     ]
 
     df = df.dropna(subset=feature_cols + ['Target_Return'])
@@ -167,26 +193,70 @@ def train_models_for_symbol(symbol: str, df: Optional[pd.DataFrame] = None) -> D
     lr.fit(X_train_sc, y_train_r)
 
     # --- 2. Random Forest Regressor (predicts daily return) ---
+    # Use validation set to select best max_depth
+    best_rf_depth = 12
+    best_rf_val_acc = 0.0
+    for depth in [6, 8, 10, 12]:
+        rf_candidate = RandomForestRegressor(
+            n_estimators=300, max_depth=depth, max_features='sqrt',
+            min_samples_leaf=10, random_state=42, n_jobs=-1,
+        )
+        rf_candidate.fit(X_train_sc, y_train_r)
+        val_pred = rf_candidate.predict(X_val_sc)
+        val_dir_acc = float(np.mean((val_pred > 0).astype(int) == y_val_d.values))
+        if val_dir_acc > best_rf_val_acc:
+            best_rf_val_acc = val_dir_acc
+            best_rf_depth = depth
+    print(f"  RF best max_depth={best_rf_depth} (val dir acc={best_rf_val_acc:.2%})")
+
     rf = RandomForestRegressor(
-        n_estimators=300, max_depth=12, max_features='sqrt',
+        n_estimators=300, max_depth=best_rf_depth, max_features='sqrt',
         min_samples_leaf=10, random_state=42, n_jobs=-1,
     )
     rf.fit(X_train_sc, y_train_r)
 
-    # --- 3. Direction Classifier ---
+    # --- 3. RF Direction Classifier ---
     clf = RandomForestClassifier(
         n_estimators=300, max_depth=10, max_features='sqrt',
         min_samples_leaf=10, random_state=42, n_jobs=-1,
     )
     clf.fit(X_train_sc, y_train_d)
 
+    # --- 4. GradientBoosting Direction Classifier (strongest for tabular data) ---
+    gb_clf = GradientBoostingClassifier(
+        n_estimators=200, max_depth=4, learning_rate=0.1,
+        subsample=0.8, min_samples_leaf=20, random_state=42,
+    )
+    gb_clf.fit(X_train_sc, y_train_d)
+
+    # --- Optimise ensemble weights on VALIDATION set ---
+    val_pred_lr = lr.predict(X_val_sc)
+    val_pred_rf = rf.predict(X_val_sc)
+    best_w, best_val_dir = 0.5, 0.0
+    for w in np.arange(0.0, 1.05, 0.1):
+        ens_val = w * val_pred_lr + (1 - w) * val_pred_rf
+        acc = float(np.mean((ens_val > 0).astype(int) == y_val_d.values))
+        if acc > best_val_dir:
+            best_val_dir = acc
+            best_w = round(float(w), 2)
+    lr_weight = best_w
+    rf_weight = round(1.0 - best_w, 2)
+    print(f"  Ensemble weights: LR={lr_weight}, RF={rf_weight} (val dir acc={best_val_dir:.2%})")
+
+    # --- Feature importance (log top features, prune noise) ---
+    importances = rf.feature_importances_
+    feat_importance = sorted(zip(X.columns, importances), key=lambda x: -x[1])
+    print(f"  Top-10 features: {[f'{n}={v:.3f}' for n, v in feat_importance[:10]]}")
+
     # --- Evaluate on TEST set ---
     pred_lr = lr.predict(X_test_sc)
     pred_rf = rf.predict(X_test_sc)
-    pred_ens = 0.6 * pred_lr + 0.4 * pred_rf  # ensemble return prediction
+    pred_ens = lr_weight * pred_lr + rf_weight * pred_rf
 
     pred_dir = clf.predict(X_test_sc)
     dir_proba = clf.predict_proba(X_test_sc)
+    pred_gb_dir = gb_clf.predict(X_test_sc)
+    gb_dir_proba = gb_clf.predict_proba(X_test_sc)
 
     # Direction accuracy of the return regression (predicted sign vs actual sign)
     ens_dir_accuracy = float(np.mean(
@@ -197,6 +267,8 @@ def train_models_for_symbol(symbol: str, df: Optional[pd.DataFrame] = None) -> D
         'symbol': symbol,
         'test_samples': int(len(X_test)),
         'prediction_target': 'daily_return',
+        'ensemble_weights': {'lr': lr_weight, 'rf': rf_weight},
+        'rf_best_max_depth': best_rf_depth,
         'lr': {
             'mae_return': float(mean_absolute_error(y_test_r, pred_lr)),
             'direction_accuracy': float(np.mean((pred_lr > 0).astype(int) == y_test_d.values)),
@@ -212,12 +284,17 @@ def train_models_for_symbol(symbol: str, df: Optional[pd.DataFrame] = None) -> D
         'direction_classifier': {
             'accuracy': float(accuracy_score(y_test_d, pred_dir)),
         },
+        'gb_classifier': {
+            'accuracy': float(accuracy_score(y_test_d, pred_gb_dir)),
+        },
         'feature_cols': list(X.columns),
+        'feature_importance': {n: round(float(v), 4) for n, v in feat_importance},
     }
 
     print(f"  Ensemble MAE(return)={metrics['ensemble']['mae_return']:.6f}  "
           f"DirAcc(ens)={ens_dir_accuracy:.2%}  "
-          f"DirAcc(clf)={metrics['direction_classifier']['accuracy']:.2%}")
+          f"DirAcc(clf)={metrics['direction_classifier']['accuracy']:.2%}  "
+          f"DirAcc(gb)={metrics['gb_classifier']['accuracy']:.2%}")
 
     # --- Save artefacts ---
     model_dir = os.path.join(MODELS_DIR, symbol)
@@ -229,6 +306,8 @@ def train_models_for_symbol(symbol: str, df: Optional[pd.DataFrame] = None) -> D
         pickle.dump(rf, f)
     with open(os.path.join(model_dir, 'model_dir_clf.pkl'), 'wb') as f:
         pickle.dump(clf, f)
+    with open(os.path.join(model_dir, 'model_gb_clf.pkl'), 'wb') as f:
+        pickle.dump(gb_clf, f)
     with open(os.path.join(model_dir, 'scaler.pkl'), 'wb') as f:
         pickle.dump(scaler, f)
     with open(os.path.join(model_dir, 'training_report.json'), 'w') as f:

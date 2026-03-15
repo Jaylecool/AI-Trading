@@ -1,21 +1,29 @@
 {
   "symbol": "GOOGL",
-  "test_samples": 201,
+  "test_samples": 195,
   "prediction_target": "daily_return",
+  "ensemble_weights": {
+    "lr": 0.0,
+    "rf": 1.0
+  },
+  "rf_best_max_depth": 8,
   "lr": {
-    "mae_return": 0.012670499641364446,
-    "direction_accuracy": 0.5124378109452736
+    "mae_return": 0.01280476912170158,
+    "direction_accuracy": 0.5384615384615384
   },
   "rf": {
-    "mae_return": 0.012830910883551969,
-    "direction_accuracy": 0.5223880597014925
+    "mae_return": 0.012711346439070898,
+    "direction_accuracy": 0.5230769230769231
   },
   "ensemble": {
-    "mae_return": 0.012594319436483306,
-    "direction_accuracy": 0.5223880597014925
+    "mae_return": 0.012711346439070898,
+    "direction_accuracy": 0.5230769230769231
   },
   "direction_classifier": {
-    "accuracy": 0.48756218905472637
+    "accuracy": 0.5333333333333333
+  },
+  "gb_classifier": {
+    "accuracy": 0.5435897435897435
   },
   "feature_cols": [
     "RSI_14",
@@ -37,6 +45,48 @@
     "ATR_Pct",
     "Return_1d",
     "Return_5d",
-    "Return_10d"
-  ]
+    "Return_10d",
+    "Return_20d",
+    "SMA10_SMA20_Cross",
+    "SMA50_SMA200_Cross",
+    "RSI_Change_5d",
+    "Volume_Change_5d",
+    "Price_vs_20d_High",
+    "Price_vs_20d_Low",
+    "Volatility_Ratio",
+    "MACD_Hist_Change",
+    "Pos_Days_5d"
+  ],
+  "feature_importance": {
+    "Volume_Ratio": 0.0509,
+    "Price_SMA200_Ratio": 0.0508,
+    "Return_1d": 0.05,
+    "Intraday_Range": 0.0452,
+    "Volume_Change_5d": 0.0452,
+    "ATR_Pct": 0.0418,
+    "Open_Close_Ratio": 0.0406,
+    "Low_Close_Ratio": 0.0393,
+    "SMA50_SMA200_Cross": 0.0375,
+    "RSI_Change_5d": 0.0373,
+    "EMA10_EMA20_Cross": 0.0365,
+    "Return_20d": 0.0349,
+    "Price_SMA10_Ratio": 0.0343,
+    "Return_5d": 0.033,
+    "RSI_14": 0.0329,
+    "Price_SMA50_Ratio": 0.0324,
+    "ROC_12": 0.0323,
+    "MACD_Histogram": 0.0323,
+    "BB_Width": 0.0312,
+    "MACD_Hist_Change": 0.0296,
+    "High_Close_Ratio": 0.0288,
+    "SMA10_SMA20_Cross": 0.0279,
+    "Price_vs_20d_Low": 0.0274,
+    "Price_SMA20_Ratio": 0.0266,
+    "BB_Position": 0.0248,
+    "Price_vs_20d_High": 0.0244,
+    "Volatility_Ratio": 0.0241,
+    "Volatility_20": 0.0223,
+    "Return_10d": 0.0211,
+    "Pos_Days_5d": 0.0049
+  }
 }

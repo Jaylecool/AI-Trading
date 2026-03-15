@@ -14,6 +14,7 @@ Date: March 6, 2026
 """
 
 import json
+import os
 import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
@@ -266,7 +267,7 @@ class Portfolio:
 class PortfolioTracker:
     """Tracks portfolio activity and history"""
     
-    LIVE_TRADES_FILE = 'live_trades.json'
+    LIVE_TRADES_FILE = os.path.join('results', 'live_trades.json')
     
     def __init__(self, initial_balance: float = 100000.0):
         """Initialize tracker"""

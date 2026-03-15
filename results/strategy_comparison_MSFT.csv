@@ -1,0 +1,4 @@
+Strategy,Name,ROI,Sharpe Ratio,Max Drawdown,Win Rate,Profit Factor,Total Trades,Final Capital,Annual Volatility,Calmar Ratio,Sortino Ratio
+AGGRESSIVE,Aggressive Strategy,4.36%,13.0066,1.20%,71.43%,10.39,7,"$104,355.94",62.13%,3.6358,106.4015
+CONSERVATIVE,Conservative Strategy,0.72%,12.3626,0.71%,50.00%,7.98,2,"$100,717.43",75.97%,1.0039,0.0000
+BALANCED,Balanced Strategy,3.60%,10.9193,1.38%,71.43%,5.38,7,"$103,595.02",81.11%,2.6069,83.2009

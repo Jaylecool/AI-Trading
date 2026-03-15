@@ -37,29 +37,29 @@ class StrategyFactory:
             # Entry/Exit Thresholds - MORE AGGRESSIVE
             buy_threshold=0.015,  # 1.5% (vs default 2%)
             sell_threshold=0.015,  # 1.5% (vs default 2%)
-            take_profit_target=0.05,  # 5% (wider for big swings)
-            stop_loss_percent=0.025,  # 2.5% (wider to avoid noise)
+            take_profit_target=0.045,  # 4.5% (3:1 reward:risk ratio)
+            stop_loss_percent=0.015,  # 1.5% tight stops for quick exits
             
             # Position Sizing - LARGER POSITIONS
-            risk_percentage=0.03,  # 3% per trade (vs default 2%)
+            risk_percentage=0.025,  # 2.5% per trade
             max_position_value_percent=0.20,  # 20% per position
             max_cash_allocation_percent=0.35,  # Keep 35% cash
             min_position_size=10,
             
             # Portfolio Risk - HIGHER TOLERANCE
             portfolio_max_loss_percent=-0.08,  # -8% circuit breaker
-            max_concurrent_positions=6,  # More positions
+            max_concurrent_positions=5,  # More positions
             
             # Position Management
             minimum_hold_days=1,  # Quick exits allowed
-            trailing_stop_percent=0.015,  # 1.5% trailing stop
+            trailing_stop_percent=0.012,  # 1.2% trailing stop
             
             # Market Conditions - LESS SENSITIVE
             volatility_threshold=0.05,  # 5% (vs default 3%)
             volatility_threshold_multiplier=1.0,  # Same thresholds
             
-            # Confidence Requirements - LOWER THRESHOLD
-            confidence_threshold=0.50,  # 50% (vs default 52%)
+            # Confidence Requirements - MODERATE THRESHOLD
+            confidence_threshold=0.55,  # 55% (raised from 50%)
         )
     
     @staticmethod
@@ -81,8 +81,8 @@ class StrategyFactory:
             # Entry/Exit Thresholds - MORE SELECTIVE
             buy_threshold=0.03,  # 3% (vs default 2%)
             sell_threshold=0.03,  # 3% (vs default 2%)
-            take_profit_target=0.035,  # 3.5% (ensure reward > risk)
-            stop_loss_percent=0.035,  # 3.5% (wider for tolerance)
+            take_profit_target=0.06,  # 6% (3:1 reward:risk ratio)
+            stop_loss_percent=0.02,  # 2% tight risk control
             
             # Position Sizing - SMALLER POSITIONS
             risk_percentage=0.01,  # 1% per trade (vs default 2%)
@@ -96,7 +96,7 @@ class StrategyFactory:
             
             # Position Management
             minimum_hold_days=3,  # Longer hold for trend profit
-            trailing_stop_percent=0.025,  # 2.5% trailing stop
+            trailing_stop_percent=0.018,  # 1.8% trailing stop
             
             # Market Conditions - MORE SENSITIVE
             volatility_threshold=0.02,  # 2% (vs default 3%)
@@ -125,8 +125,8 @@ class StrategyFactory:
             # Entry/Exit Thresholds - DEFAULT
             buy_threshold=0.02,  # 2% (default)
             sell_threshold=0.02,  # 2% (default)
-            take_profit_target=0.04,  # 4% (wider for swing trading)
-            stop_loss_percent=0.03,  # 3% (wider to avoid noise)
+            take_profit_target=0.05,  # 5% (2.5:1 reward:risk)
+            stop_loss_percent=0.02,  # 2% controlled risk
             
             # Position Sizing - STANDARD
             risk_percentage=0.02,  # 2% per trade (default)
@@ -136,18 +136,18 @@ class StrategyFactory:
             
             # Portfolio Risk - STANDARD
             portfolio_max_loss_percent=-0.05,  # -5% circuit breaker (default)
-            max_concurrent_positions=5,  # Support multi-stock
+            max_concurrent_positions=4,  # Moderate positions
             
             # Position Management
             minimum_hold_days=2,  # Hold ≥2 days
-            trailing_stop_percent=0.02,  # 2% trailing stop
+            trailing_stop_percent=0.015,  # 1.5% trailing stop
             
             # Market Conditions - STANDARD
             volatility_threshold=0.03,  # 3% (default)
             volatility_threshold_multiplier=1.5,  # Standard (default)
             
-            # Confidence Requirements - STANDARD
-            confidence_threshold=0.52,  # 52% min confidence
+            # Confidence Requirements - CALIBRATED
+            confidence_threshold=0.55,  # 55% (raised from 52%)
         )
     
     @staticmethod

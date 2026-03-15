@@ -27,8 +27,8 @@ class TradingParameters:
     # Entry/Exit Thresholds
     buy_threshold: float = 0.02  # 2%
     sell_threshold: float = 0.02  # 2%
-    take_profit_target: float = 0.04  # 4% (wider for profitable swings)
-    stop_loss_percent: float = 0.03  # 3% (wider to avoid noise stop-outs)
+    take_profit_target: float = 0.05  # 5% (2.5:1 reward:risk)
+    stop_loss_percent: float = 0.02  # 2% controlled risk
     
     # Position Sizing
     risk_percentage: float = 0.02  # 2% per trade
@@ -38,18 +38,18 @@ class TradingParameters:
     
     # Portfolio Risk
     portfolio_max_loss_percent: float = -0.05  # -5% circuit breaker
-    max_concurrent_positions: int = 5  # Support multi-stock portfolio
+    max_concurrent_positions: int = 4  # Moderate positions
     
     # Position Management
     minimum_hold_days: int = 2  # Hold ≥2 days to let winners run
-    trailing_stop_percent: float = 0.02  # 2% trailing stop
+    trailing_stop_percent: float = 0.015  # 1.5% trailing stop
     
     # Market Conditions
     volatility_threshold: float = 0.03  # 3%
     volatility_threshold_multiplier: float = 1.5  # Increase thresholds 50%
     
     # Confidence Requirements
-    confidence_threshold: float = 0.52  # 52% min confidence for trade
+    confidence_threshold: float = 0.55  # 55% min confidence for trade
     
     def __str__(self) -> str:
         """Pretty print all parameters"""

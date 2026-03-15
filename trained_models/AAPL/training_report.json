@@ -1,21 +1,29 @@
 {
   "symbol": "AAPL",
-  "test_samples": 201,
+  "test_samples": 195,
   "prediction_target": "daily_return",
+  "ensemble_weights": {
+    "lr": 1.0,
+    "rf": 0.0
+  },
+  "rf_best_max_depth": 6,
   "lr": {
-    "mae_return": 0.010308575848637225,
-    "direction_accuracy": 0.527363184079602
+    "mae_return": 0.010665031627546779,
+    "direction_accuracy": 0.5128205128205128
   },
   "rf": {
-    "mae_return": 0.009879250659946937,
-    "direction_accuracy": 0.5771144278606966
+    "mae_return": 0.00995071203675809,
+    "direction_accuracy": 0.5641025641025641
   },
   "ensemble": {
-    "mae_return": 0.01004762232205361,
-    "direction_accuracy": 0.5323383084577115
+    "mae_return": 0.010665031627546779,
+    "direction_accuracy": 0.5128205128205128
   },
   "direction_classifier": {
-    "accuracy": 0.5771144278606966
+    "accuracy": 0.5794871794871795
+  },
+  "gb_classifier": {
+    "accuracy": 0.5794871794871795
   },
   "feature_cols": [
     "RSI_14",
@@ -37,6 +45,48 @@
     "ATR_Pct",
     "Return_1d",
     "Return_5d",
-    "Return_10d"
-  ]
+    "Return_10d",
+    "Return_20d",
+    "SMA10_SMA20_Cross",
+    "SMA50_SMA200_Cross",
+    "RSI_Change_5d",
+    "Volume_Change_5d",
+    "Price_vs_20d_High",
+    "Price_vs_20d_Low",
+    "Volatility_Ratio",
+    "MACD_Hist_Change",
+    "Pos_Days_5d"
+  ],
+  "feature_importance": {
+    "Price_vs_20d_High": 0.0707,
+    "Return_10d": 0.0608,
+    "Volatility_20": 0.0587,
+    "Price_SMA200_Ratio": 0.047,
+    "ATR_Pct": 0.0463,
+    "Price_SMA20_Ratio": 0.0443,
+    "Return_1d": 0.0407,
+    "ROC_12": 0.039,
+    "RSI_14": 0.0378,
+    "SMA50_SMA200_Cross": 0.0374,
+    "Price_SMA50_Ratio": 0.0369,
+    "Intraday_Range": 0.0356,
+    "Return_20d": 0.035,
+    "EMA10_EMA20_Cross": 0.0336,
+    "Volatility_Ratio": 0.0331,
+    "Volume_Ratio": 0.0299,
+    "SMA10_SMA20_Cross": 0.0288,
+    "High_Close_Ratio": 0.0287,
+    "BB_Width": 0.0277,
+    "Open_Close_Ratio": 0.0269,
+    "MACD_Histogram": 0.0265,
+    "Price_SMA10_Ratio": 0.0255,
+    "Low_Close_Ratio": 0.0252,
+    "MACD_Hist_Change": 0.0229,
+    "BB_Position": 0.0221,
+    "Volume_Change_5d": 0.0213,
+    "Return_5d": 0.0199,
+    "RSI_Change_5d": 0.0187,
+    "Price_vs_20d_Low": 0.0162,
+    "Pos_Days_5d": 0.0027
+  }
 }

@@ -95,7 +95,7 @@ open_positions = {}  # trade_id -> Trade object
 auto_trade_last_check = None
 auto_trade_disabled_symbols = set()  # symbols with auto-buy turned off
 
-LIVE_STATE_FILE = 'live_auto_state.json'
+LIVE_STATE_FILE = os.path.join('results', 'live_auto_state.json')
 
 def save_auto_state():
     """Persist open_positions and auto_trade_log to disk."""
@@ -152,7 +152,7 @@ def load_auto_state():
     except Exception as e:
         print(f"[PERSIST] Error loading auto state: {e}")
 
-def initialize_portfolio(backtest_file: str = 'backtest_results.json'):
+def initialize_portfolio(backtest_file: str = os.path.join('results', 'backtest_results.json')):
     """Initialize portfolio from backtesting results"""
     global portfolio_tracker, streaming_service, alert_system, notification_service
     
@@ -997,7 +997,7 @@ def get_notification_history():
 @app.route('/', methods=['GET'])
 def dashboard_index():
     """Serve the dashboard HTML"""
-    dashboard_path = os.path.join(os.path.dirname(__file__), 'dashboard_trade_history.html')
+    dashboard_path = os.path.join(os.path.dirname(__file__), 'templates', 'dashboard_trade_history.html')
     if os.path.exists(dashboard_path):
         with open(dashboard_path, 'r', encoding='utf-8') as f:
             from flask import Response
@@ -1736,7 +1736,7 @@ def get_symbol_auto_trade_status():
 def dashboard():
     """Serve the dashboard HTML"""
     try:
-        html_path = os.path.join(os.path.dirname(__file__), 'dashboard_trade_history.html')
+        html_path = os.path.join(os.path.dirname(__file__), 'templates', 'dashboard_trade_history.html')
         return send_file(html_path)
     except Exception as e:
         return jsonify({'error': str(e)}), 500

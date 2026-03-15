@@ -86,7 +86,7 @@ class BacktestTrade:
             'pnl_percent': float(self.pnl_percent),
             'roi_percent': float(self.roi_percent),
             'position_duration_days': int(self.position_duration_days),
-            'is_winning_trade': self.is_winning_trade,
+            'is_winning_trade': bool(self.is_winning_trade),
             'type': 'LONG'
         }
 
@@ -292,7 +292,12 @@ class BacktestingEngine:
             lr = pred_engine._models['model_lr']
             rf = pred_engine._models['model_rf']
             clf = pred_engine._models['model_dir_clf']
-            feature_cols = pred_engine._models['report'].get('feature_cols', [])
+            gb_clf = pred_engine._models.get('model_gb_clf')
+            report = pred_engine._models.get('report', {})
+            ew = report.get('ensemble_weights', {})
+            lr_w = ew.get('lr', 0.5)
+            rf_w = ew.get('rf', 0.5)
+            feature_cols = report.get('feature_cols', [])
             
             # Compute derived features on the full dataframe (same as model_trainer)
             close = data[close_col]
@@ -322,6 +327,23 @@ class BacktestingEngine:
             df_feat['Return_1d'] = close.pct_change(1)
             df_feat['Return_5d'] = close.pct_change(5)
             df_feat['Return_10d'] = close.pct_change(10)
+            df_feat['Return_20d'] = close.pct_change(20)
+            # NEW features (matching model_trainer)
+            if 'SMA_10' in data.columns and 'SMA_20' in data.columns:
+                df_feat['SMA10_SMA20_Cross'] = (data['SMA_10'] - data['SMA_20']) / data['SMA_20'].replace(0, np.nan)
+            if 'SMA_50' in data.columns and 'SMA_200' in data.columns:
+                df_feat['SMA50_SMA200_Cross'] = (data['SMA_50'] - data['SMA_200']) / data['SMA_200'].replace(0, np.nan)
+            if 'RSI_14' in data.columns:
+                df_feat['RSI_Change_5d'] = data['RSI_14'].diff(5)
+            df_feat['Volume_Change_5d'] = data[vol_col].pct_change(5)
+            df_feat['Price_vs_20d_High'] = close / close.rolling(20).max()
+            df_feat['Price_vs_20d_Low'] = close / close.rolling(20).min()
+            if 'Volatility_20' in data.columns:
+                vol_60_mean = data['Volatility_20'].rolling(60).mean()
+                df_feat['Volatility_Ratio'] = data['Volatility_20'] / vol_60_mean.replace(0, np.nan)
+            if 'MACD_Histogram' in data.columns:
+                df_feat['MACD_Hist_Change'] = data['MACD_Histogram'].diff(5)
+            df_feat['Pos_Days_5d'] = close.diff().gt(0).rolling(5).mean()
             
             # Build feature matrix for all bars at once
             indices = list(range(60, len(data)))
@@ -345,23 +367,28 @@ class BacktestingEngine:
                 lr_preds = lr.predict(X_sc)
                 rf_preds = rf.predict(X_sc)
                 clf_probas = clf.predict_proba(X_sc)
+                gb_probas = gb_clf.predict_proba(X_sc) if gb_clf is not None else clf_probas
                 
                 for i, idx in enumerate(valid_indices):
-                    pred_ret = 0.6 * lr_preds[i] + 0.4 * rf_preds[i]
-                    up_proba = clf_probas[i][1] if len(clf_probas[i]) > 1 else 0.5
+                    pred_ret = lr_w * lr_preds[i] + rf_w * rf_preds[i]
+                    if gb_clf is not None:
+                        up_proba = gb_probas[i][1] if len(gb_probas[i]) > 1 else 0.5
+                    else:
+                        up_proba = clf_probas[i][1] if len(clf_probas[i]) > 1 else 0.5
                     
-                    # Require ensemble return AND classifier to agree
-                    if pred_ret > 0.001 and up_proba > 0.52:
+                    # Calibrated thresholds: require stronger signals
+                    if pred_ret > 0.003 and up_proba > 0.55:
                         sig = 'BULLISH'
-                        conf = up_proba + min(abs(pred_ret) * 10, 0.15)
-                    elif pred_ret < -0.001 and up_proba < 0.48:
+                        # Normalised confidence
+                        conf = (up_proba - 0.5) * 2.0 * 0.7 + min(abs(pred_ret) * 20, 0.3) * 0.3
+                    elif pred_ret < -0.003 and up_proba < 0.45:
                         sig = 'BEARISH'
-                        conf = (1 - up_proba) + min(abs(pred_ret) * 10, 0.15)
+                        conf = (0.5 - up_proba) * 2.0 * 0.7 + min(abs(pred_ret) * 20, 0.3) * 0.3
                     else:
                         sig = 'NEUTRAL'
                         conf = 0.35
                     
-                    # SMA-50 trend filter
+                    # SMA-50 trend filter (symmetrical)
                     row = data.iloc[idx]
                     cur = row[close_col]
                     sma50 = row.get('SMA_50', cur)
@@ -370,8 +397,11 @@ class BacktestingEngine:
                     if sig == 'BULLISH' and not in_uptrend:
                         sig = 'NEUTRAL'
                         conf = 0.3
+                    elif sig == 'BEARISH' and in_uptrend:
+                        sig = 'NEUTRAL'
+                        conf = 0.3
                     
-                    ml_signals[idx] = (sig, min(conf, 1.0), float(pred_ret), float(up_proba))
+                    ml_signals[idx] = (sig, min(max(conf, 0.1), 1.0), float(pred_ret), float(up_proba))
         
         # We need a lookback window for indicators, start predictions after 60 bars
         start_idx = min(60, len(data) - 1)
@@ -565,6 +595,9 @@ class BacktestingEngine:
         if shares < self.trading_params.min_position_size:
             return
         
+        # Apply transaction cost (0.1% commission)
+        commission = position_value * 0.001
+        
         # Check diversification
         if self.use_risk_management:
             allowed, reason = self.diversification_mgr.check_single_stock_limit(
@@ -599,7 +632,7 @@ class BacktestingEngine:
         
         # Update state
         self.open_positions[symbol] = position
-        self.current_capital -= position_value
+        self.current_capital -= (position_value + commission)
     
     def _process_exits(
         self,
@@ -626,8 +659,8 @@ class BacktestingEngine:
                     self._close_position(symbol, date, position.take_profit_price, 'TAKE_PROFIT')
                     continue
             
-            # Check time-based stop (exceed max hold time)
-            max_hold = 20  # 20 days max hold
+            # Check time-based stop (strategy-aware max hold)
+            max_hold = max(5, self.trading_params.minimum_hold_days * 5)
             if (date - position.entry_date).days > max_hold:
                 self._close_position(symbol, date, current_price, 'TIME_STOP')
     
@@ -655,8 +688,10 @@ class BacktestingEngine:
         position = self.open_positions[symbol]
         
         # Calculate P&L
-        pnl = (exit_price - position.entry_price) * position.shares
-        pnl_percent = (exit_price - position.entry_price) / position.entry_price
+        pnl_gross = (exit_price - position.entry_price) * position.shares
+        exit_commission = position.shares * exit_price * 0.001  # 0.1% transaction cost
+        pnl = pnl_gross - exit_commission
+        pnl_percent = pnl / (position.entry_price * position.shares)
         hold_days = (date - position.entry_date).days
         
         # Record trade
@@ -677,8 +712,8 @@ class BacktestingEngine:
         self.closed_trades.append(trade)
         self.daily_returns.append(pnl_percent)
         
-        # Update capital
-        self.current_capital += position.shares * exit_price
+        # Update capital (subtract exit commission)
+        self.current_capital += position.shares * exit_price - exit_commission
         
         # Clean up
         del self.open_positions[symbol]

@@ -1,21 +1,29 @@
 {
   "symbol": "MSFT",
-  "test_samples": 201,
+  "test_samples": 195,
   "prediction_target": "daily_return",
+  "ensemble_weights": {
+    "lr": 0.3,
+    "rf": 0.7
+  },
+  "rf_best_max_depth": 6,
   "lr": {
-    "mae_return": 0.010375745386659318,
-    "direction_accuracy": 0.46766169154228854
+    "mae_return": 0.010792291198972903,
+    "direction_accuracy": 0.4512820512820513
   },
   "rf": {
-    "mae_return": 0.009897019056885696,
-    "direction_accuracy": 0.48756218905472637
+    "mae_return": 0.00995732966778356,
+    "direction_accuracy": 0.5230769230769231
   },
   "ensemble": {
-    "mae_return": 0.010024459597931083,
-    "direction_accuracy": 0.46766169154228854
+    "mae_return": 0.010125297718958953,
+    "direction_accuracy": 0.4666666666666667
   },
   "direction_classifier": {
-    "accuracy": 0.5472636815920398
+    "accuracy": 0.517948717948718
+  },
+  "gb_classifier": {
+    "accuracy": 0.5230769230769231
   },
   "feature_cols": [
     "RSI_14",
@@ -37,6 +45,48 @@
     "ATR_Pct",
     "Return_1d",
     "Return_5d",
-    "Return_10d"
-  ]
+    "Return_10d",
+    "Return_20d",
+    "SMA10_SMA20_Cross",
+    "SMA50_SMA200_Cross",
+    "RSI_Change_5d",
+    "Volume_Change_5d",
+    "Price_vs_20d_High",
+    "Price_vs_20d_Low",
+    "Volatility_Ratio",
+    "MACD_Hist_Change",
+    "Pos_Days_5d"
+  ],
+  "feature_importance": {
+    "Price_SMA200_Ratio": 0.0743,
+    "ATR_Pct": 0.0488,
+    "Price_SMA50_Ratio": 0.0465,
+    "SMA50_SMA200_Cross": 0.0464,
+    "Price_SMA10_Ratio": 0.0447,
+    "ROC_12": 0.0428,
+    "Intraday_Range": 0.0396,
+    "High_Close_Ratio": 0.0391,
+    "BB_Position": 0.0388,
+    "Low_Close_Ratio": 0.0374,
+    "Return_1d": 0.0371,
+    "MACD_Hist_Change": 0.0354,
+    "Price_SMA20_Ratio": 0.0353,
+    "Volatility_20": 0.0341,
+    "Return_10d": 0.0317,
+    "Price_vs_20d_High": 0.0309,
+    "EMA10_EMA20_Cross": 0.0294,
+    "Volume_Change_5d": 0.0288,
+    "MACD_Histogram": 0.0281,
+    "SMA10_SMA20_Cross": 0.0277,
+    "Return_20d": 0.0272,
+    "RSI_14": 0.0268,
+    "Open_Close_Ratio": 0.0263,
+    "Volume_Ratio": 0.0257,
+    "Return_5d": 0.0241,
+    "BB_Width": 0.0237,
+    "RSI_Change_5d": 0.0221,
+    "Volatility_Ratio": 0.0207,
+    "Price_vs_20d_Low": 0.0201,
+    "Pos_Days_5d": 0.0065
+  }
 }

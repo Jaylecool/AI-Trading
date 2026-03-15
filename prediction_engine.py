@@ -47,6 +47,11 @@ def _load_models(symbol: str) -> Optional[Dict]:
             path = os.path.join(model_dir, f'{name}.pkl')
             with open(path, 'rb') as f:
                 artefacts[name] = pickle.load(f)
+        # Load GradientBoosting classifier if available
+        gb_path = os.path.join(model_dir, 'model_gb_clf.pkl')
+        if os.path.exists(gb_path):
+            with open(gb_path, 'rb') as f:
+                artefacts['model_gb_clf'] = pickle.load(f)
         report_path = os.path.join(model_dir, 'training_report.json')
         with open(report_path, 'r') as f:
             artefacts['report'] = json.load(f)
@@ -197,6 +202,9 @@ class PredictionEngine:
                 return 'BULLISH', min(conf, 1.0)
 
             elif ml_signal == 'BEARISH':
+                if in_uptrend:
+                    # Strong uptrend → degrade bearish to NEUTRAL
+                    return 'NEUTRAL', 0.3
                 confirmation = tech_bearish >= 1
                 conf = ml_confidence if confirmation else ml_confidence * 0.8
                 return 'BEARISH', min(conf, 1.0)
@@ -327,29 +335,37 @@ class PredictionEngine:
         except Exception:
             return None, 0.0
 
-        # Ensemble return prediction
+        # Ensemble return prediction (use optimized weights from training)
+        report = self._models.get('report', {})
+        ew = report.get('ensemble_weights', {})
+        lr_w = ew.get('lr', 0.5)
+        rf_w = ew.get('rf', 0.5)
+
         pred_lr = lr.predict(X_sc)[0]
         pred_rf = rf.predict(X_sc)[0]
-        pred_return = 0.6 * pred_lr + 0.4 * pred_rf
+        pred_return = lr_w * pred_lr + rf_w * pred_rf
 
-        # Direction classifier
-        dir_pred = clf.predict(X_sc)[0]
-        dir_proba = clf.predict_proba(X_sc)[0]
+        # Direction classifier — use GB if available, else RF
+        gb_clf = self._models.get('model_gb_clf')
+        if gb_clf is not None:
+            dir_proba = gb_clf.predict_proba(X_sc)[0]
+        else:
+            dir_proba = clf.predict_proba(X_sc)[0]
         up_proba = dir_proba[1] if len(dir_proba) > 1 else 0.5
 
-        # Combine
-        if pred_return > 0.0005 and up_proba > 0.50:
+        # Combine with calibrated thresholds
+        if pred_return > 0.003 and up_proba > 0.55:
             signal = 'BULLISH'
-            # Use up_proba directly as base confidence, boost with return magnitude
-            confidence = up_proba + min(abs(pred_return) * 10, 0.15)
-        elif pred_return < -0.0005 and up_proba < 0.50:
+            # Normalised confidence: 0.55 proba → low, 0.70 → high
+            confidence = (up_proba - 0.5) * 2.0 * 0.7 + min(abs(pred_return) * 20, 0.3) * 0.3
+        elif pred_return < -0.003 and up_proba < 0.45:
             signal = 'BEARISH'
-            confidence = (1 - up_proba) + min(abs(pred_return) * 10, 0.15)
+            confidence = (0.5 - up_proba) * 2.0 * 0.7 + min(abs(pred_return) * 20, 0.3) * 0.3
         else:
             signal = 'NEUTRAL'
             confidence = 0.35
 
-        return signal, min(confidence, 1.0)
+        return signal, min(max(confidence, 0.1), 1.0)
 
     def ml_predict_return(self, indicators: Dict = None) -> Tuple[float, float]:
         """
@@ -377,8 +393,17 @@ class PredictionEngine:
         except Exception:
             return 0.0, 0.3
 
-        pred_return = 0.6 * lr.predict(X_sc)[0] + 0.4 * rf.predict(X_sc)[0]
-        dir_proba = clf.predict_proba(X_sc)[0]
+        report = self._models.get('report', {})
+        ew = report.get('ensemble_weights', {})
+        lr_w = ew.get('lr', 0.5)
+        rf_w = ew.get('rf', 0.5)
+        pred_return = lr_w * lr.predict(X_sc)[0] + rf_w * rf.predict(X_sc)[0]
+
+        gb_clf = self._models.get('model_gb_clf')
+        if gb_clf is not None:
+            dir_proba = gb_clf.predict_proba(X_sc)[0]
+        else:
+            dir_proba = clf.predict_proba(X_sc)[0]
         up_proba = dir_proba[1] if len(dir_proba) > 1 else 0.5
 
         confidence = max(up_proba, 1 - up_proba)

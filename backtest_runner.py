@@ -12,6 +12,7 @@ This script:
 """
 
 import json
+import os
 import pandas as pd
 from datetime import datetime
 from typing import Dict, List
@@ -261,21 +262,21 @@ class BacktestRunner:
             if analysis[strategy_key]['strengths']:
                 print(f"\n  STRENGTHS:")
                 for strength in analysis[strategy_key]['strengths']:
-                    print(f"    ✓ {strength}")
+                    print(f"    + {strength}")
             
             if analysis[strategy_key]['weaknesses']:
                 print(f"\n  WEAKNESSES:")
                 for weakness in analysis[strategy_key]['weaknesses']:
-                    print(f"    ✗ {weakness}")
+                    print(f"    - {weakness}")
             
             if analysis[strategy_key]['improvements']:
                 print(f"\n  AREAS FOR IMPROVEMENT:")
                 for improvement in analysis[strategy_key]['improvements']:
-                    print(f"    → {improvement}")
+                    print(f"    > {improvement}")
         
         return analysis
     
-    def save_results(self, output_filename: str = 'backtest_results.json') -> None:
+    def save_results(self, output_filename: str = 'results/backtest_results.json') -> None:
         """
         Save all results to JSON file
         
@@ -283,6 +284,7 @@ class BacktestRunner:
             output_filename: Output filename for JSON results
         """
         print(f"\n[SAVE] Saving results to {output_filename}")
+        os.makedirs(os.path.dirname(output_filename) or '.', exist_ok=True)
         
         output_data = {
             'execution_timestamp': self.execution_timestamp.isoformat(),
@@ -303,7 +305,7 @@ class BacktestRunner:
         
         print(f"[SAVE] Results saved successfully")
     
-    def save_comparison_csv(self, output_filename: str = 'strategy_comparison.csv') -> None:
+    def save_comparison_csv(self, output_filename: str = 'results/strategy_comparison.csv') -> None:
         """
         Save strategy comparison to CSV
         
@@ -311,6 +313,7 @@ class BacktestRunner:
             output_filename: Output filename for CSV
         """
         print(f"[SAVE] Saving comparison to {output_filename}")
+        os.makedirs(os.path.dirname(output_filename) or '.', exist_ok=True)
         
         comparison_data = []
         
@@ -344,8 +347,12 @@ def main():
     import sys
     import os
     
-    # Support command-line symbol argument
-    symbols = sys.argv[1:] if len(sys.argv) > 1 else ['AAPL']
+    # Support command-line symbol argument; default to all available stocks
+    if len(sys.argv) > 1:
+        symbols = sys.argv[1:]
+    else:
+        from data_fetcher import DEFAULT_SYMBOLS
+        symbols = DEFAULT_SYMBOLS
     
     all_results = {}
     
@@ -377,10 +384,18 @@ def main():
         analysis = runner.analyze_strategy_strengths_weaknesses()
         
         # Save results
-        runner.save_results(f'backtest_results_{symbol}.json')
-        runner.save_comparison_csv(f'strategy_comparison_{symbol}.csv')
+        runner.save_results(f'results/backtest_results_{symbol}.json')
+        runner.save_comparison_csv(f'results/strategy_comparison_{symbol}.csv')
         
         all_results[symbol] = runner.results
+    
+    # Save combined results to main backtest_results.json
+    if all_results:
+        combined = {'execution_timestamp': datetime.now().isoformat(), 'symbols': {}}
+        for sym, res in all_results.items():
+            combined['symbols'][sym] = {k: v.to_dict() for k, v in res.items()}
+        with open('results/backtest_results.json', 'w') as f:
+            json.dump(combined, f, indent=2)
     
     # Print final summary
     print(f"\n{'='*100}")
