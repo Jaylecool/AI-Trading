@@ -1690,6 +1690,70 @@
         .auto-trade-last-action .action-buy { color: var(--accent-green); font-weight: 600; }
         .auto-trade-last-action .action-sell { color: var(--accent-red); font-weight: 600; }
 
+        /* Strategy Selector */
+        .strategy-selector {
+            margin-top: 0.75rem;
+            padding-top: 0.6rem;
+            border-top: 1px solid var(--border-color);
+        }
+        .strategy-selector-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 0.4rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .strategy-btn-group {
+            display: flex;
+            gap: 0.35rem;
+        }
+        .strategy-btn {
+            flex: 1;
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 0.35rem 0.4rem;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            background: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+        .strategy-btn:hover { border-color: var(--accent-blue); color: var(--text-primary); }
+        .strategy-btn.active-strategy {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+            color: #fff;
+        }
+        .strategy-btn.aggressive.active-strategy { background: var(--accent-red); border-color: var(--accent-red); }
+        .strategy-btn.balanced.active-strategy { background: var(--accent-blue); border-color: var(--accent-blue); }
+        .strategy-btn.conservative.active-strategy { background: var(--accent-green); border-color: var(--accent-green); }
+        .strategy-btn { cursor: pointer; }
+        .strategy-btn.active-strategy:hover { opacity: 0.9; }
+
+        /* Per-symbol strategy badges */
+        .symbol-strategy-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+            margin-top: 0.4rem;
+        }
+        .symbol-strat-badge {
+            font-size: 0.68rem;
+            font-weight: 600;
+            padding: 0.15rem 0.45rem;
+            border-radius: 3px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        .symbol-strat-badge .sym { color: var(--text-primary); }
+        .symbol-strat-badge .strat { opacity: 0.85; }
+        .symbol-strat-badge.aggressive { background: rgba(255, 59, 48, 0.15); color: var(--accent-red); }
+        .symbol-strat-badge.balanced { background: rgba(0, 122, 255, 0.15); color: var(--accent-blue); }
+        .symbol-strat-badge.conservative { background: rgba(0, 208, 132, 0.15); color: var(--accent-green); }
+
         /* Per-symbol auto-trade toggles */
         .symbol-toggles {
             margin-top: 0.6rem;
@@ -1859,6 +1923,21 @@
                             <div class="auto-trade-stat"><span>Total Trades</span><span id="atTotalTrades">0</span></div>
                         </div>
                         <div class="auto-trade-last-action" id="atLastAction">Waiting for signals...</div>
+                        <div class="strategy-selector">
+                            <div class="strategy-selector-label">Best Strategy (auto-selected)</div>
+                            <div class="strategy-btn-group">
+                                <button class="strategy-btn aggressive" id="stratAggressive" onclick="selectStrategyForSymbol('AGGRESSIVE')">
+                                    <i class="fas fa-bolt"></i> Aggressive
+                                </button>
+                                <button class="strategy-btn balanced" id="stratBalanced" onclick="selectStrategyForSymbol('BALANCED')">
+                                    <i class="fas fa-balance-scale"></i> Balanced
+                                </button>
+                                <button class="strategy-btn conservative" id="stratConservative" onclick="selectStrategyForSymbol('CONSERVATIVE')">
+                                    <i class="fas fa-shield-alt"></i> Conservative
+                                </button>
+                            </div>
+                            <div class="symbol-strategy-grid" id="symbolStrategyGrid"></div>
+                        </div>
                         <div class="symbol-toggles">
                             <div class="symbol-toggles-label">Per-Stock Auto-Buy</div>
                             <div class="symbol-toggle-grid" id="symbolToggleGrid"></div>
@@ -2245,6 +2324,7 @@
         let useFallbackAlerts = false; // Use toast-only mode when browser notifications fail
         let autoTradeGlobalEnabled = true; // tracks global auto-trade state
         let symbolAutoTradeStatus = {}; // per-symbol enabled/disabled
+        let symbolStrategiesMap = {}; // per-symbol best strategy from backtest
 
         function switchSymbol(symbol) {
             currentSymbol = symbol;
@@ -2252,6 +2332,7 @@
             document.getElementById('currentPrice').textContent = '$0.00';
             document.getElementById('changePercent').textContent = '+0.00%';
             document.getElementById('changeDollar').textContent = '(+$0.00)';
+            highlightStrategyForSymbol(symbol);
             updateDashboard();
         }
 
@@ -2938,6 +3019,13 @@
                 document.getElementById('atOpenPositions').textContent = data.open_positions || 0;
                 document.getElementById('atTotalTrades').textContent = data.total_auto_trades || 0;
 
+                // Update per-symbol strategy map and highlight current
+                if (data.symbol_strategies) {
+                    symbolStrategiesMap = data.symbol_strategies;
+                    highlightStrategyForSymbol(currentSymbol);
+                    updateSymbolStrategyBadges(data.symbol_strategies);
+                }
+
                 // Last action
                 const actionEl = document.getElementById('atLastAction');
                 if (data.recent_actions && data.recent_actions.length > 0) {
@@ -3007,6 +3095,51 @@
                 }
             } catch (e) {
                 console.error('Toggle symbol error:', e);
+            }
+        }
+
+        function highlightStrategyForSymbol(symbol) {
+            const strat = symbolStrategiesMap[symbol] || 'BALANCED';
+            ['AGGRESSIVE', 'BALANCED', 'CONSERVATIVE'].forEach(s => {
+                const btn = document.getElementById('strat' + s.charAt(0) + s.slice(1).toLowerCase());
+                if (btn) {
+                    btn.classList.toggle('active-strategy', s === strat);
+                }
+            });
+        }
+
+        async function selectStrategyForSymbol(strategy) {
+            // Update local map immediately for responsive UI
+            symbolStrategiesMap[currentSymbol] = strategy;
+            highlightStrategyForSymbol(currentSymbol);
+            updateSymbolStrategyBadges(symbolStrategiesMap);
+            // Persist to backend
+            try {
+                await fetch(`${API_BASE_URL}/api/auto-trade/symbol-strategy`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ symbol: currentSymbol, strategy: strategy })
+                });
+                showToast(`${currentSymbol} strategy set to ${strategy}`, 'success');
+            } catch (e) {
+                console.error('Set symbol strategy error:', e);
+            }
+        }
+
+        function updateSymbolStrategyBadges(symStrats) {
+            const grid = document.getElementById('symbolStrategyGrid');
+            if (!grid) return;
+            if (!symStrats || Object.keys(symStrats).length === 0) {
+                grid.innerHTML = '';
+                return;
+            }
+            grid.innerHTML = '';
+            const abbrev = { 'AGGRESSIVE': 'AGG', 'BALANCED': 'BAL', 'CONSERVATIVE': 'CON' };
+            for (const [sym, strat] of Object.entries(symStrats)) {
+                const badge = document.createElement('span');
+                badge.className = `symbol-strat-badge ${strat.toLowerCase()}`;
+                badge.innerHTML = `<span class="sym">${sym}</span><span class="strat">${abbrev[strat] || strat}</span>`;
+                grid.appendChild(badge);
             }
         }
 
@@ -3536,6 +3669,21 @@
         
         // Load settings first
         loadSettings();
+
+        // Fetch best strategies immediately so buttons highlight on first render
+        (async function() {
+            try {
+                const res = await fetch(`${API_BASE_URL}/api/auto-trade/status`);
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.symbol_strategies) {
+                        symbolStrategiesMap = data.symbol_strategies;
+                        highlightStrategyForSymbol(currentSymbol);
+                        updateSymbolStrategyBadges(data.symbol_strategies);
+                    }
+                }
+            } catch (e) { console.error('Early strategy fetch error:', e); }
+        })();
         
         updateDashboard();
         loadTrades();

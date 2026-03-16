@@ -67,6 +67,7 @@ from notification_service import (
 
 # Import trading rules for auto-trading
 from trading_rules import TradingRules, TradingParameters, PositionSizingCalculator
+from strategy_configurations import StrategyFactory, STRATEGIES
 
 # Supported symbols for multi-stock trading
 SUPPORTED_SYMBOLS = ['AAPL', 'NVDA', 'MSFT', 'GOOGL', 'AMZN', 'TSLA', 'META']
@@ -94,6 +95,41 @@ auto_trade_log = []  # list of dicts: {time, action, symbol, price, shares, reas
 open_positions = {}  # trade_id -> Trade object
 auto_trade_last_check = None
 auto_trade_disabled_symbols = set()  # symbols with auto-buy turned off
+active_strategy = 'AUTO'  # Current trading strategy: AUTO, AGGRESSIVE, BALANCED, CONSERVATIVE
+symbol_strategies = {}  # Per-symbol best strategy: {symbol: strategy_key}
+
+def auto_select_strategies():
+    """Read backtest CSVs to pick the best strategy per symbol based on a composite score."""
+    global symbol_strategies
+    base_dir = os.path.dirname(__file__)
+    results_dir = os.path.join(base_dir, 'results')
+    best = {}
+    for symbol in SUPPORTED_SYMBOLS:
+        csv_path = os.path.join(results_dir, f'strategy_comparison_{symbol}.csv')
+        if not os.path.exists(csv_path):
+            best[symbol] = 'BALANCED'  # default fallback
+            continue
+        try:
+            df = pd.read_csv(csv_path)
+            top_score = -float('inf')
+            top_strategy = 'BALANCED'
+            for _, row in df.iterrows():
+                roi = float(str(row['ROI']).replace('%', ''))
+                win_rate = float(str(row['Win Rate']).replace('%', ''))
+                sharpe = float(row['Sharpe Ratio'])
+                profit_factor = float(row['Profit Factor'])
+                # Composite score: weighted blend of key metrics
+                score = (roi * 0.3) + (win_rate * 0.3) + (sharpe * 0.2) + (profit_factor * 0.2)
+                if score > top_score:
+                    top_score = score
+                    top_strategy = row['Strategy'].strip().upper()
+            best[symbol] = top_strategy if top_strategy in STRATEGIES else 'BALANCED'
+        except Exception as e:
+            print(f"[STRATEGY] Error reading {csv_path}: {e}")
+            best[symbol] = 'BALANCED'
+    symbol_strategies = best
+    print(f"[STRATEGY] Auto-selected per-symbol strategies: {symbol_strategies}")
+    return best
 
 LIVE_STATE_FILE = os.path.join('results', 'live_auto_state.json')
 
@@ -106,6 +142,8 @@ def save_auto_state():
             },
             'auto_trade_log': auto_trade_log[-200:],
             'disabled_symbols': list(auto_trade_disabled_symbols),
+            'active_strategy': active_strategy,
+            'symbol_strategies': symbol_strategies,
             'saved_at': datetime.now().isoformat()
         }
         state_path = os.path.join(os.path.dirname(__file__), LIVE_STATE_FILE)
@@ -118,7 +156,7 @@ def save_auto_state():
 
 def load_auto_state():
     """Restore open_positions and auto_trade_log from disk."""
-    global open_positions, auto_trade_log, auto_trade_disabled_symbols
+    global open_positions, auto_trade_log, auto_trade_disabled_symbols, active_strategy
     state_path = os.path.join(os.path.dirname(__file__), LIVE_STATE_FILE)
     if not os.path.exists(state_path):
         return
@@ -126,9 +164,15 @@ def load_auto_state():
         with open(state_path, 'r') as f:
             state = json.load(f)
         
-        # Restore auto_trade_log and disabled symbols
+        # Restore auto_trade_log, disabled symbols, and active strategy
         auto_trade_log = state.get('auto_trade_log', [])
         auto_trade_disabled_symbols = set(state.get('disabled_symbols', []))
+        saved_strategy = state.get('active_strategy', 'AUTO')
+        if saved_strategy in STRATEGIES or saved_strategy == 'AUTO':
+            active_strategy = saved_strategy
+        saved_sym_strats = state.get('symbol_strategies', {})
+        if saved_sym_strats:
+            symbol_strategies.update(saved_sym_strats)
         
         # Restore open_positions as Trade objects
         pos_data = state.get('open_positions', {})
@@ -1119,16 +1163,23 @@ def auto_trade_cycle():
     # Wait for init to complete
     time.sleep(10)
 
-    params = TradingParameters()
-    # Lower thresholds for live auto-trading (default 2% is too strict for daily moves)
-    params.buy_threshold = 0.003   # 0.3% predicted appreciation triggers buy consideration
-    params.sell_threshold = 0.003  # 0.3% predicted decline triggers sell consideration
-    params.confidence_threshold = 0.3  # Lower confidence bar for auto-trading
-    params.max_concurrent_positions = len(SUPPORTED_SYMBOLS)  # Allow one position per symbol
-    trading_rules = TradingRules(params)
-    position_sizer = PositionSizingCalculator(params)
+    # Auto-select best strategies per symbol from backtest data
+    if not symbol_strategies:
+        auto_select_strategies()
 
-    print("[AUTO-TRADE] Engine started — checking every 60 seconds")
+    # Build per-symbol params caches
+    def _build_params(strategy_key):
+        p = STRATEGIES[strategy_key]['factory']()
+        p.max_concurrent_positions = len(SUPPORTED_SYMBOLS)
+        return p
+
+    def _get_symbol_strategy(sym):
+        """Return the strategy key to use for this symbol."""
+        if active_strategy == 'AUTO':
+            return symbol_strategies.get(sym, 'BALANCED')
+        return active_strategy
+
+    print(f"[AUTO-TRADE] Engine started (mode={active_strategy}) — checking every 60 seconds")
 
     while True:
         if not auto_trader_running:
@@ -1147,6 +1198,12 @@ def auto_trade_cycle():
                 # Skip symbols with auto-buy disabled
                 if symbol in auto_trade_disabled_symbols:
                     continue
+
+                # Determine strategy for this symbol
+                sym_strategy = _get_symbol_strategy(symbol)
+                params = _build_params(sym_strategy)
+                trading_rules = TradingRules(params)
+                position_sizer = PositionSizingCalculator(params)
 
                 # 1. Fetch 1 year of data for this symbol
                 ticker = yf.Ticker(symbol)
@@ -1211,7 +1268,7 @@ def auto_trade_cycle():
                 except Exception as sig_err:
                     logger.warning(f"[AUTO-TRADE] PredictionEngine signal error for {symbol}: {sig_err}")
 
-                print(f"[AUTO-TRADE] {symbol} | Signal: {pe_signal} | Forecast: ${forecast_price:.2f} vs Current: ${current_price:.2f}")
+                print(f"[AUTO-TRADE] {symbol} [{sym_strategy}] | Signal: {pe_signal} | Forecast: ${forecast_price:.2f} vs Current: ${current_price:.2f}")
 
                 # 5. Check open positions for this symbol for stop-loss / take-profit exits
                 positions_to_close = []
@@ -1646,6 +1703,10 @@ def init_app():
         # Start auto-trading engine
         start_auto_trader()
 
+        # Pre-compute best strategy per symbol from backtest CSVs
+        # so the first page load already has the correct highlights
+        auto_select_strategies()
+
 
 # ============================================================================
 # AUTO-TRADE API ENDPOINTS
@@ -1656,6 +1717,8 @@ def get_auto_trade_status():
     """Get current auto-trading engine status"""
     return jsonify({
         'enabled': auto_trader_running,
+        'active_strategy': active_strategy,
+        'symbol_strategies': symbol_strategies,
         'last_check': auto_trade_last_check,
         'open_positions': len(open_positions),
         'total_auto_trades': len(auto_trade_log),
@@ -1690,6 +1753,56 @@ def toggle_auto_trade():
         'message': f'Auto-trading {status}'
     })
 
+
+@app.route('/api/auto-trade/strategy', methods=['GET'])
+def get_active_strategy():
+    """Get the current active trading strategy"""
+    return jsonify({
+        'active_strategy': active_strategy,
+        'symbol_strategies': symbol_strategies,
+        'available': ['AUTO'] + list(STRATEGIES.keys()),
+    })
+
+@app.route('/api/auto-trade/strategy', methods=['POST'])
+def set_active_strategy():
+    """Set the active trading strategy (AUTO or a specific one)"""
+    global active_strategy
+    data = request.get_json(silent=True) or {}
+    strategy = data.get('strategy', '').upper()
+    valid = {'AUTO'} | set(STRATEGIES.keys())
+    if strategy not in valid:
+        return jsonify({'error': f'Unknown strategy: {strategy}. Choose from: {sorted(valid)}'}), 400
+    active_strategy = strategy
+    if strategy == 'AUTO' and not symbol_strategies:
+        auto_select_strategies()
+    save_auto_state()
+    print(f"[AUTO-TRADE] Strategy changed to {active_strategy} via API")
+    label = 'Auto (best per stock)' if strategy == 'AUTO' else STRATEGIES[strategy]['name']
+    return jsonify({
+        'active_strategy': active_strategy,
+        'symbol_strategies': symbol_strategies,
+        'message': f'Strategy set to {label}'
+    })
+
+@app.route('/api/auto-trade/symbol-strategy', methods=['POST'])
+def set_symbol_strategy():
+    """Set the trading strategy for a specific symbol"""
+    global symbol_strategies
+    data = request.get_json(silent=True) or {}
+    symbol = data.get('symbol', '').upper()
+    strategy = data.get('strategy', '').upper()
+    if symbol not in SUPPORTED_SYMBOLS:
+        return jsonify({'error': f'Unknown symbol: {symbol}'}), 400
+    if strategy not in STRATEGIES:
+        return jsonify({'error': f'Unknown strategy: {strategy}'}), 400
+    symbol_strategies[symbol] = strategy
+    save_auto_state()
+    print(f"[AUTO-TRADE] {symbol} strategy set to {strategy} via API")
+    return jsonify({
+        'symbol': symbol,
+        'strategy': strategy,
+        'symbol_strategies': symbol_strategies
+    })
 
 @app.route('/api/auto-trade/symbol-toggle', methods=['POST'])
 def toggle_symbol_auto_trade():
