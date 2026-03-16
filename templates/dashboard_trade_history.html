@@ -2293,8 +2293,8 @@
     </div>
 
     <script>
-        // Configuration
-        const API_BASE_URL = 'http://localhost:5000';
+        // Configuration - use relative URL so the dashboard works on any host
+        const API_BASE_URL = '';
         let REFRESH_INTERVAL = 60000; // 60 seconds
         let currentTimeframe = '1d'; // Default to daily
         let currentSymbol = 'AAPL'; // Default stock

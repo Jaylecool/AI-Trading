@@ -57,7 +57,7 @@ def _load_models(symbol: str) -> Optional[Dict]:
             artefacts['report'] = json.load(f)
         _model_cache[symbol] = artefacts
         return artefacts
-    except Exception:
+    except (FileNotFoundError, KeyError, pickle.UnpicklingError, json.JSONDecodeError):
         return None
 
 # ============================================================================
@@ -332,7 +332,7 @@ class PredictionEngine:
 
         try:
             X_sc = scaler.transform(feature_row)
-        except Exception:
+        except (ValueError, TypeError):
             return None, 0.0
 
         # Ensemble return prediction (use optimized weights from training)
@@ -390,7 +390,7 @@ class PredictionEngine:
 
         try:
             X_sc = scaler.transform(feature_row)
-        except Exception:
+        except (ValueError, TypeError):
             return 0.0, 0.3
 
         report = self._models.get('report', {})

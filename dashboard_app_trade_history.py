@@ -69,13 +69,23 @@ from notification_service import (
 from trading_rules import TradingRules, TradingParameters, PositionSizingCalculator
 from strategy_configurations import StrategyFactory, STRATEGIES
 
+# Centralised configuration
+import config as cfg
+
 # Supported symbols for multi-stock trading
-SUPPORTED_SYMBOLS = ['AAPL', 'NVDA', 'MSFT', 'GOOGL', 'AMZN', 'TSLA', 'META']
+SUPPORTED_SYMBOLS = cfg.SUPPORTED_SYMBOLS
 
 # Flask application setup
 app = Flask(__name__)
 app.json_encoder = NaNEncoder
-CORS(app)
+CORS(app, origins=cfg.CORS_ORIGINS)
+
+import re
+_SYMBOL_RE = re.compile(r'^[A-Z]{1,5}$')
+
+def _validate_symbol(symbol: str) -> bool:
+    """Return True if *symbol* looks like a valid ticker and is in SUPPORTED_SYMBOLS."""
+    return bool(symbol and _SYMBOL_RE.match(symbol) and symbol in SUPPORTED_SYMBOLS)
 
 # Global system instances
 portfolio_tracker = None
@@ -101,11 +111,9 @@ symbol_strategies = {}  # Per-symbol best strategy: {symbol: strategy_key}
 def auto_select_strategies():
     """Read backtest CSVs to pick the best strategy per symbol based on a composite score."""
     global symbol_strategies
-    base_dir = os.path.dirname(__file__)
-    results_dir = os.path.join(base_dir, 'results')
     best = {}
     for symbol in SUPPORTED_SYMBOLS:
-        csv_path = os.path.join(results_dir, f'strategy_comparison_{symbol}.csv')
+        csv_path = os.path.join(cfg.RESULTS_DIR, f'strategy_comparison_{symbol}.csv')
         if not os.path.exists(csv_path):
             best[symbol] = 'BALANCED'  # default fallback
             continue
@@ -131,7 +139,7 @@ def auto_select_strategies():
     print(f"[STRATEGY] Auto-selected per-symbol strategies: {symbol_strategies}")
     return best
 
-LIVE_STATE_FILE = os.path.join('results', 'live_auto_state.json')
+LIVE_STATE_FILE = os.path.join(cfg.RESULTS_DIR, 'live_auto_state.json')
 
 def save_auto_state():
     """Persist open_positions and auto_trade_log to disk."""
@@ -196,11 +204,11 @@ def load_auto_state():
     except Exception as e:
         print(f"[PERSIST] Error loading auto state: {e}")
 
-def initialize_portfolio(backtest_file: str = os.path.join('results', 'backtest_results.json')):
+def initialize_portfolio(backtest_file: str = os.path.join(cfg.RESULTS_DIR, 'backtest_results.json')):
     """Initialize portfolio from backtesting results"""
     global portfolio_tracker, streaming_service, alert_system, notification_service
     
-    portfolio_tracker = PortfolioTracker(initial_balance=100000.0)
+    portfolio_tracker = PortfolioTracker(initial_balance=cfg.INITIAL_CAPITAL)
     base_dir = os.path.dirname(__file__)
     portfolio_tracker.set_persistence_path(base_dir)
     
@@ -208,7 +216,7 @@ def initialize_portfolio(backtest_file: str = os.path.join('results', 'backtest_
     streaming_service = get_streaming_service(data_source=DataSourceType.YAHOO_FINANCE)
     for sym in SUPPORTED_SYMBOLS:
         streaming_service.subscribe(sym, lambda update: None)
-    streaming_service.set_update_frequency(2)  # Update every 2 seconds
+    streaming_service.set_update_frequency(cfg.STREAM_UPDATE_FREQUENCY)
     streaming_service.start()
     
     # Initialize alert system
@@ -315,6 +323,14 @@ def get_filtered_trades():
         min_pnl = request.args.get('min_pnl', type=float)
         max_pnl = request.args.get('max_pnl', type=float)
         
+        # Validate inputs
+        if symbol and not _validate_symbol(symbol):
+            return jsonify({'error': f'Invalid symbol: {symbol}'}), 400
+        if action and action.upper() not in ('BUY', 'SELL'):
+            return jsonify({'error': f'Invalid action: {action}'}), 400
+        if status and status.upper() not in ('OPEN', 'CLOSED'):
+            return jsonify({'error': f'Invalid status: {status}'}), 400
+        
         # Create filter object
         filter_obj = TradeHistoryFilter(portfolio_tracker.portfolio.trades)
         
@@ -402,10 +418,10 @@ def get_portfolio_summary():
                 try:
                     price = yf.Ticker(sym).history(period='1d')['Close'].iloc[-1]
                     portfolio_tracker.portfolio.update_market_price(sym, float(price))
-                except Exception:
-                    pass
-        except Exception:
-            pass
+                except (KeyError, IndexError, ValueError) as exc:
+                    logger.debug(f"Could not fetch price for {sym}: {exc}")
+        except ImportError:
+            logger.warning("yfinance not available – skipping live price update")
         
         metrics = portfolio_tracker.get_portfolio_summary()
         formatted = PortfolioVisualizer.format_portfolio_summary(metrics)
@@ -765,6 +781,11 @@ def subscribe_to_streaming():
         if not symbols:
             return jsonify({'error': 'No symbols provided'}), 400
         
+        # Validate symbols
+        invalid = [s for s in symbols if not _validate_symbol(s)]
+        if invalid:
+            return jsonify({'error': f'Invalid symbols: {invalid}'}), 400
+        
         # Register client
         active_clients[client_id] = {
             'symbols': symbols,
@@ -856,6 +877,12 @@ def create_alert_rule():
     """Create a new alert rule"""
     try:
         data = request.json or {}
+        
+        # Validate required fields
+        if not data.get('name', '').strip():
+            return jsonify({'error': 'Alert name is required'}), 400
+        if data.get('symbol') and not _validate_symbol(data['symbol']):
+            return jsonify({'error': f'Invalid symbol: {data["symbol"]}'}), 400
         
         rule = alert_system.create_rule(
             name=data.get('name', 'Untitled Alert'),
@@ -1366,7 +1393,7 @@ def auto_trade_cycle():
 
                     if buy_signal and buy_conf >= params.confidence_threshold:
                         summary = portfolio_tracker.get_portfolio_summary()
-                        portfolio_value = summary.get('current_balance', 100000)
+                        portfolio_value = summary.get('current_balance', cfg.INITIAL_CAPITAL)
                         available_cash = portfolio_tracker.portfolio.cash
 
                         shares = position_sizer.calculate_position_size(
@@ -1940,20 +1967,22 @@ if __name__ == '__main__':
     print("  GET  /api/next-day-prediction - Next-day forecast with confidence")
     
     print("\n" + "="*70)
-    print("Listening on http://localhost:5000")
+    print(f"Listening on http://{cfg.FLASK_HOST}:{cfg.FLASK_PORT}")
 
     # --- Public URL via ngrok (optional) ---
     use_ngrok = '--public' in sys.argv
-    if use_ngrok:
+    if use_ngrok and cfg.NGROK_DOMAIN:
         try:
             from pyngrok import ngrok
-            public_url = ngrok.connect(5000, domain="soppiest-willis-uncasked.ngrok-free.dev")
+            public_url = ngrok.connect(cfg.FLASK_PORT, domain=cfg.NGROK_DOMAIN)
             print(f"\n>>> PUBLIC URL: {public_url}")
             print(">>> Share this link to access from anywhere")
         except Exception as e:
             print(f"\n[ngrok] Could not create tunnel: {e}")
             print("[ngrok] Run without --public for local-only mode")
+    elif use_ngrok:
+        print("\n[ngrok] Set NGROK_DOMAIN in .env to enable public tunnelling")
 
     print("="*70 + "\n")
     
-    app.run(debug=False, host='0.0.0.0', port=5000, threaded=True)
+    app.run(debug=cfg.FLASK_DEBUG, host=cfg.FLASK_HOST, port=cfg.FLASK_PORT, threaded=True)
