@@ -53,6 +53,7 @@ class Trade:
     status: str = "OPEN"
     pnl: Optional[float] = None
     pnl_percent: Optional[float] = None
+    user_id: Optional[int] = None
     
     def to_dict(self):
         """Convert to dictionary"""

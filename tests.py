@@ -450,6 +450,728 @@ class TestSymbolValidation(unittest.TestCase):
 
 
 # ============================================================================
+# AUTH TESTS
+# ============================================================================
+
+import tempfile
+import sqlite3
+from unittest.mock import patch
+
+class TestAuth(unittest.TestCase):
+    """Test user registration, login, and lookup."""
+
+    def setUp(self):
+        self.tmpdir = tempfile.mkdtemp()
+        self.db_path = os.path.join(self.tmpdir, 'test_users.db')
+
+    def tearDown(self):
+        try:
+            os.remove(self.db_path)
+            os.rmdir(self.tmpdir)
+        except OSError:
+            pass
+
+    def _init(self):
+        import auth
+        with patch.object(auth, '_get_db') as mock_db:
+            # Use a real connection to the temp DB instead
+            pass
+        # Directly init with patched path
+        conn = sqlite3.connect(self.db_path)
+        conn.execute('PRAGMA journal_mode=WAL')
+        conn.execute('''CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            email TEXT NOT NULL UNIQUE,
+            password_hash TEXT NOT NULL,
+            created_at TEXT DEFAULT CURRENT_TIMESTAMP
+        )''')
+        conn.commit()
+        conn.close()
+
+    def _get_conn(self):
+        conn = sqlite3.connect(self.db_path)
+        conn.row_factory = sqlite3.Row
+        conn.execute('PRAGMA journal_mode=WAL')
+        return conn
+
+    def test_register_and_login(self):
+        """Register a user then authenticate them."""
+        from auth import register_user, authenticate_user, get_user_by_id
+        with patch('auth._get_db', side_effect=self._get_conn):
+            self._init()
+            result = register_user('Test User', 'test@example.com', 'SecurePass123')
+            self.assertTrue(result['success'], result.get('error'))
+            user_id = result['user']['id']
+            self.assertIsInstance(user_id, int)
+
+            user = authenticate_user('test@example.com', 'SecurePass123')
+            self.assertIsNotNone(user)
+            self.assertEqual(user['email'], 'test@example.com')
+
+            same = get_user_by_id(user_id)
+            self.assertIsNotNone(same)
+            self.assertEqual(same['name'], 'Test User')
+
+    def test_register_validation_short_name(self):
+        from auth import register_user
+        with patch('auth._get_db', side_effect=self._get_conn):
+            self._init()
+            result = register_user('A', 'a@b.com', 'Password123')
+            self.assertFalse(result['success'])
+
+    def test_register_validation_bad_email(self):
+        from auth import register_user
+        with patch('auth._get_db', side_effect=self._get_conn):
+            self._init()
+            result = register_user('Good Name', 'not-an-email', 'Password123')
+            self.assertFalse(result['success'])
+
+    def test_register_validation_short_password(self):
+        from auth import register_user
+        with patch('auth._get_db', side_effect=self._get_conn):
+            self._init()
+            result = register_user('Good Name', 'x@y.com', 'short')
+            self.assertFalse(result['success'])
+
+    def test_register_duplicate_email(self):
+        from auth import register_user
+        with patch('auth._get_db', side_effect=self._get_conn):
+            self._init()
+            register_user('User One', 'dup@test.com', 'Password123')
+            result = register_user('User Two', 'dup@test.com', 'Password456')
+            self.assertFalse(result['success'])
+
+    def test_authenticate_wrong_password(self):
+        from auth import register_user, authenticate_user
+        with patch('auth._get_db', side_effect=self._get_conn):
+            self._init()
+            register_user('User', 'u@t.com', 'CorrectPass1')
+            user = authenticate_user('u@t.com', 'WrongPass1')
+            self.assertIsNone(user)
+
+    def test_get_user_nonexistent(self):
+        from auth import get_user_by_id
+        with patch('auth._get_db', side_effect=self._get_conn):
+            self._init()
+            self.assertIsNone(get_user_by_id(999))
+
+
+# ============================================================================
+# STRATEGY CONFIGURATIONS TESTS
+# ============================================================================
+
+from strategy_configurations import StrategyFactory, STRATEGIES
+
+
+class TestStrategyConfigurations(unittest.TestCase):
+    """Test strategy factory and parameter consistency."""
+
+    def test_all_strategies_exist(self):
+        self.assertIn('AGGRESSIVE', STRATEGIES)
+        self.assertIn('CONSERVATIVE', STRATEGIES)
+        self.assertIn('BALANCED', STRATEGIES)
+
+    def test_aggressive_has_higher_risk(self):
+        agg = StrategyFactory.create_aggressive_strategy()
+        con = StrategyFactory.create_conservative_strategy()
+        self.assertGreaterEqual(agg.risk_percentage, con.risk_percentage)
+
+    def test_conservative_has_tighter_limits(self):
+        con = StrategyFactory.create_conservative_strategy()
+        bal = StrategyFactory.create_balanced_strategy()
+        self.assertLessEqual(con.max_position_value_percent, bal.max_position_value_percent)
+
+    def test_factory_returns_trading_parameters(self):
+        for key, info in STRATEGIES.items():
+            params = info['factory']()
+            self.assertIsInstance(params, TradingParameters, f"{key} factory failed")
+
+    def test_custom_strategy(self):
+        custom = StrategyFactory.create_custom_strategy(
+            buy_threshold=0.03, stop_loss_percent=0.04, risk_percentage=0.01
+        )
+        self.assertAlmostEqual(custom.buy_threshold, 0.03)
+        self.assertAlmostEqual(custom.stop_loss_percent, 0.04)
+
+    def test_strategies_have_metadata(self):
+        for key, info in STRATEGIES.items():
+            self.assertIn('name', info)
+            self.assertIn('description', info)
+            self.assertIn('risk_level', info)
+            self.assertIn('factory', info)
+
+
+# ============================================================================
+# PORTFOLIO TRACKER TESTS
+# ============================================================================
+
+from portfolio_tracker import Trade as PTTrade, Portfolio, PortfolioTracker, TradeHistoryFilter
+
+
+class TestPortfolio(unittest.TestCase):
+    """Test Portfolio class."""
+
+    def test_initial_balance(self):
+        p = Portfolio(50000.0)
+        self.assertEqual(p.cash, 50000.0)
+
+    def test_add_trade_reduces_cash(self):
+        p = Portfolio(100000.0)
+        t = PTTrade(trade_id='T1', date='2025-01-01', symbol='AAPL',
+                    action='BUY', quantity=10, entry_price=150.0)
+        p.add_trade(t)
+        self.assertAlmostEqual(p.cash, 100000.0 - 10 * 150.0)
+
+    def test_equity_value_includes_positions(self):
+        p = Portfolio(100000.0)
+        t = PTTrade(trade_id='T1', date='2025-01-01', symbol='AAPL',
+                    action='BUY', quantity=10, entry_price=150.0)
+        p.add_trade(t)
+        p.update_market_price('AAPL', 160.0)
+        self.assertGreater(p.calculate_equity_value(), 100000.0)
+
+    def test_metrics_keys(self):
+        p = Portfolio(100000.0)
+        m = p.get_portfolio_metrics()
+        self.assertIn('equity_value', m)
+        self.assertIn('current_balance', m)
+
+
+class TestPortfolioTracker(unittest.TestCase):
+    """Test PortfolioTracker trade lifecycle."""
+
+    def test_add_and_close_trade(self):
+        pt = PortfolioTracker(100000.0)
+        t = PTTrade(trade_id='T1', date='2025-01-01', symbol='AAPL',
+                    action='BUY', quantity=5, entry_price=200.0)
+        pt.add_trade(t)
+        closed = pt.close_trade('T1', 210.0, '2025-01-10')
+        self.assertTrue(closed)
+
+    def test_close_nonexistent_trade(self):
+        pt = PortfolioTracker(100000.0)
+        self.assertFalse(pt.close_trade('FAKE', 100.0, '2025-01-01'))
+
+    def test_portfolio_summary(self):
+        pt = PortfolioTracker(100000.0)
+        s = pt.get_portfolio_summary()
+        self.assertIn('current_balance', s)
+        self.assertIn('num_trades', s)
+
+    def test_trade_history_empty(self):
+        pt = PortfolioTracker()
+        self.assertEqual(len(pt.get_trade_history()), 0)
+
+
+class TestTradeHistoryFilter(unittest.TestCase):
+    """Test filtering trade history."""
+
+    def setUp(self):
+        self.trades = [
+            PTTrade(trade_id='T1', date='2025-01-01', symbol='AAPL',
+                    action='BUY', quantity=10, entry_price=150.0, status='CLOSED'),
+            PTTrade(trade_id='T2', date='2025-02-01', symbol='MSFT',
+                    action='BUY', quantity=5, entry_price=300.0, status='OPEN'),
+            PTTrade(trade_id='T3', date='2025-03-01', symbol='AAPL',
+                    action='SELL', quantity=10, entry_price=160.0, status='CLOSED'),
+        ]
+
+    def test_filter_by_symbol(self):
+        f = TradeHistoryFilter(self.trades)
+        result = f.filter_by_symbol('AAPL')
+        self.assertEqual(len(result), 2)
+
+    def test_filter_by_action(self):
+        f = TradeHistoryFilter(self.trades)
+        result = f.filter_by_action('BUY')
+        self.assertEqual(len(result), 2)
+
+    def test_filter_by_status(self):
+        f = TradeHistoryFilter(self.trades)
+        result = f.filter_by_status('OPEN')
+        self.assertEqual(len(result), 1)
+        self.assertEqual(result[0].symbol, 'MSFT')
+
+
+# ============================================================================
+# ALERT SYSTEM TESTS
+# ============================================================================
+
+from alert_system import (
+    AlertSystem, AlertRule, AlertType, AlertSeverity, ComparisonOperator,
+    get_alert_system,
+)
+
+
+class TestAlertSystem(unittest.TestCase):
+    """Test alert rule CRUD and evaluation."""
+
+    def setUp(self):
+        self.system = AlertSystem()
+
+    def test_create_rule(self):
+        rule = self.system.create_rule(
+            name='High Price',
+            alert_type=AlertType.PRICE_ALERT,
+            metric_field='price',
+            operator=ComparisonOperator.GREATER_THAN,
+            threshold_value=200.0,
+            symbol='AAPL',
+        )
+        self.assertIsInstance(rule, AlertRule)
+        self.assertTrue(rule.enabled)
+        self.assertEqual(rule.symbol, 'AAPL')
+
+    def test_get_rule(self):
+        rule = self.system.create_rule(
+            name='Test', alert_type=AlertType.PRICE_ALERT,
+            metric_field='price', operator=ComparisonOperator.GREATER_THAN,
+            threshold_value=100.0,
+        )
+        fetched = self.system.get_rule(rule.rule_id)
+        self.assertIsNotNone(fetched)
+        self.assertEqual(fetched.name, 'Test')
+
+    def test_delete_rule(self):
+        rule = self.system.create_rule(
+            name='Del', alert_type=AlertType.PRICE_ALERT,
+            metric_field='price', operator=ComparisonOperator.LESS_THAN,
+            threshold_value=50.0,
+        )
+        self.assertTrue(self.system.delete_rule(rule.rule_id))
+        self.assertIsNone(self.system.get_rule(rule.rule_id))
+
+    def test_evaluate_triggers_alert(self):
+        self.system.create_rule(
+            name='Over 200', alert_type=AlertType.PRICE_ALERT,
+            metric_field='price', operator=ComparisonOperator.GREATER_THAN,
+            threshold_value=200.0, symbol='AAPL',
+            severity=AlertSeverity.HIGH,
+        )
+        events = self.system.evaluate('AAPL', {'price': 210.0})
+        self.assertEqual(len(events), 1)
+        self.assertEqual(events[0].symbol, 'AAPL')
+
+    def test_evaluate_no_trigger(self):
+        self.system.create_rule(
+            name='Over 200', alert_type=AlertType.PRICE_ALERT,
+            metric_field='price', operator=ComparisonOperator.GREATER_THAN,
+            threshold_value=200.0, symbol='AAPL',
+        )
+        events = self.system.evaluate('AAPL', {'price': 190.0})
+        self.assertEqual(len(events), 0)
+
+    def test_acknowledge_alert(self):
+        self.system.create_rule(
+            name='Test', alert_type=AlertType.PRICE_ALERT,
+            metric_field='price', operator=ComparisonOperator.GREATER_THAN,
+            threshold_value=100.0, symbol='AAPL',
+        )
+        events = self.system.evaluate('AAPL', {'price': 150.0})
+        self.assertTrue(self.system.acknowledge_alert(events[0].alert_id))
+
+    def test_export_import_rules(self):
+        self.system.create_rule(
+            name='Export', alert_type=AlertType.PRICE_ALERT,
+            metric_field='price', operator=ComparisonOperator.GREATER_THAN,
+            threshold_value=100.0,
+        )
+        exported = self.system.export_rules()
+        new_system = AlertSystem()
+        self.assertTrue(new_system.import_rules(exported))
+        self.assertEqual(len(new_system.get_all_rules()), 1)
+
+    def test_get_alert_system_singleton(self):
+        a = get_alert_system()
+        b = get_alert_system()
+        self.assertIs(a, b)
+
+
+# ============================================================================
+# NOTIFICATION SERVICE TESTS
+# ============================================================================
+
+from notification_service import (
+    NotificationService, NotificationPreference, NotificationChannel,
+    Notification, get_notification_service,
+)
+
+
+class TestNotificationService(unittest.TestCase):
+    """Test notification preferences and delivery."""
+
+    def setUp(self):
+        self.service = NotificationService()
+
+    def test_default_preferences(self):
+        prefs = self.service.get_user_preferences('default')
+        self.assertIsInstance(prefs, NotificationPreference)
+
+    def test_set_and_get_preferences(self):
+        prefs = NotificationPreference(
+            user_id='user1',
+            enable_popup=True,
+            enable_sound=False,
+            enable_email=False,
+        )
+        self.service.set_user_preferences('user1', prefs)
+        got = self.service.get_user_preferences('user1')
+        self.assertFalse(got.enable_sound)
+
+    def test_send_notification(self):
+        notif = Notification(
+            notification_id='N1',
+            alert_id='A1',
+            rule_id='R1',
+            title='Test',
+            message='Hello',
+            severity='MEDIUM',
+            channels=[NotificationChannel.LOG],
+        )
+        result = self.service.send_notification(notif, 'default')
+        self.assertTrue(result)
+
+    def test_notification_history(self):
+        notif = Notification(
+            notification_id='N2',
+            alert_id='A2',
+            rule_id='R2',
+            title='Test2',
+            message='World',
+            severity='LOW',
+            channels=[NotificationChannel.DASHBOARD],
+        )
+        self.service.send_notification(notif, 'default')
+        history = self.service.get_notification_history(limit=10)
+        self.assertGreaterEqual(len(history), 1)
+
+    def test_export_import_preferences(self):
+        prefs = NotificationPreference(user_id='exp', enable_popup=False)
+        self.service.set_user_preferences('exp', prefs)
+        exported = self.service.export_preferences('exp')
+        self.assertIsInstance(exported, str)
+        new_svc = NotificationService()
+        self.assertTrue(new_svc.import_preferences(exported, 'exp'))
+
+    def test_singleton(self):
+        a = get_notification_service()
+        b = get_notification_service()
+        self.assertIs(a, b)
+
+
+# ============================================================================
+# STREAMING DATA SERVICE TESTS
+# ============================================================================
+
+from streaming_data_service import (
+    StreamingDataService, PriceUpdate, DataSourceType, get_streaming_service,
+)
+
+
+class TestStreamingDataService(unittest.TestCase):
+    """Test streaming service subscription and price retrieval."""
+
+    def test_create_simulation_service(self):
+        svc = StreamingDataService(data_source=DataSourceType.SIMULATION)
+        self.assertIsNotNone(svc)
+
+    def test_subscribe_and_get_prices(self):
+        svc = StreamingDataService(data_source=DataSourceType.SIMULATION)
+        received = []
+        svc.subscribe('AAPL', lambda update: received.append(update))
+        prices = svc.get_all_prices()
+        self.assertIsInstance(prices, dict)
+
+    def test_price_update_to_dict(self):
+        pu = PriceUpdate(
+            symbol='AAPL', timestamp='2025-01-01T10:00:00',
+            price=150.0, bid=149.9, ask=150.1,
+            volume=1000000, change_percent=0.5,
+        )
+        d = pu.to_dict()
+        self.assertEqual(d['symbol'], 'AAPL')
+        self.assertEqual(d['price'], 150.0)
+
+    def test_set_update_frequency(self):
+        svc = StreamingDataService(data_source=DataSourceType.SIMULATION)
+        svc.set_update_frequency(5)
+        # Should not raise
+
+
+# ============================================================================
+# RISK MANAGEMENT ENHANCED TESTS
+# ============================================================================
+
+from risk_management_enhanced import (
+    EnhancedStopLoss, TrailingStopLoss, DynamicTakeProfitCalculator,
+    PortfolioDiversificationManager, DynamicPositionSizer,
+)
+
+
+class TestEnhancedStopLoss(unittest.TestCase):
+    """Test enhanced and trailing stop-loss logic."""
+
+    def test_stop_not_triggered_above(self):
+        sl = EnhancedStopLoss(entry_price=100.0, initial_stop_loss_percent=0.05)
+        triggered, _ = sl.check_trigger(98.0)
+        self.assertFalse(triggered)
+
+    def test_stop_triggered_below(self):
+        sl = EnhancedStopLoss(entry_price=100.0, initial_stop_loss_percent=0.05)
+        triggered, reason = sl.check_trigger(94.0)
+        self.assertTrue(triggered)
+        self.assertIsNotNone(reason)
+
+    def test_trailing_stop_moves_up(self):
+        tsl = TrailingStopLoss(entry_price=100.0, trailing_percent=0.05)
+        tsl.update(110.0)  # price rises
+        tsl.update(108.0)  # price dips but not enough
+        triggered, _ = tsl.update(108.0)
+        self.assertFalse(triggered)
+
+    def test_trailing_stop_triggers_on_drop(self):
+        tsl = TrailingStopLoss(entry_price=100.0, trailing_percent=0.05)
+        tsl.update(110.0)  # high watermark = 110
+        triggered, _ = tsl.update(104.0)  # 5.4% below high → triggers
+        self.assertTrue(triggered)
+
+
+class TestDynamicTakeProfit(unittest.TestCase):
+
+    def test_tp_price_above_entry(self):
+        params = StrategyFactory.create_balanced_strategy()
+        tp_calc = DynamicTakeProfitCalculator(params)
+        tp = tp_calc.calculate_tp_price(
+            entry_price=100.0, current_price=105.0,
+            confidence=0.8, volatility=0.02, rsi=50.0,
+        )
+        self.assertGreater(tp, 100.0)
+
+
+class TestPortfolioDiversification(unittest.TestCase):
+
+    def test_sector_lookup(self):
+        mgr = PortfolioDiversificationManager()
+        sector = mgr.get_sector('AAPL')
+        self.assertIsInstance(sector, str)
+        self.assertGreater(len(sector), 0)
+
+    def test_single_stock_limit(self):
+        mgr = PortfolioDiversificationManager()
+        allowed, _ = mgr.check_single_stock_limit(
+            'AAPL', proposed_position_value=60000,
+            total_portfolio_value=100000, existing_positions=[],
+        )
+        # 60% of portfolio in one stock should be rejected
+        self.assertFalse(allowed)
+
+
+class TestDynamicPositionSizer(unittest.TestCase):
+
+    def test_returns_positive_shares(self):
+        params = StrategyFactory.create_balanced_strategy()
+        sizer = DynamicPositionSizer(params)
+        shares, value = sizer.calculate_position_size(
+            portfolio_value=100000, entry_price=150.0,
+            stop_loss_price=142.5, confidence=0.7, volatility=0.02,
+        )
+        self.assertGreater(shares, 0)
+        self.assertGreater(value, 0)
+
+    def test_volatility_reduces_size(self):
+        params = StrategyFactory.create_balanced_strategy()
+        sizer = DynamicPositionSizer(params)
+        s_low, _ = sizer.calculate_position_size(
+            portfolio_value=100000, entry_price=150.0,
+            stop_loss_price=142.5, confidence=0.7, volatility=0.01,
+        )
+        s_high, _ = sizer.calculate_position_size(
+            portfolio_value=100000, entry_price=150.0,
+            stop_loss_price=142.5, confidence=0.7, volatility=0.06,
+        )
+        self.assertGreaterEqual(s_low, s_high)
+
+
+# ============================================================================
+# PREDICTION ENGINE TESTS
+# ============================================================================
+
+import pandas as pd
+
+
+class TestPredictionEngine(unittest.TestCase):
+    """Test prediction engine signal generation."""
+
+    @classmethod
+    def setUpClass(cls):
+        """Load AAPL indicator data once for all tests."""
+        csv_path = 'data/AAPL_stock_data_with_indicators.csv'
+        if not os.path.exists(csv_path):
+            raise unittest.SkipTest('AAPL indicator data not available')
+        cls.data = pd.read_csv(csv_path)
+
+    def _make_engine(self):
+        from prediction_engine import PredictionEngine
+        return PredictionEngine(self.data, symbol='AAPL')
+
+    def test_create_engine(self):
+        pe = self._make_engine()
+        self.assertIsNotNone(pe)
+
+    def test_calculate_indicators(self):
+        pe = self._make_engine()
+        indicators = pe.calculate_technical_indicators()
+        self.assertIn('rsi', indicators)
+        self.assertIn('macd', indicators)
+        self.assertIn('volatility', indicators)
+
+    def test_generate_signal_returns_tuple(self):
+        pe = self._make_engine()
+        indicators = pe.calculate_technical_indicators()
+        signal, strength = pe.generate_signal(indicators)
+        self.assertIn(signal, ('BULLISH', 'BEARISH', 'NEUTRAL'))
+        self.assertGreaterEqual(strength, 0.0)
+        self.assertLessEqual(strength, 1.0)
+
+    def test_ml_predict_return(self):
+        pe = self._make_engine()
+        pred_return, confidence = pe.ml_predict_return()
+        self.assertIsInstance(pred_return, float)
+        self.assertIsInstance(confidence, float)
+
+    def test_predict_multi_day(self):
+        pe = self._make_engine()
+        result = pe.predict_multi_day(days_ahead=3)
+        self.assertIn('signal', result)
+        self.assertIn('current_price', result)
+        self.assertIn('forecasts', result)
+
+
+# ============================================================================
+# BACKTESTING ENGINE TESTS
+# ============================================================================
+
+from backtesting_engine import BacktestingEngine, BacktestResults, BacktestTrade
+
+
+class TestBacktestingEngine(unittest.TestCase):
+    """Test backtesting engine produces valid results."""
+
+    @classmethod
+    def setUpClass(cls):
+        csv_path = 'data/AAPL_stock_data_with_indicators.csv'
+        if not os.path.exists(csv_path):
+            raise unittest.SkipTest('AAPL indicator data not available')
+        engine = BacktestingEngine(symbol='AAPL')
+        cls.data = engine.load_data(csv_path)
+
+    def test_run_backtest_returns_results(self):
+        params = StrategyFactory.create_balanced_strategy()
+        engine = BacktestingEngine(
+            initial_capital=100000.0, trading_params=params, symbol='AAPL',
+        )
+        results = engine.run_backtest(self.data, strategy_name='Test')
+        self.assertIsInstance(results, BacktestResults)
+        self.assertEqual(results.initial_capital, 100000.0)
+
+    def test_roi_is_float(self):
+        params = StrategyFactory.create_balanced_strategy()
+        engine = BacktestingEngine(
+            initial_capital=100000.0, trading_params=params, symbol='AAPL',
+        )
+        results = engine.run_backtest(self.data, strategy_name='Test')
+        self.assertIsInstance(results.roi, float)
+
+    def test_trades_list(self):
+        params = StrategyFactory.create_balanced_strategy()
+        engine = BacktestingEngine(
+            initial_capital=100000.0, trading_params=params, symbol='AAPL',
+        )
+        results = engine.run_backtest(self.data, strategy_name='Test')
+        self.assertIsInstance(results.trades, list)
+        if results.trades:
+            self.assertIsInstance(results.trades[0], BacktestTrade)
+
+    def test_results_to_dict(self):
+        params = StrategyFactory.create_balanced_strategy()
+        engine = BacktestingEngine(
+            initial_capital=100000.0, trading_params=params, symbol='AAPL',
+        )
+        results = engine.run_backtest(self.data, strategy_name='Test')
+        d = results.to_dict()
+        self.assertIn('roi', d)
+        self.assertIn('sharpe_ratio', d)
+        self.assertIn('win_rate', d)
+
+    def test_win_rate_in_range(self):
+        params = StrategyFactory.create_balanced_strategy()
+        engine = BacktestingEngine(
+            initial_capital=100000.0, trading_params=params, symbol='AAPL',
+        )
+        results = engine.run_backtest(self.data, strategy_name='Test')
+        self.assertGreaterEqual(results.win_rate, 0.0)
+        self.assertLessEqual(results.win_rate, 1.0)
+
+
+# ============================================================================
+# DATA FETCHER TESTS
+# ============================================================================
+
+class TestDataFetcher(unittest.TestCase):
+    """Test data fetcher module structure."""
+
+    def test_imports(self):
+        from data_fetcher import fetch_stock_data, load_stock_data, DEFAULT_SYMBOLS
+        self.assertIsInstance(DEFAULT_SYMBOLS, list)
+        self.assertGreater(len(DEFAULT_SYMBOLS), 0)
+
+    def test_load_existing_data(self):
+        from data_fetcher import load_stock_data
+        csv_path = 'data/AAPL_stock_data_with_indicators.csv'
+        if not os.path.exists(csv_path):
+            self.skipTest('Data file not available')
+        df = load_stock_data('AAPL')
+        self.assertIsInstance(df, pd.DataFrame)
+        self.assertGreater(len(df), 0)
+
+
+# ============================================================================
+# TRADING EXECUTION TESTS
+# ============================================================================
+
+class TestTradingExecution(unittest.TestCase):
+    """Test order management and trading execution classes."""
+
+    def test_import_classes(self):
+        from trading_execution import (
+            TradingEngine, OrderManager, TradeLogger,
+            MarketOrder, LimitOrder, StopLossOrder, TakeProfitOrder,
+        )
+        self.assertTrue(True)  # Import succeeded
+
+    def test_market_order_creation(self):
+        from trading_execution import MarketOrder, OrderSide
+        from datetime import datetime
+        order = MarketOrder(
+            order_id=1, symbol='AAPL', side=OrderSide.BUY,
+            quantity=10, created_at=datetime.now(),
+        )
+        self.assertEqual(order.symbol, 'AAPL')
+        self.assertEqual(order.quantity, 10)
+
+    def test_order_manager_queue(self):
+        from trading_execution import OrderManager, OrderSide
+        mgr = OrderManager()
+        order = mgr.create_market_order(
+            symbol='AAPL', side=OrderSide.BUY,
+            quantity=5, entry_price=150.0,
+        )
+        pending = mgr.get_pending_orders()
+        self.assertGreaterEqual(len(pending), 0)
+
+
+# ============================================================================
 # RUN
 # ============================================================================
 

@@ -78,7 +78,25 @@ SUPPORTED_SYMBOLS = cfg.SUPPORTED_SYMBOLS
 # Flask application setup
 app = Flask(__name__)
 app.json_encoder = NaNEncoder
-CORS(app, origins=cfg.CORS_ORIGINS)
+app.secret_key = cfg.SECRET_KEY
+CORS(app, origins=cfg.CORS_ORIGINS, supports_credentials=True)
+
+# Import auth module
+from auth import init_db as init_auth_db, register_user, authenticate_user, get_user_by_id
+from functools import wraps
+from flask import session, redirect, Response
+
+def login_required(f):
+    """Decorator that redirects to /landing when user is not logged in."""
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        if 'user_id' not in session:
+            # JSON API endpoints return 401; page routes redirect
+            if request.path.startswith('/api/'):
+                return jsonify({'error': 'Authentication required'}), 401
+            return redirect('/landing')
+        return f(*args, **kwargs)
+    return decorated
 
 import re
 _SYMBOL_RE = re.compile(r'^[A-Z]{1,5}$')
@@ -87,26 +105,130 @@ def _validate_symbol(symbol: str) -> bool:
     """Return True if *symbol* looks like a valid ticker and is in SUPPORTED_SYMBOLS."""
     return bool(symbol and _SYMBOL_RE.match(symbol) and symbol in SUPPORTED_SYMBOLS)
 
-# Global system instances
-portfolio_tracker = None
+# Global system instances (shared — not per-user)
 streaming_service = None
 alert_system = None
 notification_service = None
 active_clients = {}  # client_id -> connection info
 
-# Trained ML model and scaler (loaded at startup)
-trained_model = None
-trained_scaler = None
+# Trained ML models: per-symbol dict loaded at startup
+# { symbol: { 'model_lr', 'model_rf', 'model_gb_clf', 'scaler', 'feature_cols' } }
+trained_models = {}  # symbol -> model dict
 
-# Auto-trading engine state
+# ---------- Per-user portfolio registry ----------
+# Each user_id maps to a dict with their own portfolio state:
+#   { 'tracker': PortfolioTracker,
+#     'open_positions': {trade_id: Trade},
+#     'auto_trade_log': [dict],
+#     'disabled_symbols': set(),
+#     'active_strategy': str,
+#     'auto_running': bool }
+user_portfolios = {}            # user_id (int) -> state dict
+_user_portfolios_lock = threading.Lock()
+
+# Legacy global kept for import compatibility only — not used at runtime.
+portfolio_tracker = None
+
+# Auto-trading daemon state (shared)
 auto_trader_thread = None
-auto_trader_running = True
-auto_trade_log = []  # list of dicts: {time, action, symbol, price, shares, reason}
-open_positions = {}  # trade_id -> Trade object
 auto_trade_last_check = None
-auto_trade_disabled_symbols = set()  # symbols with auto-buy turned off
-active_strategy = 'AUTO'  # Current trading strategy: AUTO, AGGRESSIVE, BALANCED, CONSERVATIVE
 symbol_strategies = {}  # Per-symbol best strategy: {symbol: strategy_key}
+
+
+def _user_state(user_id):
+    """Return the per-user state dict, creating a fresh portfolio on first access."""
+    uid = int(user_id)
+    with _user_portfolios_lock:
+        if uid not in user_portfolios:
+            _create_user_portfolio(uid)
+        return user_portfolios[uid]
+
+
+def _create_user_portfolio(uid):
+    """Initialise a brand-new portfolio for a user."""
+    base_dir = os.path.dirname(__file__)
+    tracker = PortfolioTracker(initial_balance=cfg.INITIAL_CAPITAL)
+    tracker.LIVE_TRADES_FILE = os.path.join('results', f'user_{uid}_trades.json')
+    tracker.set_persistence_path(base_dir)
+
+    state = {
+        'tracker': tracker,
+        'open_positions': {},
+        'auto_trade_log': [],
+        'disabled_symbols': set(),
+        'active_strategy': 'AUTO',
+        'auto_running': True,
+    }
+
+    # Try to load existing persisted data
+    live_path = os.path.join(base_dir, tracker.LIVE_TRADES_FILE)
+    if os.path.exists(live_path):
+        tracker.load_from_json(live_path)
+        _load_user_auto_state(uid, state)
+    else:
+        # New user – persist initial empty portfolio
+        tracker.save_to_json()
+
+    user_portfolios[uid] = state
+    print(f"[USER] Portfolio initialised for user {uid} (cash=${tracker.portfolio.cash:,.2f}, trades={len(tracker.trade_history)})")
+    return state
+
+
+def _user_state_file(uid):
+    return os.path.join(cfg.RESULTS_DIR, f'user_{uid}_auto_state.json')
+
+
+def save_user_auto_state(uid):
+    """Persist a single user's auto-trade state."""
+    state = user_portfolios.get(int(uid))
+    if not state:
+        return
+    try:
+        data = {
+            'open_positions': {tid: t.to_dict() for tid, t in state['open_positions'].items()},
+            'auto_trade_log': state['auto_trade_log'][-200:],
+            'disabled_symbols': list(state['disabled_symbols']),
+            'active_strategy': state['active_strategy'],
+            'symbol_strategies': symbol_strategies,
+            'saved_at': datetime.now().isoformat(),
+        }
+        path = _user_state_file(uid)
+        tmp = path + '.tmp'
+        with open(tmp, 'w') as f:
+            json.dump(data, f, indent=2, default=str)
+        os.replace(tmp, path)
+    except Exception as e:
+        print(f"[PERSIST] Error saving auto state for user {uid}: {e}")
+
+
+def _load_user_auto_state(uid, state):
+    """Load a single user's auto-trade state from disk."""
+    path = _user_state_file(uid)
+    if not os.path.exists(path):
+        return
+    try:
+        with open(path, 'r') as f:
+            data = json.load(f)
+        state['auto_trade_log'] = data.get('auto_trade_log', [])
+        state['disabled_symbols'] = set(data.get('disabled_symbols', []))
+        saved_strat = data.get('active_strategy', 'AUTO')
+        if saved_strat in STRATEGIES or saved_strat == 'AUTO':
+            state['active_strategy'] = saved_strat
+        for tid, td in data.get('open_positions', {}).items():
+            trade = Trade(
+                trade_id=td['trade_id'], date=td['date'], symbol=td['symbol'],
+                action=td['action'], quantity=float(td['quantity']),
+                entry_price=float(td['entry_price']),
+                stop_loss=float(td['stop_loss']) if td.get('stop_loss') is not None else None,
+                take_profit=float(td['take_profit']) if td.get('take_profit') is not None else None,
+                exit_date=td.get('exit_date'),
+                exit_price=float(td['exit_price']) if td.get('exit_price') is not None else None,
+                status=td.get('status', 'OPEN'), user_id=uid,
+            )
+            state['open_positions'][tid] = trade
+        print(f"[PERSIST] User {uid}: restored {len(state['open_positions'])} positions, {len(state['auto_trade_log'])} log entries")
+    except Exception as e:
+        print(f"[PERSIST] Error loading auto state for user {uid}: {e}")
 
 def auto_select_strategies():
     """Read backtest CSVs to pick the best strategy per symbol based on a composite score."""
@@ -142,76 +264,18 @@ def auto_select_strategies():
 LIVE_STATE_FILE = os.path.join(cfg.RESULTS_DIR, 'live_auto_state.json')
 
 def save_auto_state():
-    """Persist open_positions and auto_trade_log to disk."""
-    try:
-        state = {
-            'open_positions': {
-                tid: t.to_dict() for tid, t in open_positions.items()
-            },
-            'auto_trade_log': auto_trade_log[-200:],
-            'disabled_symbols': list(auto_trade_disabled_symbols),
-            'active_strategy': active_strategy,
-            'symbol_strategies': symbol_strategies,
-            'saved_at': datetime.now().isoformat()
-        }
-        state_path = os.path.join(os.path.dirname(__file__), LIVE_STATE_FILE)
-        tmp_path = state_path + '.tmp'
-        with open(tmp_path, 'w') as f:
-            json.dump(state, f, indent=2, default=str)
-        os.replace(tmp_path, state_path)
-    except Exception as e:
-        print(f"[PERSIST] Error saving auto state: {e}")
+    """Legacy wrapper — no-op now (per-user state is saved via save_user_auto_state)."""
+    pass
 
 def load_auto_state():
-    """Restore open_positions and auto_trade_log from disk."""
-    global open_positions, auto_trade_log, auto_trade_disabled_symbols, active_strategy
-    state_path = os.path.join(os.path.dirname(__file__), LIVE_STATE_FILE)
-    if not os.path.exists(state_path):
-        return
-    try:
-        with open(state_path, 'r') as f:
-            state = json.load(f)
-        
-        # Restore auto_trade_log, disabled symbols, and active strategy
-        auto_trade_log = state.get('auto_trade_log', [])
-        auto_trade_disabled_symbols = set(state.get('disabled_symbols', []))
-        saved_strategy = state.get('active_strategy', 'AUTO')
-        if saved_strategy in STRATEGIES or saved_strategy == 'AUTO':
-            active_strategy = saved_strategy
-        saved_sym_strats = state.get('symbol_strategies', {})
-        if saved_sym_strats:
-            symbol_strategies.update(saved_sym_strats)
-        
-        # Restore open_positions as Trade objects
-        pos_data = state.get('open_positions', {})
-        for tid, td in pos_data.items():
-            trade = Trade(
-                trade_id=td['trade_id'],
-                date=td['date'],
-                symbol=td['symbol'],
-                action=td['action'],
-                quantity=float(td['quantity']),
-                entry_price=float(td['entry_price']),
-                stop_loss=float(td['stop_loss']) if td.get('stop_loss') is not None else None,
-                take_profit=float(td['take_profit']) if td.get('take_profit') is not None else None,
-                exit_date=td.get('exit_date'),
-                exit_price=float(td['exit_price']) if td.get('exit_price') is not None else None,
-                status=td.get('status', 'OPEN'),
-            )
-            open_positions[tid] = trade
-        
-        print(f"[PERSIST] Restored {len(open_positions)} open positions, {len(auto_trade_log)} log entries")
-    except Exception as e:
-        print(f"[PERSIST] Error loading auto state: {e}")
+    """Legacy wrapper — no-op now."""
+    pass
 
 def initialize_portfolio(backtest_file: str = os.path.join(cfg.RESULTS_DIR, 'backtest_results.json')):
-    """Initialize portfolio from backtesting results"""
-    global portfolio_tracker, streaming_service, alert_system, notification_service
-    
-    portfolio_tracker = PortfolioTracker(initial_balance=cfg.INITIAL_CAPITAL)
-    base_dir = os.path.dirname(__file__)
-    portfolio_tracker.set_persistence_path(base_dir)
-    
+    """Initialize shared services (streaming, alerts, notifications).
+    Per-user portfolios are created lazily on first access."""
+    global streaming_service, alert_system, notification_service
+
     # Initialize streaming service with YAHOO FINANCE (LIVE DATA)
     streaming_service = get_streaming_service(data_source=DataSourceType.YAHOO_FINANCE)
     for sym in SUPPORTED_SYMBOLS:
@@ -224,49 +288,22 @@ def initialize_portfolio(backtest_file: str = os.path.join(cfg.RESULTS_DIR, 'bac
     
     # Initialize notification service
     notification_service = get_notification_service()
-    
-    # Priority 1: Load from live_trades.json (persisted real trades)
-    live_path = os.path.join(base_dir, PortfolioTracker.LIVE_TRADES_FILE)
-    if os.path.exists(live_path):
-        loaded = portfolio_tracker.load_from_json(live_path)
-        if loaded:
-            print(f"Loaded {len(portfolio_tracker.trade_history)} trades from live persistence")
-            # Also restore auto-trade state (open positions, trade log)
-            load_auto_state()
-        else:
-            # live file was empty or corrupt, fall back to backtest
-            print("Live trades file empty, falling back to backtest data")
-            backtest_path = os.path.join(base_dir, backtest_file)
-            if os.path.exists(backtest_path):
-                portfolio_tracker.load_from_backtest(backtest_path)
-                print(f"Loaded {len(portfolio_tracker.trade_history)} trades from backtest")
-                portfolio_tracker.save_to_json()
-    else:
-        # No live file exists yet - first run, load from backtest and save
-        backtest_path = os.path.join(base_dir, backtest_file)
-        if os.path.exists(backtest_path):
-            portfolio_tracker.load_from_backtest(backtest_path)
-            print(f"Loaded {len(portfolio_tracker.trade_history)} trades from backtest")
-            # Save to live file so future restarts use persisted data
-            portfolio_tracker.save_to_json()
-            print(f"Saved initial trades to {PortfolioTracker.LIVE_TRADES_FILE}")
-    
+
     print("Streaming service initialized and started")
     print("Alert system initialized")
     print("Notification service initialized")
-    
-    return portfolio_tracker
 
 # ============================================================================
 # TRADE HISTORY ENDPOINTS
 # ============================================================================
 
 @app.route('/api/trades/history', methods=['GET'])
+@login_required
 def get_trade_history():
     """Get complete trade history"""
     try:
-        if not portfolio_tracker:
-            return jsonify({'error': 'Portfolio not initialized'}), 500
+        ctx = _user_state(session['user_id'])
+        tracker = ctx['tracker']
         
         # Get parameters
         limit = request.args.get('limit', 100, type=int)
@@ -275,7 +312,7 @@ def get_trade_history():
         sort_order = request.args.get('sort_order', 'desc')
         
         # Get trade history
-        all_trades = portfolio_tracker.get_trade_history()
+        all_trades = tracker.get_trade_history()
         
         # Sort
         reverse = sort_order.lower() == 'desc'
@@ -308,11 +345,12 @@ def get_trade_history():
         return jsonify({'error': str(e)}), 500
 
 @app.route('/api/trades/filtered', methods=['GET'])
+@login_required
 def get_filtered_trades():
     """Get trades filtered by various criteria"""
     try:
-        if not portfolio_tracker:
-            return jsonify({'error': 'Portfolio not initialized'}), 500
+        ctx = _user_state(session['user_id'])
+        tracker = ctx['tracker']
         
         # Get filter parameters
         symbol = request.args.get('symbol')
@@ -332,7 +370,7 @@ def get_filtered_trades():
             return jsonify({'error': f'Invalid status: {status}'}), 400
         
         # Create filter object
-        filter_obj = TradeHistoryFilter(portfolio_tracker.portfolio.trades)
+        filter_obj = TradeHistoryFilter(tracker.portfolio.trades)
         
         # Build filters dictionary
         filters = {}
@@ -371,17 +409,18 @@ def get_filtered_trades():
         return jsonify({'error': str(e)}), 500
 
 @app.route('/api/trades/search', methods=['POST'])
+@login_required
 def search_trades():
     """Search trades with complex criteria (POST)"""
     try:
-        if not portfolio_tracker:
-            return jsonify({'error': 'Portfolio not initialized'}), 500
+        ctx = _user_state(session['user_id'])
+        tracker = ctx['tracker']
         
         # Get search criteria from body
         criteria = request.get_json()
         
         # Apply filters
-        filter_obj = TradeHistoryFilter(portfolio_tracker.portfolio.trades)
+        filter_obj = TradeHistoryFilter(tracker.portfolio.trades)
         filtered_trades = filter_obj.search(**criteria)
         
         # Format for display
@@ -405,11 +444,12 @@ def search_trades():
 # ============================================================================
 
 @app.route('/api/portfolio/summary', methods=['GET'])
+@login_required
 def get_portfolio_summary():
     """Get portfolio summary with all metrics"""
     try:
-        if not portfolio_tracker:
-            return jsonify({'error': 'Portfolio not initialized'}), 500
+        ctx = _user_state(session['user_id'])
+        tracker = ctx['tracker']
         
         # Update market prices for accurate position valuation
         try:
@@ -417,13 +457,13 @@ def get_portfolio_summary():
             for sym in SUPPORTED_SYMBOLS:
                 try:
                     price = yf.Ticker(sym).history(period='1d')['Close'].iloc[-1]
-                    portfolio_tracker.portfolio.update_market_price(sym, float(price))
+                    tracker.portfolio.update_market_price(sym, float(price))
                 except (KeyError, IndexError, ValueError) as exc:
                     logger.debug(f"Could not fetch price for {sym}: {exc}")
         except ImportError:
             logger.warning("yfinance not available – skipping live price update")
         
-        metrics = portfolio_tracker.get_portfolio_summary()
+        metrics = tracker.get_portfolio_summary()
         formatted = PortfolioVisualizer.format_portfolio_summary(metrics)
         
         return jsonify({
@@ -436,14 +476,15 @@ def get_portfolio_summary():
         return jsonify({'error': str(e)}), 500
 
 @app.route('/api/portfolio/allocation', methods=['GET'])
+@login_required
 def get_asset_allocation():
     """Get asset allocation for pie chart"""
     try:
-        if not portfolio_tracker:
-            return jsonify({'error': 'Portfolio not initialized'}), 500
+        ctx = _user_state(session['user_id'])
+        tracker = ctx['tracker']
         
         allocation = PortfolioVisualizer.get_asset_allocation(
-            portfolio_tracker.portfolio
+            tracker.portfolio
         )
         
         # Format for chart
@@ -461,14 +502,15 @@ def get_asset_allocation():
         return jsonify({'error': str(e)}), 500
 
 @app.route('/api/portfolio/statistics', methods=['GET'])
+@login_required
 def get_trade_statistics():
     """Get trade statistics by symbol"""
     try:
-        if not portfolio_tracker:
-            return jsonify({'error': 'Portfolio not initialized'}), 500
+        ctx = _user_state(session['user_id'])
+        tracker = ctx['tracker']
         
         stats = PortfolioVisualizer.get_trade_statistics(
-            portfolio_tracker.portfolio.trades
+            tracker.portfolio.trades
         )
         
         # Format for bar chart
@@ -616,14 +658,15 @@ def get_live_price():
         return jsonify({'error': str(e)}), 500
 
 @app.route('/api/portfolio/pnl-distribution', methods=['GET'])
+@login_required
 def get_pnl_distribution():
     """Get PnL distribution histogram"""
     try:
-        if not portfolio_tracker:
-            return jsonify({'error': 'Portfolio not initialized'}), 500
+        ctx = _user_state(session['user_id'])
+        tracker = ctx['tracker']
         
         distribution = PortfolioVisualizer.get_pnl_distribution(
-            portfolio_tracker.portfolio.trades
+            tracker.portfolio.trades
         )
         
         return jsonify({
@@ -637,16 +680,17 @@ def get_pnl_distribution():
         return jsonify({'error': str(e)}), 500
 
 @app.route('/api/portfolio/performance', methods=['GET'])
+@login_required
 def get_performance_metrics():
     """Get detailed performance metrics"""
     try:
-        if not portfolio_tracker:
-            return jsonify({'error': 'Portfolio not initialized'}), 500
+        ctx = _user_state(session['user_id'])
+        tracker = ctx['tracker']
         
-        metrics = portfolio_tracker.get_portfolio_summary()
+        metrics = tracker.get_portfolio_summary()
         
         # Calculate additional metrics
-        closed_trades = [t for t in portfolio_tracker.portfolio.trades 
+        closed_trades = [t for t in tracker.portfolio.trades 
                         if t.is_closed()]
         
         winning_trades = sum(1 for t in closed_trades 
@@ -699,14 +743,15 @@ def get_performance_metrics():
 # ============================================================================
 
 @app.route('/api/portfolio/symbols', methods=['GET'])
+@login_required
 def get_traded_symbols():
     """Get list of symbols traded"""
     try:
-        if not portfolio_tracker:
-            return jsonify({'error': 'Portfolio not initialized'}), 500
+        ctx = _user_state(session['user_id'])
+        tracker = ctx['tracker']
         
         symbols = set()
-        for trade in portfolio_tracker.portfolio.trades:
+        for trade in tracker.portfolio.trades:
             symbols.add(trade.symbol)
         
         return jsonify({
@@ -719,13 +764,14 @@ def get_traded_symbols():
         return jsonify({'error': str(e)}), 500
 
 @app.route('/api/portfolio/date-range', methods=['GET'])
+@login_required
 def get_date_range():
     """Get date range of trades"""
     try:
-        if not portfolio_tracker:
-            return jsonify({'error': 'Portfolio not initialized'}), 500
+        ctx = _user_state(session['user_id'])
+        tracker = ctx['tracker']
         
-        if not portfolio_tracker.portfolio.trades:
+        if not tracker.portfolio.trades:
             return jsonify({
                 'status': 'success',
                 'start_date': None,
@@ -734,7 +780,7 @@ def get_date_range():
             })
         
         dates = [datetime.fromisoformat(t.date) 
-                for t in portfolio_tracker.portfolio.trades]
+                for t in tracker.portfolio.trades]
         
         start_date = min(dates).date().isoformat()
         end_date = max(dates).date().isoformat()
@@ -751,16 +797,17 @@ def get_date_range():
         return jsonify({'error': str(e)}), 500
 
 @app.route('/api/portfolio/refresh', methods=['POST'])
+@login_required
 def refresh_portfolio():
     """Refresh portfolio data from sources"""
     try:
-        global portfolio_tracker
-        initialize_portfolio()
+        ctx = _user_state(session['user_id'])
+        tracker = ctx['tracker']
         
         return jsonify({
             'status': 'success',
             'message': 'Portfolio refreshed',
-            'trades_loaded': len(portfolio_tracker.trade_history)
+            'trades_loaded': len(tracker.trade_history)
         })
     
     except Exception as e:
@@ -1062,16 +1109,90 @@ def get_notification_history():
         return jsonify({'error': str(e)}), 500
 
 # ============================================================================
+# AUTHENTICATION ENDPOINTS
+# ============================================================================
+
+@app.route('/landing', methods=['GET'])
+def landing_page():
+    """Serve the landing / hero page."""
+    if 'user_id' in session:
+        return redirect('/dashboard')
+    path = os.path.join(os.path.dirname(__file__), 'templates', 'landing.html')
+    return Response(open(path, 'r', encoding='utf-8').read(), mimetype='text/html; charset=utf-8')
+
+@app.route('/auth', methods=['GET'])
+def auth_page():
+    """Serve the login / sign-up page."""
+    if 'user_id' in session:
+        return redirect('/dashboard')
+    path = os.path.join(os.path.dirname(__file__), 'templates', 'auth.html')
+    return Response(open(path, 'r', encoding='utf-8').read(), mimetype='text/html; charset=utf-8')
+
+@app.route('/api/auth/register', methods=['POST'])
+def api_register():
+    """Register a new user account."""
+    data = request.get_json(silent=True) or {}
+    result = register_user(
+        data.get('name', ''),
+        data.get('email', ''),
+        data.get('password', '')
+    )
+    if result['success']:
+        session['user_id'] = result['user']['id']
+        session['user_name'] = result['user']['name']
+        session['user_email'] = result['user']['email']
+    return jsonify(result)
+
+@app.route('/api/auth/login', methods=['POST'])
+def api_login():
+    """Authenticate an existing user."""
+    data = request.get_json(silent=True) or {}
+    user = authenticate_user(data.get('email', ''), data.get('password', ''))
+    if user:
+        session['user_id'] = user['id']
+        session['user_name'] = user['name']
+        session['user_email'] = user['email']
+        return jsonify({'success': True, 'user': user})
+    return jsonify({'success': False, 'error': 'Invalid email or password'})
+
+@app.route('/api/auth/logout', methods=['POST'])
+def api_logout():
+    """Clear the session and log out."""
+    session.clear()
+    return jsonify({'success': True})
+
+@app.route('/api/auth/me', methods=['GET'])
+def api_me():
+    """Return the current logged-in user info."""
+    if 'user_id' not in session:
+        return jsonify({'authenticated': False}), 401
+    return jsonify({
+        'authenticated': True,
+        'user': {
+            'id': session['user_id'],
+            'name': session.get('user_name', ''),
+            'email': session.get('user_email', '')
+        }
+    })
+
+# ============================================================================
 # DASHBOARD ENDPOINTS (NEW: Dark Mode UI with Live Data)
 # ============================================================================
 
 @app.route('/', methods=['GET'])
 def dashboard_index():
-    """Serve the dashboard HTML"""
+    """Root route: landing page for guests, dashboard for logged-in users."""
+    if 'user_id' not in session:
+        return redirect('/landing')
+    return redirect('/dashboard')
+
+@app.route('/dashboard-view', methods=['GET'])
+@login_required
+def dashboard_view():
+    """Serve the dashboard HTML (protected)."""
     dashboard_path = os.path.join(os.path.dirname(__file__), 'templates', 'dashboard_trade_history.html')
     if os.path.exists(dashboard_path):
         with open(dashboard_path, 'r', encoding='utf-8') as f:
-            from flask import Response
             return Response(f.read(), mimetype='text/html; charset=utf-8')
     return jsonify({'error': 'Dashboard not found'}), 404
 
@@ -1094,88 +1215,142 @@ def get_supported_symbols():
 
 def compute_features_from_yfinance(hist_df, symbol='AAPL'):
     """
-    Compute the 21 technical indicator features from a yfinance history DataFrame.
-    Returns a numpy array of shape (1, 21) matching the exact column order
-    the trained model expects, plus the raw DataFrame with computed columns.
+    Compute the 30 engineered features matching the trained ML model's schema.
+    Returns (feature_array, features_df) where feature_array has shape (1, 30)
+    in the exact column order from training_report.json, plus the raw DataFrame.
     
+    If the symbol has a trained model, we use its feature_cols list.
+    Otherwise falls back to the full 30-feature set.
     Requires at least 200+ rows for SMA_200 warmup.
     """
     df = hist_df.copy()
     
-    # Rename yfinance columns to match training data column names
-    # The ML model was trained with AAPL-suffixed columns
-    col_suffix = '_AAPL'  # model always expects _AAPL columns
-    df.rename(columns={
-        'Close': f'Close{col_suffix}',
-        'High': f'High{col_suffix}',
-        'Low': f'Low{col_suffix}',
-        'Open': f'Open{col_suffix}',
-        'Volume': f'Volume{col_suffix}'
-    }, inplace=True)
+    # Use generic column names
+    close = df['Close'] if 'Close' in df.columns else df.iloc[:, 0]
+    high = df['High'] if 'High' in df.columns else close
+    low = df['Low'] if 'Low' in df.columns else close
+    opn = df['Open'] if 'Open' in df.columns else close
+    vol = df['Volume'] if 'Volume' in df.columns else pd.Series(0, index=df.index)
     
-    # Simple Moving Averages
-    df['SMA_10'] = df['Close_AAPL'].rolling(window=10).mean()
-    df['SMA_20'] = df['Close_AAPL'].rolling(window=20).mean()
-    df['SMA_50'] = df['Close_AAPL'].rolling(window=50).mean()
-    df['SMA_200'] = df['Close_AAPL'].rolling(window=200).mean()
+    # Moving Averages
+    sma10 = close.rolling(10).mean()
+    sma20 = close.rolling(20).mean()
+    sma50 = close.rolling(50).mean()
+    sma200 = close.rolling(200).mean()
+    ema10 = close.ewm(span=10, adjust=False).mean()
+    ema20 = close.ewm(span=20, adjust=False).mean()
     
-    # Exponential Moving Averages
-    df['EMA_10'] = df['Close_AAPL'].ewm(span=10, adjust=False).mean()
-    df['EMA_20'] = df['Close_AAPL'].ewm(span=20, adjust=False).mean()
-    df['EMA_50'] = df['Close_AAPL'].ewm(span=50, adjust=False).mean()
-    
-    # RSI (14-period)
-    delta = df['Close_AAPL'].diff()
+    # RSI (14)
+    delta = close.diff()
     gain = delta.where(delta > 0, 0.0)
     loss = (-delta).where(delta < 0, 0.0)
-    avg_gain = gain.rolling(window=14).mean()
-    avg_loss = loss.rolling(window=14).mean()
+    avg_gain = gain.rolling(14).mean()
+    avg_loss = loss.rolling(14).mean()
     rs = avg_gain / avg_loss.replace(0, np.nan)
-    df['RSI_14'] = 100 - (100 / (1 + rs))
-    df['RSI_14'] = df['RSI_14'].fillna(50)
+    rsi = 100 - (100 / (1 + rs))
+    rsi = rsi.fillna(50)
     
     # MACD
-    ema12 = df['Close_AAPL'].ewm(span=12, adjust=False).mean()
-    ema26 = df['Close_AAPL'].ewm(span=26, adjust=False).mean()
-    df['MACD'] = ema12 - ema26
-    df['MACD_Signal'] = df['MACD'].ewm(span=9, adjust=False).mean()
-    df['MACD_Histogram'] = df['MACD'] - df['MACD_Signal']
+    ema12 = close.ewm(span=12, adjust=False).mean()
+    ema26 = close.ewm(span=26, adjust=False).mean()
+    macd = ema12 - ema26
+    macd_signal = macd.ewm(span=9, adjust=False).mean()
+    macd_hist = macd - macd_signal
     
-    # Rate of Change (12-period)
-    df['ROC_12'] = df['Close_AAPL'].pct_change(periods=12) * 100
+    # ROC 12
+    roc12 = close.pct_change(12) * 100
     
-    # Bollinger Bands (20-period, 2 std devs)
-    df['BB_Middle'] = df['SMA_20']
-    bb_std = df['Close_AAPL'].rolling(window=20).std()
-    df['BB_Upper'] = df['BB_Middle'] + (bb_std * 2)
-    df['BB_Lower'] = df['BB_Middle'] - (bb_std * 2)
+    # Bollinger Bands
+    bb_std = close.rolling(20).std()
+    bb_upper = sma20 + bb_std * 2
+    bb_lower = sma20 - bb_std * 2
     
-    # ATR (14-period)
-    high_low = df['High_AAPL'] - df['Low_AAPL']
-    high_close = (df['High_AAPL'] - df['Close_AAPL'].shift()).abs()
-    low_close = (df['Low_AAPL'] - df['Close_AAPL'].shift()).abs()
+    # ATR (14)
+    high_low = high - low
+    high_close = (high - close.shift()).abs()
+    low_close = (low - close.shift()).abs()
     true_range = pd.concat([high_low, high_close, low_close], axis=1).max(axis=1)
-    df['ATR_14'] = true_range.rolling(window=14).mean()
+    atr14 = true_range.rolling(14).mean()
     
-    # Volatility (20-period)
-    df['Volatility_20'] = df['Close_AAPL'].pct_change().rolling(window=20).std() * np.sqrt(252) * 100
+    # Volatility (annualized)
+    daily_ret = close.pct_change()
+    vol20 = daily_ret.rolling(20).std() * np.sqrt(252) * 100
     
-    # Feature columns in exact training order (22 features matching the model)
-    feature_columns = [
-        'Close_AAPL', 'High_AAPL', 'Low_AAPL', 'Open_AAPL', 'Volume_AAPL',
-        'SMA_10', 'SMA_20', 'SMA_50', 'SMA_200',
-        'EMA_10', 'EMA_20', 'EMA_50',
-        'RSI_14', 'MACD', 'MACD_Signal', 'MACD_Histogram', 'ROC_12',
-        'BB_Upper', 'BB_Lower', 'BB_Middle', 'ATR_14', 'Volatility_20'
+    # Volume SMA for ratio
+    vol_sma20 = vol.rolling(20).mean()
+    
+    # --- Build all 30 engineered features ---
+    df['RSI_14'] = rsi
+    df['MACD_Histogram'] = macd_hist
+    df['ROC_12'] = roc12
+    df['Volatility_20'] = vol20
+    df['Intraday_Range'] = (high - low) / close
+    df['Open_Close_Ratio'] = opn / close
+    df['High_Close_Ratio'] = high / close
+    df['Low_Close_Ratio'] = low / close
+    df['Volume_Ratio'] = (vol / vol_sma20).replace([np.inf, -np.inf], 1.0).fillna(1.0)
+    df['Price_SMA10_Ratio'] = close / sma10
+    df['Price_SMA20_Ratio'] = close / sma20
+    df['Price_SMA50_Ratio'] = close / sma50
+    df['Price_SMA200_Ratio'] = close / sma200
+    df['EMA10_EMA20_Cross'] = (ema10 - ema20) / close
+    df['BB_Width'] = (bb_upper - bb_lower) / sma20
+    bb_range = bb_upper - bb_lower
+    df['BB_Position'] = ((close - bb_lower) / bb_range.replace(0, np.nan)).fillna(0.5)
+    df['ATR_Pct'] = atr14 / close
+    df['Return_1d'] = daily_ret
+    df['Return_5d'] = close.pct_change(5)
+    df['Return_10d'] = close.pct_change(10)
+    df['Return_20d'] = close.pct_change(20)
+    df['SMA10_SMA20_Cross'] = (sma10 - sma20) / sma20.replace(0, np.nan)
+    df['SMA50_SMA200_Cross'] = (sma50 - sma200) / sma200.replace(0, np.nan)
+    df['RSI_Change_5d'] = rsi - rsi.shift(5)
+    df['Volume_Change_5d'] = vol.pct_change(5).replace([np.inf, -np.inf], 0).fillna(0)
+    high_20 = high.rolling(20).max()
+    low_20 = low.rolling(20).min()
+    df['Price_vs_20d_High'] = close / high_20
+    df['Price_vs_20d_Low'] = close / low_20
+    vol_60_mean = vol20.rolling(60).mean()
+    df['Volatility_Ratio'] = (vol20 / vol_60_mean.replace(0, np.nan)).fillna(1.0)
+    df['MACD_Hist_Change'] = macd_hist.diff(5)
+    df['Pos_Days_5d'] = close.diff().gt(0).rolling(5).mean()
+    
+    # Also keep raw columns for market_data dict used by TradingRules
+    df['SMA_20'] = sma20
+    df['SMA_50'] = sma50
+    df['EMA_10'] = ema10
+    df['EMA_20'] = ema20
+    df['ATR_14'] = atr14
+    
+    # Determine feature columns from trained model or use default order
+    default_feature_cols = [
+        'RSI_14', 'MACD_Histogram', 'ROC_12', 'Volatility_20',
+        'Intraday_Range', 'Open_Close_Ratio', 'High_Close_Ratio', 'Low_Close_Ratio',
+        'Volume_Ratio', 'Price_SMA10_Ratio', 'Price_SMA20_Ratio', 'Price_SMA50_Ratio',
+        'Price_SMA200_Ratio', 'EMA10_EMA20_Cross', 'BB_Width', 'BB_Position',
+        'ATR_Pct', 'Return_1d', 'Return_5d', 'Return_10d', 'Return_20d',
+        'SMA10_SMA20_Cross', 'SMA50_SMA200_Cross', 'RSI_Change_5d',
+        'Volume_Change_5d', 'Price_vs_20d_High', 'Price_vs_20d_Low',
+        'Volatility_Ratio', 'MACD_Hist_Change', 'Pos_Days_5d'
     ]
     
-    # Get the latest complete row (no NaNs in critical features)
-    latest = df[feature_columns].dropna().iloc[-1:]
+    # Use per-symbol feature cols if the model is loaded
+    feature_cols = default_feature_cols
+    if symbol in trained_models and trained_models[symbol].get('feature_cols'):
+        feature_cols = trained_models[symbol]['feature_cols']
     
+    # Get the latest complete row
+    available = [c for c in feature_cols if c in df.columns]
+    if len(available) < len(feature_cols):
+        missing = set(feature_cols) - set(available)
+        for m in missing:
+            df[m] = 0.0
+    
+    latest = df[feature_cols].dropna()
     if latest.empty:
         return None, df
     
-    return latest.values, df
+    return latest.iloc[-1:].values, df
 
 
 # ============================================================================
@@ -1183,8 +1358,9 @@ def compute_features_from_yfinance(hist_df, symbol='AAPL'):
 # ============================================================================
 
 def auto_trade_cycle():
-    """Background thread: periodically checks for trade opportunities using ML model + TradingRules."""
-    global auto_trader_running, auto_trade_last_check, open_positions, auto_trade_log
+    """Background thread: periodically checks for trade opportunities using ML model + TradingRules.
+    Iterates all registered users and processes each user's portfolio independently."""
+    global auto_trade_last_check
     from prediction_engine import PredictionEngine
 
     # Wait for init to complete
@@ -1200,16 +1376,17 @@ def auto_trade_cycle():
         p.max_concurrent_positions = len(SUPPORTED_SYMBOLS)
         return p
 
-    def _get_symbol_strategy(sym):
+    def _get_symbol_strategy(sym, user_active_strategy):
         """Return the strategy key to use for this symbol."""
-        if active_strategy == 'AUTO':
+        if user_active_strategy == 'AUTO':
             return symbol_strategies.get(sym, 'BALANCED')
-        return active_strategy
+        return user_active_strategy
 
-    print(f"[AUTO-TRADE] Engine started (mode={active_strategy}) — checking every 60 seconds")
+    print(f"[AUTO-TRADE] Engine started — checking every 60 seconds")
 
     while True:
-        if not auto_trader_running:
+        # If no users registered yet, wait
+        if not user_portfolios:
             time.sleep(5)
             continue
 
@@ -1219,15 +1396,29 @@ def auto_trade_cycle():
             auto_trade_last_check = datetime.now().isoformat()
             now_str = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-            # Loop over all supported symbols
-            for symbol in SUPPORTED_SYMBOLS:
-              try:
+            # Snapshot the current set of users
+            with _user_portfolios_lock:
+                users_snapshot = list(user_portfolios.items())
+
+            for uid, ustate in users_snapshot:
+              if not ustate.get('auto_running', True):
+                  continue
+
+              open_positions = ustate['open_positions']
+              auto_trade_log = ustate['auto_trade_log']
+              user_tracker = ustate['tracker']
+              user_disabled = ustate['disabled_symbols']
+              user_active_strategy = ustate['active_strategy']
+
+              # Loop over all supported symbols
+              for symbol in SUPPORTED_SYMBOLS:
+               try:
                 # Skip symbols with auto-buy disabled
-                if symbol in auto_trade_disabled_symbols:
+                if symbol in user_disabled:
                     continue
 
                 # Determine strategy for this symbol
-                sym_strategy = _get_symbol_strategy(symbol)
+                sym_strategy = _get_symbol_strategy(symbol, user_active_strategy)
                 params = _build_params(sym_strategy)
                 trading_rules = TradingRules(params)
                 position_sizer = PositionSizingCalculator(params)
@@ -1241,23 +1432,60 @@ def auto_trade_cycle():
 
                 current_price = float(hist['Close'].iloc[-1])
 
-                # 2. Compute features and get ML prediction
-                #    ML model only works for AAPL; others use trend-based forecast
+                # 2. Compute features and get ML prediction (per-symbol)
                 forecast_price = None
                 features_df = None
 
-                if symbol == 'AAPL' and trained_model is not None and trained_scaler is not None:
-                    features, features_df = compute_features_from_yfinance(hist, symbol='AAPL')
+                sym_model = trained_models.get(symbol)
+                if sym_model is not None:
+                    features, features_df = compute_features_from_yfinance(hist, symbol=symbol)
                     if features is not None:
-                        features_scaled = trained_scaler.transform(features)
-                        forecast_price = float(trained_model.predict(features_scaled)[0])
+                        try:
+                            scaler = sym_model['scaler']
+                            X_sc = scaler.transform(features)
+                            # Ensemble return prediction
+                            ew = sym_model.get('ensemble_weights', {})
+                            lr_w = ew.get('lr', 0.5)
+                            rf_w = ew.get('rf', 0.5)
+                            pred_return = lr_w * sym_model['model_lr'].predict(X_sc)[0] + rf_w * sym_model['model_rf'].predict(X_sc)[0]
+                            # Direction classifier check
+                            gb_clf = sym_model.get('model_gb_clf')
+                            dir_clf = gb_clf if gb_clf is not None else sym_model.get('model_dir_clf')
+                            if dir_clf is not None:
+                                dir_proba = dir_clf.predict_proba(X_sc)[0]
+                                up_proba = dir_proba[1] if len(dir_proba) > 1 else 0.5
+                                # Only use ML forecast when direction classifier agrees with return sign
+                                if (pred_return > 0 and up_proba > 0.52) or (pred_return < 0 and up_proba < 0.48):
+                                    forecast_price = current_price * (1 + pred_return)
+                                # else: direction disagrees, fall through to trend fallback
+                            else:
+                                forecast_price = current_price * (1 + pred_return)
+                        except Exception as ml_err:
+                            logger.warning(f"[AUTO-TRADE] ML prediction error for {symbol}: {ml_err}")
 
                 if forecast_price is None:
-                    # Trend-based fallback for non-AAPL symbols or if ML unavailable
-                    recent_prices = hist['Close'].tail(10).tolist()
-                    if len(recent_prices) >= 2:
-                        trend = (recent_prices[-1] - recent_prices[0]) / recent_prices[0]
-                        forecast_price = current_price * (1 + trend * 0.3)
+                    # Improved trend-based fallback:
+                    # Only project upward when in a confirmed uptrend (SMA20 > SMA50)
+                    # and not overbought, with conservative ATR-based projection
+                    if features_df is None:
+                        _, features_df = compute_features_from_yfinance(hist, symbol=symbol)
+                    last_row = features_df.dropna().iloc[-1] if not features_df.dropna().empty else None
+                    if last_row is not None:
+                        sma20_val = float(last_row.get('SMA_20', current_price))
+                        sma50_val = float(last_row.get('SMA_50', current_price))
+                        rsi_val = float(last_row.get('RSI_14', 50))
+                        atr_val = float(last_row.get('ATR_14', current_price * 0.02))
+                        atr_pct = atr_val / current_price
+                        
+                        if sma20_val > sma50_val and rsi_val < 65:
+                            # Uptrend + not overbought: conservative bullish projection
+                            forecast_price = current_price * (1 + atr_pct * 0.5)
+                        elif sma20_val < sma50_val and rsi_val > 35:
+                            # Downtrend + not oversold: bearish projection
+                            forecast_price = current_price * (1 - atr_pct * 0.5)
+                        else:
+                            # Neutral/conflicting: flat projection
+                            forecast_price = current_price
                     else:
                         forecast_price = current_price
 
@@ -1266,7 +1494,7 @@ def auto_trade_cycle():
                     _, features_df = compute_features_from_yfinance(hist, symbol=symbol)
 
                 # Update market price for position valuation
-                portfolio_tracker.portfolio.update_market_price(symbol, current_price)
+                user_tracker.portfolio.update_market_price(symbol, current_price)
 
                 # 3. Build market_data dict for TradingRules
                 last_row = features_df.dropna().iloc[-1]
@@ -1274,6 +1502,7 @@ def auto_trade_cycle():
                     'RSI_14': float(last_row.get('RSI_14', 50)),
                     'Close': current_price,
                     'SMA_20': float(last_row.get('SMA_20', current_price)),
+                    'SMA_50': float(last_row.get('SMA_50', current_price)),
                     'EMA_10': float(last_row.get('EMA_10', current_price)),
                     'EMA_20': float(last_row.get('EMA_20', current_price)),
                 }
@@ -1297,13 +1526,24 @@ def auto_trade_cycle():
 
                 print(f"[AUTO-TRADE] {symbol} [{sym_strategy}] | Signal: {pe_signal} | Forecast: ${forecast_price:.2f} vs Current: ${current_price:.2f}")
 
-                # 5. Check open positions for this symbol for stop-loss / take-profit exits
+                # 5. Check open positions for this symbol for stop-loss / take-profit / trailing-stop exits
                 positions_to_close = []
                 for tid, trade in list(open_positions.items()):
                     if trade.symbol != symbol:
                         continue
                     sl = trade.stop_loss or (trade.entry_price * (1 - params.stop_loss_percent))
                     tp = trade.take_profit or (trade.entry_price * (1 + params.take_profit_target))
+
+                    # Trailing stop: once 2%+ in profit, trail at 1.5% below highest price
+                    unrealized_pct = (current_price - trade.entry_price) / trade.entry_price
+                    if unrealized_pct >= 0.02:
+                        # Track highest price in trade metadata (stored on trade object)
+                        highest = getattr(trade, '_highest_price', trade.entry_price)
+                        highest = max(highest, current_price)
+                        trade._highest_price = highest
+                        trailing_sl = highest * (1 - params.trailing_stop_percent)
+                        if trailing_sl > sl:
+                            sl = trailing_sl  # raise stop to trailing level
 
                     if current_price <= sl:
                         positions_to_close.append((tid, 'STOP-LOSS', sl))
@@ -1312,7 +1552,7 @@ def auto_trade_cycle():
 
                 for tid, reason, trigger_price in positions_to_close:
                     trade = open_positions[tid]
-                    portfolio_tracker.close_trade(tid, current_price, datetime.now().isoformat())
+                    user_tracker.close_trade(tid, current_price, datetime.now().isoformat())
                     pnl = (current_price - trade.entry_price) * trade.quantity
                     pnl_pct = ((current_price - trade.entry_price) / trade.entry_price) * 100
                     del open_positions[tid]
@@ -1327,74 +1567,71 @@ def auto_trade_cycle():
                         'reason': f'{reason} triggered at ${trigger_price:.2f}'
                     }
                     auto_trade_log.append(log_entry)
-                    print(f"[AUTO-TRADE] {reason} SELL {trade.quantity} {symbol} @ ${current_price:.2f} | PnL: ${pnl:.2f} ({pnl_pct:+.2f}%)")
+                    print(f"[AUTO-TRADE] User {uid}: {reason} SELL {trade.quantity} {symbol} @ ${current_price:.2f} | PnL: ${pnl:.2f} ({pnl_pct:+.2f}%)")
 
                 if positions_to_close:
-                    save_auto_state()
+                    save_user_auto_state(uid)
 
-                # 6. Check for sell signal on open positions for this symbol (only when BEARISH)
+                # 6. Check for sell signal on open positions (only when BEARISH + TradingRules agrees)
                 symbol_positions = {tid: t for tid, t in open_positions.items() if t.symbol == symbol}
                 if symbol_positions and pe_signal == 'BEARISH':
                     sell_signal, sell_conf, sell_reason = trading_rules.get_sell_signal(
                         forecast_price, current_price, market_data, daily_volatility
                     )
 
-                    # Fallback: trust PE BEARISH signal even when get_sell_signal confidence is low
-                    if not sell_signal:
-                        sell_signal = True
-                        sell_conf = max(sell_conf, 0.5)
-                        depreciation = (current_price - forecast_price) / current_price
-                        if depreciation > params.sell_threshold:
-                            sell_reason = f"Trend model: {depreciation:.2%} decline with partial confirmation"
-                        else:
-                            sell_reason = f"PredictionEngine BEARISH signal (RSI/MACD/BB reversal)"
-
+                    # NO BYPASS — only trade when TradingRules confirms the signal
                     if sell_signal and sell_conf >= params.confidence_threshold:
-                        # Close oldest open position for this symbol
+                        # Enforce minimum hold period before signal-based exits
                         oldest_tid = next(iter(symbol_positions))
                         trade = open_positions[oldest_tid]
-                        portfolio_tracker.close_trade(oldest_tid, current_price, datetime.now().isoformat())
-                        pnl = (current_price - trade.entry_price) * trade.quantity
-                        pnl_pct = ((current_price - trade.entry_price) / trade.entry_price) * 100
-                        del open_positions[oldest_tid]
+                        try:
+                            entry_dt = datetime.fromisoformat(trade.date)
+                            days_held = (datetime.now() - entry_dt).days
+                        except (ValueError, TypeError):
+                            days_held = 999  # if date parsing fails, allow sell
+                        
+                        if days_held >= params.minimum_hold_days:
+                            user_tracker.close_trade(oldest_tid, current_price, datetime.now().isoformat())
+                            pnl = (current_price - trade.entry_price) * trade.quantity
+                            pnl_pct = ((current_price - trade.entry_price) / trade.entry_price) * 100
+                            del open_positions[oldest_tid]
 
-                        log_entry = {
-                            'time': now_str,
-                            'action': 'SELL (SIGNAL)',
-                            'symbol': symbol,
-                            'price': round(current_price, 2),
-                            'shares': trade.quantity,
-                            'pnl': round(pnl, 2),
-                            'reason': sell_reason
-                        }
-                        auto_trade_log.append(log_entry)
-                        print(f"[AUTO-TRADE] SIGNAL SELL {trade.quantity} {symbol} @ ${current_price:.2f} | PnL: ${pnl:.2f} ({pnl_pct:+.2f}%) | {sell_reason}")
-                        save_auto_state()
+                            log_entry = {
+                                'time': now_str,
+                                'action': 'SELL (SIGNAL)',
+                                'symbol': symbol,
+                                'price': round(current_price, 2),
+                                'shares': trade.quantity,
+                                'pnl': round(pnl, 2),
+                                'reason': sell_reason
+                            }
+                            auto_trade_log.append(log_entry)
+                            print(f"[AUTO-TRADE] User {uid}: SIGNAL SELL {trade.quantity} {symbol} @ ${current_price:.2f} | PnL: ${pnl:.2f} ({pnl_pct:+.2f}%) | {sell_reason}")
+                            save_user_auto_state(uid)
+                        else:
+                            print(f"[AUTO-TRADE] User {uid}: {symbol} sell signal but hold period not met ({days_held}/{params.minimum_hold_days} days)")
 
-                # 7. Check for buy signal (only when BULLISH and room for more positions)
+                # 7. Check for buy signal (only when BULLISH AND TradingRules agrees)
                 # Per-symbol limit: only 1 open position per symbol at a time
                 symbol_open = {tid: t for tid, t in open_positions.items() if t.symbol == symbol}
                 has_symbol_position = len(symbol_open) > 0
 
-                if pe_signal == 'BULLISH' and not has_symbol_position and len(open_positions) < params.max_concurrent_positions:
+                # Portfolio circuit breaker: pause trading if portfolio dropped too much
+                summary = user_tracker.get_portfolio_summary()
+                portfolio_value = summary.get('current_balance', cfg.INITIAL_CAPITAL)
+                portfolio_loss_pct = (portfolio_value - cfg.INITIAL_CAPITAL) / cfg.INITIAL_CAPITAL
+                circuit_breaker_tripped = portfolio_loss_pct <= params.portfolio_max_loss_percent
+
+                if circuit_breaker_tripped:
+                    print(f"[AUTO-TRADE] User {uid}: CIRCUIT BREAKER — portfolio at ${portfolio_value:.0f} ({portfolio_loss_pct:+.1%}), pausing buys")
+                elif pe_signal == 'BULLISH' and not has_symbol_position and len(open_positions) < params.max_concurrent_positions:
                     buy_signal, buy_conf, buy_reason = trading_rules.get_buy_signal(
                         forecast_price, current_price, market_data, daily_volatility
                     )
 
-                    appreciation = (forecast_price - current_price) / current_price
-                    # Fallback: trust PE BULLISH signal even when get_buy_signal confidence is low
-                    if not buy_signal:
-                        buy_signal = True
-                        buy_conf = max(buy_conf, 0.5)
-                        if appreciation > params.buy_threshold:
-                            buy_reason = f"{'ML model' if symbol == 'AAPL' else 'Trend model'}: +{appreciation:.2%} with partial confirmation"
-                        else:
-                            buy_reason = f"PredictionEngine BULLISH signal (RSI/MACD/BB momentum)"
-
+                    # NO BYPASS — only trade when TradingRules confirms the signal
                     if buy_signal and buy_conf >= params.confidence_threshold:
-                        summary = portfolio_tracker.get_portfolio_summary()
-                        portfolio_value = summary.get('current_balance', cfg.INITIAL_CAPITAL)
-                        available_cash = portfolio_tracker.portfolio.cash
+                        available_cash = user_tracker.portfolio.cash
 
                         shares = position_sizer.calculate_position_size(
                             current_price, portfolio_value, available_cash
@@ -1402,7 +1639,11 @@ def auto_trade_cycle():
 
                         if shares > 0 and (shares * current_price) <= available_cash:
                             trade_id = f"AUTO-{uuid.uuid4().hex[:8].upper()}"
-                            stop_loss = round(current_price * (1 - params.stop_loss_percent), 2)
+                            # ATR-based stop loss: use wider of ATR-based and percentage-based
+                            pct_sl = round(current_price * (1 - params.stop_loss_percent), 2)
+                            atr_val = float(features_df.dropna()['ATR_14'].iloc[-1]) if features_df is not None and 'ATR_14' in features_df.columns and not features_df.dropna().empty else current_price * params.stop_loss_percent
+                            atr_sl = round(current_price - 2 * atr_val, 2)
+                            stop_loss = min(pct_sl, atr_sl)  # wider stop = lower price = safer
                             take_profit = round(current_price * (1 + params.take_profit_target), 2)
 
                             new_trade = Trade(
@@ -1414,8 +1655,9 @@ def auto_trade_cycle():
                                 entry_price=current_price,
                                 stop_loss=stop_loss,
                                 take_profit=take_profit,
+                                user_id=uid,
                             )
-                            portfolio_tracker.add_trade(new_trade)
+                            user_tracker.add_trade(new_trade)
                             open_positions[trade_id] = new_trade
 
                             log_entry = {
@@ -1428,26 +1670,26 @@ def auto_trade_cycle():
                                 'reason': buy_reason
                             }
                             auto_trade_log.append(log_entry)
-                            print(f"[AUTO-TRADE] BUY {shares} {symbol} @ ${current_price:.2f} | SL: ${stop_loss} | TP: ${take_profit} | {buy_reason}")
-                            save_auto_state()
+                            print(f"[AUTO-TRADE] User {uid}: BUY {shares} {symbol} @ ${current_price:.2f} | SL: ${stop_loss} | TP: ${take_profit} | {buy_reason}")
+                            save_user_auto_state(uid)
                         else:
-                            print(f"[AUTO-TRADE] {symbol} buy signal but insufficient cash (need ${shares * current_price:.0f}, have ${available_cash:.0f})")
+                            print(f"[AUTO-TRADE] User {uid}: {symbol} buy signal but insufficient cash (need ${shares * current_price:.0f}, have ${available_cash:.0f})")
                     else:
                         appreciation = (forecast_price - current_price) / current_price
-                        print(f"[AUTO-TRADE] {symbol} no buy signal | Forecast: ${forecast_price:.2f} ({appreciation:+.2%}) | {buy_reason}")
+                        print(f"[AUTO-TRADE] User {uid}: {symbol} no confirmed buy signal | PE: BULLISH | TradingRules: {'YES' if buy_signal else 'NO'} conf={buy_conf:.2f} | Forecast: ${forecast_price:.2f} ({appreciation:+.2%})")
                 elif pe_signal == 'BULLISH' and has_symbol_position:
-                    print(f"[AUTO-TRADE] {symbol} BULLISH but already has an open position — skipping")
+                    print(f"[AUTO-TRADE] User {uid}: {symbol} BULLISH but already has an open position — skipping")
                 elif pe_signal == 'NEUTRAL':
-                    print(f"[AUTO-TRADE] {symbol} signal is NEUTRAL — no trade action")
+                    print(f"[AUTO-TRADE] User {uid}: {symbol} signal is NEUTRAL — no trade action")
                 elif len(open_positions) >= params.max_concurrent_positions:
-                    print(f"[AUTO-TRADE] Max positions reached ({len(open_positions)}/{params.max_concurrent_positions}), skipping {symbol}")
+                    print(f"[AUTO-TRADE] User {uid}: Max positions reached ({len(open_positions)}/{params.max_concurrent_positions}), skipping {symbol}")
 
-              except Exception as sym_err:
-                print(f"[AUTO-TRADE] Error processing {symbol}: {sym_err}")
+               except Exception as sym_err:
+                print(f"[AUTO-TRADE] User {uid}: Error processing {symbol}: {sym_err}")
 
-            # Keep log trimmed
-            if len(auto_trade_log) > 200:
-                auto_trade_log = auto_trade_log[-200:]
+              # Keep log trimmed per-user
+              if len(auto_trade_log) > 200:
+                  ustate['auto_trade_log'] = auto_trade_log[-200:]
 
         except Exception as e:
             print(f"[AUTO-TRADE] Error in cycle: {e}")
@@ -1581,24 +1823,37 @@ def get_next_day_prediction():
         current_price = float(hist['Close'].iloc[-1])
         previous_close = float(hist['Close'].iloc[-2]) if len(hist) > 1 else current_price
         
-        # --- ML Model Prediction (only available for AAPL - our trained model) ---
+        # --- ML Model Prediction (per-symbol with trained models) ---
         forecast_price = None
         confidence_level = None
+        model_name = 'trend-based'
         
-        if symbol == 'AAPL' and trained_model is not None and trained_scaler is not None:
-            features, features_df = compute_features_from_yfinance(hist, symbol='AAPL')
+        sym_model = trained_models.get(symbol)
+        if sym_model is not None:
+            features, features_df = compute_features_from_yfinance(hist, symbol=symbol)
             
             if features is not None:
-                # Scale features with the trained scaler and predict
-                features_scaled = trained_scaler.transform(features)
-                forecast_price = float(trained_model.predict(features_scaled)[0])
-                
-                # Confidence: start from model R² (93%), adjust by recent volatility
-                recent_returns = hist['Close'].pct_change().dropna().tail(20)
-                volatility = float(recent_returns.std()) * np.sqrt(252)  # annualized
-                # Higher volatility reduces confidence; base R²=0.93
-                vol_penalty = min(volatility * 30, 25)  # cap penalty at 25%
-                confidence_level = int(max(50, min(95, 93 - vol_penalty)))
+                try:
+                    scaler = sym_model['scaler']
+                    X_sc = scaler.transform(features)
+                    ew = sym_model.get('ensemble_weights', {})
+                    lr_w = ew.get('lr', 0.5)
+                    rf_w = ew.get('rf', 0.5)
+                    pred_return = lr_w * sym_model['model_lr'].predict(X_sc)[0] + rf_w * sym_model['model_rf'].predict(X_sc)[0]
+                    forecast_price = current_price * (1 + pred_return)
+                    model_name = 'ML Ensemble (LR+RF+GB)'
+                    
+                    # Confidence from direction classifier
+                    gb_clf = sym_model.get('model_gb_clf')
+                    dir_clf = gb_clf if gb_clf is not None else sym_model.get('model_dir_clf')
+                    if dir_clf is not None:
+                        dir_proba = dir_clf.predict_proba(X_sc)[0]
+                        up_proba = dir_proba[1] if len(dir_proba) > 1 else 0.5
+                        confidence_level = int(max(50, min(85, up_proba * 100)))
+                    else:
+                        confidence_level = 60
+                except Exception as ml_err:
+                    logger.warning(f"ML prediction error for {symbol}: {ml_err}")
         
         # --- Fallback: trend-based prediction if model unavailable ---
         if forecast_price is None:
@@ -1636,7 +1891,7 @@ def get_next_day_prediction():
             'confidence_level': confidence_level,
             'signal': signal,
             'symbol': symbol,
-            'model': 'Linear Regression' if (symbol == 'AAPL' and trained_model is not None) else 'trend-based',
+            'model': model_name,
             'data_source': 'yahoo_finance'
         })
     
@@ -1693,30 +1948,49 @@ def _csv_fallback_prediction():
 
 
 # Initialize on app startup
-portfolio_tracker, streaming_service, alert_system, notification_service = None, None, None, None
+streaming_service, alert_system, notification_service = None, None, None
+_app_initialized = False
 
 def init_app():
     """Initialize on app startup"""
-    global portfolio_tracker, streaming_service, alert_system, notification_service
-    global trained_model, trained_scaler
-    if portfolio_tracker is None:
+    global streaming_service, alert_system, notification_service, _app_initialized
+    global trained_models
+    # Initialize auth database
+    init_auth_db()
+    if not _app_initialized:
+        _app_initialized = True
         initialize_portfolio()
         
-        # Load trained ML model and scaler for predictions
-        model_dir = os.path.join(os.path.dirname(__file__), 'trained_models')
-        try:
-            model_path = os.path.join(model_dir, 'model_Linear_Regression.pkl')
-            scaler_path = os.path.join(model_dir, 'scaler.pkl')
-            with open(model_path, 'rb') as f:
-                trained_model = pickle.load(f)
-            with open(scaler_path, 'rb') as f:
-                trained_scaler = pickle.load(f)
-            print(f"[OK] ML Model: Linear Regression loaded from {model_path}")
-            print(f"[OK] Scaler: StandardScaler loaded from {scaler_path}")
-        except Exception as e:
-            trained_model = None
-            trained_scaler = None
-            print(f"[WARN] Could not load ML model: {e}")
+        # Load trained ML models per-symbol from trained_models/{SYMBOL}/ dirs
+        model_base = os.path.join(os.path.dirname(__file__), 'trained_models')
+        for symbol in SUPPORTED_SYMBOLS:
+            sym_dir = os.path.join(model_base, symbol)
+            if not os.path.isdir(sym_dir):
+                continue
+            try:
+                artefacts = {}
+                for name in ('model_lr', 'model_rf', 'model_dir_clf', 'scaler'):
+                    with open(os.path.join(sym_dir, f'{name}.pkl'), 'rb') as f:
+                        artefacts[name] = pickle.load(f)
+                gb_path = os.path.join(sym_dir, 'model_gb_clf.pkl')
+                if os.path.exists(gb_path):
+                    with open(gb_path, 'rb') as f:
+                        artefacts['model_gb_clf'] = pickle.load(f)
+                report_path = os.path.join(sym_dir, 'training_report.json')
+                if os.path.exists(report_path):
+                    with open(report_path, 'r') as f:
+                        report = json.load(f)
+                    artefacts['feature_cols'] = report.get('feature_cols', [])
+                    artefacts['ensemble_weights'] = report.get('ensemble_weights', {})
+                else:
+                    artefacts['feature_cols'] = []
+                    artefacts['ensemble_weights'] = {}
+                trained_models[symbol] = artefacts
+                print(f"[OK] ML Model loaded for {symbol}: LR + RF + GB classifier")
+            except Exception as e:
+                print(f"[WARN] Could not load ML model for {symbol}: {e}")
+        
+        print(f"[OK] ML Models loaded: {len(trained_models)}/{len(SUPPORTED_SYMBOLS)} symbols")
         
         print("\n" + "="*70)
         print("TASK 5.5: REAL-TIME UPDATES AND ALERTS - INITIALIZED")
@@ -1724,7 +1998,7 @@ def init_app():
         print(f"[OK] Streaming Service: {'ACTIVE' if streaming_service.is_running else 'INACTIVE'}")
         print(f"[OK] Alert System: READY ({len(alert_system.rules)} rules)")
         print(f"[OK] Notification Service: READY")
-        print(f"[OK] ML Prediction: {'ACTIVE (Linear Regression)' if trained_model else 'FALLBACK (trend-based)'}")
+        print(f"[OK] ML Prediction: {len(trained_models)} symbol models loaded")
         print("="*70 + "\n")
         
         # Start auto-trading engine
@@ -1740,11 +2014,15 @@ def init_app():
 # ============================================================================
 
 @app.route('/api/auto-trade/status', methods=['GET'])
+@login_required
 def get_auto_trade_status():
     """Get current auto-trading engine status"""
+    ctx = _user_state(session['user_id'])
+    open_positions = ctx['open_positions']
+    auto_trade_log = ctx['auto_trade_log']
     return jsonify({
-        'enabled': auto_trader_running,
-        'active_strategy': active_strategy,
+        'enabled': ctx['auto_running'],
+        'active_strategy': ctx['active_strategy'],
         'symbol_strategies': symbol_strategies,
         'last_check': auto_trade_last_check,
         'open_positions': len(open_positions),
@@ -1764,54 +2042,60 @@ def get_auto_trade_status():
     })
 
 @app.route('/api/auto-trade/toggle', methods=['POST'])
+@login_required
 def toggle_auto_trade():
-    """Enable or disable auto-trading"""
-    global auto_trader_running
+    """Enable or disable auto-trading for the current user"""
+    ctx = _user_state(session['user_id'])
     data = request.get_json(silent=True) or {}
     if 'enabled' in data:
-        auto_trader_running = bool(data['enabled'])
+        ctx['auto_running'] = bool(data['enabled'])
     else:
-        auto_trader_running = not auto_trader_running
+        ctx['auto_running'] = not ctx['auto_running']
     
-    status = 'enabled' if auto_trader_running else 'disabled'
-    print(f"[AUTO-TRADE] Trading {status} via API")
+    status = 'enabled' if ctx['auto_running'] else 'disabled'
+    print(f"[AUTO-TRADE] User {session['user_id']}: Trading {status} via API")
+    save_user_auto_state(session['user_id'])
     return jsonify({
-        'enabled': auto_trader_running,
+        'enabled': ctx['auto_running'],
         'message': f'Auto-trading {status}'
     })
 
 
 @app.route('/api/auto-trade/strategy', methods=['GET'])
+@login_required
 def get_active_strategy():
     """Get the current active trading strategy"""
+    ctx = _user_state(session['user_id'])
     return jsonify({
-        'active_strategy': active_strategy,
+        'active_strategy': ctx['active_strategy'],
         'symbol_strategies': symbol_strategies,
         'available': ['AUTO'] + list(STRATEGIES.keys()),
     })
 
 @app.route('/api/auto-trade/strategy', methods=['POST'])
+@login_required
 def set_active_strategy():
     """Set the active trading strategy (AUTO or a specific one)"""
-    global active_strategy
+    ctx = _user_state(session['user_id'])
     data = request.get_json(silent=True) or {}
     strategy = data.get('strategy', '').upper()
     valid = {'AUTO'} | set(STRATEGIES.keys())
     if strategy not in valid:
         return jsonify({'error': f'Unknown strategy: {strategy}. Choose from: {sorted(valid)}'}), 400
-    active_strategy = strategy
+    ctx['active_strategy'] = strategy
     if strategy == 'AUTO' and not symbol_strategies:
         auto_select_strategies()
-    save_auto_state()
-    print(f"[AUTO-TRADE] Strategy changed to {active_strategy} via API")
+    save_user_auto_state(session['user_id'])
+    print(f"[AUTO-TRADE] User {session['user_id']}: Strategy changed to {ctx['active_strategy']} via API")
     label = 'Auto (best per stock)' if strategy == 'AUTO' else STRATEGIES[strategy]['name']
     return jsonify({
-        'active_strategy': active_strategy,
+        'active_strategy': ctx['active_strategy'],
         'symbol_strategies': symbol_strategies,
         'message': f'Strategy set to {label}'
     })
 
 @app.route('/api/auto-trade/symbol-strategy', methods=['POST'])
+@login_required
 def set_symbol_strategy():
     """Set the trading strategy for a specific symbol"""
     global symbol_strategies
@@ -1823,7 +2107,7 @@ def set_symbol_strategy():
     if strategy not in STRATEGIES:
         return jsonify({'error': f'Unknown strategy: {strategy}'}), 400
     symbol_strategies[symbol] = strategy
-    save_auto_state()
+    save_user_auto_state(session['user_id'])
     print(f"[AUTO-TRADE] {symbol} strategy set to {strategy} via API")
     return jsonify({
         'symbol': symbol,
@@ -1832,9 +2116,10 @@ def set_symbol_strategy():
     })
 
 @app.route('/api/auto-trade/symbol-toggle', methods=['POST'])
+@login_required
 def toggle_symbol_auto_trade():
     """Enable or disable auto-trading for a specific symbol"""
-    global auto_trade_disabled_symbols
+    ctx = _user_state(session['user_id'])
     data = request.get_json(silent=True) or {}
     symbol = data.get('symbol', '').upper()
     if symbol not in SUPPORTED_SYMBOLS:
@@ -1842,39 +2127,41 @@ def toggle_symbol_auto_trade():
 
     if 'enabled' in data:
         if data['enabled']:
-            auto_trade_disabled_symbols.discard(symbol)
+            ctx['disabled_symbols'].discard(symbol)
         else:
-            auto_trade_disabled_symbols.add(symbol)
+            ctx['disabled_symbols'].add(symbol)
     else:
         # toggle
-        if symbol in auto_trade_disabled_symbols:
-            auto_trade_disabled_symbols.discard(symbol)
+        if symbol in ctx['disabled_symbols']:
+            ctx['disabled_symbols'].discard(symbol)
         else:
-            auto_trade_disabled_symbols.add(symbol)
+            ctx['disabled_symbols'].add(symbol)
 
-    enabled = symbol not in auto_trade_disabled_symbols
-    save_auto_state()
-    print(f"[AUTO-TRADE] {symbol} auto-buy {'enabled' if enabled else 'disabled'} via API")
+    enabled = symbol not in ctx['disabled_symbols']
+    save_user_auto_state(session['user_id'])
+    print(f"[AUTO-TRADE] User {session['user_id']}: {symbol} auto-buy {'enabled' if enabled else 'disabled'} via API")
     return jsonify({
         'symbol': symbol,
         'enabled': enabled,
-        'disabled_symbols': list(auto_trade_disabled_symbols)
+        'disabled_symbols': list(ctx['disabled_symbols'])
     })
 
 
 @app.route('/api/auto-trade/symbol-status', methods=['GET'])
+@login_required
 def get_symbol_auto_trade_status():
     """Get per-symbol auto-trade enabled/disabled status"""
+    ctx = _user_state(session['user_id'])
     return jsonify({
-        'symbols': {sym: sym not in auto_trade_disabled_symbols for sym in SUPPORTED_SYMBOLS},
-        'disabled_symbols': list(auto_trade_disabled_symbols)
+        'symbols': {sym: sym not in ctx['disabled_symbols'] for sym in SUPPORTED_SYMBOLS},
+        'disabled_symbols': list(ctx['disabled_symbols'])
     })
 
 
-@app.route('/', methods=['GET'])
 @app.route('/dashboard', methods=['GET'])
+@login_required
 def dashboard():
-    """Serve the dashboard HTML"""
+    """Serve the dashboard HTML (protected)."""
     try:
         html_path = os.path.join(os.path.dirname(__file__), 'templates', 'dashboard_trade_history.html')
         return send_file(html_path)
@@ -1887,7 +2174,7 @@ def health():
     return jsonify({
         'status': 'healthy',
         'timestamp': datetime.now().isoformat(),
-        'portfolio_initialized': portfolio_tracker is not None
+        'portfolio_initialized': _app_initialized
     })
 
 # ============================================================================

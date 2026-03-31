@@ -37,12 +37,12 @@ class StrategyFactory:
             # Entry/Exit Thresholds - MORE AGGRESSIVE
             buy_threshold=0.015,  # 1.5% (vs default 2%)
             sell_threshold=0.015,  # 1.5% (vs default 2%)
-            take_profit_target=0.045,  # 4.5% (3:1 reward:risk ratio)
-            stop_loss_percent=0.015,  # 1.5% tight stops for quick exits
+            take_profit_target=0.06,  # 6% (2:1 reward:risk ratio)
+            stop_loss_percent=0.03,  # 3% wider stops for volatility tolerance
             
-            # Position Sizing - LARGER POSITIONS
-            risk_percentage=0.025,  # 2.5% per trade
-            max_position_value_percent=0.20,  # 20% per position
+            # Position Sizing - MODERATE POSITIONS
+            risk_percentage=0.02,  # 2% per trade (reduced from 2.5%)
+            max_position_value_percent=0.10,  # 10% per position (reduced from 20%)
             max_cash_allocation_percent=0.35,  # Keep 35% cash
             min_position_size=10,
             
@@ -81,12 +81,12 @@ class StrategyFactory:
             # Entry/Exit Thresholds - MORE SELECTIVE
             buy_threshold=0.03,  # 3% (vs default 2%)
             sell_threshold=0.03,  # 3% (vs default 2%)
-            take_profit_target=0.06,  # 6% (3:1 reward:risk ratio)
-            stop_loss_percent=0.02,  # 2% tight risk control
+            take_profit_target=0.06,  # 6% (2:1 reward:risk ratio)
+            stop_loss_percent=0.03,  # 3% wider stops for volatility tolerance
             
             # Position Sizing - SMALLER POSITIONS
             risk_percentage=0.01,  # 1% per trade (vs default 2%)
-            max_position_value_percent=0.10,  # 10% per position
+            max_position_value_percent=0.08,  # 8% per position (reduced from 10%)
             max_cash_allocation_percent=0.65,  # Keep 65% cash
             min_position_size=10,
             
@@ -125,12 +125,12 @@ class StrategyFactory:
             # Entry/Exit Thresholds - DEFAULT
             buy_threshold=0.02,  # 2% (default)
             sell_threshold=0.02,  # 2% (default)
-            take_profit_target=0.05,  # 5% (2.5:1 reward:risk)
-            stop_loss_percent=0.02,  # 2% controlled risk
+            take_profit_target=0.07,  # 7% (2:1 reward:risk)
+            stop_loss_percent=0.035,  # 3.5% wider stops for volatility tolerance
             
             # Position Sizing - STANDARD
             risk_percentage=0.02,  # 2% per trade (default)
-            max_position_value_percent=0.15,  # 15% per position (default)
+            max_position_value_percent=0.10,  # 10% per position (reduced from 15%)
             max_cash_allocation_percent=0.50,  # Keep 50% cash (default)
             min_position_size=10,
             

@@ -26,9 +26,15 @@ Desktop.ini
 # Environment secrets
 .env
 
-# Trained model binaries (large files)
-trained_models/**/*.pkl
+# Runtime databases
+data/users.db
 
 # Runtime state (regenerated)
 results/live_auto_state.json
 results/live_trades.json
+results/user_*_trades.json
+results/user_*_auto_state.json
+
+# Dissertation text (not source code)
+*.txt
+!requirements.txt

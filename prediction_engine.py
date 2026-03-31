@@ -197,16 +197,20 @@ class PredictionEngine:
                 if not in_uptrend:
                     # Downtrend → degrade to NEUTRAL (avoid catching falling knives)
                     return 'NEUTRAL', 0.3
-                confirmation = tech_bullish >= 1  # at least 1 tech agrees
-                conf = ml_confidence if confirmation else ml_confidence * 0.8
+                confirmation = tech_bullish >= 2  # require 2/3 tech agreement
+                if not confirmation:
+                    return 'NEUTRAL', 0.35  # insufficient confirmation
+                conf = ml_confidence
                 return 'BULLISH', min(conf, 1.0)
 
             elif ml_signal == 'BEARISH':
                 if in_uptrend:
                     # Strong uptrend → degrade bearish to NEUTRAL
                     return 'NEUTRAL', 0.3
-                confirmation = tech_bearish >= 1
-                conf = ml_confidence if confirmation else ml_confidence * 0.8
+                confirmation = tech_bearish >= 2  # require 2/3 tech agreement
+                if not confirmation:
+                    return 'NEUTRAL', 0.35  # insufficient confirmation
+                conf = ml_confidence
                 return 'BEARISH', min(conf, 1.0)
 
             else:
@@ -217,10 +221,11 @@ class PredictionEngine:
         bearish_count = tech_signals.count('BEARISH')
         avg_str = float(np.mean(tech_strengths))
 
-        if bullish_count > bearish_count and in_uptrend:
-            return 'BULLISH', min(avg_str * 0.7, 0.65)
-        elif bearish_count > bullish_count:
-            return 'BEARISH', min(avg_str * 0.7, 0.65)
+        # Require 2/3 technical indicators to agree for a signal
+        if bullish_count >= 2 and in_uptrend:
+            return 'BULLISH', min(avg_str * 0.7, 0.60)
+        elif bearish_count >= 2:
+            return 'BEARISH', min(avg_str * 0.7, 0.60)
         return 'NEUTRAL', 0.3
 
     # ------------------------------------------------------------------

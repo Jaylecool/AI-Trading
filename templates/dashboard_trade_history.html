@@ -1793,6 +1793,34 @@
             color: var(--text-muted);
             opacity: 0.6;
         }
+
+        /* ===== User Menu ===== */
+        .user-menu {
+            display: flex; align-items: center; gap: 0.75rem;
+            margin-left: 1.5rem;
+        }
+        .user-avatar {
+            width: 36px; height: 36px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-blue), #00C6FF);
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 0.85rem; color: #fff;
+        }
+        .user-name {
+            font-size: 0.9rem; font-weight: 600; color: var(--text-primary);
+            max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+        }
+        .btn-logout {
+            background: none; border: 1px solid var(--border-color);
+            color: var(--text-secondary); padding: 0.4rem 0.9rem;
+            border-radius: 8px; font-size: 0.85rem; cursor: pointer;
+            transition: all 0.2s; display: flex; align-items: center; gap: 0.4rem;
+        }
+        .btn-logout:hover {
+            border-color: var(--accent-red); color: var(--accent-red);
+        }
+        @media (max-width: 768px) {
+            .user-name { display: none; }
+        }
     </style>
 </head>
 <body>
@@ -1820,6 +1848,13 @@
             </button>
             <button class="nav-tab" data-tab="settings">
                 <i class="fas fa-cog"></i> Settings
+            </button>
+        </div>
+        <div class="user-menu">
+            <div class="user-avatar" id="userAvatar"></div>
+            <span class="user-name" id="userName"></span>
+            <button class="btn-logout" onclick="handleLogout()" title="Sign out">
+                <i class="fas fa-sign-out-alt"></i> Logout
             </button>
         </div>
     </div>
@@ -2296,6 +2331,34 @@
         // Configuration - use relative URL so the dashboard works on any host
         const API_BASE_URL = '';
         let REFRESH_INTERVAL = 60000; // 60 seconds
+
+        // ===== Auth helpers =====
+        async function loadCurrentUser() {
+            try {
+                const res = await fetch('/api/auth/me');
+                if (res.status === 401) { window.location.href = '/landing'; return; }
+                const data = await res.json();
+                if (data.authenticated && data.user) {
+                    const name = data.user.name || 'User';
+                    document.getElementById('userName').textContent = name;
+                    document.getElementById('userAvatar').textContent = name.charAt(0).toUpperCase();
+                }
+            } catch(e) { console.warn('Could not load user info', e); }
+        }
+        async function handleLogout() {
+            try { await fetch('/api/auth/logout', { method: 'POST' }); } catch(e) {}
+            window.location.href = '/landing';
+        }
+        // Intercept fetch globally to detect 401 responses
+        const _origFetch = window.fetch;
+        window.fetch = async function(...args) {
+            const res = await _origFetch.apply(this, args);
+            if (res.status === 401 && typeof args[0] === 'string' && args[0].startsWith('/api/')) {
+                window.location.href = '/landing';
+            }
+            return res;
+        };
+        loadCurrentUser();
         let currentTimeframe = '1d'; // Default to daily
         let currentSymbol = 'AAPL'; // Default stock
         const SYMBOL_NAMES = {

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TradingPro - AI-Powered Stock Trading</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-primary: #0A0E13;
+            --bg-secondary: #111820;
+            --bg-card: rgba(26, 31, 38, 0.65);
+            --text-primary: #FFFFFF;
+            --text-secondary: #8B95A5;
+            --accent-blue: #007AFF;
+            --accent-cyan: #00C6FF;
+            --accent-green: #00D084;
+            --accent-purple: #7B61FF;
+            --border-color: rgba(58, 68, 79, 0.4);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        /* ===== Animated background ===== */
+        .bg-grid {
+            position: fixed; inset: 0; z-index: 0; pointer-events: none;
+            background-image:
+                linear-gradient(rgba(0,122,255,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,122,255,0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+        .bg-glow {
+            position: fixed; z-index: 0; pointer-events: none;
+            width: 700px; height: 700px; border-radius: 50%;
+            filter: blur(160px); opacity: 0.18;
+        }
+        .bg-glow.one   { top: -200px; left: -100px; background: var(--accent-blue); }
+        .bg-glow.two   { bottom: -250px; right: -150px; background: var(--accent-purple); }
+        .bg-glow.three { top: 50%; left: 55%; transform: translate(-50%,-50%); background: var(--accent-cyan); opacity: 0.08; width: 900px; height: 900px; }
+
+        /* ===== Navbar ===== */
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.25rem 3rem;
+            background: rgba(10,14,19,0.7);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            transition: background 0.3s;
+        }
+        .navbar .logo {
+            display: flex; align-items: center; gap: 0.6rem;
+            font-size: 1.4rem; font-weight: 700; color: var(--text-primary);
+            text-decoration: none;
+        }
+        .logo-icon {
+            width: 36px; height: 36px; border-radius: 8px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; font-size: 1.1rem;
+        }
+        .navbar .nav-links { display: flex; gap: 2rem; align-items: center; }
+        .navbar .nav-links a {
+            color: var(--text-secondary); text-decoration: none; font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .navbar .nav-links a:hover { color: var(--text-primary); }
+        .btn-login {
+            padding: 0.55rem 1.5rem; border-radius: 8px; font-size: 0.95rem;
+            font-weight: 600; cursor: pointer; transition: all 0.25s; text-decoration: none;
+            border: 1px solid var(--accent-blue); color: var(--accent-blue); background: transparent;
+        }
+        .btn-login:hover { background: rgba(0,122,255,0.1); }
+
+        /* ===== Hero ===== */
+        .hero {
+            position: relative; z-index: 1;
+            min-height: 100vh; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; text-align: center;
+            padding: 8rem 2rem 4rem;
+        }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: rgba(0,122,255,0.1); border: 1px solid rgba(0,122,255,0.25);
+            border-radius: 100px; padding: 0.5rem 1.25rem;
+            font-size: 0.85rem; color: var(--accent-cyan); margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease;
+        }
+        .hero-badge i { font-size: 0.75rem; }
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 800;
+            line-height: 1.1; margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease 0.1s both;
+        }
+        .hero h1 .gradient-text {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.25rem); color: var(--text-secondary);
+            max-width: 600px; line-height: 1.7; margin-bottom: 3rem;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+        .hero-cta {
+            display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+            animation: fadeInUp 0.8s ease 0.3s both;
+        }
+        .btn-get-started {
+            display: inline-flex; align-items: center; gap: 0.6rem;
+            padding: 1rem 2.5rem; border-radius: 12px; font-size: 1.1rem;
+            font-weight: 700; cursor: pointer; text-decoration: none;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            color: #fff; border: none;
+            box-shadow: 0 0 30px rgba(0,122,255,0.3), 0 4px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease; position: relative; overflow: hidden;
+        }
+        .btn-get-started::before {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+            opacity: 0; transition: opacity 0.3s;
+        }
+        .btn-get-started:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 50px rgba(0,122,255,0.45), 0 8px 25px rgba(0,0,0,0.4);
+        }
+        .btn-get-started:hover::before { opacity: 1; }
+        .btn-demo {
+            display: inline-flex; align-items: center; gap: 0.6rem;
+            padding: 1rem 2.5rem; border-radius: 12px; font-size: 1.1rem;
+            font-weight: 600; cursor: pointer; text-decoration: none;
+            background: transparent; color: var(--text-secondary);
+            border: 1px solid var(--border-color); transition: all 0.25s;
+        }
+        .btn-demo:hover { color: var(--text-primary); border-color: var(--text-secondary); }
+
+        /* Floating stock tickers */
+        .hero-tickers {
+            display: flex; gap: 1.5rem; margin-top: 3rem; flex-wrap: wrap; justify-content: center;
+            animation: fadeInUp 0.8s ease 0.5s both;
+        }
+        .ticker-chip {
+            display: flex; align-items: center; gap: 0.5rem;
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            border-radius: 100px; padding: 0.5rem 1rem;
+            font-size: 0.85rem; backdrop-filter: blur(10px);
+        }
+        .ticker-chip .symbol { font-weight: 700; color: var(--text-primary); }
+        .ticker-chip .gain { color: var(--accent-green); font-weight: 600; }
+        .ticker-chip .loss { color: #FF3B30; font-weight: 600; }
+
+        /* ===== Features ===== */
+        .features {
+            position: relative; z-index: 1;
+            padding: 6rem 2rem; max-width: 1200px; margin: 0 auto;
+        }
+        .features .section-label {
+            text-align: center; font-size: 0.85rem; color: var(--accent-blue);
+            text-transform: uppercase; letter-spacing: 2px; font-weight: 600; margin-bottom: 0.75rem;
+        }
+        .features h2 {
+            text-align: center; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        .features .subtitle {
+            text-align: center; color: var(--text-secondary); font-size: 1.1rem;
+            max-width: 600px; margin: 0 auto 4rem;
+        }
+        .features-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+        .feature-card {
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            border-radius: 16px; padding: 2rem; backdrop-filter: blur(10px);
+            transition: all 0.3s ease; position: relative; overflow: hidden;
+        }
+        .feature-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+            opacity: 0; transition: opacity 0.3s;
+        }
+        .feature-card:hover { transform: translateY(-4px); border-color: rgba(0,122,255,0.3); }
+        .feature-card:hover::before { opacity: 1; }
+        .feature-icon {
+            width: 48px; height: 48px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.3rem; margin-bottom: 1.25rem;
+        }
+        .feature-icon.blue   { background: rgba(0,122,255,0.12); color: var(--accent-blue); }
+        .feature-icon.green  { background: rgba(0,208,132,0.12); color: var(--accent-green); }
+        .feature-icon.purple { background: rgba(123,97,255,0.12); color: var(--accent-purple); }
+        .feature-icon.cyan   { background: rgba(0,198,255,0.12); color: var(--accent-cyan); }
+        .feature-card h3 { font-size: 1.15rem; font-weight: 600; margin-bottom: 0.6rem; }
+        .feature-card p  { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; }
+
+        /* ===== Stats ===== */
+        .stats {
+            position: relative; z-index: 1;
+            padding: 4rem 2rem; max-width: 1000px; margin: 0 auto;
+        }
+        .stats-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem; text-align: center;
+        }
+        .stat-item { padding: 2rem; }
+        .stat-value {
+            font-size: 2.5rem; font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .stat-label { color: var(--text-secondary); font-size: 0.95rem; margin-top: 0.4rem; }
+
+        /* ===== CTA section ===== */
+        .cta-section {
+            position: relative; z-index: 1;
+            padding: 6rem 2rem; text-align: center;
+        }
+        .cta-box {
+            max-width: 700px; margin: 0 auto;
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            border-radius: 20px; padding: 4rem 3rem; backdrop-filter: blur(10px);
+        }
+        .cta-box h2 { font-size: 2rem; font-weight: 700; margin-bottom: 1rem; }
+        .cta-box p  { color: var(--text-secondary); margin-bottom: 2rem; font-size: 1.05rem; }
+
+        /* ===== Footer ===== */
+        .footer {
+            position: relative; z-index: 1;
+            text-align: center; padding: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary); font-size: 0.85rem;
+        }
+
+        /* ===== Animations ===== */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 768px) {
+            .navbar { padding: 1rem 1.5rem; }
+            .navbar .nav-links { display: none; }
+            .hero { padding: 7rem 1.5rem 3rem; }
+            .features { padding: 4rem 1.5rem; }
+            .cta-box { padding: 3rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background effects -->
+    <div class="bg-grid"></div>
+    <div class="bg-glow one"></div>
+    <div class="bg-glow two"></div>
+    <div class="bg-glow three"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="/" class="logo">
+            <div class="logo-icon"><i class="fas fa-chart-line"></i></div>
+            <span>TradingPro</span>
+        </a>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#stats">Performance</a>
+            <a href="/auth" class="btn-login">Sign In</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-badge">
+            <i class="fas fa-bolt"></i>
+            AI-Powered Predictive Market Analysis
+        </div>
+
+        <h1>
+            Trade Smarter with<br>
+            <span class="gradient-text">Artificial Intelligence</span>
+        </h1>
+
+        <p>
+            Harness machine learning predictions, automated strategies, and real-time
+            market analytics to make data-driven trading decisions with confidence.
+        </p>
+
+        <div class="hero-cta">
+            <a href="/auth" class="btn-get-started">
+                Get Started <i class="fas fa-arrow-right"></i>
+            </a>
+            <a href="#features" class="btn-demo">
+                <i class="fas fa-play-circle"></i> See How It Works
+            </a>
+        </div>
+
+        <div class="hero-tickers">
+            <div class="ticker-chip"><span class="symbol">AAPL</span> <span class="gain">+1.24%</span></div>
+            <div class="ticker-chip"><span class="symbol">NVDA</span> <span class="gain">+3.41%</span></div>
+            <div class="ticker-chip"><span class="symbol">TSLA</span> <span class="loss">-0.87%</span></div>
+            <div class="ticker-chip"><span class="symbol">MSFT</span> <span class="gain">+0.65%</span></div>
+            <div class="ticker-chip"><span class="symbol">GOOGL</span> <span class="gain">+1.12%</span></div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features" id="features">
+        <div class="section-label">Features</div>
+        <h2>Everything You Need to Trade</h2>
+        <p class="subtitle">Professional-grade tools powered by machine learning, all in one unified platform.</p>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon blue"><i class="fas fa-brain"></i></div>
+                <h3>AI Predictions</h3>
+                <p>Machine learning models analyze historical data and technical indicators to forecast next-day price movements with confidence scores.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon green"><i class="fas fa-robot"></i></div>
+                <h3>Auto-Trading Engine</h3>
+                <p>Configure aggressive, balanced, or conservative strategies and let the system execute trades automatically based on ML signals.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon purple"><i class="fas fa-bell"></i></div>
+                <h3>Real-Time Alerts</h3>
+                <p>Set custom price, volume, and volatility alerts with instant browser notifications so you never miss a market opportunity.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon cyan"><i class="fas fa-chart-pie"></i></div>
+                <h3>Portfolio Analytics</h3>
+                <p>Track performance with live equity curves, win rates, Sharpe ratios, drawdown analysis, and comprehensive trade history.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats" id="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-value">7+</div>
+                <div class="stat-label">Symbols Tracked</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">ML</div>
+                <div class="stat-label">Powered Predictions</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">24/7</div>
+                <div class="stat-label">Real-Time Streaming</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">3</div>
+                <div class="stat-label">Trading Strategies</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="cta-box">
+            <h2>Ready to Start Trading?</h2>
+            <p>Create your free account and get access to AI-powered predictions, automated trading, and professional analytics.</p>
+            <a href="/auth" class="btn-get-started">
+                Get Started Now <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        &copy; 2026 TradingPro. AI-Driven Automated Stock Trading System.
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TradingPro - Sign In</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-primary: #0A0E13;
+            --bg-card: rgba(26, 31, 38, 0.65);
+            --text-primary: #FFFFFF;
+            --text-secondary: #8B95A5;
+            --accent-blue: #007AFF;
+            --accent-cyan: #00C6FF;
+            --accent-green: #00D084;
+            --accent-red: #FF3B30;
+            --border-color: rgba(58, 68, 79, 0.5);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            overflow-x: hidden;
+        }
+
+        /* Background effects */
+        .bg-grid {
+            position: fixed; inset: 0; z-index: 0; pointer-events: none;
+            background-image:
+                linear-gradient(rgba(0,122,255,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,122,255,0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+        .bg-glow {
+            position: fixed; z-index: 0; pointer-events: none;
+            width: 600px; height: 600px; border-radius: 50%;
+            filter: blur(160px); opacity: 0.15;
+        }
+        .bg-glow.one { top: -200px; right: -100px; background: var(--accent-blue); }
+        .bg-glow.two { bottom: -200px; left: -100px; background: #7B61FF; }
+
+        /* Back link */
+        .back-link {
+            position: fixed; top: 1.5rem; left: 2rem; z-index: 10;
+            display: flex; align-items: center; gap: 0.5rem;
+            color: var(--text-secondary); text-decoration: none;
+            font-size: 0.95rem; transition: color 0.2s;
+        }
+        .back-link:hover { color: var(--text-primary); }
+
+        /* Auth container */
+        .auth-wrapper {
+            position: relative; z-index: 1;
+            width: 100%; max-width: 440px;
+            padding: 2rem;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .auth-header {
+            text-align: center; margin-bottom: 2.5rem;
+        }
+        .auth-logo {
+            display: inline-flex; align-items: center; gap: 0.6rem;
+            font-size: 1.5rem; font-weight: 700; color: var(--text-primary);
+            text-decoration: none; margin-bottom: 1.5rem;
+        }
+        .auth-logo .logo-icon {
+            width: 40px; height: 40px; border-radius: 10px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; font-size: 1.2rem;
+        }
+        .auth-header h1 { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .auth-header p  { color: var(--text-secondary); font-size: 0.95rem; }
+
+        /* Tab switcher */
+        .auth-tabs {
+            display: flex; background: rgba(26,31,38,0.5);
+            border: 1px solid var(--border-color); border-radius: 12px;
+            padding: 4px; margin-bottom: 2rem;
+        }
+        .auth-tab {
+            flex: 1; padding: 0.75rem; border: none; border-radius: 10px;
+            font-size: 0.95rem; font-weight: 600; cursor: pointer;
+            background: transparent; color: var(--text-secondary);
+            transition: all 0.25s;
+        }
+        .auth-tab.active {
+            background: var(--accent-blue); color: #fff;
+            box-shadow: 0 2px 10px rgba(0,122,255,0.3);
+        }
+
+        /* Card */
+        .auth-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px; padding: 2.5rem;
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+        }
+
+        /* Form */
+        .form-group { margin-bottom: 1.25rem; }
+        .form-group label {
+            display: block; font-size: 0.85rem; font-weight: 600;
+            color: var(--text-secondary); margin-bottom: 0.5rem;
+        }
+        .input-wrapper {
+            position: relative;
+        }
+        .input-wrapper i {
+            position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+            color: var(--text-secondary); font-size: 0.9rem; pointer-events: none;
+        }
+        .input-wrapper input {
+            width: 100%; padding: 0.85rem 0.85rem 0.85rem 2.6rem;
+            background: rgba(15,20,25,0.6);
+            border: 1px solid var(--border-color); border-radius: 10px;
+            color: var(--text-primary); font-size: 0.95rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            outline: none;
+        }
+        .input-wrapper input::placeholder { color: rgba(139,149,165,0.5); }
+        .input-wrapper input:focus {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(0,122,255,0.15);
+        }
+        .input-wrapper input.error { border-color: var(--accent-red); }
+
+        .toggle-password {
+            position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+            background: none; border: none; color: var(--text-secondary);
+            cursor: pointer; font-size: 0.9rem; padding: 0;
+            pointer-events: all;
+        }
+        .toggle-password:hover { color: var(--text-primary); }
+
+        .field-error {
+            font-size: 0.8rem; color: var(--accent-red);
+            margin-top: 0.35rem; display: none;
+        }
+        .field-error.visible { display: block; }
+
+        /* Submit button */
+        .btn-submit {
+            width: 100%; padding: 0.9rem; border-radius: 10px; border: none;
+            font-size: 1rem; font-weight: 700; cursor: pointer;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            color: #fff; margin-top: 0.5rem;
+            box-shadow: 0 4px 15px rgba(0,122,255,0.3);
+            transition: all 0.25s; position: relative; overflow: hidden;
+        }
+        .btn-submit:hover:not(:disabled) {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(0,122,255,0.4);
+        }
+        .btn-submit:disabled {
+            opacity: 0.6; cursor: not-allowed;
+        }
+        .btn-submit .spinner {
+            display: none; width: 20px; height: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: #fff; border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+            margin: 0 auto;
+        }
+        .btn-submit.loading .btn-text { display: none; }
+        .btn-submit.loading .spinner  { display: block; }
+
+        /* Divider + switch */
+        .auth-switch {
+            text-align: center; margin-top: 1.5rem;
+            font-size: 0.9rem; color: var(--text-secondary);
+        }
+        .auth-switch a {
+            color: var(--accent-blue); text-decoration: none; font-weight: 600;
+        }
+        .auth-switch a:hover { text-decoration: underline; }
+
+        /* Toast */
+        .toast {
+            position: fixed; top: 2rem; right: 2rem; z-index: 200;
+            display: flex; align-items: center; gap: 0.75rem;
+            padding: 1rem 1.5rem; border-radius: 12px;
+            font-size: 0.95rem; font-weight: 500;
+            backdrop-filter: blur(10px);
+            transform: translateX(120%); transition: transform 0.35s ease;
+            max-width: 400px;
+        }
+        .toast.visible { transform: translateX(0); }
+        .toast.error   { background: rgba(255,59,48,0.15); border: 1px solid rgba(255,59,48,0.4); color: #FF6B6B; }
+        .toast.success { background: rgba(0,208,132,0.15); border: 1px solid rgba(0,208,132,0.4);  color: var(--accent-green); }
+
+        /* Hidden form */
+        .auth-form { display: none; }
+        .auth-form.active { display: block; animation: fadeIn 0.3s ease; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        @media (max-width: 480px) {
+            .auth-wrapper { padding: 1.5rem; }
+            .auth-card { padding: 2rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-grid"></div>
+    <div class="bg-glow one"></div>
+    <div class="bg-glow two"></div>
+
+    <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
+
+    <!-- Toast notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-info-circle"></i>
+        <span id="toastMsg"></span>
+    </div>
+
+    <div class="auth-wrapper">
+        <div class="auth-header">
+            <a href="/" class="auth-logo">
+                <div class="logo-icon"><i class="fas fa-chart-line"></i></div>
+                <span>TradingPro</span>
+            </a>
+            <h1 id="authTitle">Welcome back</h1>
+            <p id="authSubtitle">Sign in to access your trading dashboard</p>
+        </div>
+
+        <!-- Tab switcher -->
+        <div class="auth-tabs">
+            <button class="auth-tab active" data-mode="login">Sign In</button>
+            <button class="auth-tab" data-mode="signup">Create Account</button>
+        </div>
+
+        <div class="auth-card">
+            <!-- LOGIN FORM -->
+            <form class="auth-form active" id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="loginEmail" placeholder="you@example.com" required autocomplete="email">
+                    </div>
+                    <div class="field-error" id="loginEmailError"></div>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="loginPassword" placeholder="Enter your password" required autocomplete="current-password">
+                        <button type="button" class="toggle-password" onclick="toggleVis('loginPassword', this)"><i class="fas fa-eye"></i></button>
+                    </div>
+                    <div class="field-error" id="loginPasswordError"></div>
+                </div>
+                <button type="submit" class="btn-submit" id="loginBtn">
+                    <span class="btn-text">Sign In</span>
+                    <div class="spinner"></div>
+                </button>
+                <div class="auth-switch">
+                    Don't have an account? <a href="#" onclick="switchTab('signup'); return false;">Create one</a>
+                </div>
+            </form>
+
+            <!-- SIGNUP FORM -->
+            <form class="auth-form" id="signupForm" onsubmit="handleSignup(event)">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="signupName" placeholder="John Doe" required autocomplete="name">
+                    </div>
+                    <div class="field-error" id="signupNameError"></div>
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="signupEmail" placeholder="you@example.com" required autocomplete="email">
+                    </div>
+                    <div class="field-error" id="signupEmailError"></div>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="signupPassword" placeholder="Minimum 8 characters" required autocomplete="new-password">
+                        <button type="button" class="toggle-password" onclick="toggleVis('signupPassword', this)"><i class="fas fa-eye"></i></button>
+                    </div>
+                    <div class="field-error" id="signupPasswordError"></div>
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-shield-alt"></i>
+                        <input type="password" id="signupConfirm" placeholder="Re-enter your password" required autocomplete="new-password">
+                    </div>
+                    <div class="field-error" id="signupConfirmError"></div>
+                </div>
+                <button type="submit" class="btn-submit" id="signupBtn">
+                    <span class="btn-text">Create Account</span>
+                    <div class="spinner"></div>
+                </button>
+                <div class="auth-switch">
+                    Already have an account? <a href="#" onclick="switchTab('login'); return false;">Sign in</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        /* ============ Tab switching ============ */
+        function switchTab(mode) {
+            document.querySelectorAll('.auth-tab').forEach(t => t.classList.toggle('active', t.dataset.mode === mode));
+            document.getElementById('loginForm').classList.toggle('active', mode === 'login');
+            document.getElementById('signupForm').classList.toggle('active', mode === 'signup');
+            if (mode === 'login') {
+                document.getElementById('authTitle').textContent = 'Welcome back';
+                document.getElementById('authSubtitle').textContent = 'Sign in to access your trading dashboard';
+            } else {
+                document.getElementById('authTitle').textContent = 'Create your account';
+                document.getElementById('authSubtitle').textContent = 'Start trading with AI-powered predictions';
+            }
+            clearErrors();
+        }
+        document.querySelectorAll('.auth-tab').forEach(tab => {
+            tab.addEventListener('click', () => switchTab(tab.dataset.mode));
+        });
+
+        /* ============ Password toggle ============ */
+        function toggleVis(inputId, btn) {
+            const inp = document.getElementById(inputId);
+            const icon = btn.querySelector('i');
+            if (inp.type === 'password') { inp.type = 'text'; icon.className = 'fas fa-eye-slash'; }
+            else { inp.type = 'password'; icon.className = 'fas fa-eye'; }
+        }
+
+        /* ============ Validation helpers ============ */
+        function showFieldError(id, msg) {
+            const el = document.getElementById(id);
+            el.textContent = msg; el.classList.add('visible');
+            el.previousElementSibling.querySelector('input').classList.add('error');
+        }
+        function clearErrors() {
+            document.querySelectorAll('.field-error').forEach(e => { e.textContent = ''; e.classList.remove('visible'); });
+            document.querySelectorAll('.input-wrapper input').forEach(i => i.classList.remove('error'));
+        }
+        function showToast(msg, type) {
+            const toast = document.getElementById('toast');
+            const icon = toast.querySelector('i');
+            document.getElementById('toastMsg').textContent = msg;
+            toast.className = 'toast ' + type;
+            icon.className = type === 'error' ? 'fas fa-exclamation-circle' : 'fas fa-check-circle';
+            setTimeout(() => toast.classList.add('visible'), 10);
+            setTimeout(() => toast.classList.remove('visible'), 4000);
+        }
+
+        function setLoading(btnId, loading) {
+            const btn = document.getElementById(btnId);
+            btn.disabled = loading;
+            btn.classList.toggle('loading', loading);
+        }
+
+        /* ============ Login ============ */
+        async function handleLogin(e) {
+            e.preventDefault(); clearErrors();
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            let ok = true;
+            if (!email) { showFieldError('loginEmailError', 'Email is required'); ok = false; }
+            if (!password) { showFieldError('loginPasswordError', 'Password is required'); ok = false; }
+            if (!ok) return;
+
+            setLoading('loginBtn', true);
+            try {
+                const res = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showToast('Login successful! Redirecting...', 'success');
+                    setTimeout(() => window.location.href = '/dashboard', 800);
+                } else {
+                    showToast(data.error || 'Invalid credentials', 'error');
+                }
+            } catch (err) {
+                showToast('Connection error. Please try again.', 'error');
+            } finally {
+                setLoading('loginBtn', false);
+            }
+        }
+
+        /* ============ Signup ============ */
+        async function handleSignup(e) {
+            e.preventDefault(); clearErrors();
+            const name = document.getElementById('signupName').value.trim();
+            const email = document.getElementById('signupEmail').value.trim();
+            const password = document.getElementById('signupPassword').value;
+            const confirm = document.getElementById('signupConfirm').value;
+            let ok = true;
+
+            if (!name || name.length < 2) { showFieldError('signupNameError', 'Name must be at least 2 characters'); ok = false; }
+            if (!email || !email.includes('@')) { showFieldError('signupEmailError', 'Please enter a valid email'); ok = false; }
+            if (!password || password.length < 8) { showFieldError('signupPasswordError', 'Password must be at least 8 characters'); ok = false; }
+            if (password !== confirm) { showFieldError('signupConfirmError', 'Passwords do not match'); ok = false; }
+            if (!ok) return;
+
+            setLoading('signupBtn', true);
+            try {
+                const res = await fetch('/api/auth/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, password })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showToast('Account created! Redirecting...', 'success');
+                    setTimeout(() => window.location.href = '/dashboard', 800);
+                } else {
+                    showToast(data.error || 'Registration failed', 'error');
+                }
+            } catch (err) {
+                showToast('Connection error. Please try again.', 'error');
+            } finally {
+                setLoading('signupBtn', false);
+            }
+        }
+
+        /* ============ Check if URL has #signup hash ============ */
+        if (window.location.hash === '#signup') switchTab('signup');
+    </script>
+</body>
+</html>

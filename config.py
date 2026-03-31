@@ -38,7 +38,12 @@ SMTP_PASSWORD: str = os.getenv('SMTP_PASSWORD', '')
 # --- Streaming ---
 STREAM_UPDATE_FREQUENCY: int = int(os.getenv('STREAM_UPDATE_FREQUENCY', '2'))
 
+# --- Auth ---
+import secrets as _secrets
+SECRET_KEY: str = os.getenv('SECRET_KEY', _secrets.token_hex(32))
+
 # --- Directories ---
 RESULTS_DIR: str = os.path.join(_BASE_DIR, 'results')
 TRAINED_MODELS_DIR: str = os.path.join(_BASE_DIR, 'trained_models')
 DATA_DIR: str = os.path.join(_BASE_DIR, 'data')
+DATABASE_PATH: str = os.path.join(DATA_DIR, 'users.db')
