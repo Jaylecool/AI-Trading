@@ -1455,7 +1455,7 @@ def auto_trade_cycle():
                                 dir_proba = dir_clf.predict_proba(X_sc)[0]
                                 up_proba = dir_proba[1] if len(dir_proba) > 1 else 0.5
                                 # Only use ML forecast when direction classifier agrees with return sign
-                                if (pred_return > 0 and up_proba > 0.52) or (pred_return < 0 and up_proba < 0.48):
+                                if (pred_return > 0 and up_proba > 0.50) or (pred_return < 0 and up_proba < 0.50):
                                     forecast_price = current_price * (1 + pred_return)
                                 # else: direction disagrees, fall through to trend fallback
                             else:
@@ -1518,7 +1518,7 @@ def auto_trade_cycle():
                         'Date': hist.index,
                         'price': hist['Close'].values
                     })
-                    pe = PredictionEngine(pe_df)
+                    pe = PredictionEngine(pe_df, symbol=symbol)
                     indicators = pe.calculate_technical_indicators()
                     pe_signal, _ = pe.generate_signal(indicators)
                 except Exception as sig_err:
@@ -1874,7 +1874,7 @@ def get_next_day_prediction():
                 'Date': hist.index,
                 'price': hist['Close'].values
             })
-            pe = PredictionEngine(pe_df)
+            pe = PredictionEngine(pe_df, symbol=symbol)
             indicators = pe.calculate_technical_indicators()
             signal_type, signal_strength = pe.generate_signal(indicators)
             signal = signal_type

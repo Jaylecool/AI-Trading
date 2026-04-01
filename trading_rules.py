@@ -195,7 +195,7 @@ class TradingRules:
         # Check uptrend confirmation
         confirmations, confirmation_details = self._check_uptrend_confirmation(market_data)
         
-        if confirmations < 2:
+        if confirmations < 1:
             return False, 0.5, f"Insufficient uptrend confirmations: {confirmations}"
         
         # Calculate confidence score (0-1)
@@ -237,7 +237,7 @@ class TradingRules:
         # Check downtrend confirmation
         confirmations, confirmation_details = self._check_downtrend_confirmation(market_data)
         
-        if confirmations < 2:
+        if confirmations < 1:
             return False, 0.5, f"Insufficient downtrend confirmations: {confirmations}"
         
         # Calculate confidence score (0-1)

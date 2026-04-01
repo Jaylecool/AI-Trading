@@ -197,7 +197,7 @@ class PredictionEngine:
                 if not in_uptrend:
                     # Downtrend → degrade to NEUTRAL (avoid catching falling knives)
                     return 'NEUTRAL', 0.3
-                confirmation = tech_bullish >= 2  # require 2/3 tech agreement
+                confirmation = tech_bullish >= 1  # require 1/3 tech agreement
                 if not confirmation:
                     return 'NEUTRAL', 0.35  # insufficient confirmation
                 conf = ml_confidence
@@ -207,7 +207,7 @@ class PredictionEngine:
                 if in_uptrend:
                     # Strong uptrend → degrade bearish to NEUTRAL
                     return 'NEUTRAL', 0.3
-                confirmation = tech_bearish >= 2  # require 2/3 tech agreement
+                confirmation = tech_bearish >= 1  # require 1/3 tech agreement
                 if not confirmation:
                     return 'NEUTRAL', 0.35  # insufficient confirmation
                 conf = ml_confidence
@@ -359,11 +359,11 @@ class PredictionEngine:
         up_proba = dir_proba[1] if len(dir_proba) > 1 else 0.5
 
         # Combine with calibrated thresholds
-        if pred_return > 0.003 and up_proba > 0.55:
+        if pred_return > 0.001 and up_proba > 0.52:
             signal = 'BULLISH'
-            # Normalised confidence: 0.55 proba → low, 0.70 → high
+            # Normalised confidence: 0.52 proba → low, 0.70 → high
             confidence = (up_proba - 0.5) * 2.0 * 0.7 + min(abs(pred_return) * 20, 0.3) * 0.3
-        elif pred_return < -0.003 and up_proba < 0.45:
+        elif pred_return < -0.001 and up_proba < 0.48:
             signal = 'BEARISH'
             confidence = (0.5 - up_proba) * 2.0 * 0.7 + min(abs(pred_return) * 20, 0.3) * 0.3
         else:

@@ -35,8 +35,8 @@ class StrategyFactory:
         """
         return TradingParameters(
             # Entry/Exit Thresholds - MORE AGGRESSIVE
-            buy_threshold=0.015,  # 1.5% (vs default 2%)
-            sell_threshold=0.015,  # 1.5% (vs default 2%)
+            buy_threshold=0.005,  # 0.5% (lowered for more frequent trades)
+            sell_threshold=0.005,  # 0.5%
             take_profit_target=0.06,  # 6% (2:1 reward:risk ratio)
             stop_loss_percent=0.03,  # 3% wider stops for volatility tolerance
             
@@ -79,8 +79,8 @@ class StrategyFactory:
         """
         return TradingParameters(
             # Entry/Exit Thresholds - MORE SELECTIVE
-            buy_threshold=0.03,  # 3% (vs default 2%)
-            sell_threshold=0.03,  # 3% (vs default 2%)
+            buy_threshold=0.012,  # 1.2% (lowered for more frequent trades)
+            sell_threshold=0.012,  # 1.2%
             take_profit_target=0.06,  # 6% (2:1 reward:risk ratio)
             stop_loss_percent=0.03,  # 3% wider stops for volatility tolerance
             
@@ -102,8 +102,8 @@ class StrategyFactory:
             volatility_threshold=0.02,  # 2% (vs default 3%)
             volatility_threshold_multiplier=2.0,  # Wider thresholds
             
-            # Confidence Requirements - HIGHER THRESHOLD
-            confidence_threshold=0.60,  # 60% (only high-confidence trades)
+            # Confidence Requirements - MODERATE THRESHOLD
+            confidence_threshold=0.52,  # 52% (lowered for more frequent trades)
         )
     
     @staticmethod
@@ -123,8 +123,8 @@ class StrategyFactory:
         """
         return TradingParameters(
             # Entry/Exit Thresholds - DEFAULT
-            buy_threshold=0.02,  # 2% (default)
-            sell_threshold=0.02,  # 2% (default)
+            buy_threshold=0.008,  # 0.8% (lowered for more frequent trades)
+            sell_threshold=0.008,  # 0.8%
             take_profit_target=0.07,  # 7% (2:1 reward:risk)
             stop_loss_percent=0.035,  # 3.5% wider stops for volatility tolerance
             
@@ -147,7 +147,7 @@ class StrategyFactory:
             volatility_threshold_multiplier=1.5,  # Standard (default)
             
             # Confidence Requirements - CALIBRATED
-            confidence_threshold=0.55,  # 55% (raised from 52%)
+            confidence_threshold=0.50,  # 50% for more frequent entries
         )
     
     @staticmethod

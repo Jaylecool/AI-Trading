@@ -376,12 +376,12 @@ class BacktestingEngine:
                     else:
                         up_proba = clf_probas[i][1] if len(clf_probas[i]) > 1 else 0.5
                     
-                    # Calibrated thresholds: require stronger signals
-                    if pred_ret > 0.003 and up_proba > 0.55:
+                    # Calibrated thresholds: relaxed for more frequent trading
+                    if pred_ret > 0.001 and up_proba > 0.52:
                         sig = 'BULLISH'
                         # Normalised confidence
                         conf = (up_proba - 0.5) * 2.0 * 0.7 + min(abs(pred_ret) * 20, 0.3) * 0.3
-                    elif pred_ret < -0.003 and up_proba < 0.45:
+                    elif pred_ret < -0.001 and up_proba < 0.48:
                         sig = 'BEARISH'
                         conf = (0.5 - up_proba) * 2.0 * 0.7 + min(abs(pred_ret) * 20, 0.3) * 0.3
                     else:
