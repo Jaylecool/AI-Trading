@@ -114,7 +114,7 @@
         .input-wrapper {
             position: relative;
         }
-        .input-wrapper i {
+        .input-wrapper > i {
             position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
             color: var(--text-secondary); font-size: 0.9rem; pointer-events: none;
         }
@@ -137,9 +137,10 @@
             position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
             background: none; border: none; color: var(--text-secondary);
             cursor: pointer; font-size: 0.9rem; padding: 0;
-            pointer-events: all;
+            z-index: 2;
         }
-        .toggle-password:hover { color: var(--text-primary); }
+        .toggle-password:hover { color: var(--accent-cyan); }
+        .input-wrapper:has(.toggle-password) input { padding-right: 2.6rem; }
 
         .field-error {
             font-size: 0.8rem; color: var(--accent-red);
