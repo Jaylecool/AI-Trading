@@ -2661,8 +2661,8 @@
                         const symStats = statsData.detailed[symbol];
                         totalTrades += symStats.total_trades || 0;
                         totalWins += symStats.winning_trades || 0;
-                        if (symStats.total_pnl > bestTrade) bestTrade = symStats.total_pnl;
-                        if (symStats.total_pnl < worstTrade) worstTrade = symStats.total_pnl;
+                        if (symStats.best_trade != null && symStats.best_trade > bestTrade) bestTrade = symStats.best_trade;
+                        if (symStats.worst_trade != null && symStats.worst_trade < worstTrade) worstTrade = symStats.worst_trade;
                         totalWinAmount += symStats.avg_win ? symStats.avg_win * (symStats.winning_trades || 0) : 0;
                         totalLossAmount += symStats.avg_loss ? symStats.avg_loss * (symStats.losing_trades || 0) : 0;
                     }

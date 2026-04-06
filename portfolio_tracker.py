@@ -610,7 +610,13 @@ class PortfolioVisualizer:
                     'winning_trades': 0,
                     'losing_trades': 0,
                     'total_pnl': 0,
-                    'win_rate': 0
+                    'win_rate': 0,
+                    'avg_win': 0,
+                    'avg_loss': 0,
+                    'best_trade': 0,
+                    'worst_trade': 0,
+                    '_wins': [],
+                    '_losses': [],
                 }
             
             by_symbol[trade.symbol]['total_trades'] += 1
@@ -618,17 +624,29 @@ class PortfolioVisualizer:
             if trade.is_closed():
                 if trade.pnl and trade.pnl > 0:
                     by_symbol[trade.symbol]['winning_trades'] += 1
+                    by_symbol[trade.symbol]['_wins'].append(trade.pnl)
                 elif trade.pnl and trade.pnl < 0:
                     by_symbol[trade.symbol]['losing_trades'] += 1
+                    by_symbol[trade.symbol]['_losses'].append(trade.pnl)
                 
                 if trade.pnl:
                     by_symbol[trade.symbol]['total_pnl'] += trade.pnl
+                    if trade.pnl > by_symbol[trade.symbol]['best_trade']:
+                        by_symbol[trade.symbol]['best_trade'] = trade.pnl
+                    if trade.pnl < by_symbol[trade.symbol]['worst_trade']:
+                        by_symbol[trade.symbol]['worst_trade'] = trade.pnl
         
-        # Calculate win rates
+        # Calculate win rates, avg win/loss
         for symbol in by_symbol:
             total = by_symbol[symbol]['total_trades']
+            wins = by_symbol[symbol].pop('_wins')
+            losses = by_symbol[symbol].pop('_losses')
             if total > 0:
                 by_symbol[symbol]['win_rate'] = (by_symbol[symbol]['winning_trades'] / total) * 100
+            if wins:
+                by_symbol[symbol]['avg_win'] = sum(wins) / len(wins)
+            if losses:
+                by_symbol[symbol]['avg_loss'] = sum(abs(l) for l in losses) / len(losses)
         
         return by_symbol
     

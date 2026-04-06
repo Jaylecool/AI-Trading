@@ -1,20 +1,3 @@
-"""
-Task 5.3: Extended Flask Backend with Trade History and Portfolio APIs
-Adds endpoints for trade history, portfolio metrics, and visualization data
-
-Endpoints:
-- GET /api/trades/history - Complete trade history
-- GET /api/trades/filtered - Filtered trades by symbol/date
-- GET /api/portfolio/summary - Portfolio metrics
-- GET /api/portfolio/allocation - Asset allocation
-- GET /api/portfolio/statistics - Trade statistics
-- GET /api/portfolio/equity-curve - Daily equity values
-- GET /api/portfolio/pnl-distribution - PnL histogram
-- GET /api/portfolio/performance - Performance metrics
-
-Author: AI Trading System
-Date: March 6, 2026
-"""
 
 from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS

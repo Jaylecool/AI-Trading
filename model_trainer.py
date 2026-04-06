@@ -27,7 +27,9 @@ from sklearn.ensemble import (GradientBoostingClassifier,
                               RandomForestClassifier, RandomForestRegressor)
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import (accuracy_score, mean_absolute_error,
-                             mean_absolute_percentage_error, r2_score)
+                             mean_absolute_percentage_error, r2_score,
+                             f1_score, precision_score, recall_score,
+                             confusion_matrix, classification_report)
 from sklearn.preprocessing import StandardScaler
 
 from data_fetcher import DEFAULT_SYMBOLS, DATA_DIR, load_stock_data, fetch_stock_data
@@ -283,9 +285,24 @@ def train_models_for_symbol(symbol: str, df: Optional[pd.DataFrame] = None) -> D
         },
         'direction_classifier': {
             'accuracy': float(accuracy_score(y_test_d, pred_dir)),
+            'precision': float(precision_score(y_test_d, pred_dir, zero_division=0)),
+            'recall': float(recall_score(y_test_d, pred_dir, zero_division=0)),
+            'f1_score': float(f1_score(y_test_d, pred_dir, zero_division=0)),
+            'confusion_matrix': confusion_matrix(y_test_d, pred_dir).tolist(),
         },
         'gb_classifier': {
             'accuracy': float(accuracy_score(y_test_d, pred_gb_dir)),
+            'precision': float(precision_score(y_test_d, pred_gb_dir, zero_division=0)),
+            'recall': float(recall_score(y_test_d, pred_gb_dir, zero_division=0)),
+            'f1_score': float(f1_score(y_test_d, pred_gb_dir, zero_division=0)),
+            'confusion_matrix': confusion_matrix(y_test_d, pred_gb_dir).tolist(),
+        },
+        'ensemble_direction': {
+            'accuracy': float(ens_dir_accuracy),
+            'precision': float(precision_score(y_test_d, (pred_ens > 0).astype(int), zero_division=0)),
+            'recall': float(recall_score(y_test_d, (pred_ens > 0).astype(int), zero_division=0)),
+            'f1_score': float(f1_score(y_test_d, (pred_ens > 0).astype(int), zero_division=0)),
+            'confusion_matrix': confusion_matrix(y_test_d, (pred_ens > 0).astype(int)).tolist(),
         },
         'feature_cols': list(X.columns),
         'feature_importance': {n: round(float(v), 4) for n, v in feat_importance},
