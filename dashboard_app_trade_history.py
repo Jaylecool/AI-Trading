@@ -12,20 +12,29 @@ from datetime import datetime, timedelta
 import pandas as pd
 import numpy as np
 import uuid
+from flask.json.provider import DefaultJSONProvider
 
-# Custom JSON encoder to handle NaN values
-class NaNEncoder(json.JSONEncoder):
-    def encode(self, o):
-        if isinstance(o, float):
-            if np.isnan(o):
-                return 'null'
-            elif np.isinf(o):
-                return 'null'
-        return super().encode(o)
-    
-    def iterencode(self, o, _one_shot=False):
-        for chunk in super().iterencode(o, _one_shot):
-            yield chunk
+# Flask 3.x JSON provider that replaces NaN / ±Inf with null everywhere in responses
+class NaNSafeJSONProvider(DefaultJSONProvider):
+    @staticmethod
+    def _sanitize(obj):
+        """Recursively replace NaN / ±Inf floats with None so JSON stays valid."""
+        if isinstance(obj, float):
+            if np.isnan(obj) or np.isinf(obj):
+                return None
+            return obj
+        if isinstance(obj, dict):
+            return {k: NaNSafeJSONProvider._sanitize(v) for k, v in obj.items()}
+        if isinstance(obj, (list, tuple)):
+            sanitized = [NaNSafeJSONProvider._sanitize(v) for v in obj]
+            return sanitized if isinstance(obj, list) else tuple(sanitized)
+        return obj
+
+    def dumps(self, obj, **kwargs):
+        return super().dumps(self._sanitize(obj), **kwargs)
+
+    def loads(self, s, **kwargs):
+        return super().loads(s, **kwargs)
 
 # Setup logging
 logger = logging.getLogger(__name__)
@@ -60,7 +69,8 @@ SUPPORTED_SYMBOLS = cfg.SUPPORTED_SYMBOLS
 
 # Flask application setup
 app = Flask(__name__)
-app.json_encoder = NaNEncoder
+app.json_provider_class = NaNSafeJSONProvider
+app.json = NaNSafeJSONProvider(app)
 app.secret_key = cfg.SECRET_KEY
 CORS(app, origins=cfg.CORS_ORIGINS, supports_credentials=True)
 
@@ -439,8 +449,9 @@ def get_portfolio_summary():
             import yfinance as yf
             for sym in SUPPORTED_SYMBOLS:
                 try:
-                    price = yf.Ticker(sym).history(period='1d')['Close'].iloc[-1]
-                    tracker.portfolio.update_market_price(sym, float(price))
+                    _ph = yf.Ticker(sym).history(period='2d')['Close'].dropna()
+                    if not _ph.empty:
+                        tracker.portfolio.update_market_price(sym, float(_ph.iloc[-1]))
                 except (KeyError, IndexError, ValueError) as exc:
                     logger.debug(f"Could not fetch price for {sym}: {exc}")
         except ImportError:
@@ -595,12 +606,15 @@ def get_live_price():
         info = ticker.info if hasattr(ticker, 'info') else {}
         
         if not hist.empty:
-            # Current price
-            current = hist.iloc[-1]
-            current_price = float(current['Close'])
+            # Use last non-NaN close (yfinance may append a partial row for today)
+            _close_valid = hist['Close'].dropna()
+            if _close_valid.empty:
+                return jsonify({'error': 'No valid price data'}), 500
+            current_price = float(_close_valid.iloc[-1])
+            current = hist.loc[_close_valid.index[-1]]
             
             # Previous close
-            previous_price = float(hist.iloc[-2]['Close']) if len(hist) > 1 else current_price
+            previous_price = float(_close_valid.iloc[-2]) if len(_close_valid) > 1 else current_price
             
             # Price change
             change = current_price - previous_price
@@ -1413,7 +1427,11 @@ def auto_trade_cycle():
                     print(f"[AUTO-TRADE] No data for {symbol}, skipping")
                     continue
 
-                current_price = float(hist['Close'].iloc[-1])
+                _close_clean = hist['Close'].dropna()
+                if _close_clean.empty:
+                    print(f"[AUTO-TRADE] No valid Close data for {symbol}, skipping")
+                    continue
+                current_price = float(_close_clean.iloc[-1])
 
                 # 2. Compute features and get ML prediction (per-symbol)
                 forecast_price = None
@@ -1480,7 +1498,8 @@ def auto_trade_cycle():
                 user_tracker.portfolio.update_market_price(symbol, current_price)
 
                 # 3. Build market_data dict for TradingRules
-                last_row = features_df.dropna().iloc[-1]
+                _feat_valid = features_df.dropna()
+                last_row = _feat_valid.iloc[-1] if not _feat_valid.empty else pd.Series(dtype=float)
                 market_data = {
                     'RSI_14': float(last_row.get('RSI_14', 50)),
                     'Close': current_price,
@@ -1497,9 +1516,10 @@ def auto_trade_cycle():
                 # 4b. Get PredictionEngine signal (BULLISH / BEARISH / NEUTRAL)
                 pe_signal = 'NEUTRAL'
                 try:
+                    _hist_clean = hist[['Close']].dropna()
                     pe_df = pd.DataFrame({
-                        'Date': hist.index,
-                        'price': hist['Close'].values
+                        'Date': _hist_clean.index,
+                        'price': _hist_clean['Close'].values
                     })
                     pe = PredictionEngine(pe_df, symbol=symbol)
                     indicators = pe.calculate_technical_indicators()
@@ -1707,6 +1727,11 @@ def get_chart_data():
         if hist.empty:
             raise ValueError("No data from Yahoo Finance")
         
+        # Drop any partial/NaN rows before extracting prices
+        hist = hist[hist['Close'].notna()]
+        if hist.empty:
+            raise ValueError("No valid data from Yahoo Finance")
+
         # Extract prices
         prices = hist['Close'].tolist()
         
@@ -1725,9 +1750,12 @@ def get_chart_data():
         sma20_clean = clean_for_json(sma20)
         ema12_clean = clean_for_json(ema12)
         
-        current_price = float(hist['Close'].iloc[-1])
-        previous_close = float(hist['Close'].iloc[-2]) if len(hist) > 1 else current_price
-        
+        _close_valid = hist['Close'].dropna()
+        if _close_valid.empty:
+            raise ValueError("No valid Close prices from Yahoo Finance")
+        current_price = float(_close_valid.iloc[-1])
+        previous_close = float(_close_valid.iloc[-2]) if len(_close_valid) > 1 else current_price
+
         return jsonify({
             'dates': dates,
             'prices': prices_clean,
@@ -1803,8 +1831,11 @@ def get_next_day_prediction():
         if hist.empty:
             raise ValueError("No data returned from Yahoo Finance")
         
-        current_price = float(hist['Close'].iloc[-1])
-        previous_close = float(hist['Close'].iloc[-2]) if len(hist) > 1 else current_price
+        _close_series = hist['Close'].dropna()
+        if _close_series.empty:
+            raise ValueError("No valid Close data from Yahoo Finance")
+        current_price = float(_close_series.iloc[-1])
+        previous_close = float(_close_series.iloc[-2]) if len(_close_series) > 1 else current_price
         
         # --- ML Model Prediction (per-symbol with trained models) ---
         forecast_price = None
@@ -1832,7 +1863,10 @@ def get_next_day_prediction():
                     if dir_clf is not None:
                         dir_proba = dir_clf.predict_proba(X_sc)[0]
                         up_proba = dir_proba[1] if len(dir_proba) > 1 else 0.5
-                        confidence_level = int(max(50, min(85, up_proba * 100)))
+                        # Confidence = how strongly the model believes in its direction
+                        # (not just probability of going up, which floors BEARISH confidence at 50%)
+                        direction_confidence = max(up_proba, 1.0 - up_proba)
+                        confidence_level = int(min(95, direction_confidence * 100))
                     else:
                         confidence_level = 60
                 except Exception as ml_err:
@@ -1853,9 +1887,10 @@ def get_next_day_prediction():
         # --- Signal from PredictionEngine (RSI + MACD + Bollinger Bands) ---
         signal = 'NEUTRAL'
         try:
+            _hist_clean = hist[['Close']].dropna()
             pe_df = pd.DataFrame({
-                'Date': hist.index,
-                'price': hist['Close'].values
+                'Date': _hist_clean.index,
+                'price': _hist_clean['Close'].values
             })
             pe = PredictionEngine(pe_df, symbol=symbol)
             indicators = pe.calculate_technical_indicators()

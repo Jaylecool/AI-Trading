@@ -260,7 +260,9 @@ class PredictionEngine:
 
         # Build array in correct order
         try:
-            arr = np.array([[row[c] for c in feature_cols]])
+            arr = np.array([[row[c] for c in feature_cols]], dtype=float)
+            # Replace any NaN (e.g. from un-warmed rolling indicators) with 0.0
+            arr = np.where(np.isnan(arr), 0.0, arr)
             return arr
         except (KeyError, TypeError):
             return None
