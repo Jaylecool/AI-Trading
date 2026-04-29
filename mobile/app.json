@@ -1,0 +1,26 @@
+{
+  "expo": {
+    "name": "AI Trading",
+    "slug": "ai-trading",
+    "version": "1.0.0",
+    "sdkVersion": "54.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "backgroundColor": "#0d1117"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.aitrading.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#0d1117"
+      },
+      "package": "com.aitrading.app"
+    },
+    "web": {
+      "bundler": "metro"
+    }
+  }
+}

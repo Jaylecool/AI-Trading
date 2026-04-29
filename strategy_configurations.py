@@ -35,8 +35,8 @@ class StrategyFactory:
         """
         return TradingParameters(
             # Entry/Exit Thresholds - MORE AGGRESSIVE
-            buy_threshold=0.005,  # 0.5% (lowered for more frequent trades)
-            sell_threshold=0.005,  # 0.5%
+            buy_threshold=0.002,  # 0.2% (realistic next-day ML forecast threshold)
+            sell_threshold=0.002,  # 0.2%
             take_profit_target=0.06,  # 6% (2:1 reward:risk ratio)
             stop_loss_percent=0.03,  # 3% wider stops for volatility tolerance
             
@@ -79,8 +79,8 @@ class StrategyFactory:
         """
         return TradingParameters(
             # Entry/Exit Thresholds - MORE SELECTIVE
-            buy_threshold=0.012,  # 1.2% (lowered for more frequent trades)
-            sell_threshold=0.012,  # 1.2%
+            buy_threshold=0.005,  # 0.5% (realistic next-day ML forecast threshold)
+            sell_threshold=0.005,  # 0.5%
             take_profit_target=0.06,  # 6% (2:1 reward:risk ratio)
             stop_loss_percent=0.03,  # 3% wider stops for volatility tolerance
             
@@ -123,8 +123,8 @@ class StrategyFactory:
         """
         return TradingParameters(
             # Entry/Exit Thresholds - DEFAULT
-            buy_threshold=0.008,  # 0.8% (lowered for more frequent trades)
-            sell_threshold=0.008,  # 0.8%
+            buy_threshold=0.003,  # 0.3% (realistic next-day ML forecast threshold)
+            sell_threshold=0.003,  # 0.3%
             take_profit_target=0.07,  # 7% (2:1 reward:risk)
             stop_loss_percent=0.035,  # 3.5% wider stops for volatility tolerance
             

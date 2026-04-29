@@ -1359,6 +1359,7 @@ def auto_trade_cycle():
     Iterates all registered users and processes each user's portfolio independently."""
     global auto_trade_last_check
     from prediction_engine import PredictionEngine
+    from data_fetcher import refresh_all_stocks
 
     # Wait for init to complete
     time.sleep(10)
@@ -1381,6 +1382,9 @@ def auto_trade_cycle():
 
     print(f"[AUTO-TRADE] Engine started — checking every 60 seconds")
 
+    # Track the last date a data refresh was performed
+    _last_data_refresh_date = None
+
     while True:
         # If no users registered yet, wait
         if not user_portfolios:
@@ -1392,6 +1396,19 @@ def auto_trade_cycle():
 
             auto_trade_last_check = datetime.now().isoformat()
             now_str = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+            # --- Daily data refresh ---
+            # Once per calendar day, pull fresh OHLCV + indicators for all stocks
+            # so the auto-trader and prediction engine always work with current data.
+            today_date = datetime.now().date()
+            if _last_data_refresh_date != today_date:
+                try:
+                    print(f"[AUTO-TRADE] Daily data refresh starting ({today_date}) …")
+                    refresh_all_stocks(SUPPORTED_SYMBOLS)
+                    _last_data_refresh_date = today_date
+                    print(f"[AUTO-TRADE] Daily data refresh complete.")
+                except Exception as refresh_err:
+                    logger.warning(f"[AUTO-TRADE] Daily data refresh failed: {refresh_err}")
 
             # Snapshot the current set of users
             with _user_portfolios_lock:
@@ -1449,18 +1466,8 @@ def auto_trade_cycle():
                             lr_w = ew.get('lr', 0.5)
                             rf_w = ew.get('rf', 0.5)
                             pred_return = lr_w * sym_model['model_lr'].predict(X_sc)[0] + rf_w * sym_model['model_rf'].predict(X_sc)[0]
-                            # Direction classifier check
-                            gb_clf = sym_model.get('model_gb_clf')
-                            dir_clf = gb_clf if gb_clf is not None else sym_model.get('model_dir_clf')
-                            if dir_clf is not None:
-                                dir_proba = dir_clf.predict_proba(X_sc)[0]
-                                up_proba = dir_proba[1] if len(dir_proba) > 1 else 0.5
-                                # Only use ML forecast when direction classifier agrees with return sign
-                                if (pred_return > 0 and up_proba > 0.50) or (pred_return < 0 and up_proba < 0.50):
-                                    forecast_price = current_price * (1 + pred_return)
-                                # else: direction disagrees, fall through to trend fallback
-                            else:
-                                forecast_price = current_price * (1 + pred_return)
+                            # Always use LR+RF ensemble forecast (matches UI endpoint behaviour)
+                            forecast_price = current_price * (1 + pred_return)
                         except Exception as ml_err:
                             logger.warning(f"[AUTO-TRADE] ML prediction error for {symbol}: {ml_err}")
 
@@ -1902,6 +1909,16 @@ def get_next_day_prediction():
                 signal = 'BULLISH'
             elif forecast_price < current_price:
                 signal = 'BEARISH'
+
+        # --- Reconcile signal with ML forecast direction ---
+        # If the ML model predicts a price drop, don't show BULLISH (and vice versa).
+        # The forecast price is the authoritative ML output — the signal badge must
+        # agree with it so the user isn't given contradictory information.
+        if forecast_price is not None and model_name != 'trend-based':
+            if signal == 'BULLISH' and forecast_price < current_price:
+                signal = 'NEUTRAL'
+            elif signal == 'BEARISH' and forecast_price > current_price:
+                signal = 'NEUTRAL'
         
         return jsonify({
             'forecast_price': round(forecast_price, 2),
@@ -2025,6 +2042,19 @@ def init_app():
         # Pre-compute best strategy per symbol from backtest CSVs
         # so the first page load already has the correct highlights
         auto_select_strategies()
+
+        # Pre-load all registered users into user_portfolios so the auto-trader
+        # can process their portfolios without waiting for them to log in.
+        try:
+            import sqlite3 as _sqlite3
+            conn = _sqlite3.connect(cfg.DATABASE_PATH)
+            user_rows = conn.execute('SELECT id FROM users').fetchall()
+            conn.close()
+            for (uid,) in user_rows:
+                _user_state(uid)
+            print(f"[STARTUP] Pre-loaded {len(user_rows)} user portfolios for auto-trading.")
+        except Exception as preload_err:
+            print(f"[STARTUP] Could not pre-load user portfolios: {preload_err}")
 
 
 # ============================================================================
@@ -2194,6 +2224,175 @@ def health():
         'timestamp': datetime.now().isoformat(),
         'portfolio_initialized': _app_initialized
     })
+
+# ============================================================================
+# ALPACA LIVE TRADING API ENDPOINTS
+# ============================================================================
+
+import alpaca_broker as _alpaca_mod
+
+@app.route('/api/broker/status')
+@login_required
+def broker_status():
+    """Return whether live broker integration is configured and available."""
+    return jsonify({
+        'available': _alpaca_mod.is_available(),
+        'paper': cfg.ALPACA_PAPER,
+        'keys_configured': bool(cfg.ALPACA_API_KEY and cfg.ALPACA_SECRET_KEY),
+    })
+
+@app.route('/api/broker/account')
+@login_required
+def broker_account():
+    """Return Alpaca account overview (buying power, equity, P&L today)."""
+    if not _alpaca_mod.is_available():
+        return jsonify({'error': 'Broker not configured. Add ALPACA_API_KEY and ALPACA_SECRET_KEY to .env'}), 503
+    try:
+        broker = _alpaca_mod.get_broker()
+        return jsonify(broker.get_account())
+    except Exception as exc:
+        return jsonify({'error': str(exc)}), 500
+
+@app.route('/api/broker/positions')
+@login_required
+def broker_positions():
+    """Return all live open positions from Alpaca."""
+    if not _alpaca_mod.is_available():
+        return jsonify({'error': 'Broker not configured'}), 503
+    try:
+        broker = _alpaca_mod.get_broker()
+        return jsonify(broker.get_positions())
+    except Exception as exc:
+        return jsonify({'error': str(exc)}), 500
+
+@app.route('/api/broker/orders')
+@login_required
+def broker_orders():
+    """Return recent Alpaca orders. ?status=open|closed|all"""
+    if not _alpaca_mod.is_available():
+        return jsonify({'error': 'Broker not configured'}), 503
+    status = request.args.get('status', 'all')
+    if status not in ('open', 'closed', 'all'):
+        return jsonify({'error': 'status must be open, closed, or all'}), 400
+    try:
+        broker = _alpaca_mod.get_broker()
+        return jsonify(broker.get_orders(status=status, limit=100))
+    except Exception as exc:
+        return jsonify({'error': str(exc)}), 500
+
+@app.route('/api/broker/price/<symbol>')
+@login_required
+def broker_price(symbol: str):
+    """Return the latest trade price for a symbol via Alpaca."""
+    symbol = symbol.upper()
+    if not _validate_symbol(symbol):
+        return jsonify({'error': 'Invalid or unsupported symbol'}), 400
+    if not _alpaca_mod.is_available():
+        return jsonify({'error': 'Broker not configured'}), 503
+    try:
+        broker = _alpaca_mod.get_broker()
+        price = broker.get_latest_price(symbol)
+        return jsonify({'symbol': symbol, 'price': price})
+    except Exception as exc:
+        return jsonify({'error': str(exc)}), 500
+
+@app.route('/api/broker/order', methods=['POST'])
+@login_required
+def broker_place_order():
+    """
+    Place a market or limit order via Alpaca.
+
+    Body JSON:
+        symbol    str   Required. E.g. "AAPL"
+        side      str   Required. "buy" or "sell"
+        qty       float Required. Number of shares
+        type      str   "market" (default) or "limit"
+        limit_price float  Required when type="limit"
+    """
+    if not _alpaca_mod.is_available():
+        return jsonify({'error': 'Broker not configured'}), 503
+
+    data = request.get_json(silent=True) or {}
+    symbol = str(data.get('symbol', '')).upper()
+    side = str(data.get('side', '')).lower()
+    qty = data.get('qty')
+    order_type = str(data.get('type', 'market')).lower()
+    limit_price = data.get('limit_price')
+
+    # --- Validation ---
+    if not _validate_symbol(symbol):
+        return jsonify({'error': 'Invalid or unsupported symbol'}), 400
+    if side not in ('buy', 'sell'):
+        return jsonify({'error': 'side must be buy or sell'}), 400
+    try:
+        qty = float(qty)
+        if qty <= 0:
+            raise ValueError
+    except (TypeError, ValueError):
+        return jsonify({'error': 'qty must be a positive number'}), 400
+    if order_type not in ('market', 'limit'):
+        return jsonify({'error': 'type must be market or limit'}), 400
+    if order_type == 'limit':
+        try:
+            limit_price = float(limit_price)
+            if limit_price <= 0:
+                raise ValueError
+        except (TypeError, ValueError):
+            return jsonify({'error': 'limit_price must be a positive number for limit orders'}), 400
+
+    try:
+        broker = _alpaca_mod.get_broker()
+        if order_type == 'market':
+            result = broker.place_market_order(symbol, qty, side)
+        else:
+            result = broker.place_limit_order(symbol, qty, side, limit_price)
+        return jsonify(result), 201
+    except Exception as exc:
+        return jsonify({'error': str(exc)}), 500
+
+@app.route('/api/broker/order/<order_id>', methods=['DELETE'])
+@login_required
+def broker_cancel_order(order_id: str):
+    """Cancel an open Alpaca order."""
+    if not _alpaca_mod.is_available():
+        return jsonify({'error': 'Broker not configured'}), 503
+    if not order_id or len(order_id) > 64:
+        return jsonify({'error': 'Invalid order_id'}), 400
+    try:
+        broker = _alpaca_mod.get_broker()
+        ok = broker.cancel_order(order_id)
+        return jsonify({'cancelled': ok})
+    except Exception as exc:
+        return jsonify({'error': str(exc)}), 500
+
+@app.route('/api/broker/position/<symbol>/close', methods=['POST'])
+@login_required
+def broker_close_position(symbol: str):
+    """Market-sell the full position in a symbol."""
+    symbol = symbol.upper()
+    if not _validate_symbol(symbol):
+        return jsonify({'error': 'Invalid or unsupported symbol'}), 400
+    if not _alpaca_mod.is_available():
+        return jsonify({'error': 'Broker not configured'}), 503
+    try:
+        broker = _alpaca_mod.get_broker()
+        result = broker.close_position(symbol)
+        return jsonify(result)
+    except Exception as exc:
+        return jsonify({'error': str(exc)}), 500
+
+@app.route('/api/broker/positions/close-all', methods=['POST'])
+@login_required
+def broker_close_all():
+    """Close ALL open positions at market price. Use with care."""
+    if not _alpaca_mod.is_available():
+        return jsonify({'error': 'Broker not configured'}), 503
+    try:
+        broker = _alpaca_mod.get_broker()
+        results = broker.close_all_positions()
+        return jsonify({'closed': results})
+    except Exception as exc:
+        return jsonify({'error': str(exc)}), 500
 
 # ============================================================================
 # ERROR HANDLERS

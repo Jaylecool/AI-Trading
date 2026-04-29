@@ -38,3 +38,9 @@ results/user_*_auto_state.json
 # Dissertation text (not source code)
 *.txt
 !requirements.txt
+
+# Node / React Native
+node_modules/
+mobile/node_modules/
+*.lock
+!package-lock.json

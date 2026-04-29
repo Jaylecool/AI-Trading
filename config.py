@@ -42,6 +42,12 @@ STREAM_UPDATE_FREQUENCY: int = int(os.getenv('STREAM_UPDATE_FREQUENCY', '2'))
 import secrets as _secrets
 SECRET_KEY: str = os.getenv('SECRET_KEY', _secrets.token_hex(32))
 
+# --- Alpaca ---
+ALPACA_API_KEY: str = os.getenv('ALPACA_API_KEY', '')
+ALPACA_SECRET_KEY: str = os.getenv('ALPACA_SECRET_KEY', '')
+# Set ALPACA_PAPER=false in .env to switch from paper trading to live
+ALPACA_PAPER: bool = os.getenv('ALPACA_PAPER', 'true').lower() not in ('false', '0', 'no')
+
 # --- Directories ---
 RESULTS_DIR: str = os.path.join(_BASE_DIR, 'results')
 TRAINED_MODELS_DIR: str = os.path.join(_BASE_DIR, 'trained_models')
