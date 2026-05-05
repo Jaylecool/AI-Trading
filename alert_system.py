@@ -17,12 +17,16 @@ logger = logging.getLogger(__name__)
 
 class AlertType(Enum):
     """Types of alerts the system can generate"""
-    PRICE_ALERT = "price_alert"  # Price crosses threshold
-    PREDICTION_ALERT = "prediction_alert"  # Prediction confidence changes
-    STOP_LOSS_ALERT = "stop_loss_alert"  # Stop loss breached
-    PORTFOLIO_ALERT = "portfolio_alert"  # Portfolio drawdown, equity change
-    RISK_ALERT = "risk_alert"  # Risk metrics exceed limits
+    PRICE_ALERT = "price_alert"          # Price crosses threshold
+    PREDICTION_ALERT = "prediction_alert" # Prediction confidence changes
+    STOP_LOSS_ALERT = "stop_loss_alert"   # Stop loss breached
+    PORTFOLIO_ALERT = "portfolio_alert"   # Portfolio drawdown, equity change
+    RISK_ALERT = "risk_alert"            # Risk metrics exceed limits
     PERFORMANCE_ALERT = "performance_alert"  # Win rate, profit changes
+    # --- NLP / Sentiment alerts ---
+    SENTIMENT_ALERT = "sentiment_alert"          # Sentiment crosses threshold
+    NEWS_SPIKE_ALERT = "news_spike_alert"        # Rapid sentiment drop detected
+    EARNINGS_MENTION_ALERT = "earnings_mention_alert"  # Earnings keyword detected
 
 
 class AlertSeverity(Enum):
@@ -238,18 +242,67 @@ class AlertSystem:
         if callback in self.callbacks:
             self.callbacks.remove(callback)
     
-    def evaluate(self, symbol: str, data: Dict[str, Any]) -> List[AlertEvent]:
+    def evaluate(self, symbol: str, data: Dict[str, Any],
+                sentiment_data: Optional[Dict[str, Any]] = None) -> List[AlertEvent]:
         """
         Evaluate all rules against provided data and trigger alerts if conditions met.
         
         Args:
-            symbol: Symbol being evaluated
-            data: Dictionary with metric values (e.g., {'price': 150.5, 'confidence': 0.75})
+            symbol:         Symbol being evaluated
+            data:           Dictionary with metric values (e.g., {'price': 150.5, 'confidence': 0.75})
+            sentiment_data: Optional dict with NLP sentiment values:
+                              {'sentiment_1d': float, 'sentiment_momentum': float,
+                               'news_volume_7d': int, 'sentiment_delta': float}
             
         Returns:
             List of triggered AlertEvents
         """
         triggered_alerts = []
+
+        # Merge sentiment data into the evaluation data dict
+        merged_data = dict(data)
+        if sentiment_data:
+            merged_data.update(sentiment_data)
+
+        # --- Auto-generate sentiment-based alerts when news_spike_alert conditions met ---
+        if sentiment_data:
+            delta = sentiment_data.get('sentiment_delta', 0.0) or 0.0
+            score = sentiment_data.get('sentiment_1d', 0.0) or 0.0
+            # Raise a synthetic NEWS_SPIKE_ALERT when sentiment drops sharply
+            if delta < -0.30:
+                severity = AlertSeverity.CRITICAL if delta < -0.5 else AlertSeverity.HIGH
+                spike_event = AlertEvent(
+                    rule_id='auto_news_spike',
+                    rule_name='Auto: News Sentiment Spike',
+                    alert_type=AlertType.NEWS_SPIKE_ALERT,
+                    severity=severity,
+                    symbol=symbol,
+                    message=(f"{symbol} sentiment dropped {delta:+.3f} to {score:.3f} — "
+                             f"possible negative news event"),
+                    metric_field='sentiment_delta',
+                    current_value=float(delta),
+                    threshold_value=-0.30,
+                    operator='<',
+                )
+                self._register_alert(spike_event)
+                triggered_alerts.append(spike_event)
+
+            # Raise SENTIMENT_ALERT when score falls below -0.3
+            if score < -0.30:
+                sent_event = AlertEvent(
+                    rule_id='auto_sentiment',
+                    rule_name='Auto: Negative Sentiment',
+                    alert_type=AlertType.SENTIMENT_ALERT,
+                    severity=AlertSeverity.HIGH,
+                    symbol=symbol,
+                    message=(f"{symbol} 1-day sentiment is strongly negative ({score:.3f})"),
+                    metric_field='sentiment_1d',
+                    current_value=float(score),
+                    threshold_value=-0.30,
+                    operator='<',
+                )
+                self._register_alert(sent_event)
+                triggered_alerts.append(sent_event)
         
         for rule in self.rules.values():
             # Skip disabled rules
@@ -261,11 +314,11 @@ class AlertSystem:
                 continue
             
             # Check if metric is in data
-            if rule.metric_field not in data:
+            if rule.metric_field not in merged_data:
                 continue
             
             # Evaluate condition
-            current_value = data[rule.metric_field]
+            current_value = merged_data[rule.metric_field]
             threshold = rule.threshold_value
             operator = rule.operator
             

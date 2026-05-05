@@ -1821,6 +1821,98 @@
         @media (max-width: 768px) {
             .user-name { display: none; }
         }
+
+        /* ===== SENTIMENT PANEL STYLES (NLP upgrade) ===== */
+        .sentiment-panel-wrapper {
+            background: #1a1f2e;
+            border: 1px solid #2d3451;
+            border-radius: 12px;
+            margin: 18px 24px;
+            padding: 18px;
+        }
+        .sentiment-panel-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #c8d0e8;
+            margin-bottom: 14px;
+        }
+        .sentiment-panel-header i { color: #7b8cde; }
+        .sentiment-backend-badge {
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 20px;
+            background: #2a3050;
+            color: #9ba8e0;
+            letter-spacing: .5px;
+            text-transform: uppercase;
+        }
+        .sentiment-refresh-btn {
+            margin-left: auto;
+            background: none;
+            border: 1px solid #2d3451;
+            color: #9ba8e0;
+            border-radius: 6px;
+            padding: 4px 10px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: .2s;
+        }
+        .sentiment-refresh-btn:hover { background: #2d3451; color: #fff; }
+        .sentiment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .sentiment-card {
+            background: #212640;
+            border-radius: 10px;
+            padding: 14px;
+            border-left: 4px solid #555;
+        }
+        .sentiment-card.positive { border-left-color: #27c47a; }
+        .sentiment-card.neutral  { border-left-color: #f5a623; }
+        .sentiment-card.negative { border-left-color: #e05252; }
+        .sentiment-card-symbol { font-size: 13px; font-weight: 700; color: #c8d0e8; }
+        .sentiment-card-score  { font-size: 22px; font-weight: 800; margin: 4px 0; }
+        .sentiment-card.positive .sentiment-card-score { color: #27c47a; }
+        .sentiment-card.neutral  .sentiment-card-score { color: #f5a623; }
+        .sentiment-card.negative .sentiment-card-score { color: #e05252; }
+        .sentiment-sparkline { margin-top: 6px; }
+        .sentiment-card-meta { font-size: 10px; color: #6e7898; margin-top: 4px; }
+        .news-feed-panel { margin-top: 6px; }
+        .news-feed-title { font-size: 13px; font-weight: 600; color: #9ba8e0; margin-bottom: 8px; }
+        .news-feed-list { display: flex; flex-direction: column; gap: 6px; }
+        .news-feed-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            background: #212640;
+            border-radius: 8px;
+            padding: 10px 12px;
+        }
+        .news-feed-badge {
+            min-width: 58px;
+            text-align: center;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 700;
+            margin-top: 2px;
+        }
+        .news-feed-badge.positive { background: #1b3a2a; color: #27c47a; }
+        .news-feed-badge.neutral  { background: #3a2f10; color: #f5a623; }
+        .news-feed-badge.negative { background: #3a1515; color: #e05252; }
+        .news-feed-content { flex: 1; }
+        .news-feed-headline { font-size: 12px; color: #c8d0e8; line-height: 1.4; }
+        .news-feed-headline a { color: #7b8cde; text-decoration: none; }
+        .news-feed-headline a:hover { text-decoration: underline; }
+        .news-feed-meta { font-size: 10px; color: #6e7898; margin-top: 2px; }
+        .news-feed-empty { color: #6e7898; font-size: 12px; padding: 10px; }
     </style>
 </head>
 <body>
@@ -1978,6 +2070,24 @@
                             <div class="symbol-toggle-grid" id="symbolToggleGrid"></div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ====== SENTIMENT PANEL (injected by NLP upgrade) ====== -->
+        <div id="sentiment-panel" class="sentiment-panel-wrapper">
+            <div class="sentiment-panel-header">
+                <span><i class="fas fa-newspaper"></i> NLP Market Sentiment</span>
+                <span id="sentiment-backend-badge" class="sentiment-backend-badge"></span>
+                <button onclick="refreshSentiment()" class="sentiment-refresh-btn" title="Refresh sentiment"><i class="fas fa-sync-alt"></i></button>
+            </div>
+            <div id="sentiment-grid" class="sentiment-grid">
+                <!-- Cards injected by JS -->
+            </div>
+            <div id="news-feed-panel" class="news-feed-panel">
+                <div class="news-feed-title"><i class="fas fa-rss"></i> Latest Headlines</div>
+                <div id="news-feed-list" class="news-feed-list">
+                    <div class="news-feed-empty">Loading news…</div>
                 </div>
             </div>
         </div>
@@ -3761,6 +3871,133 @@
         
         // Expose debug function to global scope for console access
         window.checkPermissionStatus = checkPermissionStatus;
+    </script>
+
+    <!-- ===== SENTIMENT PANEL JAVASCRIPT (NLP upgrade) ===== -->
+    <script>
+    (function() {
+        const SYMBOLS = ['AAPL','MSFT','GOOGL','AMZN','TSLA','NVDA','META'];
+        const POLL_MS = 5 * 60 * 1000; // refresh every 5 min
+
+        function sentimentClass(score) {
+            if (score === null || score === undefined) return 'neutral';
+            if (score >  0.10) return 'positive';
+            if (score < -0.10) return 'negative';
+            return 'neutral';
+        }
+
+        function sentimentLabel(score) {
+            if (score === null || score === undefined) return 'N/A';
+            if (score >  0.10) return '▲ Bullish';
+            if (score < -0.10) return '▼ Bearish';
+            return '● Neutral';
+        }
+
+        async function loadSentiment(symbol) {
+            try {
+                const res = await fetch('/api/sentiment/' + symbol);
+                if (!res.ok) return null;
+                return await res.json();
+            } catch(e) { return null; }
+        }
+
+        async function loadNews(symbol, forceRefresh) {
+            try {
+                const url = '/api/news/' + symbol + '?limit=5' + (forceRefresh ? '&refresh=true' : '');
+                const res = await fetch(url);
+                if (!res.ok) return [];
+                const data = await res.json();
+                return data.articles || [];
+            } catch(e) { return []; }
+        }
+
+        function renderSentimentCards(results) {
+            const grid = document.getElementById('sentiment-grid');
+            if (!grid) return;
+            grid.innerHTML = '';
+            let backend = '';
+            results.forEach(({symbol, data}) => {
+                if (!data) return;
+                if (data.backend) backend = data.backend;
+                const score = typeof data.Sentiment_1d === 'number' ? data.Sentiment_1d : 0;
+                const mom   = typeof data.Sentiment_Momentum === 'number' ? data.Sentiment_Momentum : 0;
+                const vol   = data.News_Volume_7d || 0;
+                const cls   = sentimentClass(score);
+                const card  = document.createElement('div');
+                card.className = 'sentiment-card ' + cls;
+                card.innerHTML =
+                    '<div class="sentiment-card-symbol">' + symbol + '</div>' +
+                    '<div class="sentiment-card-score">' + (score >= 0 ? '+' : '') + score.toFixed(3) + '</div>' +
+                    '<div class="sentiment-card-meta">' + sentimentLabel(score) +
+                      ' &nbsp;|&nbsp; Mom: ' + (mom >= 0 ? '+' : '') + mom.toFixed(3) +
+                      ' &nbsp;|&nbsp; Vol: ' + vol + '</div>';
+                grid.appendChild(card);
+            });
+            const badge = document.getElementById('sentiment-backend-badge');
+            if (badge && backend) badge.textContent = backend;
+        }
+
+        function renderNewsFeed(allArticles) {
+            const list = document.getElementById('news-feed-list');
+            if (!list) return;
+            if (!allArticles.length) {
+                list.innerHTML = '<div class="news-feed-empty">No recent news cached. Click refresh to fetch live headlines.</div>';
+                return;
+            }
+            list.innerHTML = '';
+            allArticles.slice(0, 10).forEach(art => {
+                const score = art.sentiment_score;
+                const cls = sentimentClass(score);
+                const scoreText = score != null ? (score >= 0 ? '+' : '') + parseFloat(score).toFixed(3) : '—';
+                const pub = art.published_at ? new Date(art.published_at).toLocaleString() : '';
+                const item = document.createElement('div');
+                item.className = 'news-feed-item';
+                item.innerHTML =
+                    '<div class="news-feed-badge ' + cls + '">' + scoreText + '</div>' +
+                    '<div class="news-feed-content">' +
+                      '<div class="news-feed-headline">' +
+                        (art.url ? '<a href="' + art.url + '" target="_blank" rel="noopener noreferrer">' + art.title + '</a>'
+                                 : art.title) +
+                      '</div>' +
+                      '<div class="news-feed-meta">' + art.source + ' &middot; ' + pub + '</div>' +
+                    '</div>';
+                list.appendChild(item);
+            });
+        }
+
+        async function refreshSentiment(forceRefresh) {
+            const btn = document.querySelector('.sentiment-refresh-btn');
+            if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'; }
+
+            const results = [];
+            let allArticles = [];
+            // Fetch news first (with optional live refresh), then sentiment (reads updated cache)
+            for (const sym of SYMBOLS) {
+                await loadNews(sym, forceRefresh);  // fetch+score+cache
+                const [sdata, articles] = await Promise.all([loadSentiment(sym), loadNews(sym, false)]);
+                results.push({symbol: sym, data: sdata});
+                articles.forEach(a => { a._sym = sym; });
+                allArticles = allArticles.concat(articles);
+            }
+            // Sort by published_at desc
+            allArticles.sort((a, b) => {
+                return (b.published_at || '').localeCompare(a.published_at || '');
+            });
+            renderSentimentCards(results);
+            renderNewsFeed(allArticles);
+
+            if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-sync-alt"></i>'; }
+        }
+
+        // Expose for the refresh button
+        window.refreshSentiment = function() { return refreshSentiment(true); };
+
+        // Auto-load on page ready
+        document.addEventListener('DOMContentLoaded', function() {
+            refreshSentiment(true);  // force live fetch on first load
+            setInterval(function() { refreshSentiment(false); }, POLL_MS);
+        });
+    })();
     </script>
 </body>
 </html>

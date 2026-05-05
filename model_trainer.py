@@ -134,6 +134,16 @@ def _prepare_dataset(df: pd.DataFrame, symbol: str) -> Tuple[
         'Volatility_Ratio', 'MACD_Hist_Change', 'Pos_Days_5d',
     ]
 
+    # --- Sentiment features (added by data_fetcher.enrich_with_sentiment) ---
+    # Only include them when present; keeps backward-compat with older CSVs.
+    SENTIMENT_COLS = ['Sentiment_1d', 'Sentiment_3d', 'Sentiment_7d',
+                      'News_Volume_7d', 'Sentiment_Momentum']
+    for col in SENTIMENT_COLS:
+        if col in df.columns:
+            # Forward-fill gaps (e.g. weekends with no news) then fill remaining with 0
+            df[col] = df[col].ffill().fillna(0.0)
+            feature_cols.append(col)
+
     df = df.dropna(subset=feature_cols + ['Target_Return'])
     X = df[feature_cols]
     y_return = df['Target_Return']

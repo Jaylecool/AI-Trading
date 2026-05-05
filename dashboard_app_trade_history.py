@@ -2408,6 +2408,182 @@ def internal_error(e):
     """Handle 500 errors"""
     return jsonify({'error': 'Internal server error'}), 500
 
+
+# ============================================================================
+# SENTIMENT / NLP ENDPOINTS
+# ============================================================================
+
+# Lazy-imported NLP helpers (gracefully absent if dependencies not installed)
+_nlp_sentiment_service = None
+_news_data_fetcher = None
+
+def _get_nlp_service():
+    global _nlp_sentiment_service
+    if _nlp_sentiment_service is None:
+        try:
+            import nlp_sentiment_service as _svc
+            _nlp_sentiment_service = _svc
+        except Exception:
+            pass
+    return _nlp_sentiment_service
+
+def _get_news_fetcher():
+    global _news_data_fetcher
+    if _news_data_fetcher is None:
+        try:
+            import news_data_fetcher as _nf
+            _news_data_fetcher = _nf
+        except Exception:
+            pass
+    return _news_data_fetcher
+
+
+@app.route('/api/sentiment/<symbol>', methods=['GET'])
+@login_required
+def get_sentiment(symbol):
+    """
+    GET /api/sentiment/<symbol>
+
+    Returns rolling NLP sentiment scores for the given symbol.
+    Response:
+      {
+        "symbol": "AAPL",
+        "Sentiment_1d": 0.12,
+        "Sentiment_3d": 0.07,
+        "Sentiment_7d": -0.03,
+        "News_Volume_7d": 14,
+        "Sentiment_Momentum": 0.15,
+        "backend": "finbert" | "vader" | "unavailable"
+      }
+    """
+    symbol = symbol.upper()
+    if not _validate_symbol(symbol):
+        return jsonify({'error': f'Invalid symbol: {symbol}'}), 400
+
+    svc = _get_nlp_service()
+    if svc is None:
+        return jsonify({
+            'symbol': symbol,
+            'Sentiment_1d': 0.0,
+            'Sentiment_3d': 0.0,
+            'Sentiment_7d': 0.0,
+            'News_Volume_7d': 0,
+            'Sentiment_Momentum': 0.0,
+            'backend': 'unavailable',
+            'message': 'NLP service not installed (pip install transformers vaderSentiment)',
+        })
+
+    try:
+        features = svc.get_sentiment_features(symbol)
+        # Determine which backend is active
+        backend = 'finbert' if getattr(svc, '_finbert_available', False) else 'vader'
+        return jsonify({
+            'symbol': symbol,
+            **features,
+            'backend': backend,
+        })
+    except Exception as e:
+        logger.error(f"Sentiment error for {symbol}: {e}")
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/api/news/<symbol>', methods=['GET'])
+@login_required
+def get_news(symbol):
+    """
+    GET /api/news/<symbol>[?limit=10&refresh=false]
+
+    Returns the latest cached news articles with sentiment scores.
+    Pass refresh=true to trigger a live news fetch.
+    """
+    symbol = symbol.upper()
+    if not _validate_symbol(symbol):
+        return jsonify({'error': f'Invalid symbol: {symbol}'}), 400
+
+    nf = _get_news_fetcher()
+    if nf is None:
+        return jsonify({'symbol': symbol, 'articles': [], 'total': 0,
+                        'message': 'news_data_fetcher not available'}), 200
+
+    try:
+        limit = min(int(request.args.get('limit', 10)), 50)
+        do_refresh = request.args.get('refresh', 'false').lower() == 'true'
+
+        if do_refresh:
+            articles = nf.fetch_news(symbol)
+        else:
+            articles = nf.load_cached_news(symbol)
+
+        # Score any unscored articles
+        svc = _get_nlp_service()
+        if svc is not None:
+            articles = svc.score_articles_inplace(symbol, articles)
+
+        # Return top N articles
+        trimmed = []
+        for art in articles[:limit]:
+            trimmed.append({
+                'title': art.get('title', ''),
+                'summary': (art.get('summary') or '')[:200],
+                'url': art.get('url', ''),
+                'published_at': art.get('published_at', ''),
+                'source': art.get('source', ''),
+                'sentiment_score': art.get('sentiment_score'),
+                'sentiment_label': art.get('sentiment_label'),
+            })
+
+        return jsonify({
+            'symbol': symbol,
+            'articles': trimmed,
+            'total': len(articles),
+            'returned': len(trimmed),
+            'timestamp': datetime.now().isoformat(),
+        })
+    except Exception as e:
+        logger.error(f"News fetch error for {symbol}: {e}")
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/api/sentiment/stream-events', methods=['GET'])
+@login_required
+def get_sentiment_stream_events():
+    """
+    GET /api/sentiment/stream-events[?limit=20]
+
+    Returns the latest sentiment_update and news_spike events from the
+    streaming service event queue snapshot.
+    """
+    try:
+        limit = min(int(request.args.get('limit', 20)), 100)
+        events = []
+
+        if streaming_service is not None:
+            # Drain the queue non-blocking; re-enqueue non-sentiment events
+            requeue = []
+            while len(events) < limit:
+                try:
+                    ev = streaming_service.event_queue.get_nowait()
+                    if ev.event_type in ('sentiment_update', 'news_spike'):
+                        events.append(ev.to_dict())
+                    else:
+                        requeue.append(ev)
+                except Exception:
+                    break
+            for ev in requeue:
+                try:
+                    streaming_service.event_queue.put_nowait(ev)
+                except Exception:
+                    pass
+
+        return jsonify({
+            'events': events,
+            'count': len(events),
+            'timestamp': datetime.now().isoformat(),
+        })
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
 # ============================================================================
 # MAIN
 # ============================================================================

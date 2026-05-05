@@ -35,6 +35,7 @@ class PriceUpdate:
     ask: float
     volume: int
     change_percent: float
+    sentiment_score: Optional[float] = None   # latest NLP sentiment (-1..+1)
     
     def to_dict(self):
         return asdict(self)
@@ -66,9 +67,12 @@ class StreamingDataService:
         self.subscribed_symbols: Dict[str, List[Callable]] = {}
         self.price_cache: Dict[str, PriceUpdate] = {}
         self.is_running = False
-        self.update_frequency = 2  # seconds between updates
+        self.update_frequency = 2  # seconds between price updates
         self.stream_thread = None
+        self.news_thread = None   # NewsStreamThread
         self.event_queue = queue.Queue()
+        # Latest sentiment per symbol (updated by news thread)
+        self._sentiment_cache: Dict[str, float] = {}
         
     def subscribe(self, symbol: str, callback: Callable[[PriceUpdate], None]):
         """
@@ -101,6 +105,11 @@ class StreamingDataService:
         self.is_running = True
         self.stream_thread = threading.Thread(target=self._stream_loop, daemon=True)
         self.stream_thread.start()
+
+        # Start background news + sentiment polling thread
+        self.news_thread = threading.Thread(target=self._news_loop, daemon=True)
+        self.news_thread.start()
+
         logger.info("Streaming service started")
     
     def stop(self):
@@ -108,6 +117,8 @@ class StreamingDataService:
         self.is_running = False
         if self.stream_thread:
             self.stream_thread.join(timeout=5)
+        if self.news_thread:
+            self.news_thread.join(timeout=5)
         logger.info("Streaming service stopped")
     
     def _stream_loop(self):
@@ -145,6 +156,102 @@ class StreamingDataService:
             except Exception as e:
                 logger.error(f"Error in stream loop: {e}")
                 time.sleep(1)
+
+    def _news_loop(self):
+        """Background thread: polls for new news every NEWS_POLL_MINUTES minutes,
+        computes NLP sentiment, updates _sentiment_cache, and emits events."""
+        try:
+            import config as cfg
+            poll_interval_s = cfg.NEWS_POLL_MINUTES * 60
+        except Exception:
+            poll_interval_s = 15 * 60
+
+        # NLP service (optional)
+        try:
+            from nlp_sentiment_service import get_sentiment_features, score_articles_inplace
+            from news_data_fetcher import refresh_news, load_cached_news
+            _nlp_ok = True
+        except Exception:
+            _nlp_ok = False
+
+        _prev_sentiment: Dict[str, float] = {}  # to detect spikes
+
+        while self.is_running:
+            if not _nlp_ok:
+                time.sleep(poll_interval_s)
+                continue
+
+            symbols = list(self.subscribed_symbols.keys())
+            for symbol in symbols:
+                if not self.is_running:
+                    break
+                try:
+                    # Refresh news cache incrementally
+                    articles = refresh_news(symbol)
+                    score_articles_inplace(symbol, articles)
+
+                    # Compute rolling sentiment
+                    features = get_sentiment_features(symbol)
+                    score = features.get('Sentiment_1d', 0.0) or 0.0
+                    self._sentiment_cache[symbol] = score
+
+                    # Update price_cache with latest sentiment
+                    if symbol in self.price_cache:
+                        self.price_cache[symbol].sentiment_score = score
+
+                    # Detect sentiment spike (drop > 0.3 vs previous)
+                    prev = _prev_sentiment.get(symbol, score)
+                    delta = score - prev
+                    _prev_sentiment[symbol] = score
+
+                    event_data = {
+                        'symbol': symbol,
+                        'sentiment_1d': round(score, 4),
+                        'sentiment_3d': features.get('Sentiment_3d', 0.0),
+                        'sentiment_7d': features.get('Sentiment_7d', 0.0),
+                        'news_volume_7d': features.get('News_Volume_7d', 0),
+                        'sentiment_momentum': features.get('Sentiment_Momentum', 0.0),
+                        'articles': [
+                            {
+                                'title': a.get('title', ''),
+                                'published_at': a.get('published_at', ''),
+                                'sentiment_score': a.get('sentiment_score'),
+                                'sentiment_label': a.get('sentiment_label'),
+                                'source': a.get('source', ''),
+                                'url': a.get('url', ''),
+                            }
+                            for a in (articles or [])[:5]
+                        ],
+                    }
+
+                    self.event_queue.put(DataStreamEvent(
+                        event_type='sentiment_update',
+                        timestamp=datetime.now().isoformat(),
+                        data=event_data,
+                    ))
+
+                    # Breaking-news spike detection
+                    if delta < -0.30:
+                        self.event_queue.put(DataStreamEvent(
+                            event_type='news_spike',
+                            timestamp=datetime.now().isoformat(),
+                            data={
+                                'symbol': symbol,
+                                'sentiment_delta': round(delta, 4),
+                                'current_sentiment': round(score, 4),
+                                'severity': 'HIGH' if delta < -0.5 else 'MEDIUM',
+                            },
+                        ))
+                        logger.warning(f"[NEWS SPIKE] {symbol}: sentiment dropped {delta:.3f}")
+
+                except Exception as e:
+                    logger.debug(f"[news_loop] {symbol}: {e}")
+
+            # Sleep between polling rounds
+            elapsed = 0
+            while self.is_running and elapsed < poll_interval_s:
+                time.sleep(5)
+                elapsed += 5
     
     def _fetch_latest_prices(self) -> Dict[str, PriceUpdate]:
         """

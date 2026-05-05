@@ -24,6 +24,20 @@ warnings.filterwarnings('ignore')
 _BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 _MODELS_DIR = os.path.join(_BASE_DIR, 'trained_models')
 
+# TFT and NLP imports (optional — system works without them)
+try:
+    from transformer_predictor import predict_tft as _predict_tft, SEQUENCE_LENGTH as _TFT_SEQ_LEN
+    _TFT_AVAILABLE = True
+except Exception:
+    _TFT_AVAILABLE = False
+    _TFT_SEQ_LEN = 30
+
+try:
+    from nlp_sentiment_service import get_sentiment_features as _get_sentiment_features
+    _SENTIMENT_AVAILABLE = True
+except Exception:
+    _SENTIMENT_AVAILABLE = False
+
 
 # ============================================================================
 # MODEL CACHE  (load once, reuse)
@@ -98,6 +112,14 @@ class PredictionEngine:
 
         # Try to load trained ML models for this symbol
         self._models = _load_models(symbol)
+
+        # Try to get live sentiment features for signal enrichment
+        self._sentiment: Optional[Dict] = None
+        if _SENTIMENT_AVAILABLE:
+            try:
+                self._sentiment = _get_sentiment_features(symbol)
+            except Exception:
+                pass
 
     # ------------------------------------------------------------------
     # Technical indicators (kept for confirmation + fallback)
@@ -350,7 +372,7 @@ class PredictionEngine:
 
         pred_lr = lr.predict(X_sc)[0]
         pred_rf = rf.predict(X_sc)[0]
-        pred_return = lr_w * pred_lr + rf_w * pred_rf
+        pred_return_lr_rf = lr_w * pred_lr + rf_w * pred_rf
 
         # Direction classifier — use GB if available, else RF
         gb_clf = self._models.get('model_gb_clf')
@@ -358,7 +380,36 @@ class PredictionEngine:
             dir_proba = gb_clf.predict_proba(X_sc)[0]
         else:
             dir_proba = clf.predict_proba(X_sc)[0]
-        up_proba = dir_proba[1] if len(dir_proba) > 1 else 0.5
+        up_proba_clf = dir_proba[1] if len(dir_proba) > 1 else 0.5
+
+        # --- TFT prediction (blended in at 30% weight when available) ---
+        tft_pred_return = 0.0
+        tft_dir_prob = 0.5
+        tft_weight = 0.0
+        if _TFT_AVAILABLE:
+            try:
+                tft_result = _predict_tft(self.symbol, self.historical_data.tail(_TFT_SEQ_LEN + 20))
+                if tft_result['backend'] != 'unavailable':
+                    tft_pred_return = tft_result['predicted_return']
+                    tft_dir_prob = tft_result['direction_prob']
+                    tft_weight = 0.30
+            except Exception:
+                pass
+
+        # --- Sentiment adjustment ---
+        sentiment_bias = 0.0
+        if self._sentiment is not None:
+            s1d = self._sentiment.get('Sentiment_1d', 0.0) or 0.0
+            momentum = self._sentiment.get('Sentiment_Momentum', 0.0) or 0.0
+            # Scale: extreme sentiment (|score| > 0.5) biases return prediction by ±0.001
+            sentiment_bias = float(s1d) * 0.002 + float(momentum) * 0.001
+
+        # --- Combine: LR+RF ensemble (70%) + TFT (30%) + sentiment bias ---
+        lr_rf_weight = 1.0 - tft_weight
+        pred_return = (lr_rf_weight * pred_return_lr_rf +
+                       tft_weight * tft_pred_return +
+                       sentiment_bias)
+        up_proba = (lr_rf_weight * up_proba_clf + tft_weight * tft_dir_prob)
 
         # Combine with calibrated thresholds
         if pred_return > 0.001 and up_proba > 0.52:

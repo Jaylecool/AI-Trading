@@ -48,6 +48,18 @@ ALPACA_SECRET_KEY: str = os.getenv('ALPACA_SECRET_KEY', '')
 # Set ALPACA_PAPER=false in .env to switch from paper trading to live
 ALPACA_PAPER: bool = os.getenv('ALPACA_PAPER', 'true').lower() not in ('false', '0', 'no')
 
+# --- News / NLP (optional — system runs without these keys) ---
+# Finnhub free tier: https://finnhub.io/  (leave blank to skip)
+FINNHUB_API_KEY: str = os.getenv('FINNHUB_API_KEY', '')
+# NewsAPI free tier: https://newsapi.org/ (leave blank to skip)
+NEWSAPI_KEY: str = os.getenv('NEWSAPI_KEY', '')
+# How often (minutes) to poll for new headlines in the streaming service
+NEWS_POLL_MINUTES: int = int(os.getenv('NEWS_POLL_MINUTES', '15'))
+# News lookback window used for sentiment feature engineering (days)
+NEWS_LOOKBACK_DAYS: int = int(os.getenv('NEWS_LOOKBACK_DAYS', '30'))
+# NLP backend: 'finbert' (accurate, requires torch) or 'vader' (fast, no download)
+NLP_BACKEND: str = os.getenv('NLP_BACKEND', 'finbert')
+
 # --- Directories ---
 RESULTS_DIR: str = os.path.join(_BASE_DIR, 'results')
 TRAINED_MODELS_DIR: str = os.path.join(_BASE_DIR, 'trained_models')

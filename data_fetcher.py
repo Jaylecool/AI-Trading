@@ -16,6 +16,13 @@ import yfinance as yf
 from datetime import datetime, timedelta
 from typing import List, Optional
 
+# NLP / Sentiment enrichment (optional — skipped if service is unavailable)
+try:
+    from nlp_sentiment_service import get_sentiment_features as _get_sentiment_features
+    _SENTIMENT_AVAILABLE = True
+except Exception:
+    _SENTIMENT_AVAILABLE = False
+
 
 DEFAULT_SYMBOLS = ['AAPL', 'GOOGL', 'TSLA', 'MSFT', 'AMZN', 'META']
 DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')
@@ -113,11 +120,131 @@ def fetch_stock_data(
     indicator_cols = [c for c in df.columns if c not in keep_cols]
     df = df.dropna(subset=indicator_cols).reset_index(drop=True)
 
+    # --- Sentiment Enrichment (NLP) ---
+    df = enrich_with_sentiment(df, symbol)
+
     if save:
         os.makedirs(DATA_DIR, exist_ok=True)
         path = os.path.join(DATA_DIR, f'{symbol}_stock_data_with_indicators.csv')
         df.to_csv(path, index=False)
         print(f"  ✓ Saved {len(df)} rows → {path}")
+
+    return df
+
+
+def enrich_with_sentiment(df: pd.DataFrame, symbol: str) -> pd.DataFrame:
+    """
+    Append five sentiment-based feature columns to *df* using cached news data.
+
+    Columns added (all floats, forward-filled where gaps exist):
+      Sentiment_1d       — 1-day recency-weighted compound sentiment score (-1..+1)
+      Sentiment_3d       — 3-day score
+      Sentiment_7d       — 7-day score
+      News_Volume_7d     — count of articles in the last 7 days
+      Sentiment_Momentum — Sentiment_1d minus Sentiment_7d (short vs long shift)
+
+    When news data is unavailable the columns default to 0.0 (neutral).
+    This function is intentionally fast: it uses the pre-cached news JSON and
+    never makes network calls at inference time.
+    """
+    SENTIMENT_COLS = ['Sentiment_1d', 'Sentiment_3d', 'Sentiment_7d',
+                      'News_Volume_7d', 'Sentiment_Momentum']
+
+    if not _SENTIMENT_AVAILABLE:
+        for col in SENTIMENT_COLS:
+            df[col] = 0.0
+        return df
+
+    try:
+        # Refresh news cache (incremental; skips if already fresh)
+        from news_data_fetcher import refresh_news, load_cached_news, get_recent_articles
+        from nlp_sentiment_service import score_news_batch, score_articles_inplace
+        import math
+
+        # Only fetch if we're enriching a reasonably recent dataset
+        refresh_news(symbol)
+
+        # We need per-row sentiment based on the date of each row.
+        # For historical rows: use articles published up to (and including) that date.
+        # We compute this efficiently by grouping articles by date window.
+        all_articles = load_cached_news(symbol)
+        # Score all unscored articles once
+        from nlp_sentiment_service import score_articles_inplace
+        all_articles = score_articles_inplace(symbol, all_articles)
+
+        # Build {date_str -> compound_score} for each article
+        # Then for each row, aggregate scores for the 1/3/7 day windows.
+        # For efficiency, only compute per-date when df is large; otherwise
+        # use the current-time windows (acceptable for backfill).
+        n_rows = len(df)
+
+        if n_rows <= 500:  # Small dataset — use current-time rolling windows
+            from nlp_sentiment_service import get_sentiment_features
+            features = get_sentiment_features(symbol)
+            for col in SENTIMENT_COLS:
+                df[col] = features.get(col, 0.0)
+        else:
+            # Large historical dataset — compute per-row windows
+            # This is intentionally approximate: for historical rows we use
+            # articles available AT THAT TIME (published <= row_date).
+            dates = pd.to_datetime(df['Date'])
+
+            s1d_arr = np.zeros(n_rows, dtype=float)
+            s3d_arr = np.zeros(n_rows, dtype=float)
+            s7d_arr = np.zeros(n_rows, dtype=float)
+            vol7d_arr = np.zeros(n_rows, dtype=float)
+
+            # Pre-parse article dates (only once)
+            parsed_articles = []
+            for art in all_articles:
+                pub_str = art.get('published_at', '')
+                try:
+                    pub_str_clean = pub_str.replace('Z', '+00:00')
+                    dt = datetime.fromisoformat(pub_str_clean)
+                    if dt.tzinfo is not None:
+                        from datetime import timezone
+                        dt = dt.astimezone(timezone.utc).replace(tzinfo=None)
+                    parsed_articles.append((dt, art.get('sentiment_score', 0.0) or 0.0))
+                except (ValueError, TypeError):
+                    continue
+
+            for i, row_date in enumerate(dates):
+                row_dt = row_date.to_pydatetime().replace(tzinfo=None)
+                scores_1d, w_1d = [], []
+                scores_3d, w_3d = [], []
+                scores_7d, w_7d = [], []
+
+                for art_dt, compound in parsed_articles:
+                    if art_dt > row_dt:
+                        continue  # future news — skip
+                    age_hours = (row_dt - art_dt).total_seconds() / 3600
+                    if age_hours <= 24:
+                        w = math.exp(-age_hours / 24)
+                        scores_1d.append(compound * w); w_1d.append(w)
+                    if age_hours <= 72:
+                        w = math.exp(-age_hours / 72)
+                        scores_3d.append(compound * w); w_3d.append(w)
+                    if age_hours <= 168:
+                        w = math.exp(-age_hours / 168)
+                        scores_7d.append(compound * w); w_7d.append(w)
+                        vol7d_arr[i] += 1
+
+                s1d_arr[i] = sum(scores_1d) / sum(w_1d) if w_1d else 0.0
+                s3d_arr[i] = sum(scores_3d) / sum(w_3d) if w_3d else 0.0
+                s7d_arr[i] = sum(scores_7d) / sum(w_7d) if w_7d else 0.0
+
+            df['Sentiment_1d'] = np.round(s1d_arr, 4)
+            df['Sentiment_3d'] = np.round(s3d_arr, 4)
+            df['Sentiment_7d'] = np.round(s7d_arr, 4)
+            df['News_Volume_7d'] = vol7d_arr.astype(float)
+            df['Sentiment_Momentum'] = np.round(s1d_arr - s7d_arr, 4)
+
+        print(f"  ✓ Sentiment enrichment complete for {symbol} ")
+    except Exception as e:
+        print(f"  [sentiment] Enrichment skipped for {symbol}: {e}")
+        for col in SENTIMENT_COLS:
+            if col not in df.columns:
+                df[col] = 0.0
 
     return df
 

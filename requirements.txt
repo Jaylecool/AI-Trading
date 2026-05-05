@@ -18,6 +18,25 @@ alpaca-py>=0.20.0
 # Configuration
 python-dotenv>=1.0
 
+# ── NLP / Transformer upgrade ──────────────────────────────────────────────
+# FinBERT + HuggingFace Transformers (financial sentiment analysis)
+transformers>=4.35.0
+torch>=2.0.0
+
+# Temporal Fusion Transformer (price prediction)
+pytorch-forecasting>=1.0.0
+pytorch-lightning>=2.0.0
+
+# Fast rule-based sentiment fallback (no download needed)
+vaderSentiment>=3.3.0
+
+# Optional: financial news APIs (free-tier; leave keys blank to skip)
+newsapi-python>=0.2.7
+finnhub-python>=2.4.0
+
+# NLP utilities
+nltk>=3.8.0
+
 # Optional — only needed for model research notebooks in models/
 # matplotlib>=3.7
 # seaborn>=0.12
