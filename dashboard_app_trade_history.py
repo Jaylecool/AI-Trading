@@ -1520,8 +1520,19 @@ def auto_trade_cycle():
                 recent_returns = hist['Close'].pct_change().dropna().tail(20)
                 daily_volatility = float(recent_returns.std()) if len(recent_returns) > 0 else 0.01
 
-                # 4b. Get PredictionEngine signal (BULLISH / BEARISH / NEUTRAL)
+                # 4b. Get PredictionEngine signal + multi-horizon confluence
+                # ─────────────────────────────────────────────────────────────
+                # ENTRY LOGIC: We require daily + weekly horizons to AGREE on
+                # direction before placing a buy. Monthly is used to scale TP.
+                # This avoids acting on short-term noise that contradicts the
+                # medium-term trend, cutting false positives significantly.
+                # ─────────────────────────────────────────────────────────────
                 pe_signal = 'NEUTRAL'
+                pe_weekly_sl = None
+                pe_weekly_tp = None
+                pe_horizon_signals = {}   # {'daily': 'BULLISH', 'weekly': ..., 'monthly': ...}
+                pe_confluence_buy  = False  # True only when daily+weekly both BULLISH
+                pe_confluence_sell = False  # True only when daily+weekly both BEARISH
                 try:
                     _hist_clean = hist[['Close']].dropna()
                     pe_df = pd.DataFrame({
@@ -1531,10 +1542,61 @@ def auto_trade_cycle():
                     pe = PredictionEngine(pe_df, symbol=symbol)
                     indicators = pe.calculate_technical_indicators()
                     pe_signal, _ = pe.generate_signal(indicators)
+
+                    # Multi-horizon prediction
+                    try:
+                        pe_hz = pe.predict_all_horizons()
+                        horizons_data = pe_hz.get('horizons', {})
+                        daily_hz   = horizons_data.get('daily',   {})
+                        weekly_hz  = horizons_data.get('weekly',  {})
+                        monthly_hz = horizons_data.get('monthly', {})
+
+                        pe_horizon_signals = {
+                            'daily':   daily_hz.get('signal',  'NEUTRAL'),
+                            'weekly':  weekly_hz.get('signal', 'NEUTRAL'),
+                            'monthly': monthly_hz.get('signal','NEUTRAL'),
+                        }
+
+                        # SL: widest (lowest price) of ATR/pct/weekly
+                        pe_weekly_sl = weekly_hz.get('stop_loss')
+
+                        # TP: monthly when strongly bullish there, else weekly
+                        pe_weekly_tp = (
+                            monthly_hz.get('take_profit')
+                            if monthly_hz.get('signal') == 'BULLISH'
+                            else weekly_hz.get('take_profit')
+                        )
+
+                        # Confluence: require daily + weekly agreement
+                        # (monthly is a tiebreaker bonus, not required)
+                        d_sig = pe_horizon_signals['daily']
+                        w_sig = pe_horizon_signals['weekly']
+                        m_sig = pe_horizon_signals['monthly']
+
+                        if d_sig == 'BULLISH' and w_sig == 'BULLISH':
+                            pe_confluence_buy  = True
+                            # Bonus: if monthly also bullish, override pe_signal to ensure
+                            # the outer buy gate (pe_signal == 'BULLISH') is satisfied
+                            pe_signal = 'BULLISH'
+                        elif d_sig == 'BEARISH' and w_sig == 'BEARISH':
+                            pe_confluence_sell = True
+                            pe_signal = 'BEARISH'
+                        else:
+                            # Horizons disagree → treat as NEUTRAL regardless of daily alone
+                            pe_signal = 'NEUTRAL'
+
+                    except Exception:
+                        pass  # fall back to daily-only pe_signal already set above
+
                 except Exception as sig_err:
                     logger.warning(f"[AUTO-TRADE] PredictionEngine signal error for {symbol}: {sig_err}")
 
-                print(f"[AUTO-TRADE] {symbol} [{sym_strategy}] | Signal: {pe_signal} | Forecast: ${forecast_price:.2f} vs Current: ${current_price:.2f}")
+                print(f"[AUTO-TRADE] {symbol} [{sym_strategy}] | Signal: {pe_signal} "
+                      f"| Horizons: D={pe_horizon_signals.get('daily','?')} "
+                      f"W={pe_horizon_signals.get('weekly','?')} "
+                      f"M={pe_horizon_signals.get('monthly','?')} "
+                      f"| Confluence Buy={pe_confluence_buy} "
+                      f"| Forecast: ${forecast_price:.2f} vs Current: ${current_price:.2f}")
 
                 # 5. Check open positions for this symbol for stop-loss / take-profit / trailing-stop exits
                 positions_to_close = []
@@ -1582,9 +1644,11 @@ def auto_trade_cycle():
                 if positions_to_close:
                     save_user_auto_state(uid)
 
-                # 6. Check for sell signal on open positions (only when BEARISH + TradingRules agrees)
+                # 6. Check for sell signal on open positions
+                # Require BEARISH confluence (daily + weekly) to exit — avoids
+                # selling good positions on a single noisy day
                 symbol_positions = {tid: t for tid, t in open_positions.items() if t.symbol == symbol}
-                if symbol_positions and pe_signal == 'BEARISH':
+                if symbol_positions and (pe_signal == 'BEARISH' or pe_confluence_sell):
                     sell_signal, sell_conf, sell_reason = trading_rules.get_sell_signal(
                         forecast_price, current_price, market_data, daily_volatility
                     )
@@ -1634,7 +1698,8 @@ def auto_trade_cycle():
 
                 if circuit_breaker_tripped:
                     print(f"[AUTO-TRADE] User {uid}: CIRCUIT BREAKER — portfolio at ${portfolio_value:.0f} ({portfolio_loss_pct:+.1%}), pausing buys")
-                elif pe_signal == 'BULLISH' and not has_symbol_position and len(open_positions) < params.max_concurrent_positions:
+                elif pe_confluence_buy and pe_signal == 'BULLISH' and not has_symbol_position and len(open_positions) < params.max_concurrent_positions:
+                    # Only enter when daily + weekly BOTH confirm BULLISH (confluence gate)
                     buy_signal, buy_conf, buy_reason = trading_rules.get_buy_signal(
                         forecast_price, current_price, market_data, daily_volatility
                     )
@@ -1649,12 +1714,21 @@ def auto_trade_cycle():
 
                         if shares > 0 and (shares * current_price) <= available_cash:
                             trade_id = f"AUTO-{uuid.uuid4().hex[:8].upper()}"
-                            # ATR-based stop loss: use wider of ATR-based and percentage-based
+                            # Stop-loss: best of (ATR-based, pct-based, weekly-horizon)
                             pct_sl = round(current_price * (1 - params.stop_loss_percent), 2)
                             atr_val = float(features_df.dropna()['ATR_14'].iloc[-1]) if features_df is not None and 'ATR_14' in features_df.columns and not features_df.dropna().empty else current_price * params.stop_loss_percent
                             atr_sl = round(current_price - 2 * atr_val, 2)
-                            stop_loss = min(pct_sl, atr_sl)  # wider stop = lower price = safer
-                            take_profit = round(current_price * (1 + params.take_profit_target), 2)
+                            # Multi-horizon stop (widest / safest of the three levels)
+                            candidate_sl = [pct_sl, atr_sl]
+                            if pe_weekly_sl is not None:
+                                candidate_sl.append(round(float(pe_weekly_sl), 2))
+                            stop_loss = min(candidate_sl)  # lowest price = widest stop = safest
+                            # Take-profit: best of (pct-based, weekly/monthly horizon)
+                            pct_tp = round(current_price * (1 + params.take_profit_target), 2)
+                            if pe_weekly_tp is not None:
+                                take_profit = round(max(pct_tp, float(pe_weekly_tp)), 2)
+                            else:
+                                take_profit = pct_tp
 
                             new_trade = Trade(
                                 trade_id=trade_id,
@@ -1687,6 +1761,10 @@ def auto_trade_cycle():
                     else:
                         appreciation = (forecast_price - current_price) / current_price
                         print(f"[AUTO-TRADE] User {uid}: {symbol} no confirmed buy signal | PE: BULLISH | TradingRules: {'YES' if buy_signal else 'NO'} conf={buy_conf:.2f} | Forecast: ${forecast_price:.2f} ({appreciation:+.2%})")
+                elif pe_signal == 'BULLISH' and not pe_confluence_buy and not has_symbol_position:
+                    d_s = pe_horizon_signals.get('daily','?')
+                    w_s = pe_horizon_signals.get('weekly','?')
+                    print(f"[AUTO-TRADE] User {uid}: {symbol} BULLISH daily but no confluence (D={d_s} W={w_s}) — skipping")
                 elif pe_signal == 'BULLISH' and has_symbol_position:
                     print(f"[AUTO-TRADE] User {uid}: {symbol} BULLISH but already has an open position — skipping")
                 elif pe_signal == 'NEUTRAL':
@@ -1891,8 +1969,9 @@ def get_next_day_prediction():
             recent_vol = hist['Close'].tail(20).std() / hist['Close'].tail(20).mean() * 100
             confidence_level = int(max(50, min(85, 75 - recent_vol)))
         
-        # --- Signal from PredictionEngine (RSI + MACD + Bollinger Bands) ---
+        # --- Signal from PredictionEngine + multi-horizon predictions ---
         signal = 'NEUTRAL'
+        horizons = None
         try:
             _hist_clean = hist[['Close']].dropna()
             pe_df = pd.DataFrame({
@@ -1903,23 +1982,36 @@ def get_next_day_prediction():
             indicators = pe.calculate_technical_indicators()
             signal_type, signal_strength = pe.generate_signal(indicators)
             signal = signal_type
+
+            # Multi-horizon predictions (daily / weekly / monthly)
+            try:
+                horizons_result = pe.predict_all_horizons()
+                horizons = horizons_result.get('horizons')
+                # If ML model prediction wasn't available earlier, use daily horizon
+                if forecast_price is None and horizons:
+                    forecast_price = horizons.get('daily', {}).get('forecast_price', current_price)
+            except Exception as hz_err:
+                logger.warning(f"Multi-horizon prediction error for {symbol}: {hz_err}")
         except Exception as sig_err:
             logger.warning(f"Signal generation fallback: {sig_err}")
-            if forecast_price > current_price:
+            if forecast_price is not None and forecast_price > current_price:
                 signal = 'BULLISH'
-            elif forecast_price < current_price:
+            elif forecast_price is not None and forecast_price < current_price:
                 signal = 'BEARISH'
 
+        # Ensure forecast_price is set
+        if forecast_price is None:
+            forecast_price = current_price
+
         # --- Reconcile signal with ML forecast direction ---
-        # If the ML model predicts a price drop, don't show BULLISH (and vice versa).
         # The forecast price is the authoritative ML output — the signal badge must
         # agree with it so the user isn't given contradictory information.
-        if forecast_price is not None and model_name != 'trend-based':
+        if model_name != 'trend-based':
             if signal == 'BULLISH' and forecast_price < current_price:
                 signal = 'NEUTRAL'
             elif signal == 'BEARISH' and forecast_price > current_price:
                 signal = 'NEUTRAL'
-        
+
         return jsonify({
             'forecast_price': round(forecast_price, 2),
             'current_price': round(current_price, 2),
@@ -1927,7 +2019,8 @@ def get_next_day_prediction():
             'signal': signal,
             'symbol': symbol,
             'model': model_name,
-            'data_source': 'yahoo_finance'
+            'data_source': 'yahoo_finance',
+            'horizons': horizons,
         })
     
     except Exception as e:

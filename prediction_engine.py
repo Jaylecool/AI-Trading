@@ -538,6 +538,132 @@ class PredictionEngine:
             'generated_at': datetime.now().isoformat(),
         }
     
+    def predict_all_horizons(self) -> Dict:
+        """
+        Generate Daily (1-day), Weekly (5-day), and Monthly (21-day) price
+        predictions with stop-loss and take-profit targets for each horizon.
+
+        Uses the same ML ensemble as predict_multi_day but extends the horizon
+        with trend blending, confidence decay, and ATR-scaled risk levels.
+        """
+        indicators = self.calculate_technical_indicators()
+        signal_type, _ = self.generate_signal(indicators)
+
+        prices = self.prices
+        current_price = float(prices[-1])
+
+        # Daily volatility (annualised from last 60 days)
+        recent_ret = (np.diff(prices[-60:]) / prices[-60:-1]
+                      if len(prices) > 60 else np.diff(prices) / prices[:-1])
+        daily_vol = float(np.std(recent_ret)) if len(recent_ret) > 0 else 0.01
+
+        # Average True Range proxy (mean absolute daily move, last 14 bars)
+        if len(prices) >= 15:
+            atr = float(np.mean(np.abs(np.diff(prices[-15:]))))
+        else:
+            atr = current_price * 0.015
+        atr_pct = atr / current_price
+
+        # Base 1-day ML return + confidence
+        ml_return_1d, ml_conf_1d = self.ml_predict_return(indicators)
+
+        # Sentiment 1-day bias (same as _ml_predict_signal)
+        sentiment_bias = 0.0
+        if self._sentiment is not None:
+            s1d = self._sentiment.get('Sentiment_1d', 0.0) or 0.0
+            mom = self._sentiment.get('Sentiment_Momentum', 0.0) or 0.0
+            sentiment_bias = float(s1d) * 0.002 + float(mom) * 0.001
+
+        # Daily trend from last 20 bars (per-bar drift)
+        recent_20 = prices[-20:] if len(prices) >= 20 else prices
+        n_bars = max(len(recent_20) - 1, 1)
+        trend_daily = float((recent_20[-1] - recent_20[0]) / recent_20[0]) / n_bars
+
+        # ── Horizon specs ─────────────────────────────────────────────────────
+        # key, days, name, label, conf_decay, trend_weight, atr_mult
+        specs = [
+            ('daily',   1,  'Daily',   '1 Day',   0.00, 0.00, 1.5),
+            ('weekly',  5,  'Weekly',  '5 Days',  0.18, 0.30, 2.0),
+            ('monthly', 21, 'Monthly', '21 Days', 0.42, 0.60, 2.8),
+        ]
+
+        horizons_out: Dict = {}
+        for key, days, name, label, conf_decay, trend_wt, atr_mult in specs:
+            if days == 1:
+                h_return = ml_return_1d + sentiment_bias
+                confidence = ml_conf_1d
+            else:
+                ml_scale = 1.0 - conf_decay
+                h_return = (ml_return_1d * days * ml_scale * (1.0 - trend_wt)
+                            + trend_daily * days * trend_wt)
+                confidence = max(0.28, ml_conf_1d * (1.0 - conf_decay))
+
+            forecast_price = current_price * (1.0 + h_return)
+            price_change = forecast_price - current_price
+            pct_change = h_return * 100.0
+
+            # Horizon signal
+            if days == 1:
+                h_signal = signal_type
+            else:
+                if h_return > 0.005:
+                    h_signal = 'BULLISH'
+                elif h_return < -0.005:
+                    h_signal = 'BEARISH'
+                else:
+                    h_signal = 'NEUTRAL'
+
+            # Stop-loss: ATR × multiplier × √days (time-uncertainty scaling)
+            stop_dist = atr * atr_mult * (days ** 0.5)
+            if h_signal in ('BULLISH', 'NEUTRAL'):
+                stop_loss = max(current_price - stop_dist, current_price * 0.70)
+            else:
+                stop_loss = current_price + stop_dist
+
+            # Take-profit: 2:1 risk/reward ratio relative to stop distance
+            risk = abs(current_price - stop_loss)
+            if h_signal == 'BULLISH':
+                take_profit = current_price + risk * 2.0
+            elif h_signal == 'BEARISH':
+                take_profit = current_price - risk * 2.0
+            else:
+                take_profit = forecast_price
+
+            # Recommended action
+            if h_signal == 'BULLISH' and confidence > 0.50:
+                action = 'BUY'
+            elif h_signal == 'BEARISH' and confidence > 0.50:
+                action = 'SELL'
+            else:
+                action = 'HOLD'
+
+            conf_pct = int(min(95, max(30, confidence * 100)))
+
+            horizons_out[key] = {
+                'name': name,
+                'label': label,
+                'days': days,
+                'forecast_price': round(float(forecast_price), 2),
+                'price_change': round(float(price_change), 2),
+                'pct_change': round(float(pct_change), 3),
+                'signal': h_signal,
+                'confidence': conf_pct,
+                'stop_loss': round(float(stop_loss), 2),
+                'take_profit': round(float(take_profit), 2),
+                'action': action,
+            }
+
+        return {
+            'current_price': round(float(current_price), 2),
+            'symbol': self.symbol,
+            'volatility': round(float(daily_vol * 100), 3),
+            'atr': round(float(atr), 2),
+            'atr_pct': round(float(atr_pct * 100), 3),
+            'horizons': horizons_out,
+            'model_available': self._models is not None,
+            'generated_at': datetime.now().isoformat(),
+        }
+
     @staticmethod
     def _calculate_sma(prices, period=20):
         """Calculate Simple Moving Average"""

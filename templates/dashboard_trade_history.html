@@ -464,6 +464,132 @@
             color: var(--accent-yellow);
         }
 
+        /* ─── Multi-Horizon Prediction Cards ─────────────────────────────── */
+        .horizon-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .horizon-card {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.65rem 0.55rem 0.6rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.28rem;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.3s;
+        }
+
+        .horizon-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--border-color);
+            transition: background 0.3s;
+        }
+        .horizon-card.bullish { border-color: rgba(0, 208, 132, 0.3); }
+        .horizon-card.bullish::before { background: var(--accent-green); }
+        .horizon-card.bearish { border-color: rgba(255, 59, 48, 0.3); }
+        .horizon-card.bearish::before { background: var(--accent-red); }
+        .horizon-card.neutral::before { background: var(--accent-yellow); }
+
+        .horizon-card-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: var(--text-secondary);
+        }
+
+        .horizon-card-days {
+            font-size: 0.58rem;
+            color: var(--text-secondary);
+            opacity: 0.65;
+            margin-top: -0.15rem;
+        }
+
+        .horizon-action-badge {
+            display: inline-block;
+            padding: 0.1rem 0.45rem;
+            border-radius: 4px;
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            width: fit-content;
+        }
+        .horizon-action-badge.buy  { background: rgba(0, 208, 132, 0.18); color: var(--accent-green); }
+        .horizon-action-badge.sell { background: rgba(255, 59, 48, 0.18);  color: var(--accent-red); }
+        .horizon-action-badge.hold { background: rgba(255, 204, 51, 0.15); color: var(--accent-yellow); }
+
+        .horizon-forecast-price {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            white-space: nowrap;
+            line-height: 1.2;
+        }
+
+        .horizon-pct-change {
+            font-size: 0.7rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .horizon-pct-change.up   { color: var(--accent-green); }
+        .horizon-pct-change.down { color: var(--accent-red); }
+        .horizon-pct-change.flat { color: var(--text-secondary); }
+
+        .horizon-conf-bar {
+            width: 100%;
+            height: 4px;
+            background: var(--bg-secondary);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 0.1rem;
+        }
+        .horizon-conf-fill {
+            height: 100%;
+            border-radius: 2px;
+            transition: width 0.4s ease;
+            background: var(--accent-yellow);
+        }
+        .horizon-card.bullish .horizon-conf-fill { background: var(--accent-green); }
+        .horizon-card.bearish .horizon-conf-fill { background: var(--accent-red); }
+
+        .horizon-conf-label {
+            font-size: 0.58rem;
+            color: var(--text-secondary);
+        }
+
+        .horizon-divider {
+            height: 1px;
+            background: var(--border-color);
+            opacity: 0.5;
+            margin: 0.05rem 0;
+        }
+
+        .horizon-target-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.57rem;
+        }
+        .horizon-target-row .sl { color: var(--accent-red);   opacity: 0.9; font-weight: 600; }
+        .horizon-target-row .tp { color: var(--accent-green); opacity: 0.9; font-weight: 600; }
+
+        /* Compact current-price + signal row below cards */
+        .prediction-summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .prediction-summary-row .summary-block { flex: 1; }
+
         /* Trade History Table */
         .table-container {
             background: var(--bg-secondary);
@@ -2002,38 +2128,86 @@
 
                 <!-- Right Column: Prediction Panel -->
                 <div class="prediction-panel">
-                    <div class="panel-title">Next-Day Prediction</div>
+                    <div class="panel-title">Predictions</div>
 
-                    <!-- Forecast Price -->
+                    <!-- Multi-Horizon Forecast Cards -->
                     <div class="prediction-section">
-                        <div class="section-label">Forecast Price</div>
-                        <div class="forecast-price" id="forecastPrice">$0.00</div>
-                        <div class="forecast-change" id="forecastChange">
-                            <span class="arrow">↑</span>
-                            <span class="percent">0.00%</span>
-                            <span class="dollar">(+$0.00)</span>
+                        <div class="section-label">Price Forecast</div>
+                        <div class="horizon-cards">
+
+                            <!-- Daily Card -->
+                            <div class="horizon-card neutral" id="hCard-daily">
+                                <div class="horizon-card-label">Daily</div>
+                                <div class="horizon-card-days">1 Day</div>
+                                <span class="horizon-action-badge hold" id="hAction-daily">HOLD</span>
+                                <div class="horizon-forecast-price" id="hPrice-daily">$—</div>
+                                <div class="horizon-pct-change flat" id="hPct-daily">0.00%</div>
+                                <div class="horizon-conf-bar">
+                                    <div class="horizon-conf-fill" id="hConf-daily" style="width:0%"></div>
+                                </div>
+                                <div class="horizon-conf-label" id="hConfLabel-daily">—</div>
+                                <div class="horizon-divider"></div>
+                                <div class="horizon-target-row">
+                                    <span class="sl" id="hSL-daily">SL —</span>
+                                    <span class="tp" id="hTP-daily">TP —</span>
+                                </div>
+                            </div>
+
+                            <!-- Weekly Card -->
+                            <div class="horizon-card neutral" id="hCard-weekly">
+                                <div class="horizon-card-label">Weekly</div>
+                                <div class="horizon-card-days">5 Days</div>
+                                <span class="horizon-action-badge hold" id="hAction-weekly">HOLD</span>
+                                <div class="horizon-forecast-price" id="hPrice-weekly">$—</div>
+                                <div class="horizon-pct-change flat" id="hPct-weekly">0.00%</div>
+                                <div class="horizon-conf-bar">
+                                    <div class="horizon-conf-fill" id="hConf-weekly" style="width:0%"></div>
+                                </div>
+                                <div class="horizon-conf-label" id="hConfLabel-weekly">—</div>
+                                <div class="horizon-divider"></div>
+                                <div class="horizon-target-row">
+                                    <span class="sl" id="hSL-weekly">SL —</span>
+                                    <span class="tp" id="hTP-weekly">TP —</span>
+                                </div>
+                            </div>
+
+                            <!-- Monthly Card -->
+                            <div class="horizon-card neutral" id="hCard-monthly">
+                                <div class="horizon-card-label">Monthly</div>
+                                <div class="horizon-card-days">21 Days</div>
+                                <span class="horizon-action-badge hold" id="hAction-monthly">HOLD</span>
+                                <div class="horizon-forecast-price" id="hPrice-monthly">$—</div>
+                                <div class="horizon-pct-change flat" id="hPct-monthly">0.00%</div>
+                                <div class="horizon-conf-bar">
+                                    <div class="horizon-conf-fill" id="hConf-monthly" style="width:0%"></div>
+                                </div>
+                                <div class="horizon-conf-label" id="hConfLabel-monthly">—</div>
+                                <div class="horizon-divider"></div>
+                                <div class="horizon-target-row">
+                                    <span class="sl" id="hSL-monthly">SL —</span>
+                                    <span class="tp" id="hTP-monthly">TP —</span>
+                                </div>
+                            </div>
                         </div>
+                        <!-- Hidden backward-compat elements used by portfolio signals JS -->
+                        <span id="forecastPrice" style="display:none">0</span>
+                        <div id="forecastChange" style="display:none"></div>
+                        <span id="confidenceValue" style="display:none">0</span>
+                        <div id="confidenceFill" style="display:none"></div>
                     </div>
 
-                    <!-- Confidence Level -->
+                    <!-- Current Price & Signal (compact row) -->
                     <div class="prediction-section">
-                        <div class="section-label">Confidence Level</div>
-                        <div class="confidence-value" id="confidenceValue">0%</div>
-                        <div class="confidence-bar">
-                            <div class="confidence-fill" id="confidenceFill" style="width: 0%"></div>
+                        <div class="prediction-summary-row">
+                            <div class="summary-block">
+                                <div class="section-label">Current Price</div>
+                                <div class="current-price-value" id="panelCurrentPrice">$0.00</div>
+                            </div>
+                            <div class="summary-block" style="text-align:right;">
+                                <div class="section-label">Signal</div>
+                                <div class="signal-value neutral" id="signalValue">NEUTRAL</div>
+                            </div>
                         </div>
-                    </div>
-
-                    <!-- Current Price -->
-                    <div class="prediction-section">
-                        <div class="section-label">Current Price</div>
-                        <div class="current-price-value" id="panelCurrentPrice">$0.00</div>
-                    </div>
-
-                    <!-- Signal -->
-                    <div class="prediction-section">
-                        <div class="section-label">Signal</div>
-                        <div class="signal-value bullish" id="signalValue">BULLISH</div>
                     </div>
 
                     <!-- Auto-Trade Status -->
@@ -2692,36 +2866,90 @@
             if (!data) return;
 
             const forecastPrice = data.forecast_price || 0;
-            const currentPrice = data.current_price || 0;
-            const confidence = data.confidence_level || 0;
-            const signal = data.signal || 'NEUTRAL';
+            const currentPrice  = data.current_price  || 0;
+            const confidence    = data.confidence_level || 0;
+            const signal        = data.signal || 'NEUTRAL';
+            const horizons      = data.horizons || null;
 
-            // Forecast price and change
-            const priceChange = forecastPrice - currentPrice;
-            const percentChange = (priceChange / currentPrice * 100).toFixed(2);
-            const isBullish = priceChange >= 0;
-
-            document.getElementById('forecastPrice').textContent = `$${forecastPrice.toFixed(2)}`;
-            document.getElementById('panelCurrentPrice').textContent = `$${currentPrice.toFixed(2)}`;
-            
-            const forecastChangeEl = document.getElementById('forecastChange');
-            forecastChangeEl.className = `forecast-change ${isBullish ? 'bullish' : 'bearish'}`;
-            forecastChangeEl.innerHTML = `
-                <span class="arrow">${isBullish ? '↑' : '↓'}</span>
-                <span class="percent">${isBullish ? '+' : ''}${percentChange}%</span>
-                <span class="dollar">(${isBullish ? '+' : ''}$${Math.abs(priceChange).toFixed(2)})</span>
-            `;
-
-            // Confidence level
+            // ── Hidden backward-compat elements (used by updatePortfolioSignals) ──
+            document.getElementById('forecastPrice').textContent = forecastPrice;
+            const priceChange   = forecastPrice - currentPrice;
+            const pctChange     = currentPrice > 0 ? (priceChange / currentPrice * 100).toFixed(2) : '0.00';
+            const isBullish     = priceChange >= 0;
+            const fcEl = document.getElementById('forecastChange');
+            fcEl.className = `forecast-change ${isBullish ? 'bullish' : 'bearish'}`;
+            fcEl.innerHTML = `<span class="arrow">${isBullish ? '↑' : '↓'}</span><span class="percent">${isBullish ? '+' : ''}${pctChange}%</span>`;
             document.getElementById('confidenceValue').textContent = `${confidence}%`;
             document.getElementById('confidenceFill').style.width = `${confidence}%`;
 
-            // Signal
+            // ── Current price + signal row ──
+            document.getElementById('panelCurrentPrice').textContent = `$${currentPrice.toFixed(2)}`;
             const signalEl = document.getElementById('signalValue');
             signalEl.textContent = signal;
             signalEl.className = `signal-value ${signal.toLowerCase()}`;
 
-            // Update portfolio signals section
+            // ── Multi-horizon cards ──────────────────────────────────────────
+            const HORIZONS = ['daily', 'weekly', 'monthly'];
+
+            if (horizons) {
+                HORIZONS.forEach(key => {
+                    const h = horizons[key];
+                    if (!h) return;
+
+                    const card = document.getElementById(`hCard-${key}`);
+                    if (!card) return;
+
+                    const sig    = (h.signal || 'NEUTRAL').toLowerCase();
+                    const action = (h.action || 'HOLD').toLowerCase();
+                    const pct    = h.pct_change || 0;
+
+                    card.className = `horizon-card ${sig}`;
+
+                    const actionEl = document.getElementById(`hAction-${key}`);
+                    actionEl.textContent = (h.action || 'HOLD').toUpperCase();
+                    actionEl.className   = `horizon-action-badge ${action}`;
+
+                    document.getElementById(`hPrice-${key}`).textContent =
+                        `$${h.forecast_price.toFixed(2)}`;
+
+                    const pctEl = document.getElementById(`hPct-${key}`);
+                    pctEl.textContent = `${pct >= 0 ? '+' : ''}${pct.toFixed(2)}%`;
+                    pctEl.className   = `horizon-pct-change ${pct > 0.05 ? 'up' : pct < -0.05 ? 'down' : 'flat'}`;
+
+                    document.getElementById(`hConf-${key}`).style.width = `${h.confidence}%`;
+                    document.getElementById(`hConfLabel-${key}`).textContent = `${h.confidence}% conf`;
+
+                    document.getElementById(`hSL-${key}`).textContent = `SL $${h.stop_loss.toFixed(2)}`;
+                    document.getElementById(`hTP-${key}`).textContent = `TP $${h.take_profit.toFixed(2)}`;
+                });
+            } else {
+                // Fallback: populate daily card from simple (non-horizon) prediction data
+                const card = document.getElementById('hCard-daily');
+                if (card) {
+                    const pct = currentPrice > 0
+                        ? ((forecastPrice - currentPrice) / currentPrice * 100) : 0;
+                    const sig = signal.toLowerCase();
+                    const action = signal === 'BULLISH' ? 'buy'
+                                 : signal === 'BEARISH' ? 'sell' : 'hold';
+
+                    card.className = `horizon-card ${sig}`;
+                    const actionEl = document.getElementById('hAction-daily');
+                    actionEl.textContent = action.toUpperCase();
+                    actionEl.className   = `horizon-action-badge ${action}`;
+
+                    document.getElementById('hPrice-daily').textContent =
+                        `$${forecastPrice.toFixed(2)}`;
+
+                    const pctEl = document.getElementById('hPct-daily');
+                    pctEl.textContent = `${pct >= 0 ? '+' : ''}${pct.toFixed(2)}%`;
+                    pctEl.className   = `horizon-pct-change ${pct > 0 ? 'up' : pct < 0 ? 'down' : 'flat'}`;
+
+                    document.getElementById('hConf-daily').style.width = `${confidence}%`;
+                    document.getElementById('hConfLabel-daily').textContent = `${confidence}% conf`;
+                }
+            }
+
+            // Portfolio signals (uses top-level signal / confidence_level / forecast_price)
             updatePortfolioSignals(data);
         }
 
