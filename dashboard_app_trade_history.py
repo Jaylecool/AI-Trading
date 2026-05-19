@@ -98,6 +98,27 @@ def _validate_symbol(symbol: str) -> bool:
     """Return True if *symbol* looks like a valid ticker and is in SUPPORTED_SYMBOLS."""
     return bool(symbol and _SYMBOL_RE.match(symbol) and symbol in SUPPORTED_SYMBOLS)
 
+# ── Prediction cache ──────────────────────────────────────────────────────────
+# Keyed by symbol. Each entry: {'data': <dict>, 'expires': <datetime>}
+# TTL: 5 min during market hours (9:30–16:00 ET weekdays), 60 min otherwise.
+_prediction_cache: dict = {}
+
+def _prediction_cache_ttl() -> int:
+    """Return cache TTL in seconds based on whether the market is open."""
+    from datetime import timezone
+    import zoneinfo
+    try:
+        tz = zoneinfo.ZoneInfo("America/New_York")
+    except Exception:
+        return 300  # fallback 5 min
+    now = datetime.now(tz)
+    market_open = now.replace(hour=9, minute=30, second=0, microsecond=0)
+    market_close = now.replace(hour=16, minute=0, second=0, microsecond=0)
+    is_weekday = now.weekday() < 5
+    if is_weekday and market_open <= now <= market_close:
+        return 300   # 5 minutes during market hours
+    return 3600      # 60 minutes outside market hours
+
 # Global system instances (shared — not per-user)
 streaming_service = None
 alert_system = None
@@ -1904,10 +1925,15 @@ def get_next_day_prediction():
     try:
         import yfinance as yf
         from prediction_engine import PredictionEngine
-        
+
         symbol = request.args.get('symbol', 'AAPL')
         if symbol not in SUPPORTED_SYMBOLS:
             return jsonify({'error': f'Unsupported symbol: {symbol}'}), 400
+
+        # ── Cache check ───────────────────────────────────────────────────────
+        cached = _prediction_cache.get(symbol)
+        if cached and cached['expires'] > datetime.utcnow():
+            return jsonify(cached['data'])
         
         # Fetch 1 year of data (need 200+ days for SMA_200 warmup)
         ticker = yf.Ticker(symbol)
@@ -2012,7 +2038,7 @@ def get_next_day_prediction():
             elif signal == 'BEARISH' and forecast_price > current_price:
                 signal = 'NEUTRAL'
 
-        return jsonify({
+        result = {
             'forecast_price': round(forecast_price, 2),
             'current_price': round(current_price, 2),
             'confidence_level': confidence_level,
@@ -2021,7 +2047,16 @@ def get_next_day_prediction():
             'model': model_name,
             'data_source': 'yahoo_finance',
             'horizons': horizons,
-        })
+        }
+
+        # ── Store in cache ────────────────────────────────────────────────────
+        ttl = _prediction_cache_ttl()
+        _prediction_cache[symbol] = {
+            'data': result,
+            'expires': datetime.utcnow() + timedelta(seconds=ttl),
+        }
+
+        return jsonify(result)
     
     except Exception as e:
         logger.error(f"Error in get_next_day_prediction (live): {e}")
