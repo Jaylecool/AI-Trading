@@ -219,8 +219,14 @@ class PredictionEngine:
                 if not in_uptrend:
                     # Downtrend → degrade to NEUTRAL (avoid catching falling knives)
                     return 'NEUTRAL', 0.3
-                confirmation = tech_bullish >= 1  # require 1/3 tech agreement
-                if not confirmation:
+                # Block buys when RSI is overbought — high mean-reversion risk
+                if rsi > 70:
+                    return 'NEUTRAL', 0.3
+                # Require short-term uptrend (price > SMA20) AND 1/3 tech agreement
+                sma20 = indicators.get('bb_middle', current_price)
+                in_short_uptrend = current_price > sma20
+                confirmation = tech_bullish >= 1  # at least 1/3 tech indicators bullish
+                if not confirmation or not in_short_uptrend:
                     return 'NEUTRAL', 0.35  # insufficient confirmation
                 conf = ml_confidence
                 return 'BULLISH', min(conf, 1.0)
@@ -228,6 +234,9 @@ class PredictionEngine:
             elif ml_signal == 'BEARISH':
                 if in_uptrend:
                     # Strong uptrend → degrade bearish to NEUTRAL
+                    return 'NEUTRAL', 0.3
+                # Block shorts when RSI is extremely oversold — bounce risk
+                if rsi < 30:
                     return 'NEUTRAL', 0.3
                 confirmation = tech_bearish >= 1  # require 1/3 tech agreement
                 if not confirmation:
@@ -412,11 +421,13 @@ class PredictionEngine:
         up_proba = (lr_rf_weight * up_proba_clf + tft_weight * tft_dir_prob)
 
         # Combine with calibrated thresholds
-        if pred_return > 0.001 and up_proba > 0.52:
+        # Raised from 0.001/0.52 to 0.002/0.55 — filters weak ML signals,
+        # improving daily precision at the cost of fewer signals.
+        if pred_return > 0.002 and up_proba > 0.55:
             signal = 'BULLISH'
-            # Normalised confidence: 0.52 proba → low, 0.70 → high
+            # Normalised confidence: 0.55 proba → low, 0.75 → high
             confidence = (up_proba - 0.5) * 2.0 * 0.7 + min(abs(pred_return) * 20, 0.3) * 0.3
-        elif pred_return < -0.001 and up_proba < 0.48:
+        elif pred_return < -0.002 and up_proba < 0.45:
             signal = 'BEARISH'
             confidence = (0.5 - up_proba) * 2.0 * 0.7 + min(abs(pred_return) * 20, 0.3) * 0.3
         else:
