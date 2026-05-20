@@ -566,7 +566,7 @@ class PredictionEngine:
 
         # ── Base ML prediction (1-day) ────────────────────────────────────────
         ml_return_1d, ml_conf_1d = self.ml_predict_return(indicators)
-        daily_signal_type, _ = self.generate_signal(indicators)
+        daily_signal, _ = self.generate_signal(indicators)
 
         # ── Sentiment bias ────────────────────────────────────────────────────
         sentiment_bias = 0.0
@@ -664,16 +664,19 @@ class PredictionEngine:
         elif current_price < sma50:
             w_bear += 1
 
-        # 5. Actual 5-day momentum (most direct signal for 5-day horizon)
-        if mom5d > 0.004:
+        # 5. SMA20 trend direction (is the short-term average itself rising?)
+        #    More stable and less correlated with votes 3/4 than raw momentum.
+        if sma20_rising:
             w_bull += 1
-        elif mom5d < -0.004:
+        else:
             w_bear += 1
 
-        # 6. RSI zone (not overbought for bull, not oversold for bear)
-        if 42 <= rsi <= 68:
+        # 6. RSI momentum zone — clean split at 50 to avoid overlap
+        #    50–70: bullish momentum range (not yet overbought)
+        #    30–50: bearish momentum range (not yet oversold)
+        if 50 <= rsi <= 70:
             w_bull += 1
-        elif 32 <= rsi <= 58:
+        elif 30 <= rsi <= 50:
             w_bear += 1
 
         # Weekly price return: blend 5d momentum (50%) + 10d momentum (30%) + ML×5 (20%)
@@ -681,14 +684,15 @@ class PredictionEngine:
                          + 0.30 * mom10d
                          + 0.20 * (ml_return_1d * 5 * 0.70))
 
-        # Signal requires 4/6 indicators to agree
-        if w_bull >= 4:
+        # Signal requires 5/6 indicators to agree (high-precision filter)
+        # At 5-day horizon, requiring supermajority filters out low-conviction setups.
+        if w_bull >= 5:
             weekly_signal = 'BULLISH'
             # Confidence scales with votes and ADX (higher in trending market)
-            weekly_conf = min(0.90, 0.52 + w_bull * 0.05 + adx_strength * 0.10)
-        elif w_bear >= 4:
+            weekly_conf = min(0.90, 0.55 + (w_bull - 4) * 0.07 + adx_strength * 0.10)
+        elif w_bear >= 5:
             weekly_signal = 'BEARISH'
-            weekly_conf = min(0.90, 0.52 + w_bear * 0.05 + adx_strength * 0.10)
+            weekly_conf = min(0.90, 0.55 + (w_bear - 4) * 0.07 + adx_strength * 0.10)
         else:
             weekly_signal = 'NEUTRAL'
             weekly_conf = 0.40
@@ -731,10 +735,12 @@ class PredictionEngine:
         elif macd < 0 and macd < macd_sig:
             m_bear += 1
 
-        # 6. RSI in constructive zone (not extreme)
-        if 48 <= rsi <= 72:
+        # 6. RSI momentum zone — clean split at 50 for monthly horizon
+        #    52–72: bullish zone (not deeply overbought)
+        #    28–48: bearish zone (not deeply oversold)
+        if 52 <= rsi <= 72:
             m_bull += 1
-        elif 28 <= rsi <= 52:
+        elif 28 <= rsi <= 48:
             m_bear += 1
 
         # Monthly price return: blend 20d momentum (50%) + 10d (30%) + ML×21 (20%)
