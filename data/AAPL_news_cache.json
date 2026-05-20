@@ -1,5 +1,635 @@
 [
   {
+    "id": "4ae56fc0e5ca",
+    "title": "SpaceX's IPO moonshot draws some doubters on Wall Street",
+    "summary": "Elon Musk wants to take SpaceX public -- and he's asking investors to believe the rocket and AI company is worth almost $1.75 trillion. Musk is asking investors to value the company at nearly 100 times that.",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/spacexs-ipo-moonshot-draws-doubters-020758429.html",
+    "published_at": "2026-05-20T02:07:58Z",
+    "source": "AFP",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "1a4c817c1237",
+    "title": "Warren Buffett’s Berkshire Delivered a 39,000x Return Since 1965. He Still Tells Most Investors to Buy Index Funds Instead.",
+    "summary": "Although Berkshire Hathaway (NYSE:BRK-B) has compiled the single best long-run track record in modern markets, the man who built it spends most of his shareholder letters telling you not to try this at home. On Wall Street, that contradiction has hardened into one of investing’s most durable patterns. From 1965 to 2025, Berkshire posted a ... Warren Buffett’s Berkshire Delivered a 39,000x Return Since 1965. He Still Tells Most Investors to Buy Index Funds Instead.",
+    "url": "https://247wallst.com/investing/2026/05/19/warren-buffetts-berkshire-delivered-a-39000x-return-since-1965-he-still-tells-most-investors-to-buy-index-funds-instead/",
+    "published_at": "2026-05-20T01:12:45Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "98f7bbaf0057",
+    "title": "Warren Buffett’s Berkshire opens a $2.6B stake in world's largest airline",
+    "summary": "Warren Buffett spent decades avoiding airline stocks. He called them a capital trap, a business where no matter how well you ran it, fuel prices and fare wars could wipe out profits in a quarter. Then Covid hit, and Berkshire Hathawaydumped its airline holdings in 2020, locking in significant ...",
+    "url": "https://www.thestreet.com/investing/stocks/warren-buffetts-berkshire-opens-a-2-6b-stake-in-worlds-largest-airline",
+    "published_at": "2026-05-19T22:07:00Z",
+    "source": "TheStreet",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "a3607842d78b",
+    "title": "Cracks Are Starting to Appear in the Chip Stock Rally",
+    "summary": "Investors have piled into semiconductor stocks as AI enthusiasm drives markets higher, but rising bond yields and crowded positioning are beginning to raise concerns.",
+    "url": "https://www.barrons.com/articles/crowded-semiconductor-trade-nvidia-intel-chip-stocks-392770bc?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-19T21:37:00Z",
+    "source": "Barrons.com",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "fe734e814d61",
+    "title": "Why Would Anyone Buy SCHB Instead of MAGS?",
+    "summary": "The \"Magnificent Seven\" are looking less magnificent in 2026. This low-cost index fund could be a better buy.",
+    "url": "https://www.fool.com/investing/2026/05/19/why-would-anyone-buy-schb-instead-of-mags/",
+    "published_at": "2026-05-19T21:20:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "a5aeb23b899d",
+    "title": "Sector Update: Tech Stocks Mixed Late Afternoon",
+    "summary": "Tech stocks were mixed late Tuesday afternoon with the State Street Technology Select Sector SPDR ET",
+    "url": "https://finance.yahoo.com/sectors/technology/articles/sector-tech-stocks-mixed-afternoon-195318606.html",
+    "published_at": "2026-05-19T19:53:18Z",
+    "source": "MT Newswires",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "c2e2b0f869ee",
+    "title": "5-star analyst drops eye-popping Intel stock price target",
+    "summary": "Intel (INTC) stock has lost about 19.17% since hitting its highest-ever closing price of $129.44 on May 11. It is currently trading at $104.62, according to Yahoo Finance at the time of writing, Tuesday morning, May 19. Intel repurchased Apollo’s (APO) equity interest in the joint venture related ...",
+    "url": "https://www.thestreet.com/investing/stocks/5-star-analyst-drops-eye-popping-intel-stock-price-target",
+    "published_at": "2026-05-19T19:47:00Z",
+    "source": "TheStreet",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "cfa67c7b05d0",
+    "title": "Analyze Apple stock on Yahoo Finance's new AI platform AlphaSpace",
+    "summary": "Josh Lipton, host of Market Domination, explores Yahoo Finance's latest offering and new way to level up your investing strategy, AlphaSpace.",
+    "url": "https://finance.yahoo.com/video/analyze-apple-stock-on-yahoo-finances-new-ai-platform-alphaspace-194037185.html",
+    "published_at": "2026-05-19T19:40:37Z",
+    "source": "Yahoo Finance Video",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "61be2e8edb6d",
+    "title": "Trump's Big Tech trades while in office raise concerns",
+    "summary": "President Trump traded over $50 million in Magnificent Seven tech stocks in the first quarter of 2026, according to a new ethics disclosure. Yahoo Finance Washington Correspondent Ben Werschkul comes on Market Catalysts to speak more about the concerns raised from Trump's trading activity and volume while in office.",
+    "url": "https://finance.yahoo.com/video/trumps-big-tech-trades-while-in-office-raise-concerns-150723305.html",
+    "published_at": "2026-05-19T15:07:23Z",
+    "source": "Yahoo Finance Video",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "0ecaa7d4f452",
+    "title": "Trump traded over $50 million in 'Magnificent 7' stocks last quarter, loading up on Apple and Google and selling Tesla",
+    "summary": "President Trump made 94 different trades of 'Magnificent 7' stocks in the first quarter of 2026, a new ethics disclosure shows, executing millions of dollars in transactions even as he was meeting with and often promoting these top tech companies.",
+    "url": "https://finance.yahoo.com/markets/stocks/article/trump-traded-over-50-million-in-magnificent-7-stocks-last-quarter-loading-up-on-apple-and-google-and-selling-tesla-100000562.html",
+    "published_at": "2026-05-19T10:00:00Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "449beeb77e6f",
+    "title": "Anthropic to let partners share Mythos cybersecurity findings with others",
+    "summary": "Anthropic said on Monday it is revising its earlier position to allow users of its Mythos cybersecurity model ‌to share information about cyber threats with others who may be exposed ‌to similar vulnerabilities.  Mythos, announced on April 7, is being deployed as part of Anthropic's \"Project Glasswing,\" a controlled ​initiative under which select organizations, including major tech firms such as Amazon, Microsoft, Nvidia and Apple, are permitted to use the unreleased Claude Mythos Preview model for defensive cybersecurity purposes.  Mythos' capabilities to code at a high level have given it a potentially ‌unprecedented ability to identify cybersecurity ⁠vulnerabilities and devise ways to exploit them, according to experts.",
+    "url": "https://finance.yahoo.com/sectors/technology/articles/anthropic-let-partners-share-mythos-222802181.html",
+    "published_at": "2026-05-18T22:28:02Z",
+    "source": "Reuters",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "22c61489254b",
+    "title": "The Spill: Apple (AAPL) Just Crushed It. Now What?",
+    "summary": "By IPO Edge Editorial Staff For most of the last year, the bear case on Apple (AAPL) wrote itself. Tariffs would gut margins. China was a lost cause. The AI story had […]",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/spill-apple-aapl-just-crushed-215603939.html",
+    "published_at": "2026-05-18T21:56:03Z",
+    "source": "IPO-Edge.com",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "bf535f88ced2",
+    "title": "Alphabet’s $5 Trillion Milestone: How AI Ambitions Are Fueling Google’s Record Run",
+    "summary": "Alphabet shares have rallied in 2026, fueled in part by the Google parent’s artificial-intelligence ambitions.",
+    "url": "https://www.barrons.com/articles/alphabet-stock-5-trillion-market-cap-google-nvidia-09db616d?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-18T21:03:00Z",
+    "source": "Barrons.com",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "f0e9e949a832",
+    "title": "On Holding Founders Acquire $6.6 Million of Class A Shares",
+    "summary": "Each of the three On co-founders — David Allemann, Casper Coppetti, and Olivier Bernhard — acquired 60,000 Class A shares last Thursday.",
+    "url": "https://wwd.com/footwear-news/shoe-industry-news/on-holding-three-co-founders-acquired-class-a-shares-1238971890/",
+    "published_at": "2026-05-18T20:53:47Z",
+    "source": "Footwear News",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "050f5b639ca5",
+    "title": "Is Now the Time to Buy Forgotten FAANG Stock Netflix?",
+    "summary": "Netflix isn't a Magnificent Seven stock, but it's still worth monitoring.",
+    "url": "https://www.fool.com/investing/2026/05/18/is-now-time-buy-forgotten-faang-stock-netflix/",
+    "published_at": "2026-05-18T20:51:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "a0b335d1aba5",
+    "title": "Applied Optoelectronics Inc. (AAOI): Mark Cuban Urges Focus on Foundational AI",
+    "summary": "We just covered the Mark Cuban Stock Portfolio: 8 Best Stocks to Buy and Applied Optoelectronics, Inc. (NASDAQ:AAOI) ranks 6th on this list. Applied Optoelectronics, Inc. (NASDAQ:AAOI) is one of the favorite AI stocks among billionaire investors. Mark Cuban, in an interview on the the Big Technology Podcast earlier this month, gave his view on […]",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/applied-optoelectronics-inc-aaoi-mark-202843330.html",
+    "published_at": "2026-05-18T20:28:43Z",
+    "source": "Insider Monkey",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "778ae7e6b4f3",
+    "title": "Is It Too Late To Consider Apple (AAPL) After Its 44% One Year Rally?",
+    "summary": "Wondering if Apple stock still offers fair value after its strong run, or if you might be paying too much for future expectations? At a last close of US$300.23, Apple has posted returns of 2.6% over the past week, 11.1% over the past month, 10.8% year to date and 44.4% over the past year. This gives you a clear sense of how sentiment has translated into recent performance. Recent headlines have focused on Apple as a core tech stock, keeping it in the spotlight for investors tracking large,...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/too-consider-apple-aapl-44-201357648.html",
+    "published_at": "2026-05-18T20:13:57Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "f6c821f71df3",
+    "title": "What Is an ETF? Everything Beginners Need to Know in 2026",
+    "summary": "<p>An exchange-traded fund, or ETF, is a basket of investments that trades on a stock exchange like a single share. Here's how ETFs work, why they've grown into a $13.4 trillion industry, and how to decide if they belong in your portfolio.</p>",
+    "url": "http://www.etf.com/sections/etf-basics/what-etf-everything-beginners-need-know-2026?utm_source=yahoo-finance&utm_medium=rss&utm_campaign=yahoo-finance-rss",
+    "published_at": "2026-05-18T19:15:50Z",
+    "source": "etf.com",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "39faac329a94",
+    "title": "Market Chatter: Apple Working on AI Writing Tools, Shortcuts for iOS 27",
+    "summary": "Apple (AAPL) is preparing new AI features for iOS 27 and iPadOS 27 as it looks to narrow the gap wit",
+    "url": "https://finance.yahoo.com/sectors/technology/articles/market-chatter-apple-working-ai-181223388.html",
+    "published_at": "2026-05-18T18:12:23Z",
+    "source": "MT Newswires",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "9edfe7feb896",
+    "title": "Pepsi, Apple, and 9 More AI Momentum Trade Winners. Plus 4 Losers to Dump.",
+    "summary": "It isn’t time to bail on the Magnificent Seven yet. But there are momentum winners in staples and healthcare, too.",
+    "url": "https://www.barrons.com/articles/pepsi-apple-nvidia-ai-momentum-trade-stocks-96c06291?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-18T18:12:00Z",
+    "source": "Barrons.com",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "95468a308f22",
+    "title": "Jim Cramer Shares Key Insights About Apple (AAPL)",
+    "summary": "We recently published Jim Cramer Discussed A Mysterious Yellow Light & These 9 Stocks. Apple Inc. (NASDAQ:AAPL) is one the stocks discussed by Jim Cramer. Apple Inc. (NASDAQ:AAPL)’s shares are up by 14% over the past month and by 10% year-to-date. Financial firm Wedbush, which is one of the firm’s biggest supporters, recently raised the […]",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-shares-key-insights-144502668.html",
+    "published_at": "2026-05-18T14:45:02Z",
+    "source": "Insider Monkey",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "d80cefc738f1",
+    "title": "Dow Jones and Nasdaq climb as oil eases on reports of Iran sanctions lift",
+    "summary": "US stocks battled higher on Monday morning, reversing some of the declines from the end of last week, even though investors continued to worry about rising bond yields, stubborn inflation and the economic fallout from higher oil prices. The Dow Jones opened 0.2% higher at 49,608, while...",
+    "url": "https://www.proactiveinvestors.com/companies/news/1092469/dow-jones-seen-remaining-in-red-oil-eases-on-reports-of-iran-sanctions-lifted-1092469.html",
+    "published_at": "2026-05-18T12:15:00Z",
+    "source": "Proactive",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "ca6c07ec842e",
+    "title": "Amazon's Big Rally Takes A Breather Just Short Of $3 Trillion Club. What To Watch Next.",
+    "summary": "Amazon stock has paused its rally just short of a $3 trillion market cap. Two upcoming events could dictate where AMZN goes next.",
+    "url": "https://www.investors.com/news/technology/amazon-stock-3-trillion-market-cap-milestone-nvidia-earnings/?src=A00220&yptr=yahoo",
+    "published_at": "2026-05-18T12:00:32Z",
+    "source": "Investor's Business Daily",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "9eba71d03cd5",
+    "title": "SpaceX’s Mega-IPO Puts a Price Tag on the Fear of Missing Out",
+    "summary": "(Bloomberg) -- Elon Musk has turned science fiction into reality for the better part of two decades, making believers rich and earning the benefit of the doubt from many on Wall Street. Away from rockets and electric cars, his companies are bending reality on another plane – convincing analysts to stretch their traditional valuation tools, and assign multiples based on what one academic calls “optionalities.”Most Read from BloombergUS and Iran Far From Deal as Bond Rout Piles Pressure on TrumpBi",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/spacex-mega-ipo-puts-price-110000597.html",
+    "published_at": "2026-05-18T11:00:00Z",
+    "source": "Bloomberg",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "36a1a589a3a6",
+    "title": "What Tim Cook's Trip to China Could Mean for Apple Investors",
+    "summary": "The tech giant has a lot at stake regarding its interactions with both the U.S. and Chinese governments.",
+    "url": "https://www.fool.com/investing/2026/05/18/what-tim-cooks-trip-to-china-could-mean-for-apple/",
+    "published_at": "2026-05-18T10:30:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "5276d8464f04",
+    "title": "Indian court tells Apple to 'cooperate' in antitrust case",
+    "summary": "NEW DELHI, May 18 (Reuters) - An Indian court has told Apple to \"fully cooperate\" with investigators in an antitrust case related to the iPhone ​apps market, not agreeing with the U.S. company's",
+    "url": "https://finance.yahoo.com/sectors/technology/articles/indian-court-tells-apple-cooperate-063440812.html",
+    "published_at": "2026-05-18T10:15:25Z",
+    "source": "Reuters",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "33876c50bea0",
+    "title": "Apple China IPhone 17 Discounts Test Ecosystem And Margin Trade Offs",
+    "summary": "Apple (NasdaqGS:AAPL) is cutting prices on iPhone 17 models in China ahead of a key shopping festival. The company is combining its own discounts with national trade in subsidies to lower costs for both premium and base devices. The move comes as Apple faces heightened competition from local brands such as Huawei and Xiaomi in a core market. For investors tracking NasdaqGS:AAPL, these price cuts in China highlight how important the iPhone still is to Apple's broader ecosystem of services...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/apple-china-iphone-17-discounts-050713840.html",
+    "published_at": "2026-05-18T05:07:13Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "e234ce138963",
+    "title": "This AI Stock Has Every Quality Warren Buffett Looks for in a Long-Term Hold",
+    "summary": "No tech stock has sustained success as long as this powerhouse.",
+    "url": "https://www.fool.com/investing/2026/05/17/this-ai-stock-has-every-quality-warren-buffett-loo/",
+    "published_at": "2026-05-18T03:35:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "2c619b704048",
+    "title": "Apple Is Making Hit Products and High Profits From Imperfect Chips",
+    "summary": "The company’s popular, $599 Neo laptop is just one of dozens of Apple devices that use lower-performing processors.",
+    "url": "https://www.wsj.com/tech/apple-is-making-hit-products-and-high-profits-from-imperfect-chips-d32c21d8?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-18T01:00:00Z",
+    "source": "The Wall Street Journal",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "6de9f8716d94",
+    "title": "Trump Personally Brokered the Apple-Intel Deal That Sent Intel from $20 to $125",
+    "summary": "On a recent TBPN segment, host John Coogan walked listeners through what he framed as the most consequential industrial policy intervention in semiconductors since the CHIPS Act, namely Commerce Secretary Howard Lutnick meeting repeatedly with Tim Cook, Elon Musk, and Jensen Huang to push them to partner with Intel, with President Trump personally advocating for ... Trump Personally Brokered the Apple-Intel Deal That Sent Intel from $20 to $125",
+    "url": "https://247wallst.com/investing/2026/05/17/trump-personally-brokered-the-apple-intel-deal-that-sent-intel-from-20-to-125/",
+    "published_at": "2026-05-18T00:16:30Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "794c073bf7c3",
+    "title": "The \"Magnificent Seven\" Has Gained $4.8 Trillion Since the Start of April. Here's Why That's a Risk to the S&P 500 and Nasdaq-100.",
+    "summary": "Market concentration can amplify gains but also compound declines during a stock market sell-off.",
+    "url": "https://www.fool.com/investing/2026/05/15/magnificent-seven-growth-stocks-all-time-high/",
+    "published_at": "2026-05-15T05:15:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "0d45b8d82bad",
+    "title": "Why are so many U.S. CEOs in China with Trump, and what do they want?",
+    "summary": "More than a dozen American CEOs are accompanying President Trump on his trip to China. That's not unusual.",
+    "url": "https://www.cbsnews.com/news/trump-china-trip-xi-jinping-us-ceos-business-interests/",
+    "published_at": "2026-05-15T03:23:51Z",
+    "source": "CBS News",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "f0b34f934368",
+    "title": "1 Unstoppable Stock to Buy Before It Joins Nvidia, Alphabet, and Apple in the $4 Trillion Club",
+    "summary": "Artificial intelligence could be Amazon's ticket into the ultra-exclusive $4 trillion club.",
+    "url": "https://www.fool.com/investing/2026/05/14/1-stock-buy-joins-nvidia-alphabet-4-trillion-club/",
+    "published_at": "2026-05-14T22:37:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "fce9587e4a42",
+    "title": "BuzzHPC targets $200M in AI revenue while Big Tech is still burning cash",
+    "summary": "While the biggest names in tech are burning billions to build AI infrastructure, BuzzHPC is already running close to 80% EBITDA margins and generating real revenue. Craig Tavares, President and COO of BuzzHPC — a subsidiary of Hive Digital Technologies — joined TheStreet Roundtable to lay out a ...",
+    "url": "https://www.thestreet.com/crypto/markets/buzzhpc-targets-200m-in-ai-revenue-while-big-tech-is-still-burning-cash",
+    "published_at": "2026-05-14T21:56:03Z",
+    "source": "TheStreet",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "5e3fc6a90a18",
+    "title": "Wall Street Hearts AI, as Blockbuster IPO Shows",
+    "summary": "The strong reception comes after enthusiasm for AI companies and chip hardware helped the S&P 500 and the tech-laden Nasdaq composite rebound quickly from Iran war concerns and soar to new records.  At the other end of the spectrum, Honda reported its first annual loss as a listed company—equivalent to $2.7 billion.  2. Security researchers say they have discovered a new way of circumventing Apple’s state-of-the-art security technology.",
+    "url": "https://www.wsj.com/tech/wall-street-hearts-ai-as-blockbuster-ipo-shows-697ee9fe?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-14T21:33:00Z",
+    "source": "The Wall Street Journal",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "25235590ae53",
+    "title": "Tech Gains Lift Nasdaq, S&P 500 to New Highs",
+    "summary": "The Nasdaq Composite and the S&P 500 hit new peaks on Thursday, buoyed again by gains in the technol",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/tech-gains-lift-nasdaq-p-210738061.html",
+    "published_at": "2026-05-14T21:07:38Z",
+    "source": "MT Newswires",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "139a945f1383",
+    "title": "OpenAI prepares legal action against Apple over ChatGPT deal",
+    "summary": "The AI company enlisted an outside law firm after the partnership failed to generate expected subscribers or prominence within Apple's ecosystem",
+    "url": "https://qz.com/openai-apple-legal-action-chatgpt-integration-051426",
+    "published_at": "2026-05-14T20:24:03Z",
+    "source": "Quartz",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "4fcd73107a0f",
+    "title": "Fortress Private Ledger Buys $2.8 Million Worth of FEGE -- a Global Equity ETF Outpacing the S&P 500",
+    "summary": "This actively managed ETF invests across U.S. and global equities, with a one-year price gain outpacing the S&P 500.",
+    "url": "https://www.fool.com/coverage/filings/2026/05/14/fortress-private-ledger-buys-usd2-8-million-worth-of-fege-a-global-equity-etf-outpacing-the-s-and-p-500/",
+    "published_at": "2026-05-14T19:58:25Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "d8f3f50166e8",
+    "title": "Sector Update: Tech Stocks Rise Late Afternoon",
+    "summary": "Tech stocks were higher late Thursday afternoon, with the State Street Technology Select Sector SPDR",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/sector-tech-stocks-rise-afternoon-194647658.html",
+    "published_at": "2026-05-14T19:46:47Z",
+    "source": "MT Newswires",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "f2ee9d9826e0",
+    "title": "Xi Warns of Taiwan Conflict. These Stocks Could Get Crushed.",
+    "summary": "Taiwan Semiconductor Manufacturing sits at the center of the AI boom, linking companies worth roughly $30 trillion in market value to the island’s chip supply chain.",
+    "url": "https://www.barrons.com/articles/taiwan-tsmc-ai-stocks-china-risk-f62bc9c7?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-14T19:41:00Z",
+    "source": "Barrons.com",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "743c0010873d",
+    "title": "Xi Jinping tells CEOs that 'China's door will only open wider' as Trump's two-day visit gets underway",
+    "summary": "Chinese President Xi Jinping warmly welcomed a delegation of US CEOs on Thursday during the first day of President Trump's visit to the country.",
+    "url": "https://finance.yahoo.com/economy/policy/article/xi-jinping-tells-ceos-that-chinas-door-will-only-open-wider-as-trumps-two-day-visit-gets-underway-113954588.html",
+    "published_at": "2026-05-14T11:39:54Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "93047648005d",
+    "title": "Why BofA remains cautious on Intel stock despite ongoing rally",
+    "summary": "Investing.com -- Bank of America raised its Intel stock price target to $96 from $56 but maintained its Underperform rating, arguing that a potential foundry deal with Apple, while significant, is already reflected in the stock’s current valuation.",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/why-bofa-remains-cautious-intel-080238224.html",
+    "published_at": "2026-05-11T08:02:38Z",
+    "source": "Investing.com",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "0c5bb2a725f8",
+    "title": "Fed’s Eyes Turn to Inflation: Heard on the Street Weekly Recap",
+    "summary": "The U.S. economy added 115,000 jobs in April, the Labor Department said, far exceeding expectations.  The unemployment rate stayed unchanged at 4.3%.  The jobs report puts the Federal Reserve’s focus squarely on inflation data when it comes to determining its next move on interest rates.",
+    "url": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-05-11-2026/card/fed-s-eyes-turn-to-inflation-heard-on-the-street-weekly-recap-OKMcPiGBc0g1JjUifoj0?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-11T07:39:04Z",
+    "source": "The Wall Street Journal",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "1d058797d1ff",
+    "title": "Dow Jones Futures Fall, Oil Prices Jump To $100; Trump Says Iran Response 'Totally Unacceptable'",
+    "summary": "President Donald Trump said Iran's response to a U.S. peace offer is \"totally unacceptable.\" The Xi summit is on tap..",
+    "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-iran-trump-xi-summit-apple-nvidia-boeing/?src=A00220&yptr=yahoo",
+    "published_at": "2026-05-11T03:05:22Z",
+    "source": "Investor's Business Daily",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "66147f6fae3a",
+    "title": "590,000 buyers paid $59 million for Trump's gold phone — not 1 has shipped and refunds look unlikely",
+    "summary": "Customers paid a collective $59 million toward a gold smartphone that Trump Mobile promised would be “Made in the USA” — but that doesn’t seem to have actually been made.",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/590-000-buyers-paid-59-223500998.html",
+    "published_at": "2026-05-10T22:35:00Z",
+    "source": "Moneywise",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "3e0bfa45608d",
+    "title": "Apple’s Higher R&D Signals Deeper AI Push And Investor Reassessment",
+    "summary": "Apple (NasdaqGS:AAPL) has allocated more than 10% of its revenue to research and development, the first time in roughly 30 years this ratio has reached that level. The company is accelerating work on AI powered devices, including advanced AirPods with cameras and major platform updates that integrate artificial intelligence features. Apple sits at the center of consumer hardware and software, with its ecosystem spanning iPhone, Mac, iPad, wearables, services and custom silicon. The...",
+    "url": "https://finance.yahoo.com/sectors/technology/articles/apple-higher-r-d-signals-211703876.html",
+    "published_at": "2026-05-10T21:17:03Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "3a99aa605a87",
+    "title": "Is It Too Late to Buy Apple Stock?",
+    "summary": "With shares of the tech giant at an all-time high, it might feel late to be jumping in. But several catalysts are coming together at the same time.",
+    "url": "https://www.fool.com/investing/2026/05/10/is-it-too-late-to-buy-apple-stock/",
+    "published_at": "2026-05-10T16:02:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "d25ff1e77d9b",
+    "title": "MONECO Advisors Loads Up on This Defined-Maturity Bond ETF -- Here's Why It Matters",
+    "summary": "Invesco BulletShares 2032 Corporate Bond ETF targets investment-grade U.S. corporate bonds with a fixed maturity and monthly rebalancing.",
+    "url": "https://www.fool.com/coverage/filings/2026/05/10/moneco-advisors-loads-up-on-this-defined-maturity-bond-etf-here-s-why-it-matters/",
+    "published_at": "2026-05-10T15:38:01Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "c9bade26f831",
+    "title": "AI Wins Have Alphabet Poised to Become World’s Biggest Company",
+    "summary": "(Bloomberg) -- Over the past year, Alphabet Inc. has gone from an artificial intelligence afterthought to the one firm in the market with dominant positions in nearly every aspect of the technology. Now it’s on the brink of overtaking AI chip giant Nvidia Corp. as the largest company in the world.Most Read from BloombergIran Makes New Offer on Uranium in Response to US, WSJ SaysTrump Rejects New Iran Peace Offer as ‘Totally Unacceptable’Drone Hits Ship Near Qatar as US Awaits Iran Peace Plan Res",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/ai-wins-alphabet-poised-become-130007285.html",
+    "published_at": "2026-05-10T13:00:07Z",
+    "source": "Bloomberg",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "07351e4ebf1e",
+    "title": "New York Times: More Than Just News, But Is the Valuation Good Enough?",
+    "summary": "Berkshire bought NYT, but strong execution and optionality may not justify today's valuation premium",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/york-times-more-just-news-124832865.html",
+    "published_at": "2026-05-10T12:48:32Z",
+    "source": "GuruFocus.com",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "ae92a7dc9a79",
+    "title": "Intel’s Apple-Polished Comeback",
+    "summary": "Plus, the hearing-walking correlation, Greg Brockman’s diary, Anthropic’s ‘Perfect Wingman’ and code-whispering.",
+    "url": "https://www.wsj.com/tech/ai/intels-apple-polished-comeback-57ec72d6?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-10T12:03:00Z",
+    "source": "The Wall Street Journal",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "5a20d4d1ab1c",
+    "title": "The $1 trillion club's new members are powering the AI boom: Chart of the Day",
+    "summary": "Market royalty is getting a hardware makeover.",
+    "url": "https://finance.yahoo.com/markets/article/the-1-trillion-clubs-new-members-are-powering-the-ai-boom-chart-of-the-day-104234629.html",
+    "published_at": "2026-05-10T10:42:34Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "2d43b44e6ed6",
+    "title": "Samsung Hits $1 Trillion Valuation, Joining TSMC in Elite Club",
+    "summary": "(Bloomberg) -- Samsung Electronics Co.’s market valuation topped $1 trillion after shares in the world’s largest memory maker more than quadrupled over the past year on booming demand for the chips used in artificial intelligence.Most Read from BloombergUS Has Opened a Passage Through Hormuz, Central Command SaysAnthropic Unveils AI Agents to Field Financial Services TasksUS Says Offensive Phase of Iran War Over as Ship Hit in StraitTrump Pauses Plan to Guide Ships While Seeking Iran DealWhite H",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/samsung-hits-1-trillion-valuation-023525360.html",
+    "published_at": "2026-05-06T07:31:12Z",
+    "source": "Bloomberg",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "ac7ae619ad5c",
+    "title": "Arm Reports Earnings as It Shifts Its Business Model",
+    "summary": "Arm reports earnings Wednesday as investors focus on its move into data center CPUs, a business shift that could put the chip-design company in competition with some of its own customers.",
+    "url": "https://www.barrons.com/articles/arm-earnings-stock-price-044c9e87?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-06T06:30:00Z",
+    "source": "Barrons.com",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "f3d300e4a297",
+    "title": "Intel Joined Elon Musk's Terafab. Will This Catalyst Cement the Stock's Turnaround?",
+    "summary": "The chipmaker's shares reached historic heights after the Terafab announcement.",
+    "url": "https://www.fool.com/investing/2026/05/05/intel-joined-elon-musks-terafab/",
+    "published_at": "2026-05-05T22:37:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "854fc3801c3b",
+    "title": "Apple Talks Put Intel Foundry Ambitions And Investor Hopes In Focus",
+    "summary": "Apple is in early talks with Intel about using Intel's U.S. facilities to manufacture chips. The discussions focus on Apple potentially adding Intel as a supplementary or alternative supplier to TSMC. The talks are described as preliminary, with no formal agreement announced. For investors watching NasdaqGS:INTC, these discussions come at a time when the stock is trading at $108.18, following very large 1 year returns and a 174.7% return year to date. The share price move has been...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/apple-talks-put-intel-foundry-221413260.html",
+    "published_at": "2026-05-05T22:14:13Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "090180c56510",
+    "title": "Stock Market Today, May 5: Stocks Rebound as U.S.-Iran Truce Holds",
+    "summary": "Today, May 5, 2026, Micron’s jump on high-capacity SSD demand helped power a broader chip-led advance in U.S. stocks.",
+    "url": "https://www.fool.com/coverage/stock-market-today/2026/05/05/stock-market-today-may-5-stocks-rebound-as-u-s-iran-truce-holds/",
+    "published_at": "2026-05-05T21:37:02Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "21c5f07dd281",
+    "title": "US Equity Indexes Advance, Crude Oil Drops as Rubio Says Combat Operation Against Iran 'Over'",
+    "summary": "US equity indexes rose on Tuesday as crude oil futures fell after the United Arab Emirates reported",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/us-equity-indexes-advance-crude-213653042.html",
+    "published_at": "2026-05-05T21:36:53Z",
+    "source": "MT Newswires",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "1e52ada769ec",
+    "title": "Apple settles lawsuit over late Siri AI features for $250 million",
+    "summary": "Apple on Tuesday settled for $250 million a shareholder lawsuit ‌brought after the company delayed artificial-intelligence upgrades to ‌its Siri voice assistant.  The lawsuit, filed by Peter Landsheft in U.S. ​federal court in California in 2024, arose after the iPhone maker announced - and started running advertisements for - a bevy of AI upgrades at its annual software developer conference ‌in 2024, saying ⁠they would become available with new iPhones that fall.  In 2025, Apple said that the AI overhaul of Siri would not come ​until this ​year, and executives have ​now confirmed that the ‌new Siri features will be unveiled at Apple's annual developer conference next month.",
+    "url": "https://finance.yahoo.com/sectors/technology/articles/apple-settles-lawsuit-over-siri-213002287.html",
+    "published_at": "2026-05-05T21:30:02Z",
+    "source": "Reuters",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "363385743fa9",
+    "title": "These Stocks Are Today’s Movers: Intel, PayPal, Palantir, Shopify, Micron, Duolingo, and More",
+    "summary": "Intel stock rises following a report that Apple could tap the chip maker and Samsung Electronics to make the main processors for its devices in the U.S.",
+    "url": "https://www.barrons.com/articles/stock-movers-8b3b686f?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-05T21:12:00Z",
+    "source": "Barrons.com",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "9cf828812df7",
+    "title": "Chip Makers Push Nasdaq, S&P 500 to Fresh Highs",
+    "summary": "The semiconductor index has risen 54% since the end of March, its best performance over a 25-day period since March 2000.  Chip makers are racing to meet surging demand for the specialized devices that are pivotal to powering artificial intelligence.  Tuesday’s rally powered Intel to a 13% gain and a market capitalization of about $544 billion, surpassing  Oracle  and  Johnson & Johnson  Shares of  Sandisk  Micron and  Qualcomm  all added more than 10%, lifting the tech-heavy Nasdaq composite up 1%.",
+    "url": "https://www.wsj.com/finance/stocks/chip-makers-push-nasdaq-s-p-500-to-fresh-highs-a87aea7f?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-05T21:03:00Z",
+    "source": "The Wall Street Journal",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "8a4175792228",
+    "title": "Micron stock is surging, hitting a new intraday record high. Why?",
+    "summary": "The semiconductor sector (SOXX) has seen a lot of momentum this year.  Yahoo Finance Senior Business Reporter Ines Ferré zooms in on Micron (MU) in particular, highlighting the factors driving the stock's recent gains.",
+    "url": "https://finance.yahoo.com/video/micron-stock-is-surging-hitting-a-new-intraday-record-high-why-195211594.html",
+    "published_at": "2026-05-05T19:52:11Z",
+    "source": "Yahoo Finance Video",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "c2143568aa47",
+    "title": "Here’s What BofA Thinks About ​NVIDIA Corporation (NVDA)",
+    "summary": "​NVIDIA Corporation (NASDAQ:NVDA) plays an important role in the quantum computing industry through its accelerated computing infrastructure and software platforms. For instance, the company integrates quantum processors with its AI supercomputers through tools like CUDA-Q, an open-source platform for hybrid quantum-classical applications, and NVQLink for seamless connectivity. The company also ranks as one of the […]",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/bofa-thinks-nvidia-corporation-nvda-101132458.html",
+    "published_at": "2026-05-05T10:11:32Z",
+    "source": "Insider Monkey",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
     "id": "6ea00223204b",
     "title": "Apple Crushed Q2 Earnings, but Tim Cook Just Issued a Warning About This Looming Threat",
     "summary": "Cook isn't the only CEO worried about this problem.",

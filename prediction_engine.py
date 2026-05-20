@@ -541,90 +541,242 @@ class PredictionEngine:
     def predict_all_horizons(self) -> Dict:
         """
         Generate Daily (1-day), Weekly (5-day), and Monthly (21-day) price
-        predictions with stop-loss and take-profit targets for each horizon.
+        predictions using horizon-specific multi-indicator voting.
 
-        Uses the same ML ensemble as predict_multi_day but extends the horizon
-        with trend blending, confidence decay, and ATR-scaled risk levels.
+        Each horizon uses indicators calibrated to its own timeframe:
+        - Daily  : ML ensemble + technical confirmation (existing approach)
+        - Weekly : 5-day momentum + 6-indicator majority vote
+        - Monthly: 20-day momentum + 6-indicator majority vote
+
+        Only signals BULLISH/BEARISH when a supermajority of independent
+        indicators agree — trades precision for recall.
         """
         indicators = self.calculate_technical_indicators()
-        signal_type, _ = self.generate_signal(indicators)
 
         prices = self.prices
         current_price = float(prices[-1])
+        n = len(prices)
 
-        # Daily volatility (annualised from last 60 days)
+        # ── ATR & volatility ─────────────────────────────────────────────────
         recent_ret = (np.diff(prices[-60:]) / prices[-60:-1]
-                      if len(prices) > 60 else np.diff(prices) / prices[:-1])
+                      if n > 60 else np.diff(prices) / prices[:-1])
         daily_vol = float(np.std(recent_ret)) if len(recent_ret) > 0 else 0.01
-
-        # Average True Range proxy (mean absolute daily move, last 14 bars)
-        if len(prices) >= 15:
-            atr = float(np.mean(np.abs(np.diff(prices[-15:]))))
-        else:
-            atr = current_price * 0.015
+        atr = float(np.mean(np.abs(np.diff(prices[-15:])))) if n >= 15 else current_price * 0.015
         atr_pct = atr / current_price
 
-        # Base 1-day ML return + confidence
+        # ── Base ML prediction (1-day) ────────────────────────────────────────
         ml_return_1d, ml_conf_1d = self.ml_predict_return(indicators)
+        daily_signal_type, _ = self.generate_signal(indicators)
 
-        # Sentiment 1-day bias (same as _ml_predict_signal)
+        # ── Sentiment bias ────────────────────────────────────────────────────
         sentiment_bias = 0.0
         if self._sentiment is not None:
             s1d = self._sentiment.get('Sentiment_1d', 0.0) or 0.0
             mom = self._sentiment.get('Sentiment_Momentum', 0.0) or 0.0
             sentiment_bias = float(s1d) * 0.002 + float(mom) * 0.001
 
-        # Daily trend from last 20 bars (per-bar drift)
-        recent_20 = prices[-20:] if len(prices) >= 20 else prices
-        n_bars = max(len(recent_20) - 1, 1)
-        trend_daily = float((recent_20[-1] - recent_20[0]) / recent_20[0]) / n_bars
+        # ── Extract indicators ────────────────────────────────────────────────
+        rsi       = float(indicators.get('rsi', 50))
+        macd      = float(indicators.get('macd', 0))
+        macd_sig  = float(indicators.get('macd_signal', 0))
+        macd_hist = float(indicators.get('macd_hist', 0))
+        sma20     = float(indicators.get('bb_middle', current_price))
+        sma50     = float(indicators.get('sma50', current_price))
+        bb_upper  = float(indicators.get('bb_upper', current_price))
+        bb_lower  = float(indicators.get('bb_lower', current_price))
+        bb_range  = bb_upper - bb_lower
+        bb_pos    = (current_price - bb_lower) / bb_range if bb_range > 0 else 0.5
 
-        # ── Horizon specs ─────────────────────────────────────────────────────
-        # key, days, name, label, conf_decay, trend_weight, atr_mult
-        # conf_decay calibrated to walk-forward validated accuracy:
-        #   Daily   42% dir-acc  → no bonus (base ML confidence kept as-is)
-        #   Weekly  61% dir-acc  → slight BOOST (+8%) to reflect validated edge
-        #   Monthly 57% dir-acc  → mild decay (−10%) for longer uncertainty
-        specs = [
-            ('daily',   1,  'Daily',   '1 Day',   0.00,  0.00, 1.5),
-            ('weekly',  5,  'Weekly',  '5 Days',  -0.08, 0.30, 2.0),
-            ('monthly', 21, 'Monthly', '21 Days',  0.10, 0.60, 2.8),
+        # ── Multi-period price momentum (computed directly from prices) ───────
+        mom5d  = float((prices[-1] - prices[-6])  / prices[-6])  if n >= 6  else 0.0
+        mom10d = float((prices[-1] - prices[-11]) / prices[-11]) if n >= 11 else 0.0
+        mom20d = float((prices[-1] - prices[-21]) / prices[-21]) if n >= 21 else 0.0
+
+        # ── SMA20 trend: is SMA20 rising over last 10 bars? ──────────────────
+        sma20_series = self._calculate_sma(prices, 20)
+        sma20_10ago = float(sma20_series[-11]) if n >= 31 and not np.isnan(sma20_series[-11]) else sma20
+        sma20_rising = sma20 > sma20_10ago
+
+        # SMA50 trend
+        sma50_series = self._calculate_sma(prices, 50)
+        sma50_10ago = float(sma50_series[-11]) if n >= 61 and not np.isnan(sma50_series[-11]) else sma50
+        sma50_rising = sma50 > sma50_10ago
+
+        # ── ADX proxy (trend strength) — average directional movement ─────────
+        # Uses simplified Wilder-style calculation over last 14 bars.
+        adx_strength = 0.5   # default: moderate trend
+        if n >= 16:
+            hi = prices[-15:]
+            lo = prices[-15:]  # proxy: use price series as H=L=C (no OHLC)
+            tr = np.abs(np.diff(prices[-15:]))
+            plus_dm  = np.maximum(np.diff(prices[-15:]), 0)
+            minus_dm = np.maximum(-np.diff(prices[-15:]), 0)
+            atr14 = np.mean(tr) if np.mean(tr) > 0 else 1
+            pdi = np.mean(plus_dm)  / atr14
+            mdi = np.mean(minus_dm) / atr14
+            dx = abs(pdi - mdi) / (pdi + mdi) if (pdi + mdi) > 0 else 0
+            adx_strength = float(dx)   # 0 = no trend, 1 = strong trend
+
+        # ── Volume trend (if volume data available via historical_data) ───────
+        vol_rising = False
+        try:
+            vol_col = next((c for c in self.historical_data.columns if 'Volume' in c), None)
+            if vol_col and len(self.historical_data) >= 10:
+                vols = self.historical_data[vol_col].dropna().values[-10:]
+                vol_rising = float(vols[-3:].mean()) > float(vols[:5].mean())
+        except Exception:
+            pass
+
+        # ══════════════════════════════════════════════════════════════════════
+        # DAILY horizon — ML ensemble + technical gate (existing logic)
+        # ══════════════════════════════════════════════════════════════════════
+        daily_return   = ml_return_1d + sentiment_bias
+        daily_forecast = current_price * (1.0 + daily_return)
+        daily_conf     = min(0.95, max(0.35, ml_conf_1d))
+
+        # ══════════════════════════════════════════════════════════════════════
+        # WEEKLY horizon — 6-indicator majority vote (need 4/6 to signal)
+        # Each indicator is independently calibrated to 5-day prediction.
+        # ══════════════════════════════════════════════════════════════════════
+        w_bull, w_bear = 0, 0
+
+        # 1. ML 1-day signal (still informative, but single vote only)
+        if ml_return_1d > 0.002 and ml_conf_1d > 0.55:
+            w_bull += 1
+        elif ml_return_1d < -0.002 and ml_conf_1d > 0.55:
+            w_bear += 1
+
+        # 2. MACD momentum crossover
+        if macd > macd_sig and macd_hist > 0:
+            w_bull += 1
+        elif macd < macd_sig and macd_hist < 0:
+            w_bear += 1
+
+        # 3. Price above / below SMA20 (short-term trend)
+        if current_price > sma20 * 1.001:
+            w_bull += 1
+        elif current_price < sma20 * 0.999:
+            w_bear += 1
+
+        # 4. Price above / below SMA50 (medium-term trend)
+        if current_price > sma50:
+            w_bull += 1
+        elif current_price < sma50:
+            w_bear += 1
+
+        # 5. Actual 5-day momentum (most direct signal for 5-day horizon)
+        if mom5d > 0.004:
+            w_bull += 1
+        elif mom5d < -0.004:
+            w_bear += 1
+
+        # 6. RSI zone (not overbought for bull, not oversold for bear)
+        if 42 <= rsi <= 68:
+            w_bull += 1
+        elif 32 <= rsi <= 58:
+            w_bear += 1
+
+        # Weekly price return: blend 5d momentum (50%) + 10d momentum (30%) + ML×5 (20%)
+        weekly_return = (0.50 * mom5d
+                         + 0.30 * mom10d
+                         + 0.20 * (ml_return_1d * 5 * 0.70))
+
+        # Signal requires 4/6 indicators to agree
+        if w_bull >= 4:
+            weekly_signal = 'BULLISH'
+            # Confidence scales with votes and ADX (higher in trending market)
+            weekly_conf = min(0.90, 0.52 + w_bull * 0.05 + adx_strength * 0.10)
+        elif w_bear >= 4:
+            weekly_signal = 'BEARISH'
+            weekly_conf = min(0.90, 0.52 + w_bear * 0.05 + adx_strength * 0.10)
+        else:
+            weekly_signal = 'NEUTRAL'
+            weekly_conf = 0.40
+
+        weekly_forecast = current_price * (1.0 + weekly_return)
+
+        # ══════════════════════════════════════════════════════════════════════
+        # MONTHLY horizon — 6-indicator majority vote (need 4/6 to signal)
+        # Uses longer-term indicators calibrated to 21-day prediction.
+        # ══════════════════════════════════════════════════════════════════════
+        m_bull, m_bear = 0, 0
+
+        # 1. SMA20 vs SMA50 alignment (golden/death cross direction)
+        if sma20 > sma50 * 1.001:
+            m_bull += 1
+        elif sma20 < sma50 * 0.999:
+            m_bear += 1
+
+        # 2. SMA50 rising/falling (is medium-term trend accelerating?)
+        if sma50_rising:
+            m_bull += 1
+        else:
+            m_bear += 1
+
+        # 3. Actual 20-day momentum (most direct for 21-day horizon)
+        if mom20d > 0.010:
+            m_bull += 1
+        elif mom20d < -0.010:
+            m_bear += 1
+
+        # 4. 10-day momentum (secondary confirmation)
+        if mom10d > 0.005:
+            m_bull += 1
+        elif mom10d < -0.005:
+            m_bear += 1
+
+        # 5. MACD positive and above signal (overall momentum direction)
+        if macd > 0 and macd > macd_sig:
+            m_bull += 1
+        elif macd < 0 and macd < macd_sig:
+            m_bear += 1
+
+        # 6. RSI in constructive zone (not extreme)
+        if 48 <= rsi <= 72:
+            m_bull += 1
+        elif 28 <= rsi <= 52:
+            m_bear += 1
+
+        # Monthly price return: blend 20d momentum (50%) + 10d (30%) + ML×21 (20%)
+        monthly_return = (0.50 * mom20d
+                          + 0.30 * mom10d
+                          + 0.20 * (ml_return_1d * 21 * 0.40))
+
+        # Signal requires 4/6 indicators to agree
+        if m_bull >= 4:
+            monthly_signal = 'BULLISH'
+            monthly_conf = min(0.90, 0.52 + m_bull * 0.05 + adx_strength * 0.10)
+        elif m_bear >= 4:
+            monthly_signal = 'BEARISH'
+            monthly_conf = min(0.90, 0.52 + m_bear * 0.05 + adx_strength * 0.10)
+        else:
+            monthly_signal = 'NEUTRAL'
+            monthly_conf = 0.40
+
+        monthly_forecast = current_price * (1.0 + monthly_return)
+
+        # ══════════════════════════════════════════════════════════════════════
+        # Build per-horizon output (SL / TP / action)
+        # ══════════════════════════════════════════════════════════════════════
+        horizon_specs = [
+            ('daily',   1,  'Daily',   '1 Day',  daily_signal,   daily_conf,   daily_forecast,   1.5),
+            ('weekly',  5,  'Weekly',  '5 Days', weekly_signal,  weekly_conf,  weekly_forecast,  2.0),
+            ('monthly', 21, 'Monthly', '21 Days',monthly_signal, monthly_conf, monthly_forecast, 2.8),
         ]
 
         horizons_out: Dict = {}
-        for key, days, name, label, conf_decay, trend_wt, atr_mult in specs:
-            if days == 1:
-                h_return = ml_return_1d + sentiment_bias
-                confidence = ml_conf_1d
-            else:
-                ml_scale = 1.0 - conf_decay
-                h_return = (ml_return_1d * days * ml_scale * (1.0 - trend_wt)
-                            + trend_daily * days * trend_wt)
-                confidence = min(0.95, max(0.35, ml_conf_1d * (1.0 - conf_decay)))
-
-            forecast_price = current_price * (1.0 + h_return)
+        for key, days, name, label, h_signal, confidence, forecast_price, atr_mult in horizon_specs:
             price_change = forecast_price - current_price
-            pct_change = h_return * 100.0
+            h_return     = (forecast_price - current_price) / current_price
+            pct_change   = h_return * 100.0
 
-            # Horizon signal
-            if days == 1:
-                h_signal = signal_type
-            else:
-                if h_return > 0.005:
-                    h_signal = 'BULLISH'
-                elif h_return < -0.005:
-                    h_signal = 'BEARISH'
-                else:
-                    h_signal = 'NEUTRAL'
-
-            # Stop-loss: ATR × multiplier × √days (time-uncertainty scaling)
+            # SL: ATR × multiplier × √days
             stop_dist = atr * atr_mult * (days ** 0.5)
             if h_signal in ('BULLISH', 'NEUTRAL'):
                 stop_loss = max(current_price - stop_dist, current_price * 0.70)
             else:
                 stop_loss = current_price + stop_dist
 
-            # Take-profit: 2:1 risk/reward ratio relative to stop distance
             risk = abs(current_price - stop_loss)
             if h_signal == 'BULLISH':
                 take_profit = current_price + risk * 2.0
@@ -633,10 +785,9 @@ class PredictionEngine:
             else:
                 take_profit = forecast_price
 
-            # Recommended action
-            if h_signal == 'BULLISH' and confidence > 0.50:
+            if h_signal == 'BULLISH' and confidence > 0.55:
                 action = 'BUY'
-            elif h_signal == 'BEARISH' and confidence > 0.50:
+            elif h_signal == 'BEARISH' and confidence > 0.55:
                 action = 'SELL'
             else:
                 action = 'HOLD'

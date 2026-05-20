@@ -1,5 +1,645 @@
 [
   {
+    "id": "5d63a1487604",
+    "title": "Nvidia's Earnings Are Hours Away. Here Are 3 Things to Watch.",
+    "summary": "The AI chipmaker's outlook for the quarter ahead, its Vera Rubin transition, and any fresh China commentary could matter more than the headline numbers.",
+    "url": "https://www.fool.com/investing/2026/05/20/nvidias-earnings-are-hours-away-here-are-3-things/",
+    "published_at": "2026-05-20T05:46:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "adf6d6222cf1",
+    "title": "Asian stocks extend losing streak as higher yields bite, Nvidia results in focus",
+    "summary": "By Stella Qiu SYDNEY, May 20 (Reuters) - Asian stocks extended a losing streak on Wednesday as war-driven inflation fears hammered bonds, while investors awaited earnings from Nvidia to see whether",
+    "url": "https://finance.yahoo.com/news/asian-stocks-fall-4th-day-020854458.html",
+    "published_at": "2026-05-20T05:32:37Z",
+    "source": "Reuters",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "c51eee7684c9",
+    "title": "“4,000% or 5,000% Over Five or Six Years”: Why Patient Investors in NVDA, AMD, and LLY Are Winning",
+    "summary": "On a recent episode of Earn Your Leisure titled “The #1 Investing Mistake Keeping You Broke,” co-host E delivered a blunt diagnosis for retail investors: stop trading the stocks you should be holding. “The ones that are leading now will lead,” he said, warning that top companies could compound 4,000% or 5,000% over five or ... “4,000% or 5,000% Over Five or Six Years”: Why Patient Investors in NVDA, AMD, and LLY Are Winning",
+    "url": "https://247wallst.com/investing/2026/05/20/4000-or-5000-over-five-or-six-years-why-patient-investors-in-nvda-amd-and-lly-are-winning/",
+    "published_at": "2026-05-20T05:22:05Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "4f70cbf67705",
+    "title": "The S&P 500 Just Completed Its 7th Straight Up Week. History Says It's Still Time to Buy.",
+    "summary": "Nearly 100 years of history for the S&P 500 say a streak like this is reason for optimism, not the signal of a top.",
+    "url": "https://www.fool.com/investing/2026/05/20/sp-500-7th-straight-up-week-history-says-to-buy/",
+    "published_at": "2026-05-20T04:35:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "1a988adc8bb5",
+    "title": "Should You Buy Nvidia Stock Before Its Next Earnings Report?",
+    "summary": "Stop fretting over this stock's near-term fluctuations.",
+    "url": "https://www.fool.com/investing/2026/05/19/should-you-buy-nvidia-stock-before-its-next-earnin/",
+    "published_at": "2026-05-20T04:11:54Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "a016ec88de2f",
+    "title": "Dow Jones Futures Fall With Nvidia Earnings Due; Micron, Sandisk, Astera Rise",
+    "summary": "The stock market fell Tuesday as yields hit new highs, but some AI leaders like Micron and Sandisk rebounded. Nvidia earnings loom.",
+    "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-yields-micron-sandisk-astera-labs-nvidia-earnings/?src=A00220&yptr=yahoo",
+    "published_at": "2026-05-20T03:06:12Z",
+    "source": "Investor's Business Daily",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "fae825d66680",
+    "title": "Stock market today: Dow, S&P 500, Nasdaq futures dip in countdown to Nvidia earnings",
+    "summary": "Stocks wavered as Wall Street awaited Nvidia earnings, hoping strong results could offer some relief from ongoing inflation concerns.",
+    "url": "https://finance.yahoo.com/news/live/stock-market-today-dow-sp-500-nasdaq-futures-dip-in-countdown-to-nvidia-earnings-222757467.html",
+    "published_at": "2026-05-19T22:27:57Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "9a367ee4f0c7",
+    "title": "ServiceNow stock gains as investors push further into software",
+    "summary": "ServiceNow (NOW) shares are extending their gains in this trading week, jumping by nearly 5% on Tuesday morning in a new push by software stocks. Yahoo Finance Senior Reporter Ines Ferré takes a closer look at why investors may be rotating out of semiconductor stocks into software. AI semiconductor giant Nvidia (NVDA) is scheduled to report first quarter earnings this Wednesday, May 20.",
+    "url": "https://finance.yahoo.com/video/servicenow-stock-gains-as-investors-push-further-into-software-141506101.html",
+    "published_at": "2026-05-19T14:15:06Z",
+    "source": "Yahoo Finance Video",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "e2882e4e5ab3",
+    "title": "Take a closer look at Nvidia stock using Yahoo Finance's AlphaSpace",
+    "summary": "Yahoo Finance has launched AlphaSpace, a premium investment platform that combines data, charting, news, analysis, and more to help retail investors understand markets and make smart decisions faster. Yahoo Finance Executive Editor Brian Sozzi demonstrates how to use the platform by taking a closer look at AI chip stock Nvidia (NVDA) ahead of its first quarter earnings on Wednesday. Innovator From Goldman Sachs Asset Management chief investment strategist Tim Urbanowicz weighs in with his firm's general outlook on Nvidia.",
+    "url": "https://finance.yahoo.com/video/take-a-closer-look-at-nvidia-stock-using-yahoo-finances-alphaspace-140312172.html",
+    "published_at": "2026-05-19T14:03:12Z",
+    "source": "Yahoo Finance Video",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "0ecaa7d4f452",
+    "title": "Trump traded over $50 million in 'Magnificent 7' stocks last quarter, loading up on Apple and Google and selling Tesla",
+    "summary": "President Trump made 94 different trades of 'Magnificent 7' stocks in the first quarter of 2026, a new ethics disclosure shows, executing millions of dollars in transactions even as he was meeting with and often promoting these top tech companies.",
+    "url": "https://finance.yahoo.com/markets/stocks/article/trump-traded-over-50-million-in-magnificent-7-stocks-last-quarter-loading-up-on-apple-and-google-and-selling-tesla-100000562.html",
+    "published_at": "2026-05-19T10:00:00Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "8a11cd1fec0d",
+    "title": "Forget Nvidia. 1 of These 3 Hyperscalers Could Be the Top AI Stock Through 2030.",
+    "summary": "Combined 2026 capital spending from three cloud giants is set to top $570 billion, and they could be a smarter way to play artificial intelligence over the long haul.",
+    "url": "https://www.fool.com/investing/2026/05/19/forget-nvidia-1-of-these-3-hyperscalers-could-be-t/",
+    "published_at": "2026-05-19T06:01:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "1d332508c1bb",
+    "title": "I Have 90% of My Net Worth in One Stock. How Do I Diversify Without a Massive Tax Bill?",
+    "summary": "Ben Carlson of Ritholtz Wealth Management has flagged what he calls “one of the biggest trends that I’ve seen in the wealth management space in the last 5 years”: clients walking in the door already asking for tax-aware diversification, rather than advisors having to sell it to them. The two archetypes he cited on The ... I Have 90% of My Net Worth in One Stock. How Do I Diversify Without a Massive Tax Bill?",
+    "url": "https://247wallst.com/investing/2026/05/19/i-have-90-of-my-net-worth-in-one-stock-how-do-i-diversify-without-a-massive-tax-bill/",
+    "published_at": "2026-05-19T04:38:45Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "63b628d2570a",
+    "title": "Morning Bid: Markets in uneasy calm as inflation fears take root",
+    "summary": "A look at the day ahead in European and global markets from Rae Wee Market sentiment remained fragile on Tuesday even after U.S.",
+    "url": "https://finance.yahoo.com/economy/policy/articles/morning-bid-markets-uneasy-calm-043620543.html",
+    "published_at": "2026-05-19T04:36:20Z",
+    "source": "Reuters",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "19cfb80fcf85",
+    "title": "Greg Abel Recently Bought $235 Million Worth of Warren Buffett's Favorite Stock",
+    "summary": "Warren Buffett plowed $77.8 billion into this particular stock between 2018 and 2024.",
+    "url": "https://www.fool.com/investing/2026/05/18/greg-abel-bought-235-million-warren-buffetts-stock/",
+    "published_at": "2026-05-19T03:50:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "959e60376d1d",
+    "title": "China market for Nvidia AI chips to open 'over time': Huang",
+    "summary": "Nvidia boss Jensen Huang expects China to eventually open its market to high-end US chips that can train and run artificial intelligence systems.\"My sense is that over time the market will open,\" added Huang, CEO of Nvidia -- the world's most valuable company, due to huge demand for its AI hardware.",
+    "url": "https://finance.yahoo.com/sectors/technology/articles/china-market-nvidia-ai-chips-030253929.html",
+    "published_at": "2026-05-19T03:02:53Z",
+    "source": "AFP",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "ea97c1c155e2",
+    "title": "TBUX vs. TLT: Which Bond Fund Is the Better Buy?",
+    "summary": "Most people should steer clear of long-term bond funds, and the reason why might surprise you.",
+    "url": "https://www.fool.com/investing/2026/05/18/tbux-vs-tlt-which-bond-fund-is-better-buy/",
+    "published_at": "2026-05-19T02:20:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "45e045232b5c",
+    "title": "Why Dominion Energy Stock Jumped Today",
+    "summary": "Merging with a larger utility could create an AI infrastructure colossus.",
+    "url": "https://www.fool.com/investing/2026/05/18/why-dominion-energy-stock-is-up-today/",
+    "published_at": "2026-05-19T02:15:50Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "90e795706be9",
+    "title": "Semiconductor Exposure in S&P 500 Hits 18%. That’s More Than Double the Tech Bubble Peak.",
+    "summary": "Cameron Dawson, chief investment officer at NewEdge Wealth, dropped a statistic on Thoughtful Money with Adam Taggart that should reframe how investors think about diversification in 2026. “10 years ago, the semiconductor index or weight in the S&P 500 was 2%. Today it’s 18%,” she said, adding that “that 18% is more than double what ... Semiconductor Exposure in S&P 500 Hits 18%. That’s More Than Double the Tech Bubble Peak.",
+    "url": "https://247wallst.com/investing/2026/05/18/semiconductor-exposure-in-sp-500-hits-18-thats-more-than-double-the-tech-bubble-peak/",
+    "published_at": "2026-05-19T01:56:37Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "add5f94237b2",
+    "title": "Google and Blackstone to Create New AI Cloud Company",
+    "summary": "The duo plans to launch the unnamed U.S. company with $5 billion in equity capital from Blackstone, which will be the majority owner.",
+    "url": "https://www.wsj.com/tech/ai/google-and-blackstone-to-create-new-ai-cloud-company-0e35b91f?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-19T01:37:00Z",
+    "source": "The Wall Street Journal",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "b79ef1c5460d",
+    "title": "Stock market today: Dow, S&P 500, Nasdaq drop amid rising bond yields",
+    "summary": "Wall Street weighed inflation concerns and counted down to Nvidia earnings.",
+    "url": "https://finance.yahoo.com/markets/live/stock-market-today-dow-sp-500-nasdaq-drop-amid-rising-bond-yields-222343798.html",
+    "published_at": "2026-05-18T22:23:43Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "ef5feb102f6e",
+    "title": "Lucid Price Prediction: 50% Upside, or Value Trap?",
+    "summary": "Few stocks divide investors like Lucid (NASDAQ:LCID). The luxury EV maker has the technology, partnerships, and Saudi backing. It also has deeply negative gross margins and a Polymarket bankruptcy market trading near a coin flip. When our model points to upside, it deserves careful framing. Our 24/7 Wall St. price target for Lucid is $9.42 ... Lucid Price Prediction: 50% Upside, or Value Trap?",
+    "url": "https://247wallst.com/investing/2026/05/18/lucid-price-prediction-50-upside-or-value-trap/",
+    "published_at": "2026-05-18T15:11:29Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "e8743742c13d",
+    "title": "Nvidia Price Prediction: Where Will The Tech Giant Be In 2030?",
+    "summary": "NVIDIA (NASDAQ:NVDA) is the operating system of the AI economy. It just closed fiscal 2026 with $215.94 billion in revenue and $120.07 billion in net income, numbers that would have sounded absurd two years ago. Shares are up 18.83% year to date to $224.41, yet the valuation looks tame relative to cash flow. Can NVDA ... Nvidia Price Prediction: Where Will The Tech Giant Be In 2030?",
+    "url": "https://247wallst.com/investing/2026/05/18/nvidia-price-prediction-where-will-the-tech-giant-be-in-2030/",
+    "published_at": "2026-05-18T15:11:07Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "b34b11a30b18",
+    "title": "Lockheed Martin Price Target Slashed to $571 by Citi: Is the Defense Trade Stuck in Neutral?",
+    "summary": "Citi lowered its price target on Lockheed Martin (NYSE:LMT) to $571 from $675, while maintaining a Neutral rating. The price target cut lands as LMT stock trades at $518.41, well below the firm’s revised mark. For prudent investors, the takeaway on LMT stock is that the defense trade may stay range-bound until the macro backdrop ... Lockheed Martin Price Target Slashed to $571 by Citi: Is the Defense Trade Stuck in Neutral?",
+    "url": "https://247wallst.com/investing/2026/05/18/lockheed-martin-price-target-slashed-to-571-by-citi-is-the-defense-trade-stuck-in-neutral/",
+    "published_at": "2026-05-18T15:08:47Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "0eed34b5b3f3",
+    "title": "Okta Price Target Bumped to $103 at KeyBanc as Security Spending Catches Fire",
+    "summary": "Okta (NASDAQ:OKTA) stock earned a stronger endorsement from KeyBanc. Analyst Eric Heath raised the firm’s price target on Okta to $103 from $95 and kept an Overweight rating on the shares, citing a sharper outlook for enterprise security spending in the back half of the year. The price target raise is part of a broader ... Okta Price Target Bumped to $103 at KeyBanc as Security Spending Catches Fire",
+    "url": "https://247wallst.com/investing/2026/05/18/okta-price-target-bumped-to-103-at-keybanc-as-security-spending-catches-fire/",
+    "published_at": "2026-05-18T15:06:57Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "a947a88fd528",
+    "title": "NVIDIA Price Target Lifted to $300 by KeyBanc: Blackwell and Rubin Are Stacking Catalysts",
+    "summary": "NVIDIA (NASDAQ:NVDA) just picked up another bullish data point from Wall Street. KeyBanc raised its price target on NVIDIA to $300 from $275, maintaining an Overweight rating on the shares. The firm’s thesis: Blackwell and Rubin are stacking catalysts heading into the May 20 earnings report. For long-term holders, the price target raise reinforces a ... NVIDIA Price Target Lifted to $300 by KeyBanc: Blackwell and Rubin Are Stacking Catalysts",
+    "url": "https://247wallst.com/investing/2026/05/18/nvidia-price-target-lifted-to-300-by-keybanc-blackwell-and-rubin-are-stacking-catalysts/",
+    "published_at": "2026-05-18T15:03:39Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "98b16f67394d",
+    "title": "FuelCell Energy Slumps 22%, Plug Power Sinks 12%: Hydrogen Bulls Hit the Brakes",
+    "summary": "Shares of FuelCell Energy (NASDAQ:FCEL) slid 22% in Monday morning trading, while Plug Power (NASDAQ:PLUG) shares dropped 12%. The selloff hits two of the loudest winners of the AI power trade. The hydrogen rally is taking a breather after weeks of euphoric upside. The pullback comes after a remarkable run. FuelCell Energy stock has surged ... FuelCell Energy Slumps 22%, Plug Power Sinks 12%: Hydrogen Bulls Hit the Brakes",
+    "url": "https://247wallst.com/investing/2026/05/18/fuelcell-energy-slumps-22-plug-power-sinks-12-hydrogen-bulls-hit-the-brakes/",
+    "published_at": "2026-05-18T14:52:40Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "6f545ce2594c",
+    "title": "Nvidia Likely to Post Fiscal Q1 Beat on AI Spend, Supply Chain Edge, Wedbush Says",
+    "summary": "Nvidia (NVDA) is likely to post a fiscal Q1 beat due to positive data points through the quarter, he",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/nvidia-likely-post-fiscal-q1-145003146.html",
+    "published_at": "2026-05-18T14:50:03Z",
+    "source": "MT Newswires",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "c5a3fba08559",
+    "title": "Earnings live updates: Nvidia and Walmart, 2 important bellwethers for the US economy, report results this week",
+    "summary": "Investors will get highly anticipated quarterly results from Nvidia (NVDA) on Wednesday in what’s expected to be the marquee earnings event of the week.",
+    "url": "https://finance.yahoo.com/markets/live/earnings-live-updates-nvidia-and-walmart-2-important-bellwethers-for-the-us-economy-report-results-this-week-115413665.html",
+    "published_at": "2026-05-18T11:54:13Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "7b64ee2ea4ca",
+    "title": "Tech stocks today: Tech stocks fall as investors gear up for Nvidia earnings, OpenAI v. Elon Musk trial decision",
+    "summary": "Nvidia earnings report is expected to be the main event for tech investors this week.",
+    "url": "https://finance.yahoo.com/sectors/technology/live/tech-stocks-today-tech-stocks-fall-as-investors-gear-up-for-nvidia-earnings-openai-v-elon-musk-trial-decision-111103131.html",
+    "published_at": "2026-05-18T11:11:03Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "cc72d03c712c",
+    "title": "Tech stocks today: Elon Musk loses court battle against OpenAI, Samsung extends talks to avert looming strike",
+    "summary": "Nvidia earnings report is expected to be the main event for tech investors this week.",
+    "url": "https://finance.yahoo.com/sectors/technology/live/tech-stocks-today-elon-musk-loses-court-battle-against-openai-samsung-extends-talks-to-avert-looming-strike-111103140.html",
+    "published_at": "2026-05-18T11:11:03Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "ec163baf2bdb",
+    "title": "Here's how Nvidia stock has historically performed after earnings: Chart of the Day",
+    "summary": "Buying Nvidia stock just before quarterly results has historically produced modest short-term gains, but the longer-term picture has been much stronger.",
+    "url": "https://finance.yahoo.com/markets/stocks/article/heres-how-nvidia-stock-has-historically-performed-after-earnings-chart-of-the-day-090000420.html",
+    "published_at": "2026-05-18T09:00:00Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "a715088214bd",
+    "title": "Investors eye Nvidia, bond yields, and the next commodity supercycle: What to watch this week",
+    "summary": "Investors step into the week after a Friday in the red, spurred by a stable of geopolitical uncertainties post Trump-Xi summit, rising bond yields, and sticky inflation.",
+    "url": "https://finance.yahoo.com/news/investors-eye-nvidia-bond-yields-and-the-next-commodity-supercycle-what-to-watch-this-week-104255761.html",
+    "published_at": "2026-05-17T10:42:55Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "2a5263ae0f0b",
+    "title": "Asian shares dive as US yields hit one-year high",
+    "summary": "By Stella Qiu SYDNEY, May 15 (Reuters) - Asian shares dived on Friday as investor euphoria over tech stocks gave way to inflation fears that saw Treasury yields spike to one-year highs and rising bets",
+    "url": "https://finance.yahoo.com/news/asian-shares-fall-us-yields-021744011.html",
+    "published_at": "2026-05-15T05:38:36Z",
+    "source": "Reuters",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "8dc497d6c9dd",
+    "title": "Teva Stock Is at Its Highest Level in Nearly a Decade. Here's Why It Could Soar Even More.",
+    "summary": "The market's rediscovery of Teva Pharmaceuticals remains ongoing.",
+    "url": "https://www.fool.com/investing/2026/05/15/teva-stock-is-at-its-highest-level-in-nearly-a-dec/",
+    "published_at": "2026-05-15T05:20:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "794c073bf7c3",
+    "title": "The \"Magnificent Seven\" Has Gained $4.8 Trillion Since the Start of April. Here's Why That's a Risk to the S&P 500 and Nasdaq-100.",
+    "summary": "Market concentration can amplify gains but also compound declines during a stock market sell-off.",
+    "url": "https://www.fool.com/investing/2026/05/15/magnificent-seven-growth-stocks-all-time-high/",
+    "published_at": "2026-05-15T05:15:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "5661e94ce877",
+    "title": "Morning Bid: Yield surge spoils the equity party",
+    "summary": "A look at the day ahead in European and global markets from Stella Qiu Is the penny finally dropping for investors in stocks?",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/morning-bid-yield-surge-spoils-044749283.html",
+    "published_at": "2026-05-15T04:47:49Z",
+    "source": "Reuters",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "9f4790dcb471",
+    "title": "Cerebras Just Pulled Off the Biggest IPO Of 2026 So Far. History Says This Happens Next.",
+    "summary": "Demand for the AI chipmaker's debut was more than 20 times oversubscribed. But history offers some sobering context for what could come next.",
+    "url": "https://www.fool.com/investing/2026/05/14/cerebras-just-pulled-off-the-biggest-ipo-of-2026-h/",
+    "published_at": "2026-05-15T04:18:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "142511d512cf",
+    "title": "Asia Markets Downbeat as Trump-Xi Summit Heads Into Final Day",
+    "summary": "STOCKS  Asian stocks started the day broadly lower, despite a positive lead from Wall Street overnight and a constructive tone from the meeting between President Trump and Chinese leader Xi Jinping. As the U.",
+    "url": "https://www.wsj.com/finance/stocks/asia-markets-downbeat-as-trump-xi-summit-heads-into-final-day-a6483176?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-15T03:43:00Z",
+    "source": "The Wall Street Journal",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "0d45b8d82bad",
+    "title": "Why are so many U.S. CEOs in China with Trump, and what do they want?",
+    "summary": "More than a dozen American CEOs are accompanying President Trump on his trip to China. That's not unusual.",
+    "url": "https://www.cbsnews.com/news/trump-china-trip-xi-jinping-us-ceos-business-interests/",
+    "published_at": "2026-05-15T03:23:51Z",
+    "source": "CBS News",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "872187953f9e",
+    "title": "\"The Big Short's\" Michael Burry vs. Renowned Economist Ed Yardeni: One Thinks the Stock Market Is Going to 8,250, and the Other Sees an Imminent \"Bloody Car Crash.\"",
+    "summary": "Some investors believe the market's extraordinary run can continue, while others recommend investors move into cash.",
+    "url": "https://www.fool.com/investing/2026/05/14/the-big-shorts-michael-burry-vs-renowned-economist/",
+    "published_at": "2026-05-15T03:20:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "195269ea3e38",
+    "title": "What the Trump–Xi summit in China could mean for Nvidia",
+    "summary": "President Trump's summit in China with President Xi is underway, with Nvidia (NVDA) CEO Jensen Huang and Tesla (TSLA) CEO Elon Musk tagging along. Yahoo Finance Technology Editor Dan Howley explains what talks in China could mean for Nvidia.",
+    "url": "https://finance.yahoo.com/video/what-the-trumpxi-summit-in-china-could-mean-for-nvidia-200822221.html",
+    "published_at": "2026-05-14T20:08:22Z",
+    "source": "Yahoo Finance Video",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "0246fcb6ddaf",
+    "title": "Trump, Elon Musk are trying to open up China for business",
+    "summary": "President Trump's summit in China with President Xi is underway, with Nvidia (NVDA) CEO Jensen Huang and Tesla (TSLA) CEO Elon Musk tagging along. Yahoo Finance Washington Correspondent Ben Werschkul explains what you need to know from the first day of the summit.",
+    "url": "https://finance.yahoo.com/video/trump-elon-musk-are-trying-to-open-up-china-for-business-150948221.html",
+    "published_at": "2026-05-14T15:09:48Z",
+    "source": "Yahoo Finance Video",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "d3bb6a83db51",
+    "title": "Are retail investors leaning away from software amid tech rally?",
+    "summary": "While record-breaking rallies in tech push the US market (^DJI, ^IXIC, ^GSPC) to new heights in 2026, are retail investors still as engaged with these market dynamics that come with these massive valuations? Yahoo Finance Senior Reporters Ines Ferré and Brooke DiPalma comment on the latest trends in retail trading activity observed by JPMorgan.",
+    "url": "https://finance.yahoo.com/video/retail-investors-leaning-away-software-141600541.html",
+    "published_at": "2026-05-14T14:16:00Z",
+    "source": "Yahoo Finance Video",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "1063f4eb26b3",
+    "title": "Photonics is 'phase 3' of AI infrastructure build. But what is photonics?",
+    "summary": "The Nasdaq Composite (^IXIC) leads Wednesday's stock gains alongside the S&P 500 (^GSPC), the former ending the trading day 1.2% higher as the sector rallied. IDX Advisors CIO Ben McMillan comes on Market Domination Overtime to explain the demand for photonics technology — or the use of laser and light to transmit data — that could be the next phase of the AI Revolution.",
+    "url": "https://finance.yahoo.com/video/photonics-phase-3-ai-infrastructure-103000049.html",
+    "published_at": "2026-05-14T10:30:00Z",
+    "source": "Yahoo Finance Video",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "b34571c17f60",
+    "title": "Stock market today: Dow retakes 50,000 level, S&P 500 and Nasdaq surge to fresh records as AI trade roars back",
+    "summary": "The AI trade lifted stocks on Thursday as all eyes were on the crucial Trump-Xi summit that kicked off in Beijing.",
+    "url": "https://finance.yahoo.com/news/live/stock-market-today-dow-retakes-50000-level-sp-500-and-nasdaq-surge-to-fresh-records-as-ai-trade-roars-back-223230929.html",
+    "published_at": "2026-05-13T22:32:30Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "ddfaafcba23d",
+    "title": "If I Had to Start Over With $1,000 in Tech Stocks Today, Here's Exactly What I'd Buy",
+    "summary": "Investing $1,000 in these great stocks should go a long way.",
+    "url": "https://www.fool.com/investing/2026/05/11/if-i-had-to-start-over-with-1000-in-tech-stocks-to/",
+    "published_at": "2026-05-11T08:55:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "b618f2db8a53",
+    "title": "Palantir Just Showed Why Nvidia Stock Can Plunge on May 21",
+    "summary": "It may be impossible for the face of the artificial intelligence (AI) revolution to meet or exceed investors' otherworldly expectations.",
+    "url": "https://www.fool.com/investing/2026/05/11/palantir-show-why-nvidia-stock-can-plunge-may-21/",
+    "published_at": "2026-05-11T08:26:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "06b8d7af8549",
+    "title": "56 Million Americans Don't Have a Workplace Retirement Plan. Trump's New Executive Order Targets That Gap",
+    "summary": "President Donald Trump wants you to save for retirement, so he's highlighting the incentives intended to get you into the saving habit.",
+    "url": "https://www.fool.com/retirement/2026/05/10/56-million-americans-dont-have-a-workplace-retirem/",
+    "published_at": "2026-05-11T03:35:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "1d058797d1ff",
+    "title": "Dow Jones Futures Fall, Oil Prices Jump To $100; Trump Says Iran Response 'Totally Unacceptable'",
+    "summary": "President Donald Trump said Iran's response to a U.S. peace offer is \"totally unacceptable.\" The Xi summit is on tap..",
+    "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-iran-trump-xi-summit-apple-nvidia-boeing/?src=A00220&yptr=yahoo",
+    "published_at": "2026-05-11T03:05:22Z",
+    "source": "Investor's Business Daily",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "0cfe42e701ba",
+    "title": "3 Top Stocks to Buy in May",
+    "summary": "These are all demonstrating impressive performance now and have long-term tailwinds.",
+    "url": "https://www.fool.com/investing/2026/05/10/3-top-stocks-to-buy-in-may/",
+    "published_at": "2026-05-11T02:50:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "7b925d4a01fd",
+    "title": "The World Is Burning Through Oil With No Resupply in Sight. Is SHEL Stock a Buy Before the Squeeze Gets Worse?",
+    "summary": "Shell's CEO is warning that the world has a 1 billion-barrel hole to dig out of, and it could get worse before it gets better.",
+    "url": "https://www.fool.com/investing/2026/05/10/the-world-is-burning-through-oil-with-no-resupply/",
+    "published_at": "2026-05-11T02:35:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "189cb72ae3a6",
+    "title": "I Ran the Numbers on VONG, and These 2 Vanguard ETFs Came Out Ahead",
+    "summary": "This tech-focused fund is not the best option.",
+    "url": "https://www.fool.com/investing/2026/05/10/i-ran-the-numbers-on-vong-and-2-vanguard-etfs/",
+    "published_at": "2026-05-11T01:03:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "5779e2da993b",
+    "title": "Nvidia Reports Earnings in May. Here's Why I'm Loading Up Before the Report.",
+    "summary": "Nvidia's next earnings report could show whether the AI infrastructure boom is still in its early innings.",
+    "url": "https://www.fool.com/investing/2026/05/10/nvidia-reports-earnings-in-may-heres-why-im-loadin/",
+    "published_at": "2026-05-11T00:20:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "bd73b37672d2",
+    "title": "Iran May Have Found a New Way to Threaten Trump’s Economy — And It’s Not Oil",
+    "summary": "The stock market has spent much of 2026 acting like geopolitical risk is just background noise. The S&P 500 keeps pushing toward record highs, AI spending remains red hot, and investors have largely shrugged off the widening conflict involving Iran. But what if Tehran found a pressure point far more dangerous than oil tankers? That’s ... Iran May Have Found a New Way to Threaten Trump’s Economy — And It’s Not Oil",
+    "url": "https://247wallst.com/investing/2026/05/10/iran-may-have-found-a-new-way-to-threaten-trumps-economy-and-its-not-oil/",
+    "published_at": "2026-05-10T22:35:36Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "a64973f7dd45",
+    "title": "Planet Fitness Stock Plunged Following Earnings. Should You Buy?",
+    "summary": "The gym chain lost almost one-third of its value as the market digested its Q1 numbers.",
+    "url": "https://www.fool.com/investing/2026/05/10/planet-fitness-stock-plunged-following-earnings-sh/",
+    "published_at": "2026-05-10T22:22:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "421c44b923cf",
+    "title": "Could Buying the Right Dividend ETF Today Make You a Millionaire in Retirement?",
+    "summary": "Many investors prefer growth and tech stocks to build their portfolios. Dividend stocks and ETFs might actually be the better risk/reward play.",
+    "url": "https://www.fool.com/investing/2026/05/06/buy-right-dividend-etf-make-retirement-millionaire/",
+    "published_at": "2026-05-06T08:52:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "8ae88c758421",
+    "title": "Should You Buy Nvidia Stock Before May 20?",
+    "summary": "Recent history provides a compelling answer.",
+    "url": "https://www.fool.com/investing/2026/05/06/should-you-buy-nvidia-stock-before-may-20/",
+    "published_at": "2026-05-06T08:35:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "5c1afd4f0e16",
+    "title": "Want Reliable Dividend Income in May? These 2 Stocks Deliver",
+    "summary": "These stocks check off multiple boxes for income investors.",
+    "url": "https://www.fool.com/investing/2026/05/06/want-reliable-dividend-income-in-may-these-2-stock/",
+    "published_at": "2026-05-06T08:30:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "05c0cc2f4385",
+    "title": "Alphabet Just Signaled That the Next Phase of the AI Revolution Has Arrived -- and Google's Parent Is Coming for Nvidia's Crown",
+    "summary": "It's not just about graphics processing units (GPUs) and data center build-outs any longer.",
+    "url": "https://www.fool.com/investing/2026/05/06/googl-signal-next-phase-ai-revolution-nvda-crown/",
+    "published_at": "2026-05-06T08:26:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "f99da8a9ddd3",
+    "title": "India's offshore tech hubs hit $98.4 billion revenue in FY26, nearing 2030 forecast, report says",
+    "summary": "By Sai Ishwarbharath B and Haripriya Suresh BENGALURU, May 6 (Reuters) - India's offshore technology centers are expected to have generated $98.4 billion in revenue for fiscal 2026, nearing levels",
+    "url": "https://sg.finance.yahoo.com/news/indias-offshore-tech-hubs-hit-081527987.html",
+    "published_at": "2026-05-06T08:15:27Z",
+    "source": "Reuters",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "c9579486ecc3",
+    "title": "Is nVent a Buy After Blowout Earnings?",
+    "summary": "Long-term demand is the most important focus for nVent.",
+    "url": "https://www.fool.com/investing/2026/05/06/is-nvent-a-buy-after-blowout-earnings/",
+    "published_at": "2026-05-06T08:15:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "ccd933c270c0",
+    "title": "AMD Q1 earnings: What the chipmaker's growth could mean for Nvidia",
+    "summary": "Advanced Micro Devices (AMD) posted first quarter results that beat Wall Street estimates, reporting adjusted earnings of $1.37 per share (vs. estimates of $1.28) and revenue of $10.25 billion (vs. estimates of $9.89 billion). Futurum CEO Daniel Newman comes on Market Domination Overtime to dive into the AI chipmaker's earnings release and what it may signal about CEO Lisa Su's growth outlook and the company's tightening competition with Nvidia (NVDA). The stock is getting a lift in Tuesday's after-hours trading at the time of this video being posted.",
+    "url": "https://finance.yahoo.com/video/amd-q1-earnings-what-the-chipmakers-growth-could-mean-for-nvidia-204203602.html",
+    "published_at": "2026-05-05T20:42:03Z",
+    "source": "Yahoo Finance Video",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "21350969321a",
+    "title": "The chip trade is no longer just about Nvidia",
+    "summary": "Investors are no longer just chasing the GPUs that train AI models. They're also chasing the memory and storage needed to keep those systems running.",
+    "url": "https://finance.yahoo.com/markets/article/the-chip-trade-is-no-longer-just-about-nvidia-175900816.html",
+    "published_at": "2026-05-05T17:59:00Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "6665f072412e",
+    "title": "AMD earnings on deck: Why we might see a stock sell-off",
+    "summary": "AMD (AMD) is set to report quarterly earnings on Tuesday after the closing bell. Yahoo Finance Markets and Data Editor Jared Blikre and Winthrop Capital chief investment officer Adam Coons chat with Yahoo Finance Senior Reporter Brooke DiPalma about their expectations.",
+    "url": "https://finance.yahoo.com/video/amd-earnings-deck-why-might-141730992.html",
+    "published_at": "2026-05-05T14:17:30Z",
+    "source": "Yahoo Finance Video",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
     "id": "9e2f860b484e",
     "title": "3 Monster Dividend Stocks That Could Pay You Through the Next Decade of Chaos",
     "summary": "It's time to start thinking at least a little bit defensively by exchanging long-term potential gains for certain near-term cash flow.",

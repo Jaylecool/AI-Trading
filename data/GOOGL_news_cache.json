@@ -1,5 +1,505 @@
 [
   {
+    "id": "2993d36f3abd",
+    "title": "CleanSpark (CLSK) Climbs 9.3% as Analyst ‘Highly Optimistic’",
+    "summary": "CleanSpark Inc. (NASDAQ:CLSK) is one of the 10 Stocks With Powerful Gains. Shares of CleanSpark rallied for a second day on Tuesday, jumping 9.30 percent to close at $14.69 apiece, as investors took heart from an investment firm’s bullish call for its stock. In a market note, CleanSpark Inc. (NASDAQ:CLSK) received a $24 price target […]",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/cleanspark-clsk-climbs-9-3-032548061.html",
+    "published_at": "2026-05-20T03:25:48Z",
+    "source": "Insider Monkey",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "c2fff28521f6",
+    "title": "Meta Begins 8,000 Global Job Cuts in Asian Hub of Singapore",
+    "summary": "(Bloomberg) -- Meta Platforms Inc. is alerting thousands of employees that they’re being laid off, part of a previously announced restructuring aimed at improving efficiency and reducing costs while investing heavily in artificial intelligence.Most Read from BloombergUS Lawmakers Plan New $130 Fee for Electric Vehicle OwnersNATO Is Starting to Consider Hormuz Mission to Protect ShipsUS 30-Year Yield Hits Highest Since 2007 as Selloff DeepensHasbro Cancels Dungeons & Dragons Game From ‘Star Wars’",
+    "url": "https://finance.yahoo.com/news/meta-begins-8000-global-job-cuts-in-asian-hub-of-singapore-004153264.html",
+    "published_at": "2026-05-20T00:41:53Z",
+    "source": "Bloomberg",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "ce18a7868328",
+    "title": "Alphabet AI Data Center Venture Raises Questions On Valuation And Growth",
+    "summary": "Blackstone and Alphabet's Google have agreed to form a joint venture to build and operate AI data centers in the United States. The new platform will offer access to Google Tensor Processing Units as compute as a service for enterprise customers. Blackstone plans to invest $5b in equity, while Google will provide AI chips, software, and data center technology. The venture targets 500 megawatts of capacity by 2027, with potential expansion as demand for AI infrastructure changes. Alphabet...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/alphabet-ai-data-center-venture-221339110.html",
+    "published_at": "2026-05-19T22:13:39Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "dee86dfc2f1c",
+    "title": "Google’s I/O conference showed how the company is being completely rebuilt for AI—for better or for worse",
+    "summary": "Even Google's iconic search box is being revamped to accommodate AI.",
+    "url": "https://finance.yahoo.com/sectors/technology/articles/google-o-conference-showed-company-221035016.html",
+    "published_at": "2026-05-19T22:10:35Z",
+    "source": "Fortune",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "a3607842d78b",
+    "title": "Cracks Are Starting to Appear in the Chip Stock Rally",
+    "summary": "Investors have piled into semiconductor stocks as AI enthusiasm drives markets higher, but rising bond yields and crowded positioning are beginning to raise concerns.",
+    "url": "https://www.barrons.com/articles/crowded-semiconductor-trade-nvidia-intel-chip-stocks-392770bc?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-19T21:37:00Z",
+    "source": "Barrons.com",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "d4399a083b25",
+    "title": "Samsung and Google detail AI smart glasses, putting pressure on Meta as Apple preps rival eyewear",
+    "summary": "Samsung and Google showed off their AI-powered smart glasses on Tuesday.",
+    "url": "https://finance.yahoo.com/sectors/technology/article/samsung-and-google-detail-ai-smart-glasses-putting-pressure-on-meta-as-apple-preps-rival-eyewear-174500630.html",
+    "published_at": "2026-05-19T17:45:00Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "5c25ab2cbf6f",
+    "title": "Google-Blackstone AI venture weighs on CoreWeave stock, Snowflake jumps",
+    "summary": "Market Catalysts Host Julie Hyman tracks several of the day's top trending stock tickers, including CoreWeave (CRWV) and other neocloud stocks falling on Alphabet's (GOOG, GOOGL) latest AI infrastructure venture with Blackstone (BX); Snowflake (SNOW) shares jumping as Bank of America raises its price target; and Amer Sports (AS) raising its full-year guidance upon reporting strong demand for its Salomon shoes.",
+    "url": "https://finance.yahoo.com/video/google-blackstone-ai-venture-weighs-on-coreweave-stock-snowflake-jumps-144332095.html",
+    "published_at": "2026-05-19T14:43:32Z",
+    "source": "Yahoo Finance Video",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "0ecaa7d4f452",
+    "title": "Trump traded over $50 million in 'Magnificent 7' stocks last quarter, loading up on Apple and Google and selling Tesla",
+    "summary": "President Trump made 94 different trades of 'Magnificent 7' stocks in the first quarter of 2026, a new ethics disclosure shows, executing millions of dollars in transactions even as he was meeting with and often promoting these top tech companies.",
+    "url": "https://finance.yahoo.com/markets/stocks/article/trump-traded-over-50-million-in-magnificent-7-stocks-last-quarter-loading-up-on-apple-and-google-and-selling-tesla-100000562.html",
+    "published_at": "2026-05-19T10:00:00Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "8a11cd1fec0d",
+    "title": "Forget Nvidia. 1 of These 3 Hyperscalers Could Be the Top AI Stock Through 2030.",
+    "summary": "Combined 2026 capital spending from three cloud giants is set to top $570 billion, and they could be a smarter way to play artificial intelligence over the long haul.",
+    "url": "https://www.fool.com/investing/2026/05/19/forget-nvidia-1-of-these-3-hyperscalers-could-be-t/",
+    "published_at": "2026-05-19T06:01:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "1d332508c1bb",
+    "title": "I Have 90% of My Net Worth in One Stock. How Do I Diversify Without a Massive Tax Bill?",
+    "summary": "Ben Carlson of Ritholtz Wealth Management has flagged what he calls “one of the biggest trends that I’ve seen in the wealth management space in the last 5 years”: clients walking in the door already asking for tax-aware diversification, rather than advisors having to sell it to them. The two archetypes he cited on The ... I Have 90% of My Net Worth in One Stock. How Do I Diversify Without a Massive Tax Bill?",
+    "url": "https://247wallst.com/investing/2026/05/19/i-have-90-of-my-net-worth-in-one-stock-how-do-i-diversify-without-a-massive-tax-bill/",
+    "published_at": "2026-05-19T04:38:45Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "1139ba24228b",
+    "title": "Google, Blackstone launch cloud company as Wall Street races to fund AI boom",
+    "summary": "The two giants are launching an AI compute supplier as the demand for AI infrastructure continues to grow.",
+    "url": "https://finance.yahoo.com/markets/article/google-blackstone-launch-cloud-company-as-wall-street-races-to-fund-ai-boom-023203769.html",
+    "published_at": "2026-05-19T02:32:03Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "add5f94237b2",
+    "title": "Google and Blackstone to Create New AI Cloud Company",
+    "summary": "The duo plans to launch the unnamed U.S. company with $5 billion in equity capital from Blackstone, which will be the majority owner.",
+    "url": "https://www.wsj.com/tech/ai/google-and-blackstone-to-create-new-ai-cloud-company-0e35b91f?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-19T01:37:00Z",
+    "source": "The Wall Street Journal",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "5eb76fce6643",
+    "title": "The American Rebellion Against AI Is Gaining Steam",
+    "summary": "Booed commencement speakers, blocked data centers, plummeting poll numbers: The fast-growing industry has a faster-growing crisis.",
+    "url": "https://www.wsj.com/tech/ai/the-american-rebellion-against-ai-is-gaining-steam-94b72529?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-19T01:00:00Z",
+    "source": "The Wall Street Journal",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "4da327dc51ca",
+    "title": "Google, Blackstone to launch AI cloud venture to meet data centre demand",
+    "summary": "Alphabet's Google and Blackstone said on Monday that they will form an artificial ‌intelligence cloud business venture aimed at capitalising on an insatiable demand ‌for AI computing services. Blackstone, the world's largest alternative asset manager, will invest an initial $5 billion in ​equity to help bring 500 megawatts of data centre capacity online in 2027, with further expansion planned over time. The U.S.-based venture will provide data centre capacity along with Google's custom AI chips, known as Tensor Processing Units, or TPUs, through ‌a compute-as-a-service model.",
+    "url": "https://finance.yahoo.com/sectors/technology/articles/google-blackstone-create-ai-cloud-001303521.html",
+    "published_at": "2026-05-19T00:13:03Z",
+    "source": "Reuters",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "4fac620725b8",
+    "title": "Google, Blackstone to create new AI cloud company, WSJ reports",
+    "summary": "May 18 (Reuters) - Alphabet's Google and Blackstone plan to launch an artificial-intelligence cloud company using Google's specialized chips, the Wall Street Journal reported on Monday, citing sources",
+    "url": "https://finance.yahoo.com/sectors/technology/articles/google-blackstone-create-ai-cloud-001303808.html",
+    "published_at": "2026-05-19T00:13:03Z",
+    "source": "Reuters",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "7bac4781e63c",
+    "title": "Meta Moves 7,000 Workers Into AI Roles Ahead of Job Cuts",
+    "summary": "(Bloomberg) -- Meta Platforms Inc. is reassigning 7,000 workers to new jobs related to artificial intelligence, according to an internal memo, part of a broad corporate restructuring that includes planned staff reductions later this week. Most Read from BloombergUS Lawmakers Plan New $130 Fee for Electric Vehicle OwnersBillionaire Rinehart Bets $100 Million on US Defense StocksStocks and Oil Whipsaw on Mixed US-Iran Signals: Markets WrapElon Musk Loses Case Against Sam Altman Over OpenAI’s Overh",
+    "url": "https://finance.yahoo.com/news/meta-moves-7000-workers-into-ai-roles-ahead-of-job-cuts-230001257.html",
+    "published_at": "2026-05-18T23:00:01Z",
+    "source": "Bloomberg",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "578406ce1519",
+    "title": "NextEra, Dominion combination ushers in new era of power, utilities consolidation",
+    "summary": "On Monday, Florida-based NextEra Energy, North America’s largest investor-owned electric utility, announced it had entered an agreement to combine with Dominion Energy, creating the world’s largest regulated electric utility business. The $66.8 billion all-stock transaction is the latest evidence of growing consolidation in the US public energy and utilities sector to meet the exponential demand for power to fuel the AI buildout. Goldman Sachs estimates in a February report that global data cent",
+    "url": "https://finance.yahoo.com/sectors/energy/articles/nextera-dominion-combination-ushers-era-225409040.html",
+    "published_at": "2026-05-18T22:54:09Z",
+    "source": "Pitchbook",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "d09812f82e7d",
+    "title": "Why Location Is the Only Thing That Matters for Nebius Stock",
+    "summary": "While the U.S. market is saturated with data centers, Nebius is leveraging Europe's strict regulations and energy grid limits to build a monopolistic AI infrastructure.",
+    "url": "https://www.barchart.com/story/news/2003142/why-location-is-the-only-thing-that-matters-for-nebius-stock",
+    "published_at": "2026-05-18T21:37:24Z",
+    "source": "Barchart",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "83cc9b004650",
+    "title": "Berkshire CEO Greg Abel sells 16 stocks, triples Alphabet",
+    "summary": "Greg Abel exited positions including Visa, Mastercard, Amazon, and UnitedHealth while boosting Berkshire's Alphabet stake to almost 58 million shares",
+    "url": "https://qz.com/berkshire-hathaway-greg-abel-alphabet-google-stake-051526",
+    "published_at": "2026-05-18T14:41:36Z",
+    "source": "Quartz",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "1a0a211ca9ea",
+    "title": "Google I/O preview: Bank of America expects major AI push across Search, Chrome, and Android",
+    "summary": "Alphabet Inc (NASDAQ:GOOG) is preparing to kick off its annual Google I/O developer conference on May 19, with Bank of America expecting a broad slate of artificial intelligence announcements that could reinforce the company's position at the forefront of the AI race. The keynote is scheduled...",
+    "url": "https://www.proactiveinvestors.com/companies/news/1092412/google-i-o-preview-bank-of-america-expects-major-ai-push-across-search-chrome-and-android-1092412.html",
+    "published_at": "2026-05-18T13:56:00Z",
+    "source": "Proactive",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "b502703e5847",
+    "title": "Buy, Hold or Sell Intel at Over $100?",
+    "summary": "Intel (NASDAQ:INTC) has more than tripled this year on a turnaround story that is real, and that is precisely the problem for anyone trying to put fresh money to work today. Intel makes the x86 CPUs that run most of the world’s PCs and servers, and under CEO Lip-Bu Tan it has become a contract ... Buy, Hold or Sell Intel at Over $100?",
+    "url": "https://247wallst.com/investing/2026/05/18/buy-hold-or-sell-intel-at-over-100/",
+    "published_at": "2026-05-18T13:54:01Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "da5e4f1ae48d",
+    "title": "UnitedHealth Drop Proves Berkshire’s Market Power Post-Buffett",
+    "summary": "The health insurer's shares fell early Monday after Berkshire disclosed it exited its position in the company in the first quarter.",
+    "url": "https://www.barrons.com/articles/unitedhealth-stock-price-berkshire-buffett-848714ed?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-18T13:47:00Z",
+    "source": "Barrons.com",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "19d5d70a6503",
+    "title": "Berkshire Hathaway exits UnitedHealth stake Q1 2026",
+    "summary": "The exit was part of a broader portfolio reshuffle in the first quarter after Greg Abel succeeded Warren Buffett as CEO",
+    "url": "https://qz.com/berkshire-hathaway-unitedhealth-stake-greg-abel-051826",
+    "published_at": "2026-05-18T13:33:53Z",
+    "source": "Quartz",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "1f2f7effc699",
+    "title": "Why Nvidia earnings must deliver massively",
+    "summary": "Ideally, Nvidia will have a big earnings day.",
+    "url": "https://finance.yahoo.com/markets/article/why-nvidia-earnings-must-deliver-massively-131600201.html",
+    "published_at": "2026-05-18T13:16:00Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "5cb3ab7b6670",
+    "title": "Startup Makes Switching AI Chips Easier—and Nvidia Is a New Investor",
+    "summary": "Decart’s valuation hit nearly $4 billion as investors pour capital into startups making AI computing more efficient.",
+    "url": "https://www.wsj.com/tech/ai/startup-makes-switching-ai-chips-easierand-nvidia-is-a-new-investor-c78e3a54?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-18T13:01:00Z",
+    "source": "The Wall Street Journal",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "bfe48da045ff",
+    "title": "Buy Cisco as a New Leader of the AI Networking Infrastructure Space",
+    "summary": "Cisco rides booming AI networking demand as hyperscaler orders surge, driving record revenues and stronger fiscal 2026 guidance.",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/buy-cisco-leader-ai-networking-124000922.html",
+    "published_at": "2026-05-18T12:40:00Z",
+    "source": "Zacks",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "fab34420ae83",
+    "title": "Greg Abel Channeled His Inner Warren Buffett With Legacy and Dividend Stock Buys in Q1",
+    "summary": "Warren Buffett stepped down as CEO of Berkshire Hathaway (NYSE: BRK-B) on December 31, 2025, after six decades leading the conglomerate he transformed from a struggling textile mill into a $1 trillion empire. The “Oracle of Omaha” left his successor, Greg Abel, with a highly concentrated portfolio: almost 65% of Berkshire’s $331 billion equity portfolio ... Greg Abel Channeled His Inner Warren Buffett With Legacy and Dividend Stock Buys in Q1",
+    "url": "https://247wallst.com/investing/2026/05/18/greg-abel-channeled-his-inner-warren-buffett-with-legacy-and-dividend-stock-buys-in-q1/",
+    "published_at": "2026-05-18T12:10:50Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "9bf94369977c",
+    "title": "Prediction: Wall Street May Be Sleeping on Google’s Next Big Move",
+    "summary": "Few mega-caps have shifted the narrative as decisively as Google (NASDAQ:GOOG) has over the past year. After a 138.92% one-year run and a 26.65% year-to-date gain, the real question is whether the market has fully priced what comes next. Our model says it has not. Our 24/7 Wall St. Price Target for Google Google trades ... Prediction: Wall Street May Be Sleeping on Google’s Next Big Move",
+    "url": "https://247wallst.com/investing/2026/05/18/prediction-wall-street-may-be-sleeping-on-googles-next-big-move/",
+    "published_at": "2026-05-18T12:09:35Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "8bbd6bf9ca59",
+    "title": "Earnings live updates: Home Depot beats earnings estimates as small DIY projects remain a 'real source of strength'",
+    "summary": "Investors will get highly anticipated quarterly results from Nvidia (NVDA) on Wednesday in what's expected to be the marquee earnings event of the week.",
+    "url": "https://finance.yahoo.com/markets/live/earnings-live-updates-home-depot-beats-earnings-estimates-as-small-diy-projects-remain-a-real-source-of-strength-115413520.html",
+    "published_at": "2026-05-18T11:54:13Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "794c073bf7c3",
+    "title": "The \"Magnificent Seven\" Has Gained $4.8 Trillion Since the Start of April. Here's Why That's a Risk to the S&P 500 and Nasdaq-100.",
+    "summary": "Market concentration can amplify gains but also compound declines during a stock market sell-off.",
+    "url": "https://www.fool.com/investing/2026/05/15/magnificent-seven-growth-stocks-all-time-high/",
+    "published_at": "2026-05-15T05:15:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "6c1e988d1e5f",
+    "title": "Alphabet's $60 Billion AI Debt Blitz Puts Credit Markets On Alert",
+    "summary": "Alphabet's global bond push highlights rising AI funding needs and growing pressure on overseas credit markets.",
+    "url": "https://finance.yahoo.com/markets/currencies/articles/alphabets-60-billion-ai-debt-003042104.html",
+    "published_at": "2026-05-15T00:30:42Z",
+    "source": "GuruFocus.com",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "f0b34f934368",
+    "title": "1 Unstoppable Stock to Buy Before It Joins Nvidia, Alphabet, and Apple in the $4 Trillion Club",
+    "summary": "Artificial intelligence could be Amazon's ticket into the ultra-exclusive $4 trillion club.",
+    "url": "https://www.fool.com/investing/2026/05/14/1-stock-buy-joins-nvidia-alphabet-4-trillion-club/",
+    "published_at": "2026-05-14T22:37:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "fce9587e4a42",
+    "title": "BuzzHPC targets $200M in AI revenue while Big Tech is still burning cash",
+    "summary": "While the biggest names in tech are burning billions to build AI infrastructure, BuzzHPC is already running close to 80% EBITDA margins and generating real revenue. Craig Tavares, President and COO of BuzzHPC — a subsidiary of Hive Digital Technologies — joined TheStreet Roundtable to lay out a ...",
+    "url": "https://www.thestreet.com/crypto/markets/buzzhpc-targets-200m-in-ai-revenue-while-big-tech-is-still-burning-cash",
+    "published_at": "2026-05-14T21:56:03Z",
+    "source": "TheStreet",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "88a20c86b4be",
+    "title": "Meta Platforms Looks Like a Bargain Right Now",
+    "summary": "Meta Platforms might be one of the most undervalued tech stocks right now.",
+    "url": "https://www.fool.com/investing/2026/05/14/meta-platforms-stock-bargain-right-now/",
+    "published_at": "2026-05-14T21:40:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "101683baeddb",
+    "title": "AI hyperscalers are 'falling behind' if they're not spending: Strategist",
+    "summary": "As AI chip stock rally and push the market (^DJI, ^IXIC, ^GSPC) to new record highs, Hamilton Capital Partners CIO Alonso Munoz comes on Market Domination to speak more on the lofty capex spending these hyperscalers continue to invest into artificial intelligence.",
+    "url": "https://finance.yahoo.com/video/ai-hyperscalers-are-falling-behind-if-theyre-not-spending-strategist-204734505.html",
+    "published_at": "2026-05-14T20:47:34Z",
+    "source": "Yahoo Finance Video",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "4081e293a3ae",
+    "title": "Cerebras Stock Jumps 68% After Blockbuster IPO. CEO Sees Bigger Things Ahead.",
+    "summary": "Cerebras’ IPO comes at a dramatic time, with chip stocks surging and many at or near all-time highs.",
+    "url": "https://www.barrons.com/articles/cerebras-ipo-stock-ticker-price-eab2b046?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-14T20:19:00Z",
+    "source": "Barrons.com",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "42c95e4b5746",
+    "title": "Meta Stock vs. Google Stock: One Is Clearly the Better Buy for the Next 10 Years",
+    "summary": "Both Big Tech stocks look like long-term winners, but one clearly has the upper hand.",
+    "url": "https://www.barchart.com/story/news/1941283/meta-stock-vs-google-stock-one-is-clearly-the-better-buy-for-the-next-10-years",
+    "published_at": "2026-05-14T20:02:35Z",
+    "source": "Barchart",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "299f9f3631c6",
+    "title": "‘LifeHack’ Review: A High-Tech Heist",
+    "summary": "A group of digital-savvy Gen-Zers try to pull off a crypto caper in the impressively entertaining feature debut from writer-director Ronan Corrigan.",
+    "url": "https://www.wsj.com/arts-culture/film/lifehack-review-a-high-tech-heist-4ed7c755?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-14T19:51:00Z",
+    "source": "The Wall Street Journal",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "5ec5255153be",
+    "title": "Elon Musk’s Terafab Could Make Intel Stock More Exciting for Long-Term Investors Than Wall Street Ever Thought Was Possible",
+    "summary": "Intel stock is rallying as investors increasingly view the company as a critical AI manufacturing and infrastructure partner behind the massive Terafab project.",
+    "url": "https://www.barchart.com/story/news/1940205/elon-musks-terafab-could-make-intel-stock-more-exciting-for-long-term-investors-than-wall-street-ever-thought-was-possible",
+    "published_at": "2026-05-14T19:13:41Z",
+    "source": "Barchart",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "d3bb6a83db51",
+    "title": "Are retail investors leaning away from software amid tech rally?",
+    "summary": "While record-breaking rallies in tech push the US market (^DJI, ^IXIC, ^GSPC) to new heights in 2026, are retail investors still as engaged with these market dynamics that come with these massive valuations? Yahoo Finance Senior Reporters Ines Ferré and Brooke DiPalma comment on the latest trends in retail trading activity observed by JPMorgan.",
+    "url": "https://finance.yahoo.com/video/retail-investors-leaning-away-software-141600541.html",
+    "published_at": "2026-05-14T14:16:00Z",
+    "source": "Yahoo Finance Video",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "ddfaafcba23d",
+    "title": "If I Had to Start Over With $1,000 in Tech Stocks Today, Here's Exactly What I'd Buy",
+    "summary": "Investing $1,000 in these great stocks should go a long way.",
+    "url": "https://www.fool.com/investing/2026/05/11/if-i-had-to-start-over-with-1000-in-tech-stocks-to/",
+    "published_at": "2026-05-11T08:55:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "279977f36f41",
+    "title": "Ambani's Jio Platforms IPO pivots to pure fundraising, no investor exits, sources say",
+    "summary": "By Aditya Kalra and Vibhuti Sharma MUMBAI, May 11 (Reuters) - Mukesh Ambani's Reliance Jio Platforms has pivoted to a pure fundraising for its planned Mumbai listing, selling a 2.5% stake in the",
+    "url": "https://sg.finance.yahoo.com/news/ambanis-jio-platforms-ipo-pivots-042231044.html",
+    "published_at": "2026-05-11T04:48:50Z",
+    "source": "Reuters",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "9f069dd6f4ab",
+    "title": "Broadcom Weighs Record Private Credit To Extend AI Chip Lead",
+    "summary": "Broadcom (NasdaqGS:AVGO) is reportedly in advanced talks with private credit firms, including Apollo Global Management and Blackstone. The company is seeking a record $35b to $55b financing package to support AI chip development and long term supply agreements. The funding would back Broadcom's custom AI chip commitments with major clients such as Google, Anthropic, Meta, and OpenAI. If completed, this would be the largest private credit transaction on record for a technology related...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/broadcom-weighs-record-private-credit-041950050.html",
+    "published_at": "2026-05-11T04:19:50Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "34794e5fc29f",
+    "title": "My Top 3 Quantum Computing Stocks for May 2026",
+    "summary": "Quantum computing is getting closer to reality.",
+    "url": "https://www.fool.com/investing/2026/05/10/my-top-3-quantum-computing-stocks-for-may-2026/",
+    "published_at": "2026-05-10T23:20:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "bd73b37672d2",
+    "title": "Iran May Have Found a New Way to Threaten Trump’s Economy — And It’s Not Oil",
+    "summary": "The stock market has spent much of 2026 acting like geopolitical risk is just background noise. The S&P 500 keeps pushing toward record highs, AI spending remains red hot, and investors have largely shrugged off the widening conflict involving Iran. But what if Tehran found a pressure point far more dangerous than oil tankers? That’s ... Iran May Have Found a New Way to Threaten Trump’s Economy — And It’s Not Oil",
+    "url": "https://247wallst.com/investing/2026/05/10/iran-may-have-found-a-new-way-to-threaten-trumps-economy-and-its-not-oil/",
+    "published_at": "2026-05-10T22:35:36Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "9efa81b30828",
+    "title": "Jim Cramer Says Nvidia Is 'Tough To Beat' On Corning Deal, Points Out Google, Amazon Still Have An 'Opponent With Multiple Legs Up'",
+    "summary": "Nvidia Corp. has deepened its grip on the AI infrastructure race with a $500 million investment in Corning Inc., a move that addresses critical networking bottlenecks even as Amazon.com, Inc. and Alphabet Inc.'s Google intensify efforts to challenge its dominance....",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-says-nvidia-tough-203128088.html",
+    "published_at": "2026-05-10T20:31:28Z",
+    "source": "Benzinga",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "afd2663e9575",
+    "title": "Alphabet’s AI-Focused Debt Raise and Cloud Surge Could Be A Game Changer For Alphabet (GOOGL)",
+    "summary": "In early May 2026, Alphabet reported first-quarter 2026 results with revenue of US$109.90 billion and net income of US$62.58 billion, alongside a higher quarterly dividend and more than US$17 billion raised through euro and Canadian-dollar bond offerings to fund artificial intelligence investment. The quarter underscored how Google Cloud’s 63% year-on-year sales increase and a revenue backlog above US$460 billion, supported by large AI infrastructure deals, are reshaping Alphabet into a...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/alphabet-ai-focused-debt-raise-190834944.html",
+    "published_at": "2026-05-10T19:08:34Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "c332ce085f65",
+    "title": "Goldman Sachs resets Broadcom stock forecast",
+    "summary": "Broadcom (AVGO) is a semiconductor giant with a vast product portfolio spanning wired infrastructure, wireless communications, enterprise storage, and industrial end markets. The company positioned itself as a major player in enterprise infrastructure software following its 2023 acquisition of ...",
+    "url": "https://www.thestreet.com/investing/stocks/goldman-sachs-reiterates-buy-rating-broadcom-stock",
+    "published_at": "2026-05-10T18:33:00Z",
+    "source": "TheStreet",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "09cd23b9203d",
+    "title": "Is Taiwan Semiconductor Manufacturing a Buy, Sell, or Hold in 2026?",
+    "summary": "The AI play remains as unstoppable in 2026 as it was in 2025, and Taiwan Semiconductor is one of the most dominant stocks in the space.",
+    "url": "https://www.fool.com/investing/2026/05/10/is-taiwan-semiconductor-manufacturing-a-buy-sell-o/",
+    "published_at": "2026-05-10T18:20:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "5a20d4d1ab1c",
+    "title": "The $1 trillion club's new members are powering the AI boom: Chart of the Day",
+    "summary": "Market royalty is getting a hardware makeover.",
+    "url": "https://finance.yahoo.com/markets/article/the-1-trillion-clubs-new-members-are-powering-the-ai-boom-chart-of-the-day-104234629.html",
+    "published_at": "2026-05-10T10:42:34Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
     "id": "b5189728d221",
     "title": "Market Chatter: OpenAI Discussed Spinoff of Robotics, Consumer-Hardware Divisions",
     "summary": "Microsoft-backed (MSFT) OpenAI Chief Executive Sam Altman discussed spinning off the startup's robot",

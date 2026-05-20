@@ -1,5 +1,505 @@
 [
   {
+    "id": "323173ae350b",
+    "title": "Warren Buffett's Successor Greg Abel Just Dumped Amazon Stock: 2 AI Stocks He Is Still Bullish On",
+    "summary": "Berkshire Hathaway's strategy hasn't changed; only the details have.",
+    "url": "https://www.fool.com/investing/2026/05/20/warren-buffetts-successor-greg-abel-just-dumped-am/",
+    "published_at": "2026-05-20T05:05:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "1dc21dec5b48",
+    "title": "Q1 Online Retail Earnings Review: First Prize Goes to Amazon (NASDAQ:AMZN)",
+    "summary": "The end of the earnings season is always a good time to take a step back and see who shined (and who not so much). Let’s take a look at how online retail stocks fared in Q1, starting with Amazon (NASDAQ:AMZN).",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/q1-online-retail-earnings-review-045255570.html",
+    "published_at": "2026-05-20T04:52:55Z",
+    "source": "StockStory",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "a3a2a48ad940",
+    "title": "Amazon Lawsuit Adds New Risk Layer To Valuation And Share Momentum",
+    "summary": "Amazon.com (NasdaqGS:AMZN) is facing a class-action lawsuit over how it handled tariff-related price increases on imported goods. The case follows a U.S. Supreme Court ruling that certain Trump-era tariffs were unlawful. Plaintiffs allege Amazon raised prices, did not seek available tariff refunds from the government, and is withholding potential customer restitution that could reach into the hundreds of millions of dollars. For investors tracking Amazon.com at a current share price of...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/amazon-lawsuit-adds-risk-layer-221421528.html",
+    "published_at": "2026-05-19T22:14:21Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "569321144a00",
+    "title": "Amazon Might Be the Most Obvious AI Stock Investors Are Missing",
+    "summary": "Is Amazon the most underrated AI stock? Its \"picks and shovels\" strategy could pay off big for long-term investors.",
+    "url": "https://www.fool.com/investing/2026/05/19/is-amazon-the-most-obvious-unknown-ai-stock/",
+    "published_at": "2026-05-19T22:01:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "0d5dccff11ac",
+    "title": "Chewy CEO Says Consumers Are ‘Stretched.’ The Pet Care Stock Drops.",
+    "summary": "The CEO of online pet retailer  Chewy  says pet owners are feeling “more stretched” these days, an ominous sign for consumer spending that sent the stock down 9% in Tuesday trading.  Sumit Singh made the remarks during the J.P. Morgan Technology, Media & Communications Conference.  “In the last couple of months, we are continuing to see and interpret the consumer as being more stretched than we were when we entered the year,” Singh said.",
+    "url": "https://www.barrons.com/articles/chewy-ceo-consumers-stretched-stock-2dd398a5?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-19T21:46:00Z",
+    "source": "Barrons.com",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "fe734e814d61",
+    "title": "Why Would Anyone Buy SCHB Instead of MAGS?",
+    "summary": "The \"Magnificent Seven\" are looking less magnificent in 2026. This low-cost index fund could be a better buy.",
+    "url": "https://www.fool.com/investing/2026/05/19/why-would-anyone-buy-schb-instead-of-mags/",
+    "published_at": "2026-05-19T21:20:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "1ebe4a381e55",
+    "title": "US Equity Indexes Fall as Trump's Warnings to Resolve Iran Standoff Send Treasury Yields Sharply Higher",
+    "summary": "US equity indexes slid as the 30-year Treasury yield rose to a two-decade high amid bets favoring hi",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/us-equity-indexes-fall-trump-210037471.html",
+    "published_at": "2026-05-19T21:00:37Z",
+    "source": "MT Newswires",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "dcface57ce64",
+    "title": "Beyond NVIDIA: The Next Phase of the AI Investment Boom",
+    "summary": "We discuss AI infrastructure, quantum computing, and modern warfare ETFs.",
+    "url": "https://finance.yahoo.com/sectors/technology/articles/beyond-nvidia-next-phase-ai-200900801.html",
+    "published_at": "2026-05-19T20:09:00Z",
+    "source": "Zacks",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "0ecaa7d4f452",
+    "title": "Trump traded over $50 million in 'Magnificent 7' stocks last quarter, loading up on Apple and Google and selling Tesla",
+    "summary": "President Trump made 94 different trades of 'Magnificent 7' stocks in the first quarter of 2026, a new ethics disclosure shows, executing millions of dollars in transactions even as he was meeting with and often promoting these top tech companies.",
+    "url": "https://finance.yahoo.com/markets/stocks/article/trump-traded-over-50-million-in-magnificent-7-stocks-last-quarter-loading-up-on-apple-and-google-and-selling-tesla-100000562.html",
+    "published_at": "2026-05-19T10:00:00Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "8a11cd1fec0d",
+    "title": "Forget Nvidia. 1 of These 3 Hyperscalers Could Be the Top AI Stock Through 2030.",
+    "summary": "Combined 2026 capital spending from three cloud giants is set to top $570 billion, and they could be a smarter way to play artificial intelligence over the long haul.",
+    "url": "https://www.fool.com/investing/2026/05/19/forget-nvidia-1-of-these-3-hyperscalers-could-be-t/",
+    "published_at": "2026-05-19T06:01:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "1e87947f7571",
+    "title": "Laird Superfood Inc (LSF) Q1 2026 Earnings Call Highlights: Strategic Acquisitions and Growth ...",
+    "summary": "Laird Superfood Inc (LSF) reports a 20% sales growth and strategic acquisitions, while facing challenges in gross margins and operating expenses.",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/laird-superfood-inc-lsf-q1-010210784.html",
+    "published_at": "2026-05-19T01:02:10Z",
+    "source": "GuruFocus.com",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "a3277754c649",
+    "title": "Planet Fitness, Gray Television, and Smith & Wesson Shares Skyrocket, What You Need To Know",
+    "summary": "A number of stocks jumped in the afternoon session after April retail sales matched expectations with a 0.5% monthly gain, confirming that the U.S. consumer is absorbing higher costs without a total pullback.",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/planet-fitness-gray-television-smith-001255961.html",
+    "published_at": "2026-05-19T00:12:55Z",
+    "source": "StockStory",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "2437e269dcd6",
+    "title": "Steven Madden, Lindblad Expeditions, Lucky Strike, Polaris, and Clarus Shares Skyrocket, What You Need To Know",
+    "summary": "A number of stocks jumped in the afternoon session after April retail sales matched expectations with a 0.5% monthly gain, confirming that the U.S. consumer is absorbing higher costs without a total pullback.",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/steven-madden-lindblad-expeditions-lucky-000455796.html",
+    "published_at": "2026-05-19T00:04:55Z",
+    "source": "StockStory",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "449beeb77e6f",
+    "title": "Anthropic to let partners share Mythos cybersecurity findings with others",
+    "summary": "Anthropic said on Monday it is revising its earlier position to allow users of its Mythos cybersecurity model ‌to share information about cyber threats with others who may be exposed ‌to similar vulnerabilities.  Mythos, announced on April 7, is being deployed as part of Anthropic's \"Project Glasswing,\" a controlled ​initiative under which select organizations, including major tech firms such as Amazon, Microsoft, Nvidia and Apple, are permitted to use the unreleased Claude Mythos Preview model for defensive cybersecurity purposes.  Mythos' capabilities to code at a high level have given it a potentially ‌unprecedented ability to identify cybersecurity ⁠vulnerabilities and devise ways to exploit them, according to experts.",
+    "url": "https://finance.yahoo.com/sectors/technology/articles/anthropic-let-partners-share-mythos-222802181.html",
+    "published_at": "2026-05-18T22:28:02Z",
+    "source": "Reuters",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "43b3dfdf8734",
+    "title": "Trump Announces Discount Drug Pricing Expansion With Mark Cuban",
+    "summary": "(Bloomberg) -- President Donald Trump announced his administration is adding more than 600 generic medications to its direct-to-consumer drug sales website TrumpRx alongside billionaire Mark Cuban.Most Read from BloombergUS Lawmakers Plan New $130 Fee for Electric Vehicle OwnersBillionaire Rinehart Bets $100 Million on US Defense StocksStocks and Oil Whipsaw on Mixed US-Iran Signals: Markets WrapElon Musk Loses Case Against Sam Altman Over OpenAI’s OverhaulTrump Says Holding Off on New Iran Stri",
+    "url": "https://finance.yahoo.com/news/white-house-to-announce-trumprx-expansion-with-mark-cuban-153253716.html",
+    "published_at": "2026-05-18T22:09:47Z",
+    "source": "Bloomberg",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "8b8a28a7bdfe",
+    "title": "Amazon.com Inc. (AMZN): Mark Cuban Remains Bullish in AI Era",
+    "summary": "We just covered the Mark Cuban Stock Portfolio: 8 Best Stocks to Buy and Amazon.com, Inc. (NASDAQ:AMZN) ranks 1st on this list. For Mark Cuban, Amazon.com, Inc. (NASDAQ:AMZN) stock is a long-term, high-conviction buy and hold investment. This strategy has yielded massive returns for Cuban, by his own admission. During an appearance on the The […]",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/amazon-com-inc-amzn-mark-215457284.html",
+    "published_at": "2026-05-18T21:54:57Z",
+    "source": "Insider Monkey",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "333b4867db89",
+    "title": "Amazon Hit With Consumer Lawsuit Over Trump Tariff Refunds",
+    "summary": "The class-action complaint claims Amazon prioritized political goodwill over reimbursing shoppers for invalidated IEEPA tariffs.",
+    "url": "https://wwd.com/sourcing-journal/logistics/amazon-tariff-refunds-class-action-consumer-lawsuit-president-donald-trump-ieepa-1238972203/",
+    "published_at": "2026-05-18T21:53:36Z",
+    "source": "Sourcing Journal",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "c3c606031426",
+    "title": "Berkshire is extra bullish on Delta, Alphabet as CEO adjusts portfolio",
+    "summary": "Berkshire Hathaway (BRK-A, BRK-B) has adjusted its equity portfolio under new CEO Greg Abel, including a new $2.6 billion stake in Delta Air Lines (DAL) while tripling the firm's stake in Alphabet (GOOG, GOOGL). The Glenview Trust Company CIO Bill Stone takes a closer look at Berkshire's revamped equity holdings and which stocks it has dumped under Abel. After stepping down from the chief executive role at the beginning of 2026, Warren Buffett remains as Berkshire's executive chairman.",
+    "url": "https://finance.yahoo.com/video/berkshire-is-extra-bullish-on-delta-alphabet-as-ceo-adjusts-portfolio-203921096.html",
+    "published_at": "2026-05-18T20:39:21Z",
+    "source": "Yahoo Finance Video",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "83cc9b004650",
+    "title": "Berkshire CEO Greg Abel sells 16 stocks, triples Alphabet",
+    "summary": "Greg Abel exited positions including Visa, Mastercard, Amazon, and UnitedHealth while boosting Berkshire's Alphabet stake to almost 58 million shares",
+    "url": "https://qz.com/berkshire-hathaway-greg-abel-alphabet-google-stake-051526",
+    "published_at": "2026-05-18T14:41:36Z",
+    "source": "Quartz",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "19d5d70a6503",
+    "title": "Berkshire Hathaway exits UnitedHealth stake Q1 2026",
+    "summary": "The exit was part of a broader portfolio reshuffle in the first quarter after Greg Abel succeeded Warren Buffett as CEO",
+    "url": "https://qz.com/berkshire-hathaway-unitedhealth-stake-greg-abel-051826",
+    "published_at": "2026-05-18T13:33:53Z",
+    "source": "Quartz",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "831ff210d1ef",
+    "title": "Alexa For Shopping And Custom Chips Reshape Amazon AI Investment Story",
+    "summary": "Amazon.com (NasdaqGS:AMZN) is replacing its Rufus shopping chatbot with a new unified assistant called Alexa for Shopping. The company is positioning Alexa as the central interface for shopping, with features for personalization, product comparison, and scheduling. At the same time, Amazon is rapidly scaling production of its custom AI chips, with reported sell out of training capacity for generative and agentic AI workloads. For investors watching NasdaqGS:AMZN, this move ties together...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/alexa-shopping-custom-chips-reshape-131426120.html",
+    "published_at": "2026-05-18T13:14:26Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "35d3989c2705",
+    "title": "Could Amazon Really Hit $375 This Year? Here’s Why It’s Possible",
+    "summary": "Amazon (NASDAQ:AMZN) just delivered a quarter that should make every bear reconsider. AWS grew 28% year over year, the fastest pace in 15 quarters, the chips business crossed a $20 billion annual run rate, and EPS came in at $2.78 versus a $1.73 estimate. Yet shares closed at $264.14 on May 15, well below where ... Could Amazon Really Hit $375 This Year? Here’s Why It’s Possible",
+    "url": "https://247wallst.com/investing/2026/05/18/could-amazon-really-hit-375-this-year-heres-why-its-possible/",
+    "published_at": "2026-05-18T13:13:11Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "5c1352261c10",
+    "title": "UnitedHealth Group stock slides after Berkshire Hathaway exits position in the health insurer",
+    "summary": "UnitedHealth stock tumbled after Berkshire Hathaway revealed it sold its entire stake in the health insurer.",
+    "url": "https://finance.yahoo.com/markets/stocks/article/unitedhealth-group-stock-slides-after-berkshire-hathaway-exits-position-in-the-health-insurer-130721003.html",
+    "published_at": "2026-05-18T13:07:21Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "5cb3ab7b6670",
+    "title": "Startup Makes Switching AI Chips Easier—and Nvidia Is a New Investor",
+    "summary": "Decart’s valuation hit nearly $4 billion as investors pour capital into startups making AI computing more efficient.",
+    "url": "https://www.wsj.com/tech/ai/startup-makes-switching-ai-chips-easierand-nvidia-is-a-new-investor-c78e3a54?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-18T13:01:00Z",
+    "source": "The Wall Street Journal",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "bfe48da045ff",
+    "title": "Buy Cisco as a New Leader of the AI Networking Infrastructure Space",
+    "summary": "Cisco rides booming AI networking demand as hyperscaler orders surge, driving record revenues and stronger fiscal 2026 guidance.",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/buy-cisco-leader-ai-networking-124000922.html",
+    "published_at": "2026-05-18T12:40:00Z",
+    "source": "Zacks",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "ca6c07ec842e",
+    "title": "Amazon's Big Rally Takes A Breather Just Short Of $3 Trillion Club. What To Watch Next.",
+    "summary": "Amazon stock has paused its rally just short of a $3 trillion market cap. Two upcoming events could dictate where AMZN goes next.",
+    "url": "https://www.investors.com/news/technology/amazon-stock-3-trillion-market-cap-milestone-nvidia-earnings/?src=A00220&yptr=yahoo",
+    "published_at": "2026-05-18T12:00:32Z",
+    "source": "Investor's Business Daily",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "5730de6709b8",
+    "title": "Walmart, Amazon and Home Depot  are part of Zacks Earnings Preview",
+    "summary": "Walmart heads into earnings with strong momentum, while Amazon and Home Depot reflect shifting retail and housing market trends.",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/walmart-amazon-home-depot-part-115500271.html",
+    "published_at": "2026-05-18T11:55:00Z",
+    "source": "Zacks",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "c5a3fba08559",
+    "title": "Earnings live updates: Nvidia and Walmart, 2 important bellwethers for the US economy, report results this week",
+    "summary": "Investors will get highly anticipated quarterly results from Nvidia (NVDA) on Wednesday in what’s expected to be the marquee earnings event of the week.",
+    "url": "https://finance.yahoo.com/markets/live/earnings-live-updates-nvidia-and-walmart-2-important-bellwethers-for-the-us-economy-report-results-this-week-115413665.html",
+    "published_at": "2026-05-18T11:54:13Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "794c073bf7c3",
+    "title": "The \"Magnificent Seven\" Has Gained $4.8 Trillion Since the Start of April. Here's Why That's a Risk to the S&P 500 and Nasdaq-100.",
+    "summary": "Market concentration can amplify gains but also compound declines during a stock market sell-off.",
+    "url": "https://www.fool.com/investing/2026/05/15/magnificent-seven-growth-stocks-all-time-high/",
+    "published_at": "2026-05-15T05:15:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "3e7f46528dca",
+    "title": "Vuzix Q1 Earnings Call Highlights",
+    "summary": "Vuzix (NASDAQ:VUZI) reported a smaller first-quarter loss as operating expenses declined, while revenue fell year over year amid lower product sales, management said on the company’s first-quarter 2026 earnings call. Chief Executive Officer Paul Travers said the company is continuing to focus its s",
+    "url": "https://www.marketbeat.com/instant-alerts/vuzix-q1-earnings-call-highlights-2026-05-15/?utm_source=yahoofinance&utm_medium=yahoofinance",
+    "published_at": "2026-05-15T05:07:01Z",
+    "source": "MarketBeat",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "5085bcfd45c7",
+    "title": "FitLife Brands Inc (FTLF) Q1 2026 Earnings Call Highlights: Revenue Surge Amidst Acquisition Gains",
+    "summary": "FitLife Brands Inc (FTLF) reports a 59% revenue increase driven by strategic acquisitions, despite challenges in gross margins and net income.",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/fitlife-brands-inc-ftlf-q1-050123165.html",
+    "published_at": "2026-05-15T05:01:23Z",
+    "source": "GuruFocus.com",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "f79bd55032c9",
+    "title": "Cerebras Raises $5.55 Billion IPO at $40 Billion Valuation",
+    "summary": "AI chipmaker priced shares above range as IPO demand exceeded available shares more than 20 times.",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/cerebras-raises-5-55-billion-003314885.html",
+    "published_at": "2026-05-15T00:33:14Z",
+    "source": "GuruFocus.com",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "e84472da6b2a",
+    "title": "FitLife Brands Q1 Earnings Call Highlights",
+    "summary": "FitLife Brands (NASDAQ:FTLF) reported sharply higher first-quarter 2026 revenue, driven by the acquisition of Irwin, while profitability declined as the company absorbed lower Irwin margins and higher acquisition-related expenses. Chief Executive Officer Dayton Judd said total revenue for the quart",
+    "url": "https://www.marketbeat.com/instant-alerts/fitlife-brands-q1-earnings-call-highlights-2026-05-14/?utm_source=yahoofinance&utm_medium=yahoofinance",
+    "published_at": "2026-05-15T00:05:46Z",
+    "source": "MarketBeat",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "d007ae529ebf",
+    "title": "Amazon Rallies 36% as AI Push Drives Market Value Toward $3 Trillion",
+    "summary": "AWS growth and $225 billion in AI chip commitments are strengthening investor confidence in Amazon's long-term AI strategy.",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/amazon-rallies-36-ai-push-232736448.html",
+    "published_at": "2026-05-14T23:27:36Z",
+    "source": "GuruFocus.com",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "a8683c785118",
+    "title": "Amazon Expands Smaller Whole Foods Stores",
+    "summary": "Amazon is bringing its compact Whole Foods format to more major cities as it targets urban shoppers.",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/amazon-expands-smaller-whole-foods-231729134.html",
+    "published_at": "2026-05-14T23:17:29Z",
+    "source": "GuruFocus.com",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "981f6c155b62",
+    "title": "3 Top Stocks That Growth Investors Should Buy Now",
+    "summary": "Nvidia, Amazon, and Meta Platforms all have plenty of upside potential.",
+    "url": "https://www.fool.com/investing/2026/05/14/3-top-stocks-that-growth-investors-should-buy-now/",
+    "published_at": "2026-05-14T22:55:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "f0b34f934368",
+    "title": "1 Unstoppable Stock to Buy Before It Joins Nvidia, Alphabet, and Apple in the $4 Trillion Club",
+    "summary": "Artificial intelligence could be Amazon's ticket into the ultra-exclusive $4 trillion club.",
+    "url": "https://www.fool.com/investing/2026/05/14/1-stock-buy-joins-nvidia-alphabet-4-trillion-club/",
+    "published_at": "2026-05-14T22:37:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "101683baeddb",
+    "title": "AI hyperscalers are 'falling behind' if they're not spending: Strategist",
+    "summary": "As AI chip stock rally and push the market (^DJI, ^IXIC, ^GSPC) to new record highs, Hamilton Capital Partners CIO Alonso Munoz comes on Market Domination to speak more on the lofty capex spending these hyperscalers continue to invest into artificial intelligence.",
+    "url": "https://finance.yahoo.com/video/ai-hyperscalers-are-falling-behind-if-theyre-not-spending-strategist-204734505.html",
+    "published_at": "2026-05-14T20:47:34Z",
+    "source": "Yahoo Finance Video",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "51567d96af38",
+    "title": "Cisco surges on Q3 AI demand, while cutting 4,000 jobs in AI overhaul",
+    "summary": "Cisco Systems (CSCO) stock has surged by double-digits since reporting fiscal third quarter results in Wednesday's extended hours, topping Wall Street expectations with revenue of $15.84 billion and adjusted earnings of $1.06 per share. This comes after the cloud operator laid off 4,000 workers as part of a new AI-focused restructuring. Hennion & Walsh CIO Kevin Mahn and Yahoo Finance Senior Reporters Ines Ferré and Brooke DiPalma take a closer look at the AI demand propelling Cisco, the cloud operator's outlook, and its recent job cuts.",
+    "url": "https://finance.yahoo.com/video/cisco-surges-on-q3-ai-demand-while-cutting-4000-jobs-in-ai-overhaul-135252913.html",
+    "published_at": "2026-05-14T13:52:52Z",
+    "source": "Yahoo Finance Video",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "ccd4e35dc762",
+    "title": "Nvidia to report Q1 earnings as chip competition grows",
+    "summary": "AI heavyweight Nvidia will report its first quarter results on May 20, in what is easily one of the most anticipated announcements of the earnings season.",
+    "url": "https://finance.yahoo.com/markets/stocks/article/nvidia-to-report-q1-earnings-as-chip-competition-grows-191200841.html",
+    "published_at": "2026-05-13T19:12:00Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "0cfe42e701ba",
+    "title": "3 Top Stocks to Buy in May",
+    "summary": "These are all demonstrating impressive performance now and have long-term tailwinds.",
+    "url": "https://www.fool.com/investing/2026/05/10/3-top-stocks-to-buy-in-may/",
+    "published_at": "2026-05-11T02:50:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "bd73b37672d2",
+    "title": "Iran May Have Found a New Way to Threaten Trump’s Economy — And It’s Not Oil",
+    "summary": "The stock market has spent much of 2026 acting like geopolitical risk is just background noise. The S&P 500 keeps pushing toward record highs, AI spending remains red hot, and investors have largely shrugged off the widening conflict involving Iran. But what if Tehran found a pressure point far more dangerous than oil tankers? That’s ... Iran May Have Found a New Way to Threaten Trump’s Economy — And It’s Not Oil",
+    "url": "https://247wallst.com/investing/2026/05/10/iran-may-have-found-a-new-way-to-threaten-trumps-economy-and-its-not-oil/",
+    "published_at": "2026-05-10T22:35:36Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "9efa81b30828",
+    "title": "Jim Cramer Says Nvidia Is 'Tough To Beat' On Corning Deal, Points Out Google, Amazon Still Have An 'Opponent With Multiple Legs Up'",
+    "summary": "Nvidia Corp. has deepened its grip on the AI infrastructure race with a $500 million investment in Corning Inc., a move that addresses critical networking bottlenecks even as Amazon.com, Inc. and Alphabet Inc.'s Google intensify efforts to challenge its dominance....",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-says-nvidia-tough-203128088.html",
+    "published_at": "2026-05-10T20:31:28Z",
+    "source": "Benzinga",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "51d21ebabd47",
+    "title": "2 Top Stocks Long-Term Investors Should Buy in May",
+    "summary": "Amazon and Shopify look like two great stocks to buy for the long term.",
+    "url": "https://www.fool.com/investing/2026/05/10/2-top-stocks-long-term-investors-should-buy-in-may/",
+    "published_at": "2026-05-10T20:20:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "9dc0d7385a71",
+    "title": "The global economy is experiencing the largest capex cycle ever, with nearly $5 trillion seen by the end of the decade—and it’s not all AI spending",
+    "summary": "At the same time, AI capital spending, while overlapping with the energy transition somewhat, is also galloping ahead full speed.",
+    "url": "https://finance.yahoo.com/economy/articles/global-economy-experiencing-largest-capex-173254033.html",
+    "published_at": "2026-05-10T17:32:54Z",
+    "source": "Fortune",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "bff364f7d7bf",
+    "title": "NVIDIA’s Huang says AI will make intelligence a commodity for billions",
+    "summary": "Investing.com -- NVIDIA chief executive Jensen Huang said on Sunday that artificial intelligence will make intelligence itself a commodity accessible to anyone, from carpenters to shopkeepers, adding that the technology will reach billions of people who have never had access to computing power before.",
+    "url": "https://finance.yahoo.com/sectors/technology/articles/nvidia-huang-says-ai-intelligence-172540508.html",
+    "published_at": "2026-05-10T17:25:40Z",
+    "source": "Investing.com",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "a70b1b6b2a87",
+    "title": "Where Will Amazon Stock Be in 10 Years?",
+    "summary": "What will come next for this diversified technology giant?",
+    "url": "https://www.fool.com/investing/2026/05/10/where-will-amazon-stock-be-in-10-years/",
+    "published_at": "2026-05-10T17:12:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "9eddf6344bb5",
+    "title": "Prediction: AI Infrastructure Stocks Will Crush the S&P 500 in 2026",
+    "summary": "Some AI stocks are trading at very reasonable levels right now.",
+    "url": "https://www.fool.com/investing/2026/05/10/prediction-ai-infrastructure-stocks-will-crush-the/",
+    "published_at": "2026-05-10T16:35:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "7730009cb3a1",
+    "title": "Berkshire CEO has sobering message for tech stock investors",
+    "summary": "Berkshire Hathaway (BRK.A, BRK.B) CEO Greg Abel isn’t chasing the AI trade just because everyone else is. In his first annual meeting as Berkshire’s top honcho and Warren Buffett’s successor, he said that the company isn’t treating tech spending or tech stocks as a momentum game. That’s ...",
+    "url": "https://www.thestreet.com/investing/berkshire-ceo-has-sobering-message-for-tech-stock-investors",
+    "published_at": "2026-05-10T16:33:00Z",
+    "source": "TheStreet",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "5a20d4d1ab1c",
+    "title": "The $1 trillion club's new members are powering the AI boom: Chart of the Day",
+    "summary": "Market royalty is getting a hardware makeover.",
+    "url": "https://finance.yahoo.com/markets/article/the-1-trillion-clubs-new-members-are-powering-the-ai-boom-chart-of-the-day-104234629.html",
+    "published_at": "2026-05-10T10:42:34Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
     "id": "0f4c1075b9c9",
     "title": "Meta’s Cheap Stock Is an Investor Trap",
     "summary": "Meta’s stock has languished recently as concern grows over its spending on AI, leaving it unusually cheap.  At around 18 times forward earnings, its valuation also represents a discount to other big tech companies.  The premium for Google-parent  Alphabet’s  shares against Meta’s is the highest it has been since 2022.",
