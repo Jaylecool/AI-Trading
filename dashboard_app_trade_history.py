@@ -1555,11 +1555,20 @@ def auto_trade_cycle():
                 pe_confluence_buy  = False  # True only when daily+weekly both BULLISH
                 pe_confluence_sell = False  # True only when daily+weekly both BEARISH
                 try:
-                    _hist_clean = hist[['Close']].dropna()
-                    pe_df = pd.DataFrame({
-                        'Date': _hist_clean.index,
-                        'price': _hist_clean['Close'].values
-                    })
+                    # Use the full indicator CSV so PredictionEngine has access to
+                    # all OHLCV columns and pre-computed indicators for feature building.
+                    # Falling back to Close-only data causes the ML feature vector to be
+                    # incomplete, producing near-50% confidence and mostly NEUTRAL signals.
+                    try:
+                        pe_df = pd.read_csv(f'data/{symbol}_stock_data_with_indicators.csv')
+                        if pe_df.empty or len(pe_df) < 50:
+                            raise ValueError("CSV too short")
+                    except Exception:
+                        _hist_clean = hist[['Close']].dropna()
+                        pe_df = pd.DataFrame({
+                            'Date': _hist_clean.index,
+                            'price': _hist_clean['Close'].values
+                        })
                     pe = PredictionEngine(pe_df, symbol=symbol)
                     indicators = pe.calculate_technical_indicators()
                     pe_signal, _ = pe.generate_signal(indicators)
