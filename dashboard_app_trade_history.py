@@ -1555,14 +1555,24 @@ def auto_trade_cycle():
                 pe_confluence_buy  = False  # True only when daily+weekly both BULLISH
                 pe_confluence_sell = False  # True only when daily+weekly both BEARISH
                 try:
-                    # Use the full indicator CSV so PredictionEngine has access to
-                    # all OHLCV columns and pre-computed indicators for feature building.
-                    # Falling back to Close-only data causes the ML feature vector to be
-                    # incomplete, producing near-50% confidence and mostly NEUTRAL signals.
+                    # Build pe_df from the already-computed features_df (250 rows, full
+                    # indicators from yfinance). The local indicator CSVs may have very few
+                    # rows (< 50), making SMA-50 and Bollinger Bands all NaN and forcing the
+                    # system into a technical-only fallback that almost never signals BULLISH.
+                    # Using features_df gives PredictionEngine enough history AND the correct
+                    # ML feature columns (RSI_14, MACD_Histogram, etc.) so _build_feature_row
+                    # can build a complete feature vector for the ML ensemble.
                     try:
-                        pe_df = pd.read_csv(f'data/{symbol}_stock_data_with_indicators.csv')
-                        if pe_df.empty or len(pe_df) < 50:
-                            raise ValueError("CSV too short")
+                        if features_df is not None and len(features_df.dropna(subset=['Close'])) >= 50:
+                            pe_df = features_df.copy()
+                            # PredictionEngine needs a 'Date' column and Close_{symbol}
+                            pe_df['Date'] = (pe_df.index.normalize()
+                                             if hasattr(pe_df.index, 'normalize')
+                                             else pd.to_datetime(pe_df.index))
+                            pe_df[f'Close_{symbol}'] = pe_df['Close']
+                            pe_df = pe_df.reset_index(drop=True)
+                        else:
+                            raise ValueError("features_df unavailable or too short")
                     except Exception:
                         _hist_clean = hist[['Close']].dropna()
                         pe_df = pd.DataFrame({
@@ -1634,12 +1644,15 @@ def auto_trade_cycle():
                     if trade.symbol != symbol:
                         continue
                     sl = trade.stop_loss or (trade.entry_price * (1 - params.stop_loss_percent))
-                    tp = trade.take_profit or (trade.entry_price * (1 + params.take_profit_target))
+
+                    # Unrealized return — computed from entry price, never from a stored TP value.
+                    # Using price-based TP (trade.take_profit) is fragile: the stored value can
+                    # be inflated by the ATR/horizon formula (e.g. 60% above entry) or stale after
+                    # restarts.  Percentage-based exit is immune to all of those issues.
+                    unrealized_pct = (current_price - trade.entry_price) / trade.entry_price
 
                     # Trailing stop: once 2%+ in profit, trail at 1.5% below highest price
-                    unrealized_pct = (current_price - trade.entry_price) / trade.entry_price
                     if unrealized_pct >= 0.02:
-                        # Track highest price in trade metadata (stored on trade object)
                         highest = getattr(trade, '_highest_price', trade.entry_price)
                         highest = max(highest, current_price)
                         trade._highest_price = highest
@@ -1649,8 +1662,11 @@ def auto_trade_cycle():
 
                     if current_price <= sl:
                         positions_to_close.append((tid, 'STOP-LOSS', sl))
-                    elif current_price >= tp:
-                        positions_to_close.append((tid, 'TAKE-PROFIT', tp))
+                    elif unrealized_pct >= params.take_profit_target:
+                        # Profit target reached — exit based on actual return vs entry price.
+                        # This fires correctly regardless of whatever price was stored in
+                        # trade.take_profit (which may be wrong due to ATR/horizon inflation).
+                        positions_to_close.append((tid, 'TAKE-PROFIT', current_price))
 
                 for tid, reason, trigger_price in positions_to_close:
                     trade = open_positions[tid]
@@ -1753,12 +1769,11 @@ def auto_trade_cycle():
                             if pe_weekly_sl is not None:
                                 candidate_sl.append(round(float(pe_weekly_sl), 2))
                             stop_loss = min(candidate_sl)  # lowest price = widest stop = safest
-                            # Take-profit: best of (pct-based, weekly/monthly horizon)
-                            pct_tp = round(current_price * (1 + params.take_profit_target), 2)
-                            if pe_weekly_tp is not None:
-                                take_profit = round(max(pct_tp, float(pe_weekly_tp)), 2)
-                            else:
-                                take_profit = pct_tp
+                            # Take-profit: use the strategy's pct target only.
+                            # The ATR-based horizon TP was setting targets 50-60% above entry
+                            # (monthly 30% SL floor * 2 risk/reward = 60% TP) which caused
+                            # positions to never close.  The trailing stop handles extra upside.
+                            take_profit = round(current_price * (1 + params.take_profit_target), 2)
 
                             new_trade = Trade(
                                 trade_id=trade_id,
@@ -1962,6 +1977,7 @@ def get_next_day_prediction():
         confidence_level = None
         model_name = 'trend-based'
         
+        features_df = None  # will be populated if a trained model exists
         sym_model = trained_models.get(symbol)
         if sym_model is not None:
             features, features_df = compute_features_from_yfinance(hist, symbol=symbol)
@@ -2004,15 +2020,33 @@ def get_next_day_prediction():
             recent_vol = hist['Close'].tail(20).std() / hist['Close'].tail(20).mean() * 100
             confidence_level = int(max(50, min(85, 75 - recent_vol)))
         
+        # Ensure features_df is populated even when sym_model is None
+        if features_df is None:
+            _, features_df = compute_features_from_yfinance(hist, symbol=symbol)
+        
         # --- Signal from PredictionEngine + multi-horizon predictions ---
         signal = 'NEUTRAL'
         horizons = None
         try:
-            _hist_clean = hist[['Close']].dropna()
-            pe_df = pd.DataFrame({
-                'Date': _hist_clean.index,
-                'price': _hist_clean['Close'].values
-            })
+            # Use features_df (250 rows, full yfinance indicators) so PredictionEngine
+            # has enough history for SMA-50, Bollinger Bands, and ML feature extraction.
+            # Building from a Close-only or stale CSV (< 50 rows) produces all-NaN
+            # technical indicators and degrades every signal to NEUTRAL.
+            _pe_df = None
+            if features_df is not None and len(features_df.dropna(subset=['Close'])) >= 50:
+                _pe_df = features_df.copy()
+                _pe_df['Date'] = (_pe_df.index.normalize()
+                                  if hasattr(_pe_df.index, 'normalize')
+                                  else pd.to_datetime(_pe_df.index))
+                _pe_df[f'Close_{symbol}'] = _pe_df['Close']
+                _pe_df = _pe_df.reset_index(drop=True)
+            if _pe_df is None:
+                _hist_clean = hist[['Close']].dropna()
+                _pe_df = pd.DataFrame({
+                    'Date': _hist_clean.index,
+                    'price': _hist_clean['Close'].values
+                })
+            pe_df = _pe_df
             pe = PredictionEngine(pe_df, symbol=symbol)
             indicators = pe.calculate_technical_indicators()
             signal_type, signal_strength = pe.generate_signal(indicators)

@@ -521,6 +521,15 @@ def predict_tft(symbol: str, recent_df: pd.DataFrame) -> Dict:
         if len(df_feat) < SEQUENCE_LENGTH:
             return _unavailable_result()
 
+        # Build a full-width DataFrame matching the scaler's training schema.
+        # Missing columns (e.g. sentiment features when NLP is unavailable) are
+        # filled with 0.0 so the scaler always receives the expected feature count.
+        if len(available_cols) < len(feature_cols):
+            full_df = pd.DataFrame(0.0, index=df_feat.index, columns=feature_cols)
+            for col in available_cols:
+                full_df[col] = df_feat[col].values
+            df_feat = full_df
+
         X = scaler.transform(df_feat.values).astype(np.float32)  # (T, n_feat)
 
         if backend == 'tft':

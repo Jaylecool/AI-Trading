@@ -1,5 +1,635 @@
 [
   {
+    "id": "7ba87d12419d",
+    "title": "Nvidia Enters Windows Laptop Market, Taking On Intel and AMD",
+    "summary": "(Bloomberg) -- Nvidia Corp. is entering the PC market with a new chip aimed at loosening the stranglehold of Intel Corp. technology in that arena and modernizing the machines for the AI era.Most Read from BloombergUS Says Deals With Iran for Safe Hormuz Transit Are ProhibitedStrait of Hormuz Ship Transits Are Rising Thanks to US HelpAmericans Injured in Iranian Missile Strike on Kuwaiti Air BaseAmericans Hurt in Kuwait as Trump Sends Mixed Signals on WarBerkshire Hathaway to Buy Taylor Morrison",
+    "url": "https://finance.yahoo.com/sectors/technology/articles/nvidia-enters-windows-laptop-market-042523745.html",
+    "published_at": "2026-06-01T04:25:23Z",
+    "source": "Bloomberg",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "422ea150a9d3",
+    "title": "DELL vs AAPL: Analysts See Upside for One, and Downside for the Other",
+    "summary": "Dell (DELL) and Apple (AAPL) are both AI hardware stories, but they are very different stocks right now. Dell is the cleaner near-term AI infrastructure winner, especially after its latest earnings showed massive demand for AI servers and traditional servers. Meanwhile, Apple is the higher-quality consumer ecosystem bet, but its AI payoff is still less visible and depends more on future product execution. So, in simple terms, Dell has the stronger current AI numbers, while Apple has the stronger",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/dell-vs-aapl-analysts-see-033500497.html",
+    "published_at": "2026-06-01T03:35:00Z",
+    "source": "TipRanks",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "b1715fc36892",
+    "title": "Dell unveils $699 XPS 13 laptop in challenge to Apple's MacBook Neo",
+    "summary": "Dell on Sunday unveiled its most affordable laptop, XPS 13, as the PC maker aims to capture ‌market share from Apple's MacBook Neo by attracting students and young professionals.  Starting ‌at $699 and a reduced $599 for students aged 16 and older during the back-to-school season, the ​XPS 13 seeks to offer a superior experience compared to the MacBook Neo, Dell said.",
+    "url": "https://finance.yahoo.com/sectors/technology/articles/dell-unveils-699-xps-13-225306337.html",
+    "published_at": "2026-05-31T22:53:06Z",
+    "source": "Reuters",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "bf154e69f534",
+    "title": "Why This Fund Sold $35 Million of Bristow Group Amid a 40% Stock Surge",
+    "summary": "Bristow Group delivers aviation and mission-critical transport services to offshore energy, government, and commercial clients worldwide.",
+    "url": "https://www.fool.com/coverage/filings/2026/05/31/why-this-fund-sold-usd35-million-of-bristow-group-amid-a-40-stock-surge/",
+    "published_at": "2026-05-31T18:20:12Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "63700633a200",
+    "title": "China Insight: Why Fashion Must Rethink Globalization",
+    "summary": "The answer increasingly lies not in export volume alone, but in supply chain integration, local collaboration, sustainability standards and long-term strategic value.",
+    "url": "https://wwd.com/business-news/business-features/shein-anta-sustainability-fashion-globalization-1238987366/",
+    "published_at": "2026-05-31T17:52:19Z",
+    "source": "WWD",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "2afe65b22c8d",
+    "title": "How Overzealous Option Traders Are Making 3X Leveraged ETFs Look Like Saviors",
+    "summary": "Warning: A key part of the options market you may be relying on is no longer working.",
+    "url": "https://www.barchart.com/story/news/2223405/how-overzealous-option-traders-are-making-3x-leveraged-etfs-look-like-saviors",
+    "published_at": "2026-05-31T14:30:02Z",
+    "source": "Barchart",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "eced332e8e43",
+    "title": "How The Apple (AAPL) Narrative Is Shifting With AI Ambitions And Leadership Transition",
+    "summary": "Apple’s modeled fair value has been updated from US$297.88 to US$310.51, a modest shift that signals a recalibration of expectations rather than a wholesale rewrite of the story. The move aligns with recent analyst commentary that considers Apple’s AI roadmap, product refresh cycle, leadership changes, and debates around iPhone demand, China exposure, and cost pressures. As you read on, you will see how these moving pieces shape the evolving narrative and what to watch to stay informed ahead...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/apple-aapl-narrative-shifting-ai-130932430.html",
+    "published_at": "2026-05-31T13:09:32Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "ad8ca772bfee",
+    "title": "S&P 500 Dividend Yield Hits 1.08%. The Lowest Payout Rate Since the 1800s Is a Retirement Red Flag.",
+    "summary": "The S&P 500 dividend yield has fallen to 1.08%, a level the index has not seen since the 1800s. For retirees who built their income plan around stock dividends, that number is the financial equivalent of finding out the well in the backyard has gone dry while the water bill keeps climbing. I’ve been writing ... S&P 500 Dividend Yield Hits 1.08%. The Lowest Payout Rate Since the 1800s Is a Retirement Red Flag.",
+    "url": "https://247wallst.com/personal-finance/2026/05/31/sp-500-dividend-yield-hits-1-08-the-lowest-payout-rate-since-the-1800s-is-a-retirement-red-flag/",
+    "published_at": "2026-05-31T12:26:47Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "7d4e757d8279",
+    "title": "IPOs are no longer Wall Street's starting line — they're the exit ramp: Chart of the Day",
+    "summary": "Wall Street used to get the growth story early. Now it often only gets the receipt.",
+    "url": "https://finance.yahoo.com/markets/article/ipos-are-no-longer-wall-streets-starting-line--theyre-the-exit-ramp-chart-of-the-day-114434009.html",
+    "published_at": "2026-05-31T11:44:34Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "7ab256e4209c",
+    "title": "Inside the Ambitious Plan That Actually Made Home Prices in Austin Affordable Again",
+    "summary": "A decade of policy changes in the Texas capital set the stage for a construction boom. The result is that prices are down and sales are up. Other cities are taking notice.",
+    "url": "https://www.barrons.com/articles/austin-texas-home-prices-sales-affordable-d9c899ba?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-31T07:00:00Z",
+    "source": "Barrons.com",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "acee15d4ac4c",
+    "title": "QQQ’s Hidden Risk: Why the Fund’s Top 5 Holdings Move Together",
+    "summary": "The Invesco QQQ Trust (NASDAQ:QQQ) has ripped higher in the spring rally, climbing 10% in the past month and 19% year to date to trade near $727. That rebound from the early-April volatility spike, when the VIX briefly punched above 25, has been powered almost entirely by the same handful of AI infrastructure names that ... QQQ’s Hidden Risk: Why the Fund’s Top 5 Holdings Move Together",
+    "url": "https://247wallst.com/investing/2026/05/30/qqqs-hidden-risk-why-the-funds-top-5-holdings-move-together/",
+    "published_at": "2026-05-30T21:18:26Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "7e7c81f5478a",
+    "title": "SCHX’s 750 stocks hide a 48% concentration risk most dividend investors overlook",
+    "summary": "The Schwab U.S. Large-Cap ETF (NYSEARCA:SCHX) charges 0.03% a year, holds 750 stocks, and just paid a quarterly distribution of $0.0732 per share on March 30, 2026. For roughly thirty cents a year on every $1,000 invested, SCHX investors get exposure to almost the entire U.S. large-cap market, with income that has arrived on schedule ... SCHX’s 750 stocks hide a 48% concentration risk most dividend investors overlook",
+    "url": "https://247wallst.com/investing/2026/05/30/schxs-750-stocks-hide-a-48-concentration-risk-most-dividend-investors-overlook/",
+    "published_at": "2026-05-30T19:55:12Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "0d1b8f5aa030",
+    "title": "Intel Has Tripled in 2026. Here's 1 Reason It Could Keep Going.",
+    "summary": "One idea from the chipmaker's latest earnings call sits at the center of the bull case.",
+    "url": "https://www.fool.com/investing/2026/05/28/intel-has-tripled-in-2026-heres-1-reason-it-could/",
+    "published_at": "2026-05-28T22:51:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "b0dca9f0bb46",
+    "title": "Is Apple (AAPL) One of the Best Reddit Stocks to Buy According to Billionaires?",
+    "summary": "Apple Inc. (NASDAQ:AAPL) is included among the 10 Best Reddit Stocks to Buy According to Billionaires. On May 26, BofA raised its price recommendation on Apple Inc. (NASDAQ:AAPL) to $380 from $330. It reiterated a Buy rating on the shares. Analyst Wamsi Mohan said the shift toward AI agents focused on individual users could strengthen […]",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/apple-aapl-one-best-reddit-202540104.html",
+    "published_at": "2026-05-28T20:25:40Z",
+    "source": "Insider Monkey",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "9a395fc61808",
+    "title": "Wealth Preservation Advisors Liquidates Peoples Bancorp Stake, According to Recent SEC Filing",
+    "summary": "Peoples Bancorp pairs community banking with insurance, wealth, leasing, and premium finance, giving it more than one earnings lever. Lower funding costs help, but the stock’s upside depends on whether that mix can support durable earnings after credit costs.",
+    "url": "https://www.fool.com/coverage/filings/2026/05/28/wealth-preservation-advisors-liquidates-peoples-bancorp-stake-according-to-recent-sec-filing/",
+    "published_at": "2026-05-28T20:06:51Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "784d345dee6d",
+    "title": "Qualcomm Stock Just Hit New Record Highs. Investors Can Thank a ByteDance Deal.",
+    "summary": "Qualcomm’s AI ambitions just got a major validation as a blockbuster ByteDance deal sends the smartphone chip giant to fresh record highs.",
+    "url": "https://www.barchart.com/story/news/2185014/qualcomm-stock-just-hit-new-record-highs-investors-can-thank-a-bytedance-deal",
+    "published_at": "2026-05-28T20:02:27Z",
+    "source": "Barchart",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "aaa199454cc2",
+    "title": "TSMC CEO Promises Staff Massive 30% Bonus Bump as Profits Surge. This Is a Clear Message for TSM Stock Bulls.",
+    "summary": "TSMC CEO pledges 30%+ staff bonuses as Q1 revenue hits $35.9 billion and AI demand surges. Here's why TSM stock looks like a long-term winner for investors.",
+    "url": "https://www.barchart.com/story/news/2184743/tsmc-ceo-promises-staff-massive-30-bonus-bump-as-profits-surge-this-is-a-clear-message-for-tsm-stock-bulls",
+    "published_at": "2026-05-28T19:50:09Z",
+    "source": "Barchart",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "ad0df5491a96",
+    "title": "Tim Cook Has Never Hyped AI. Apple Stock Is at an All-Time High Anyway",
+    "summary": "NVIDIA (NASDAQ:NVDA) dominates 2026 financial television as the consensus AI play. But the trade quietly outrunning it belongs to a company whose CEO refuses to say the magic words. Apple (NASDAQ:AAPL) closed at $311, an all-time high on a split-adjusted basis, carrying a $4.57 trillion market cap, up 54% in one year. Tim Cook never ... Tim Cook Has Never Hyped AI. Apple Stock Is at an All-Time High Anyway",
+    "url": "https://247wallst.com/investing/2026/05/28/tim-cook-has-never-hyped-ai-apple-stock-is-at-an-all-time-high-anyway/",
+    "published_at": "2026-05-28T19:05:38Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "6825fd546fc8",
+    "title": "‘It’s insulting’: Ferrari fans have given their verdict on its first electric car, and it’s not good",
+    "summary": "It’s deemed outrageously expensive, it’s insulting to existing owners and perhaps most damning of all – it looks like a Nissan Leaf. Those are just some of the unflattering comments directed at Ferrari’s first electric car, the Luce, since it was unveiled earlier this week by the legendary Italian marque.",
+    "url": "https://www.cnn.com/2026/05/28/cars/ferrari-verdict-electric-car-luce-intl",
+    "published_at": "2026-05-28T18:27:47Z",
+    "source": "CNN Business",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "13f6133cd9ee",
+    "title": "While Nvidia Battles AMD, Qualcomm Quietly Signed the Biggest AI Deal in Its History. With ByteDance",
+    "summary": "You may want to keep hitting the buy button on Qualcomm (NASDAQ:QCOM), and the last six weeks handed you three more reasons to do it again. While the financial press tracks every twitch in the Nvidia (NASDAQ:NVDA) versus AMD (NASDAQ:AMD) slap fight, Qualcomm quietly signed the biggest AI deal in its history. The stock has run 100% from ... While Nvidia Battles AMD, Qualcomm Quietly Signed the Biggest AI Deal in Its History. With ByteDance",
+    "url": "https://247wallst.com/investing/2026/05/28/while-nvidia-battles-amd-qualcomm-quietly-signed-the-biggest-ai-deal-in-its-history-with-bytedance/",
+    "published_at": "2026-05-28T17:50:59Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "93df754caa18",
+    "title": "Anthropic to roll out Claude Mythos in coming weeks, launches Opus 4.8",
+    "summary": "Anthropic on Thursday said it is launching an upgraded ‌Claude Opus 4.8 model even as ‌it works to release its powerful, market-moving Mythos model ​to all customers in the coming weeks.  Mythos is the AI lab's large language model with advanced cybersecurity capabilities that have ‌raised concerns among ⁠executives and world leaders about its impact.  As a part of Project ⁠Glasswing, major tech firms such as Amazon, Microsoft and Apple are permitted to ​use Mythos ​for cybersecurity purposes.",
+    "url": "https://finance.yahoo.com/sectors/technology/articles/anthropic-roll-claude-mythos-coming-170038375.html",
+    "published_at": "2026-05-28T17:00:38Z",
+    "source": "Reuters",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "c9c40362a105",
+    "title": "Jensen Huang Joins Elite Tsinghua University Advisory Board That Includes Tim Cook And Elon Musk: Report",
+    "summary": "Nvidia Corp. (NASDAQ:NVDA) CEO Jensen Huang has reportedly agreed to join the advisory board of one of China's most prestigious universities. Nvidia CEO Joins Elite Tsinghua Advisory Board Huang accepted an invitation to join the advisory board of Tsinghua University School of Economics and Management, the Financial Times reported on Wednesday, citing people familiar with the matter. The board includes some of the world's most prominent business leaders. It has Apple Inc. (NASDAQ:AAPL) CEO Tim C",
+    "url": "https://finance.yahoo.com/sectors/technology/articles/jensen-huang-joins-elite-tsinghua-013840598.html",
+    "published_at": "2026-05-28T01:38:40Z",
+    "source": "Benzinga",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "a89275229f5b",
+    "title": "Why Android takes a bigger hit than Apple from AI memory shortages",
+    "summary": "Yahoo Finance Tech Editor Dan Howley joins Josh Lipton on Market Domination to break down new data showing the steepest decline in smartphone sales on record, as soaring demand for AI memory chips reshapes the semiconductor market.",
+    "url": "https://finance.yahoo.com/video/why-android-takes-a-bigger-hit-than-apple-from-ai-memory-shortages-212846995.html",
+    "published_at": "2026-05-27T21:28:46Z",
+    "source": "Yahoo Finance Video",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "ceb0fac2b9e4",
+    "title": "Best Buy stock gains as new gadgets and higher tax refunds boost sales",
+    "summary": "This marks the first report since the company announced CEO Corie Barry is stepping down from the electronics retailer at the end of the third quarter.",
+    "url": "https://finance.yahoo.com/markets/stocks/article/best-buy-stock-gains-as-new-gadgets-and-higher-tax-refunds-boost-sales-212025056.html",
+    "published_at": "2026-05-27T21:20:25Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "9c3306cd82e9",
+    "title": "Eli Lilly Stock Hits Record Highs, Becomes First Pharmaceutical Firm Worth $1 Trillion",
+    "summary": "Eli Lilly (LLY) stock has surged to new record highs of over $1,000 a share, cementing its position as one of the market's most dominant growth stories and the first pharmaceutical firm worth $1 trillion.",
+    "url": "https://finance.yahoo.com/sectors/healthcare/articles/eli-lilly-stock-hits-record-203900546.html",
+    "published_at": "2026-05-27T20:39:00Z",
+    "source": "Zacks",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "89f65dc0aba9",
+    "title": "Top Analyst Reports for Alphabet, Apple & Micron Technology",
+    "summary": "Alphabet's AI-driven growth in Search, Cloud and subscriptions is boosting momentum, though spending and legal risks remain in focus.",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/top-analyst-reports-alphabet-apple-201300052.html",
+    "published_at": "2026-05-27T20:13:00Z",
+    "source": "Zacks",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "21f63347ecb5",
+    "title": "Buy, Sell, or Hold Vanguard’s Mega Cap Growth ETF Right Now | MGK",
+    "summary": "There’s a tech ETF that has been almost neck-and-neck with the S&P 500 in the past year and has built up a meaningful lead over the past five years. It’s the Vanguard’s Mega Cap Growth ETF (NYSEARCA:MGK). This ETF tracks the price of the CRSP US Mega Cap Growth Index, which in turn tracks companies ... Buy, Sell, or Hold Vanguard’s Mega Cap Growth ETF Right Now | MGK",
+    "url": "https://247wallst.com/investing/2026/05/27/buy-sell-or-hold-vanguards-mega-cap-growth-etf-right-now-mgk/",
+    "published_at": "2026-05-27T19:45:18Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "3f0476d3f293",
+    "title": "Jesus Has a Stock Portfolio: NVDA, MSFT, and Other Tech Giants that the Church of Latter-Day Saints Is Betting Big On",
+    "summary": "The LDS Church and its investment arm have leaned heavily on the AI revolution, and so far it's working out pretty well for them. Here's what institutional investors should take away from the church's gamble.",
+    "url": "https://www.barchart.com/story/news/2159195/jesus-has-a-stock-portfolio-nvda-msft-and-other-tech-giants-that-the-church-of-latter-day-saints-is-betting-big-on",
+    "published_at": "2026-05-27T19:10:02Z",
+    "source": "Barchart",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "9b984568a562",
+    "title": "Dell’s Growth Story Comes With Risk, But Also a Unique Edge",
+    "summary": "Dell Technologies (DELL) stock has surged 30% in just the last five trading days. And whenever a move like that happens, the instinct for a lot of investors is obvious: chase the momentum before it disappears.",
+    "url": "https://www.trefis.com/articles/600367/dells-growth-story-comes-with-risk-but-also-a-unique-edge/2026-05-27",
+    "published_at": "2026-05-27T19:06:13Z",
+    "source": "Trefis",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "f8f54224d615",
+    "title": "Red-hot AI demand pushes more companies into the $1 trillion club",
+    "summary": "Micron Technologies and SK Hynix joined the trillion-dollar club, which includes Apple, Meta and Tesla.",
+    "url": "https://www.nbcnews.com/business/markets/micron-hits-trillion-dollar-value-ai-euphoria-rcna347159",
+    "published_at": "2026-05-27T18:35:46Z",
+    "source": "NBC News",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "a1daaa3a5838",
+    "title": "Apple Keeps Smartphone Lead",
+    "summary": "U.S. smartphone shipments fell 3% in the first quarter, but Apple stayed on top.",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/apple-keeps-smartphone-lead-183213195.html",
+    "published_at": "2026-05-27T18:32:13Z",
+    "source": "GuruFocus.com",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "e08249568c57",
+    "title": "The App for Trump Accounts Will Launch Thursday. Here’s What to Know.",
+    "summary": "The app where millions of Americans will be able to manage new Trump accounts for their children is set to launch Thursday, a Treasury Department spokeswoman said.  Account activation will begin for families who have already enrolled in the program.  The app, built by   Bank of New York Mellon  and  Robinhood  will be available in the Apple and Google app stores.",
+    "url": "https://www.wsj.com/finance/investing/the-app-for-trump-accounts-will-launch-thursday-heres-what-to-know-47f1e983?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-27T18:28:00Z",
+    "source": "The Wall Street Journal",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "76cc8a0ed4fa",
+    "title": "Ferrari bets on generational tech shift with Luce five-seat EV",
+    "summary": "<body><p>STORY: :: Ferrari</p><p>Ferrari presented its first fully electric car on Monday, marking a high-stakes shift by the luxury sports car maker.</p><p>Dubbed the Luce, it has a range of over 300 miles and features four electric motors, which help deliver more than 1,000 horsepower and a top speed close to 200 miles per hour.&nbsp;</p><p>Priced at $640,000, Ferrari aims to appeal to families with deep pockets, offering them comfortable seats, high-end tech and a big trunk.&nbsp;</p><p>The four-door Luce, Italian for 'light', is Ferrari's first five-seater and was developed with the help of former Apple design chief Jony Ive and his collective LoveFrom.</p><p>The Luce marks a gamble that a generation steeped in technology and AI, and less attached to the brand's trademark 12- and 8-cylinder engine legacy, will shift to high-tech luxury EVs.</p><p>The move comes as competitors including Porsche and Lamborghini scale back their EV ambitions, citing weak demand.</p><p>Ferrari also hopes the Luce will help it expand in markets like China, where EVs are already widespread and big petrol cars are heavily taxed.</p></body>",
+    "url": "https://finance.yahoo.com/video/ferrari-bets-generational-tech-shift-050104998.html",
+    "published_at": "2026-05-26T05:01:04Z",
+    "source": "Reuters Videos",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "9f28b4f3cc68",
+    "title": "RACE Stock Slips: Ferrari's New EV Supercar Luce Fails To Impress Retail Traders",
+    "summary": "Investors questioned the luxury automaker’s shift away from its traditional sports-car identity.",
+    "url": "https://stocktwits.com/news-articles/markets/equity/race-stock-slips-ferrari-s-new-ev-supercar-luce-fails-to-impress-retail-traders/cZgaqqURepQ",
+    "published_at": "2026-05-26T04:57:47Z",
+    "source": "Stocktwits",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "495dc009552d",
+    "title": "Is Nvidia the Most Underrated Dividend Growth Stock to Own?",
+    "summary": "Nvidia's dividend is going up by 2,400%.",
+    "url": "https://www.fool.com/investing/2026/05/25/is-nvidia-the-most-underrated-dividend-growth-stoc/",
+    "published_at": "2026-05-25T23:50:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "2a28e982b90b",
+    "title": "Wedbush analyst has bold IMAX stock message for investors",
+    "summary": "IMAX Corporation (IMAX) shareholders had the kind of Friday that rewrites a year. Shares of the premium cinema technology company jumped about 15% on May 22, closing at $39.12, after The Wall Street Journal reported the company is exploring a sale and has approached entertainment companies as ...",
+    "url": "https://www.thestreet.com/investing/stocks/wedbush-analyst-has-bold-imax-stock-message-for-investors",
+    "published_at": "2026-05-25T23:00:00Z",
+    "source": "TheStreet",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "169cad70fbd7",
+    "title": "Ferrari Rolls Out Five-Seat Fully Electric Car in Brand First",
+    "summary": "(Bloomberg) -- Ferrari NV unveiled its first fully electric car, a five-seat model priced at €550,000 ($640,000) that marks a sharp break from the sports-car maker’s fuel-burning heritage.Most Read from BloombergNvidia CEO Urges Super Micro to Tighten Up on ComplianceTrump Doctor Visit Renews Health Scrutiny as 80th Birthday NearsTrump Says He’ll Announce Negotiated Deal With Iran ShortlyRubio Sees Good News Coming on Hormuz as Iran Talks ContinueUS, Iran Inch Toward Deal as Gaps Remain on Urani",
+    "url": "https://finance.yahoo.com/sectors/technology/articles/ferrari-rolls-five-seat-fully-201042436.html",
+    "published_at": "2026-05-25T20:10:42Z",
+    "source": "Bloomberg",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "859bded14559",
+    "title": "Dear Apple Stock Fans, Mark Your Calendars for June 18",
+    "summary": "Apple is cutting prices in China ahead of the 618 shopping holiday and Wedbush says that could help its market share.",
+    "url": "https://www.barchart.com/story/news/2117440/dear-apple-stock-fans-mark-your-calendars-for-june-18",
+    "published_at": "2026-05-25T17:00:02Z",
+    "source": "Barchart",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "ce4bdef9ec2b",
+    "title": "Is Now the Time to Add an International ETF to Your Core Holdings?",
+    "summary": "The best investors are always thinking about ways they can upgrade their portfolios.",
+    "url": "https://www.fool.com/investing/2026/05/25/now-time-add-international-etf-core-holdings/",
+    "published_at": "2026-05-25T16:20:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "1c78f16b59b7",
+    "title": "Why This Invesco ETF Might Be the Most Underrated Index Fund Available Today",
+    "summary": "And no, it is not the Invesco QQQ.",
+    "url": "https://www.fool.com/investing/2026/05/25/why-invesco-etf-underrated-index-fund-ptf/",
+    "published_at": "2026-05-25T16:10:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "4aef037eb53c",
+    "title": "S&P 500 Dividends Just Hit an All-Time Low Going Back to the 1800s — Here’s What Retirees Need to Know",
+    "summary": "The host of Retire SMART Podcast opened Episode 416 with a number that should stop every income-focused retiree in their tracks. The S&P 500’s dividend yield has fallen to roughly 1.1%, an all-time low going back to the 1800s. His framing was blunt: “The dividend usually fluctuates between 2 and change, and sometimes up to ... S&P 500 Dividends Just Hit an All-Time Low Going Back to the 1800s — Here’s What Retirees Need to Know",
+    "url": "https://247wallst.com/personal-finance/2026/05/25/sp-500-dividends-just-hit-an-all-time-low-going-back-to-the-1800s-heres-what-retirees-need-to-know/",
+    "published_at": "2026-05-25T15:05:10Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "e7880819907f",
+    "title": "Here's How Much You'd Need to Invest in VIG to Generate $500 per Month in Dividends",
+    "summary": "The Vanguard Dividend Appreciation ETF (VIG) may be one of the more consistent dividend-growth funds. But it's not one of the biggest yielders.",
+    "url": "https://www.fool.com/investing/2026/05/25/how-much-you-need-invest-vig-500-dividends/",
+    "published_at": "2026-05-25T14:40:12Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "4a26b2a5934b",
+    "title": "Analysis-Ferrari's Luce leads bold leap into uncertain electric era",
+    "summary": "By Giulio Piovaccari ROME, May 25 (Reuters) - As its sports car rivals tap the brakes on a shift to EVs, Ferrari will take a leap into an uncertain era on Monday with the launch of its first fully-",
+    "url": "https://uk.finance.yahoo.com/news/analysis-ferraris-luce-leads-bold-060900962.html",
+    "published_at": "2026-05-25T06:09:00Z",
+    "source": "Reuters",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "bae5dc83662d",
+    "title": "Apple vs. Microsoft: What Their Revenue Trends Reveal for Investors",
+    "summary": "One tech giant delivers record-setting sales surges, while the other posts unwavering growth. Recent earnings reveal how each strategy plays out over time.",
+    "url": "https://www.fool.com/coverage/charts/2026/05/24/apple-vs-microsoft-what-their-revenue-trends-reveal-for-investors/",
+    "published_at": "2026-05-25T04:10:32Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "cae4bee73a9d",
+    "title": "‘Expect Corrections and Don’t Rely on Hope’: Cramer’s Reality Check for a First-Time Homebuyer",
+    "summary": "Jim Cramer’s blunt line to a young first-time homebuyer on the May 22 episode of Mad Money: “Expect corrections and don’t rely on hope as an investing strategy.” The caller, a younger investor, had just used a significant portion of his investment assets as a down payment on his first home and asked how to ... ‘Expect Corrections and Don’t Rely on Hope’: Cramer’s Reality Check for a First-Time Homebuyer",
+    "url": "https://247wallst.com/personal-finance/2026/05/24/expect-corrections-and-dont-rely-on-hope-cramers-reality-check-for-a-first-time-homebuyer/",
+    "published_at": "2026-05-24T22:21:54Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "3806ce5508ac",
+    "title": "Qualcomm Stock Is the Sleeping Giant of the AI Revolution. It’s Starting to Wake Up.",
+    "summary": "Long weighed down by smartphone market stagnation and the impending loss of Apple as a client, Qualcomm is staging a powerful comeback as it transitions to an aggressive offensive in AI data center inference and physical AI.",
+    "url": "https://www.barchart.com/story/news/2110205/qualcomm-stock-is-the-sleeping-giant-of-the-ai-revolution-its-starting-to-wake-up",
+    "published_at": "2026-05-24T21:41:47Z",
+    "source": "Barchart",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "8f0ca3d311d0",
+    "title": "Warren Buffett's Favorite Holdings: 3 Stocks Worth Owning for a Lifetime",
+    "summary": "New CEO Greg Abel is following in Buffett's footsteps and keeping these positions.",
+    "url": "https://www.fool.com/investing/2026/05/24/warren-buffetts-favorite-holdings-3-stocks-worth/",
+    "published_at": "2026-05-24T17:50:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "bb9856097b1e",
+    "title": "Boise Cascade Stock Is Down 23%. One Investor Just Trimmed $27 Million",
+    "summary": "Boise Cascade supplies engineered wood products and building materials to construction markets across the U.S. and Canada.",
+    "url": "https://www.fool.com/coverage/filings/2026/05/24/boise-cascade-stock-is-down-23-one-investor-just-trimmed-usd27-million/",
+    "published_at": "2026-05-24T14:15:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "c583eda450f2",
+    "title": "Nvidia Is Going To Have To Do An Apple On Dividends, Says Jim Cramer: Sounds 'Boring' But It Works",
+    "summary": "CNBC semiconductor correspondent Kristina Partsinevelos argued mega-cap firms like Nvidia Corp are great for investors seeking growth rather than income, as the AI chipmaker’s new dividend payout still reflects lower yields. The chipmaker lifted its quarterly dividend to $0.25 from...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/nvidia-going-apple-dividends-says-123212973.html",
+    "published_at": "2026-05-24T12:32:12Z",
+    "source": "Benzinga",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "5b1c06dfcd84",
+    "title": "Alphabet Bets On AI Glasses And Cheaper Gemini To Deepen Ecosystem",
+    "summary": "Alphabet (NasdaqGS:GOOGL) officially launched Android XR powered AI smart glasses at Google I/O 2026, positioning Google more directly in the smart glasses market against Meta and Apple. Google expanded global wearables partnerships, including collaborations with Samsung, Gentle Monster, and Warby Parker, to broaden distribution and design options for its AI glasses. The company cut Gemini enterprise AI pricing by 20% to drive wider adoption, alongside reported 40% growth in enterprise usage...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/alphabet-bets-ai-glasses-cheaper-061108192.html",
+    "published_at": "2026-05-24T06:11:08Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "e96b8d57e766",
+    "title": "5 Warren Buffett Stocks to Buy Hand Over Fist in May",
+    "summary": "Berkshire Hathaway remodeled its portfolio in the first quarter. It's time to check out what remains.",
+    "url": "https://www.fool.com/investing/2026/05/24/5-warren-buffett-stocks-to-buy-hand-over-fist-in-m/",
+    "published_at": "2026-05-24T05:20:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "ac819b1f3d9c",
+    "title": "Ebola Spreads Across Congo as Flights Halted, Supplies Run Low",
+    "summary": "(Bloomberg) -- Congo suspended flights to the eastern city of Bunia and regional health ministers warned of escalating cross-border risks from Ebola as the outbreak spread across three provinces and overwhelmed contact-tracing efforts.Most Read from BloombergNvidia CEO Urges Super Micro to Tighten Up on ComplianceTrump Doctor Visit Renews Health Scrutiny as 80th Birthday NearsTrump Says He’ll Announce Negotiated Deal With Iran ShortlyRubio Sees Good News Coming on Hormuz as Iran Talks ContinueIr",
+    "url": "https://finance.yahoo.com/news/ebola-spreads-across-congo-as-flights-halted-supplies-run-low-003054553.html",
+    "published_at": "2026-05-24T00:30:54Z",
+    "source": "Bloomberg",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "655f316738d7",
+    "title": "Despite Its Recent Partnership with Apple, MP Materials Stock Is Down. Here's Why.",
+    "summary": "MP Materials is trading flat on the year. With major partnerships backing it, why isn't this rare-earth stock soaring?",
+    "url": "https://www.fool.com/investing/2026/05/23/despite-its-recent-partnership-with-apple-mp-mater/",
+    "published_at": "2026-05-23T21:05:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "882e1706f34b",
+    "title": "Why MP Materials (MP) Is Down 11.3% After Apple and Pentagon Rare Earth Magnet Deals",
+    "summary": "In the first quarter of 2026, MP Materials reported US$90.65 million in sales and a net loss of US$7.97 million, while announcing major multi-year partnerships with Apple and the U.S. Department of Defense to expand rare earth magnet production and recycling in the United States. At the same time, expectations of a potential US–China rare earth agreement and significant insider selling by MP Materials’ leadership have shifted attention toward geopolitical and governance risks, even as the...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/why-mp-materials-mp-down-032000176.html",
+    "published_at": "2026-05-21T03:20:00Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "a69dbff9bb4d",
+    "title": "Apple’s AI Overhaul and CEO Transition Could Be A Game Changer For Apple (AAPL)",
+    "summary": "In recent weeks, Apple has reported record quarterly results, previewed extensive Apple Intelligence and Siri upgrades, and reshaped its hardware organization as it prepares for a CEO handover to John Ternus later this year. These developments highlight how Apple is trying to pair a growing, high-margin services and AI ecosystem with leadership change and tighter silicon–device integration to reinforce its competitive position. We’ll now examine how Apple’s accelerated Apple Intelligence...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/apple-ai-overhaul-ceo-transition-231510014.html",
+    "published_at": "2026-05-20T23:15:10Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "67b081ff9e1e",
+    "title": "Fiduciary Family Office Dumps Its Entire $10.2 Million Stake in JIVE",
+    "summary": "JPMorgan International Value ETF provides global equity diversification with a value tilt and competitive yield across developed and emerging markets.",
+    "url": "https://www.fool.com/coverage/filings/2026/05/20/fiduciary-family-office-dumps-its-entire-usd10-2-million-stake-in-jive/",
+    "published_at": "2026-05-20T20:28:18Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "875cefefdd41",
+    "title": "Vanguard Total Stock Market Index Fund ETF Shares (VTI): Graham Stephan Remains Bullish",
+    "summary": "We just covered the Graham Stephan Stock Portfolio: Top 11 Stocks and Vanguard Total Stock Market Index Fund ETF Shares (NYSE:VTI) ranks 8th on this list. Graham Stephan is a big proponent of investing in funds like Vanguard Total Stock Market Index Fund ETF Shares (NYSE:VTI). He believes they lower the risk profile of the […]",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/vanguard-total-stock-market-index-195026096.html",
+    "published_at": "2026-05-20T19:50:26Z",
+    "source": "Insider Monkey",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "2237f328f652",
+    "title": "Vanguard 500 Index Fund (VFIAX): Top Stock Pick by Graham Stephan",
+    "summary": "We just covered the Graham Stephan Stock Portfolio: Top 11 Stocks and Vanguard 500 Index Fund (NASDAQ:VFIAX) ranks 6th on this list. Vanguard 500 Index Fund (NASDAQ:VFIAX) is an index fund that Graham Stephan has advocated buying in the past few years. The Vanguard 500 Index Fund employs an indexing investment approach designed to track […]",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/vanguard-500-index-fund-vfiax-194924160.html",
+    "published_at": "2026-05-20T19:49:24Z",
+    "source": "Insider Monkey",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "8426439f1e2d",
+    "title": "Apple Inc. (AAPL): A Top Stock Pick by Graham Stephan?",
+    "summary": "We just covered the Graham Stephan Stock Portfolio: Top 11 Stocks and Apple Inc. (NASDAQ:AAPL) ranks 1st on this list. Apple Inc. (NASDAQ:AAPL) appears on our list of the top stock picks of Graham Stephan because it is a popular holding in the index funds that Stephan often asks his followers to buy and hold. […]",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/apple-inc-aapl-top-stock-194310051.html",
+    "published_at": "2026-05-20T19:43:10Z",
+    "source": "Insider Monkey",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "3bb368995dc3",
+    "title": "80% of companies have an immigrant in a top leadership role—Trump’s visa crackdown is forcing them to make a ‘plan C,’ warns immigration expert",
+    "summary": "Last year, Apple and Google told employees on visas to not leave the U.S. to avoid the risk of getting stranded in another country.",
+    "url": "https://finance.yahoo.com/economy/policy/articles/80-companies-immigrant-top-leadership-192653860.html",
+    "published_at": "2026-05-20T19:26:53Z",
+    "source": "Fortune",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "0d5b7a35031d",
+    "title": "KeyBanc Turns Cautious on Apple Stock as Valuation Concerns Grow. It’s Due for Profit-Taking.",
+    "summary": "Apple's valuation looks \"stretched,\" according to KeyBanc's warning.",
+    "url": "https://www.barchart.com/story/news/2045748/keybanc-turns-cautious-on-apple-stock-as-valuation-concerns-grow-its-due-for-profit-taking",
+    "published_at": "2026-05-20T18:59:01Z",
+    "source": "Barchart",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "5c56b65d0fe2",
+    "title": "After Watching Mega Caps Drive Every Bull Market This Decade These 3 Growth ETFs Keep Rising to the Top of My Research",
+    "summary": "Every bull market since 2016 has been a mega cap story. The S&P 500’s gains over the past decade have been driven by a handful of growth giants whose weight in the index keeps expanding. Three growth ETFs consistently top my research: Vanguard Mega Cap Growth ETF (NYSEARCA:MGK), Schwab U.S. Large-Cap Growth ETF (NYSEARCA:SCHG), and ... After Watching Mega Caps Drive Every Bull Market This Decade These 3 Growth ETFs Keep Rising to the Top of My Research",
+    "url": "https://247wallst.com/investing/2026/05/20/after-watching-mega-caps-drive-every-bull-market-this-decade-these-3-growth-etfs-keep-rising-to-the-top-of-my-research/",
+    "published_at": "2026-05-20T18:53:52Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "090fa3d81fc8",
+    "title": "What analysts want to see from Nvidia earnings",
+    "summary": "Yahoo Finance Executive Editor is joined by Crossmark Global Investments Chief Market Strategist Victoria Fernandez to break down Nvidia (NVDA) ahead of earnings today, May 20.",
+    "url": "https://finance.yahoo.com/video/what-analysts-want-to-see-from-nvidia-earnings-141643596.html",
+    "published_at": "2026-05-20T14:16:43Z",
+    "source": "Yahoo Finance Video",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
     "id": "4ae56fc0e5ca",
     "title": "SpaceX's IPO moonshot draws some doubters on Wall Street",
     "summary": "Elon Musk wants to take SpaceX public -- and he's asking investors to believe the rocket and AI company is worth almost $1.75 trillion. Musk is asking investors to value the company at nearly 100 times that.",

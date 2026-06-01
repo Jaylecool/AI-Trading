@@ -219,8 +219,12 @@ class PredictionEngine:
                 if not in_uptrend:
                     # Downtrend → degrade to NEUTRAL (avoid catching falling knives)
                     return 'NEUTRAL', 0.3
-                # Block buys when RSI is overbought — high mean-reversion risk
-                if rsi > 70:
+                # Block buys when RSI is extremely overbought (>75) — mean-reversion risk.
+                # Between 70–75, allow high-confidence ML signals through (momentum stocks
+                # can stay elevated; blocking at 70 was masking genuine bullish setups).
+                if rsi > 75:
+                    return 'NEUTRAL', 0.3
+                elif rsi > 70 and ml_confidence < 0.65:
                     return 'NEUTRAL', 0.3
                 # Require short-term uptrend (price > SMA20) AND 1/3 tech agreement
                 sma20 = indicators.get('bb_middle', current_price)
@@ -420,14 +424,15 @@ class PredictionEngine:
                        sentiment_bias)
         up_proba = (lr_rf_weight * up_proba_clf + tft_weight * tft_dir_prob)
 
-        # Combine with calibrated thresholds
-        # Raised from 0.001/0.52 to 0.002/0.55 — filters weak ML signals,
-        # improving daily precision at the cost of fewer signals.
-        if pred_return > 0.002 and up_proba > 0.55:
+        # Combine with calibrated thresholds.
+        # up_proba threshold lowered from 0.55 → 0.52: the direction classifier is
+        # calibrated but conservative; stocks like MSFT (0.548) and META (0.528) were
+        # producing large positive pred_returns yet being blocked by a 0.55 gate.
+        if pred_return > 0.002 and up_proba > 0.52:
             signal = 'BULLISH'
-            # Normalised confidence: 0.55 proba → low, 0.75 → high
+            # Normalised confidence: 0.52 proba → low, 0.75 → high
             confidence = (up_proba - 0.5) * 2.0 * 0.7 + min(abs(pred_return) * 20, 0.3) * 0.3
-        elif pred_return < -0.002 and up_proba < 0.45:
+        elif pred_return < -0.002 and up_proba < 0.48:
             signal = 'BEARISH'
             confidence = (0.5 - up_proba) * 2.0 * 0.7 + min(abs(pred_return) * 20, 0.3) * 0.3
         else:
@@ -695,15 +700,16 @@ class PredictionEngine:
                          + 0.30 * mom10d
                          + 0.20 * (ml_return_1d * 5 * 0.70))
 
-        # Signal requires 5/6 indicators to agree (high-precision filter)
-        # At 5-day horizon, requiring supermajority filters out low-conviction setups.
-        if w_bull >= 5:
+        # Signal requires 4/6 indicators to agree (consistent with monthly horizon).
+        # 5/6 was too restrictive — it blocked weekly BULLISH even when daily was strongly
+        # bullish, causing the confluence gate to never fire for most stocks.
+        if w_bull >= 4:
             weekly_signal = 'BULLISH'
             # Confidence scales with votes and ADX (higher in trending market)
-            weekly_conf = min(0.90, 0.55 + (w_bull - 4) * 0.07 + adx_strength * 0.10)
-        elif w_bear >= 5:
+            weekly_conf = min(0.90, 0.55 + (w_bull - 3) * 0.07 + adx_strength * 0.10)
+        elif w_bear >= 4:
             weekly_signal = 'BEARISH'
-            weekly_conf = min(0.90, 0.55 + (w_bear - 4) * 0.07 + adx_strength * 0.10)
+            weekly_conf = min(0.90, 0.55 + (w_bear - 3) * 0.07 + adx_strength * 0.10)
         else:
             weekly_signal = 'NEUTRAL'
             weekly_conf = 0.40

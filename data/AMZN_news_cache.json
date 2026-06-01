@@ -1,5 +1,625 @@
 [
   {
+    "id": "f7e44f7c3cc6",
+    "title": "Nvidia Says Anthropic, OpenAI Among Big Users of New Vera Chip",
+    "summary": "(Bloomberg) -- Nvidia Corp. said Anthropic PBC, OpenAI and SpaceX are among the first big users of its upcoming microprocessor, securing key customers for its latest attempt to expand an already extensive footprint in AI data centers.Most Read from BloombergUS Says Deals With Iran for Safe Hormuz Transit Are ProhibitedStrait of Hormuz Ship Transits Are Rising Thanks to US HelpAmericans Injured in Iranian Missile Strike on Kuwaiti Air BaseAmericans Hurt in Kuwait as Trump Sends Mixed Signals on W",
+    "url": "https://finance.yahoo.com/sectors/technology/articles/nvidia-says-anthropic-openai-among-041102143.html",
+    "published_at": "2026-06-01T04:11:02Z",
+    "source": "Bloomberg",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "706897637e31",
+    "title": "Dow Jones Futures, Oil Prices Rise As Trump Makes This Iran Move; Nvidia, Tesla Lead 5 Titans Near Buy Points",
+    "summary": "Crude oil prices rose Sunday as President Trump reportedly stiffened Iran deal terms. Nvidia, Tesla lead five titans near buy points.",
+    "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-iran-hopes-nvidia-tesla-stocks-near-buy-points/?src=A00220&yptr=yahoo",
+    "published_at": "2026-06-01T03:05:26Z",
+    "source": "Investor's Business Daily",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "73b3040f34af",
+    "title": "What to Know About Snowflake's Partnership With Amazon",
+    "summary": "The $6 billion commitment sent Snowflake's shares soaring.",
+    "url": "https://www.fool.com/investing/2026/05/31/what-to-know-about-snowflakes-amazon-partnership/",
+    "published_at": "2026-06-01T00:33:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "bb6097dd93d0",
+    "title": "Microsoft Tightens AI Tools As Investors Focus On Outcome Based Adoption",
+    "summary": "Microsoft (NasdaqGS:MSFT) has reportedly tightened internal AI tool spending, canceling licenses for external AI coding assistants such as Claude Code. Engineers are being directed toward the company’s own Copilot CLI as part of a broader focus on internal AI products and cost control. Across the sector, AI evaluation is shifting toward outcome based metrics, highlighted by Amazon discontinuing its AI leaderboard in favor of impact focused measures. For you as an investor, this points to a...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/microsoft-tightens-ai-tools-investors-230707366.html",
+    "published_at": "2026-05-31T23:07:07Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "ba5a21e34d43",
+    "title": "A $3 Million Insurance Bet: What This Fund Might Be Seeing in Ryan Specialty Stock",
+    "summary": "Ryan Specialty Holdings delivers tailored insurance solutions for brokers and carriers seeking specialized risk management expertise.",
+    "url": "https://www.fool.com/coverage/filings/2026/05/31/a-usd3-million-insurance-bet-what-this-fund-might-be-seeing-in-ryan-specialty-stock/",
+    "published_at": "2026-05-31T19:44:58Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "7b0a22b5f973",
+    "title": "Meta Has a Plan to Monetize Its AI Investments. Its Underperforming Stock Needs It Badly.",
+    "summary": "Meta Platforms is rolling out subscriptions for its family of apps as well as AI services. The subscriptions could drive its long-term growth and help the company monetize its AI capex.",
+    "url": "https://www.barchart.com/story/news/2224189/meta-has-a-plan-to-monetize-its-ai-investments-its-underperforming-stock-needs-it-badly",
+    "published_at": "2026-05-31T18:00:02Z",
+    "source": "Barchart",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "2b652ca80b99",
+    "title": "Amazon joins Microsoft in sending shocking message to employees",
+    "summary": "For the past two years, the message from Big Tech to its employees was simple: use more AI. The companies that used it most would win. The numbers would follow. The numbers have not followed. And now the message is changing. Amazon (AMZN) shut down an internal AI leaderboard called KiroRank on May ...",
+    "url": "https://www.thestreet.com/technology/amazon-joins-microsoft-in-sending-shocking-message-to-employees",
+    "published_at": "2026-05-31T17:17:00Z",
+    "source": "TheStreet",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "7e46f273d389",
+    "title": "Is Marvell Technology Stock a Buy After Providing a Strong Outlook?",
+    "summary": "Marvell's stock has had a big run this year.",
+    "url": "https://www.fool.com/investing/2026/05/31/marvell-stock-buy-providing-strong-outlook/",
+    "published_at": "2026-05-31T16:15:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "604962a6c43a",
+    "title": "How to Play Amazon Stock Now Near Record Highs",
+    "summary": "While AMZN stock is no longer cheap after its recent run, Amazon’s expanding AI opportunity and multiple high-growth businesses support its investment appeal.",
+    "url": "https://www.barchart.com/story/news/2223755/how-to-play-amazon-stock-now-near-record-highs",
+    "published_at": "2026-05-31T16:00:02Z",
+    "source": "Barchart",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "8a21dbb326fc",
+    "title": "'Rockets are hard': Elon Musk responds to Jeff Bezos' rocket explosion as his own SpaceX glides to a $1.8T IPO",
+    "summary": "Blue Origin's New Glenn rocket exploded during a hot-fire test, and Elon Musk had some thoughts about it as SpaceX heads toward what could be the biggest IPO yet.",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/rockets-hard-elon-musk-responds-151500401.html",
+    "published_at": "2026-05-31T15:15:00Z",
+    "source": "Moneywise",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "7d4e757d8279",
+    "title": "IPOs are no longer Wall Street's starting line — they're the exit ramp: Chart of the Day",
+    "summary": "Wall Street used to get the growth story early. Now it often only gets the receipt.",
+    "url": "https://finance.yahoo.com/markets/article/ipos-are-no-longer-wall-streets-starting-line--theyre-the-exit-ramp-chart-of-the-day-114434009.html",
+    "published_at": "2026-05-31T11:44:34Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "f318e72fb12b",
+    "title": "The Chip Rally Has Gone Parabolic. It’s Time to Separate the Pillars From the Pretenders.",
+    "summary": "A furious rally for chip stocks has raised fears of a new bubble. If and when the party ends, five stocks will be left standing. They all remain undervalued.",
+    "url": "https://www.barrons.com/articles/chip-stocks-pillars-nvidia-amd-broadcom-tsm-micron-df290dbc?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-29T05:00:00Z",
+    "source": "Barrons.com",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "57242f783e8c",
+    "title": "Navellier to SpaceX buyers: wait for escape velocity",
+    "summary": "While it seems like every retail investor on the planet is going to be fighting over SpaceX shares on initial public offering (IPO) day, I believe this is a classic wait-and-see. Further, aerospace suppliers might be a better way to profit from the SpaceX IPO craze than a direct investment in ...",
+    "url": "https://www.thestreet.com/investing/navellier-to-spacex-buyers-wait-for-escape-velocity",
+    "published_at": "2026-05-29T04:29:14Z",
+    "source": "TheStreet",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "8ff9728c6f8a",
+    "title": "Dell shares rocket on bullish forecast for AI demand",
+    "summary": "<body><p>STORY: :: Dell</p><p>Dell shares rocketed higher in after-hours trade Thursday, jumping around 39%.</p><p>The surge came after the computer maker lifted revenue and profit expectations.</p><p>Dell says it is seeing soaring demand for AI-optimized servers used in data centers.</p><p>It’s benefiting as tech giants like Alphabet and Amazon plan to spend over $700 billion on AI-related infrastructure this year.</p><p>Dell now expects annual revenue of up to $169 billion - way up on the previous forecast of up to $142 billion.</p><p>AI server revenue is expected to hit $60 billion for fiscal 2027, $10 billion up on previous expectations.</p><p>The company has been adjusting prices constantly as strong global demand causes the cost of memory chips to soar.</p><p>:: Dell</p><p>On a call with analysts, Chief Operating Officer Jeff Clarke said he knew customers were feeling the pain.</p><p>But he said there was little sign of inflationary pressure easing.</p><p>One analyst told Reuters that Dell looked well placed to cope with the chip shortage, helped by its scale and strong relationships with suppliers.</p></body>",
+    "url": "https://finance.yahoo.com/video/dell-shares-rocket-bullish-forecast-033820734.html",
+    "published_at": "2026-05-29T03:38:20Z",
+    "source": "Reuters Videos",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "728a5542a24c",
+    "title": "ASTS Stock Slides Overnight: Blue Origin Explosion Raises Fresh Fears For 45-Satellite Rollout",
+    "summary": "The incident comes less than two months after New Glenn's third mission failed to place AST's BlueBird 7 satellite into its intended orbit.",
+    "url": "https://stocktwits.com/news-articles/markets/equity/asts-stock-slides-overnight-blue-origin-explosion-raises-fresh-fears-for-45-satellite-rollout/cZgS7xwRetK",
+    "published_at": "2026-05-29T02:55:26Z",
+    "source": "Stocktwits",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "e0ab3ee9dead",
+    "title": "Amazon Tariff Lawsuit Tests Pricing Practices And Investor Confidence",
+    "summary": "Amazon.com (NasdaqGS:AMZN) is facing a new class action lawsuit over tariff-related fees charged to customers during the 2025 to 2026 IEEPA tariff period. The claim alleges Amazon collected and kept fees linked to tariffs that were later invalidated by the Supreme Court. Plaintiffs argue customers may have overpaid hundreds of millions of dollars, while Amazon could be eligible for federal refunds of those tariff amounts. For investors watching Amazon.com at a share price of $274.0, this...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/amazon-tariff-lawsuit-tests-pricing-220401949.html",
+    "published_at": "2026-05-28T22:04:01Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "da33f35adf43",
+    "title": "Walmart is expanding 30-minute delivery service. See where",
+    "summary": "Walmart is now offering 30-minute delivery services in 33 cities across the United States.",
+    "url": "https://www.usatoday.com/story/money/retail/2026/05/28/walmarts-30-minute-delivery-service-expands/90300285007/",
+    "published_at": "2026-05-28T21:37:42Z",
+    "source": "USA TODAY",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "89c4fa9bfcb1",
+    "title": "Famed Investor Stanley Druckenmiller Sold Every Share of Alphabet. He Just Bought 5 AI Hardware Stocks Instead.",
+    "summary": "The legendary investor rotated out of a Magnificent Seven leader and into the picks-and-shovels of the AI build-out. But should you follow him?",
+    "url": "https://www.fool.com/investing/2026/05/28/famed-investor-stanley-druckenmiller-sold-every-sh/",
+    "published_at": "2026-05-28T21:26:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "cc039360aa86",
+    "title": "Cerebras Stock Will Ride the AI Wave With Innovation-Driven Growth",
+    "summary": "Cathie Wood added to her position in Cerebras following its massive IPO.",
+    "url": "https://www.barchart.com/story/news/2187581/cerebras-stock-will-ride-the-ai-wave-with-innovation-driven-growth",
+    "published_at": "2026-05-28T21:21:04Z",
+    "source": "Barchart",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "a1207717870f",
+    "title": "WMT Takes On AMZN With 30-Minute Delivery Offering Across 33 US Markets",
+    "summary": "Walmart’s 30-minute-or-less delivery service is now available in Austin, Dallas, Denver, Houston, Chicago, St. Louis, Atlanta, Tampa and Oklahoma City among others.",
+    "url": "https://stocktwits.com/news-articles/markets/equity/walmart-expands-30-minute-delivery-to-33-us-markets-competes-with-amazon/cZgiMDKRete",
+    "published_at": "2026-05-28T21:05:11Z",
+    "source": "Stocktwits",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "b72dcef61856",
+    "title": "How to play the ETF market without touching tech: Chart of the Day",
+    "summary": "Yahoo Finance Markets and Data Editor Jared Blikre shows how the tech trade is dominating exchange-traded fund (ETF) flows right now.",
+    "url": "https://finance.yahoo.com/video/how-to-play-the-etf-market-without-touching-tech-chart-of-the-day-193120838.html",
+    "published_at": "2026-05-28T19:31:20Z",
+    "source": "Yahoo Finance Video",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "b0badd8523ba",
+    "title": "Snowflake stock soars on growing enterprise AI demand, AWS partnership",
+    "summary": "Snowflake stock jumped after a better than expected quarter driven by accelerating enterprise AI demand.",
+    "url": "https://finance.yahoo.com/markets/article/snowflake-stock-soars-on-growing-enterprise-ai-demand-aws-partnership-125150205.html",
+    "published_at": "2026-05-28T12:51:50Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "8d4c8d3a298e",
+    "title": "Microsoft’s Defense Deal And Clean Energy Push Reframe Long-Term Valuation",
+    "summary": "Microsoft, ticker NasdaqGS:MSFT, is at the center of a new $9.7b, five year enterprise software consolidation contract with the U.S. Department of Defense. The company has also joined Amazon, Google, and Meta in launching the Data Center Innovation Initiative focused on clean energy and sustainable materials for data centers. These moves touch on U.S. government technology adoption, long term software standard setting, and the environmental profile of AI and cloud infrastructure. Microsoft...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/microsoft-defense-deal-clean-energy-031502009.html",
+    "published_at": "2026-05-28T03:15:02Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "b0e58e4ec994",
+    "title": "Dow Jones Futures Waver, Snowflake Surges On Earnings; Fed Inflation Data Due",
+    "summary": "The major indexes edged higher as oil prices dived, with Amazon flashing a buy signal. Snowflake jumped late.",
+    "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-oil-prices-amazon-marvell-snowflake-earnings/?src=A00220&yptr=yahoo",
+    "published_at": "2026-05-28T03:11:08Z",
+    "source": "Investor's Business Daily",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "575b5228bc5e",
+    "title": "The Quiet AI Winner That Doesn't Show Up on Any Hot Stock List",
+    "summary": "This former telecom wreck now has $13 billion in AI contracts. Here's why it's still under the radar.",
+    "url": "https://www.fool.com/investing/2026/05/27/the-quiet-ai-winner/",
+    "published_at": "2026-05-28T01:01:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "13ae5a09dc8b",
+    "title": "SNOW Stock Rallies After-Hours On $6B Amazon AI Deal, Strong Earnings Beat",
+    "summary": "Snowflake shares soared 36% after-hours on signing an AI deal with Amazon and buying Natoma, a platform for enterprise AI agents.",
+    "url": "https://stocktwits.com/news-articles/markets/equity/snow-stock-rallies-after-hours-on-6-b-amazon-ai-deal-strong-earnings-beat/cZgLydpRerU",
+    "published_at": "2026-05-28T00:00:36Z",
+    "source": "Stocktwits",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "75cb7f9b027e",
+    "title": "Amazon Strikes $6 Billion Deal With Snowflake for Agentic Computing Chips",
+    "summary": "The cloud-storage company joins Apple and Meta as one of AWS’s largest customers for CPU-based computing. Snowflake shares soared 35% after the closing bell.",
+    "url": "https://www.wsj.com/tech/amazon-strikes-6-billion-deal-with-snowflake-for-its-agentic-computing-chips-d04114d8?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-27T21:43:00Z",
+    "source": "The Wall Street Journal",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "f5d0dd5056a9",
+    "title": "Ro Khanna Says US Economy 'Works For Capital First And Workers Last,' Calls For Higher Billionaire Taxes To Fund Public Services",
+    "summary": "Rep. Ro Khanna (D-Calif.) said the U.S. economy prioritizes capital over workers and called for higher taxes on billionaires to redirect wealth toward public services, including health care, child care and education. Wealth Vs. Workers On Monday, Khanna posted on...",
+    "url": "https://www.yahoo.com/news/politics/articles/ro-khanna-says-us-economy-213127808.html",
+    "published_at": "2026-05-27T21:31:27Z",
+    "source": "Benzinga",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "c730f1e5c174",
+    "title": "Snowflake Stock Soars on An Upbeat Outlook and An AI Deal With Amazon",
+    "summary": "The company's shares were recently up 35% in after-hours trading",
+    "url": "https://www.investopedia.com/an-ai-deal-with-amazon-and-an-upbeat-outlook-have-snowflake-s-stock-soaring-snow-11985045",
+    "published_at": "2026-05-27T21:31:15Z",
+    "source": "Investopedia",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "c09d98333615",
+    "title": "Could Amazon Be Spending Too Much on AI? Here's What Wall Street Thinks About Its Planned $200 Billion in Capex for 2026.",
+    "summary": "It's often better to be overprepared than underprepared.",
+    "url": "https://www.fool.com/investing/2026/05/27/could-amazon-be-spending-too-much-on-ai-heres-what/",
+    "published_at": "2026-05-27T21:28:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "112135885679",
+    "title": "Snowflake Surges On Earnings, Guidance, Expanded Amazon Partnership",
+    "summary": "Snowflake stock soared amid Q1 earnings and revenue that topped estimates. The software maker hiked full-year sales guidance.",
+    "url": "https://www.investors.com/news/technology/snowflake-stock-snow-snowflake-earnings-q12026/?src=A00220&yptr=yahoo",
+    "published_at": "2026-05-27T21:05:18Z",
+    "source": "Investor's Business Daily",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "b4a490784cb5",
+    "title": "Amazon is offering its AI shopping tools to retailers",
+    "summary": "Market Domination Host Josh Lipton and Yahoo Finance Senior Reporter Brooke DiPalma track several of the day's top trending stories and stock moves, including how Amazon (AMZN) is licensing and selling its \"Alexa for Shopping\" AI tool to other retailers.",
+    "url": "https://finance.yahoo.com/video/amazon-is-offering-its-ai-shopping-tools-to-retailers-193933639.html",
+    "published_at": "2026-05-27T19:39:33Z",
+    "source": "Yahoo Finance Video",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "47611ee52a52",
+    "title": "YipitData Looks at Holistic Beauty and Supplements Driving Overall Market Growth",
+    "summary": "James Hart looks at how beauty, wellness and supplements converge into one category as consumers embrace functional treatments.",
+    "url": "https://wwd.com/beauty-industry-news/beauty-features/yipitdata-holistic-beauty-supplements-market-growth-1238977446/",
+    "published_at": "2026-05-26T04:00:00Z",
+    "source": "WWD",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "2ea7a907d8de",
+    "title": "5-star analysts reset Marvell stock price target ahead of earnings",
+    "summary": "Marvell (MRVL) stock closed the May 22 trading session at $196.33. The stock has rallied 131% year to date, by Sunday morning, May 24. Meanwhile, the SPDR S&P 500 index (SPY) is up about 9% in the same period. The company has outpaced the S&P 500, thanks to its participation in the broader ...",
+    "url": "https://www.thestreet.com/investing/5-star-analysts-reset-marvell-stock-price-target-ahead-of-earnings",
+    "published_at": "2026-05-26T00:03:00Z",
+    "source": "TheStreet",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "0b6c314e11b2",
+    "title": "In India, You Can Get Milk Delivered Faster Than It Takes to Make Coffee",
+    "summary": "Amazon is racing Indian startups to deliver groceries to customers in minutes. The secret sauce is micro-warehouses.",
+    "url": "https://www.wsj.com/business/logistics/in-india-you-can-get-milk-delivered-faster-than-it-takes-to-make-coffee-aa211a54?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-25T21:36:00Z",
+    "source": "The Wall Street Journal",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "35aa8f708571",
+    "title": "A Hot IPO Lifts Geothermal Power Companies",
+    "summary": "Fervo Energy  a geothermal startup that made its public debut this month, is closer than many to fulfilling that promise.  Its initial public offering was a success: Fervo’s shares are up 42% from its IPO price, with a market cap of $12.4 billion.  Oklo, backed by OpenAI’s Sam Altman, and  Amazon.com  -backed  X-Energy  are each valued at around $11.5 billion.",
+    "url": "https://www.wsj.com/finance/stocks/a-hot-ipo-lifts-geothermal-power-companies-325a2ac0?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-25T21:17:00Z",
+    "source": "The Wall Street Journal",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "832e68261938",
+    "title": "Market Crash: 2 Stocks I'd Buy Without Hesitation",
+    "summary": "Costco and Amazon will bounce back from the next market crash.",
+    "url": "https://www.fool.com/investing/2026/05/25/market-crash-2-stocks-id-buy-without-hesitation/",
+    "published_at": "2026-05-25T17:46:55Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "c7ba005a580e",
+    "title": "The One Thing Jim Cramer Demands From Tech-Only Investors Before He’ll Bless the Strategy",
+    "summary": "Jim Cramer just refused to bless a portfolio built almost entirely on his own stock recommendations, and no question that the lesson is worth pausing on. On the May 22 episode of Mad Money, a caller named Jerry laid out a tech-saturated portfolio diversified across tech retail sales, software, semiconductors, data center, and advertising, noting ... The One Thing Jim Cramer Demands From Tech-Only Investors Before He’ll Bless the Strategy",
+    "url": "https://247wallst.com/investing/2026/05/25/the-one-thing-jim-cramer-demands-from-tech-only-investors-before-hell-bless-the-strategy/",
+    "published_at": "2026-05-25T17:16:12Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "5108fd24beee",
+    "title": "3 Reasons Amazon Is the Best Growth Stock to Buy in May",
+    "summary": "The online giant has been running with the market lately, but its business is moving even faster.",
+    "url": "https://www.fool.com/investing/2026/05/25/3-reasons-company-is-the-best-growth-stock-to-buy/",
+    "published_at": "2026-05-25T16:27:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "340d2d7c471e",
+    "title": "Venture Capitalist John Doerr Says AI Is the Biggest Tech ‘Tsunami’ Ever",
+    "summary": "The well-known venture capitalist who bet on Google says that the AI revolution is, if anything, underhyped.",
+    "url": "https://www.wsj.com/tech/ai/john-doerr-ai-opinion-1d64ee60?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-25T16:16:00Z",
+    "source": "The Wall Street Journal",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "423f0cd145b4",
+    "title": "Who owns Amazon? Top executives and institutional investors",
+    "summary": "Amazon is the biggest online retailer in the world, and its market capitalization of $2.9 trillion makes it the fifth-largest company. Its spectacular stock price gain since its IPO has made founder Jeff Bezos a billionaire many times over and minted millionaires among early investors who held onto ...",
+    "url": "https://www.thestreet.com/investing/stocks/who-owns-amazon-top-executives-and-institutional-investors",
+    "published_at": "2026-05-25T14:50:00Z",
+    "source": "TheStreet",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "642c886e5360",
+    "title": "AI Could Soon Let Anyone Launch A Restaurant In Under A Minute, Wonder Founder Says",
+    "summary": "AI could soon allow anyone to create and launch a virtual restaurant brand in under a minute, according to serial entrepreneur Marc Lore, founder of food-delivery startup Wonder. Lore said Wonder Create can generate a restaurant's branding, menu and recipes...",
+    "url": "https://finance.yahoo.com/sectors/technology/articles/ai-could-soon-let-anyone-140107171.html",
+    "published_at": "2026-05-25T14:01:07Z",
+    "source": "Benzinga",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "5dec61ec5cb6",
+    "title": "3 AI Stocks I Wouldn't Hesitate to Buy Now",
+    "summary": "There are several great AI stocks worth buying right now.",
+    "url": "https://www.fool.com/investing/2026/05/24/3-ai-stocks-i-wouldnt-hesitate-to-buy-now/",
+    "published_at": "2026-05-25T02:20:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "fb863d522b37",
+    "title": "Bernie Sanders Challenges Jeff Bezos To Debate On Taxing Billionaires, Says Amazon Founder Will Still Be Worth $269 Billion After Paying Up",
+    "summary": "Sen. Bernie Sanders (I-Vt.) joined Amazon.com Inc founder Jeff Bezos in a wealth tax debate on whether the money received from taxes could improve public services, or billionaires should be taxed more. Taxes Could Improve Public Service Activities In a...",
+    "url": "https://www.yahoo.com/news/politics/articles/bernie-sanders-challenges-jeff-bezos-003126567.html",
+    "published_at": "2026-05-25T00:31:26Z",
+    "source": "Benzinga",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "cae4bee73a9d",
+    "title": "‘Expect Corrections and Don’t Rely on Hope’: Cramer’s Reality Check for a First-Time Homebuyer",
+    "summary": "Jim Cramer’s blunt line to a young first-time homebuyer on the May 22 episode of Mad Money: “Expect corrections and don’t rely on hope as an investing strategy.” The caller, a younger investor, had just used a significant portion of his investment assets as a down payment on his first home and asked how to ... ‘Expect Corrections and Don’t Rely on Hope’: Cramer’s Reality Check for a First-Time Homebuyer",
+    "url": "https://247wallst.com/personal-finance/2026/05/24/expect-corrections-and-dont-rely-on-hope-cramers-reality-check-for-a-first-time-homebuyer/",
+    "published_at": "2026-05-24T22:21:54Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "ee6b5bfdbedc",
+    "title": "This Billionaire Dumped Cloud Stocks for These New AI Stocks. Should Investors Follow Suit?",
+    "summary": "Philippe Laffont was busy buying Taiwan Semiconductor Manufacturing Company and ASML Holding stock in the first three months of the year.",
+    "url": "https://www.fool.com/investing/2026/05/24/this-billionaire-dumped-his-cloud-stocks-for-these/",
+    "published_at": "2026-05-24T21:38:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "5d8122539eda",
+    "title": "‘He Knows the Flaws Because He Knows the Man’: Why Elon Musk’s OpenAI Attack Is Really About xAI",
+    "summary": "Rashaad Bilal of Earn Your Leisure distilled the Musk-versus-Altman saga down to one sharp line: “He knows the flaws because he knows the man.” That framing reorients how investors should read every legal filing, every X post, and every interview Elon Musk aims at OpenAI. The litigation is a competitive weapon. xAI is the business ... ‘He Knows the Flaws Because He Knows the Man’: Why Elon Musk’s OpenAI Attack Is Really About xAI",
+    "url": "https://247wallst.com/investing/2026/05/24/he-knows-the-flaws-because-he-knows-the-man-why-elon-musks-openai-attack-is-really-about-xai/",
+    "published_at": "2026-05-24T20:47:22Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "f9cf4c62c687",
+    "title": "This Pet Stock Is Down 40% This Year Despite Growing Free Cash Flow by 24% in 2025",
+    "summary": "Chewy is trying to prove it's more than a low-margin online pet supply company, but the market's not buying it.",
+    "url": "https://www.fool.com/investing/2026/05/24/this-pet-stock-is-down-40-this-year-despite-growin/",
+    "published_at": "2026-05-24T20:35:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "f7d64ff34c0d",
+    "title": "XOVR ETF: Watch Hyperscaler AI Capex Before Summer 2026 Earnings Season",
+    "summary": "The ERShares Private-Public Crossover ETF (NYSEARCA:XOVR) sits at an awkward crossroad heading into summer 2026. Shares trade near $19.08, down 5% year-to-date even as the public-side AI mega-caps it holds have ripped higher. That disconnect matters because XOVR is the rare ETF that pairs late-stage private growth (SpaceX is the publicly known anchor) with public ... XOVR ETF: Watch Hyperscaler AI Capex Before Summer 2026 Earnings Season",
+    "url": "https://247wallst.com/investing/2026/05/24/xovr-etf-watch-hyperscaler-ai-capex-before-summer-2026-earnings-season/",
+    "published_at": "2026-05-24T18:30:52Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "9b9caa01a9ed",
+    "title": "Berkshire Hathaway’s latest stock purge sends a clear message",
+    "summary": "For decades, Berkshire Hathaway’s quarterly stock filings have been treated like a roadmap into Warren Buffett’s thinking. However, the latest one feels very special. Berkshire Hathaway (BRK.A) (BRK.B) unveiled a wide-ranging portfolio overhaul in its latest 13F filing, adding a big new stake in ...",
+    "url": "https://www.thestreet.com/investing/berkshire-hathaways-latest-stock-purge-sends-a-clear-message",
+    "published_at": "2026-05-24T17:07:00Z",
+    "source": "TheStreet",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "592d2ec967b5",
+    "title": "Berkshire Hathaway Rebalances Under Greg Abel With Bigger AI And Tech Bet",
+    "summary": "Greg Abel, now CEO of Berkshire Hathaway (NYSE:BRK.B), has overseen a major reshaping of the stock portfolio, including full exits from Amazon, Visa, Mastercard, and UnitedHealth. Berkshire has built a top 5 position in Alphabet and has sharply increased AI related holdings, which now account for more than a third of the portfolio’s value. These moves reflect the biggest shift in Berkshire’s capital allocation approach in decades, with a clearer tilt toward technology and AI focused...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/berkshire-hathaway-rebalances-under-greg-161316454.html",
+    "published_at": "2026-05-24T16:13:16Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "6627bbbeae04",
+    "title": "Elon Musk wants to put data centers in space — here's what that could actually look like",
+    "summary": "SpaceX founder Elon Musk has said that he wants to put data centers in space for efficiency. One expert told Yahoo Finance how it would actually work.",
+    "url": "https://finance.yahoo.com/markets/article/elon-musk-wants-to-put-data-centers-in-space--heres-what-that-could-actually-look-like-143000204.html",
+    "published_at": "2026-05-24T14:30:00Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "3572ca0102d4",
+    "title": "Nvidia bets on new data center chips as sales outlook tops estimates",
+    "summary": "<body><p>STORY: Nvidia on Wednesday forecast second-quarter revenue above Wall Street expectations, and assured investors that new customers would let it maintain blockbuster rates of growth.&nbsp;</p><p>The world's most valuable company expects sales of around $91 billion, compared with estimates of about $87 billion.</p><p>For the first quarter, Nvidia reported revenue of $81.6 billion, also beating forecasts.</p><p>However, its shares dropped over 1% in extended trading, in a sign that investors believe Nvidia will face tougher competition.</p><p>That could come from U.S. rivals Intel and AMD, which are finding new demand for their chips in AI applications.&nbsp;</p><p>Nvidia CEO Jensen Huang told analysts his firm would grow faster than so-called \"hyperscale\" customers like Alphabet and Amazon.</p><p>He pointed to a new segment of smaller customers in its data center business that includes AI-specific cloud firms.</p><p>He added that the company's new \"Vera\" central processors give it access to a $200 billion market.</p><p>Huang said Nvidia expects $20 billion in revenue from the new silicon by the end of this fiscal year, in addition to the $1 trillion for existing Blackwell and Rubin chips by 2027.</p></body>",
+    "url": "https://finance.yahoo.com/video/nvidia-bets-data-center-chips-044442770.html",
+    "published_at": "2026-05-21T04:44:42Z",
+    "source": "Reuters Videos",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "bb009293f67b",
+    "title": "Amazon Now Puts Ultra Fast Delivery And Margins To The Test",
+    "summary": "Amazon.com (NasdaqGS:AMZN) has launched \"Amazon Now\", a 30-minute delivery service for groceries and essentials, to millions of U.S. customers. The service is rolling out across dozens of major U.S. cities, supported by a rapidly expanding grocery and essentials fulfillment network. The move adds a new ultra-fast delivery tier to Amazon's existing e-commerce and logistics offerings. For investors watching NasdaqGS:AMZN, the launch of Amazon Now lands on top of a share price of $265.01 and a...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/amazon-now-puts-ultra-fast-020857131.html",
+    "published_at": "2026-05-21T02:08:57Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "056e86dcef30",
+    "title": "Nvidia Tells Skeptical Investors AI Is Ready to Go Mainstream",
+    "summary": "(Bloomberg) -- Nvidia Corp., facing more investor skepticism, used its latest quarterly report to tout progress in diversifying the company, which aims to rely less on the giant data center operators that have fueled its runaway growth.Most Read from BloombergSpot the Difference: Putin Gets Trump Treatment From Xi in ChinaModi’s Toffee Gift to Meloni Ignites Rally in Wrong Indian StockSpaceX Filing Reveals $4.28 Billion Loss, Musk’s Tight GripIran Threatens to Retaliate Beyond Middle East If US",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/nvidia-gets-tepid-reaction-forecast-210054064.html",
+    "published_at": "2026-05-21T00:16:10Z",
+    "source": "Bloomberg",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "8bbc7ce26c65",
+    "title": "The Real Winner of SpaceX’s IPO: Mark Zuckerberg",
+    "summary": "Wall Street has spent the last six months questioning Mark Zuckerberg’s aggressive AI capital spending, with Meta Platforms (NASDAQ:META) raising its 2026 capex guidance to $125 to $145 billion after a Q1 in which revenue grew 33% year over year. While everyone debates whether Meta is overspending, a quieter filing from SpaceX just laid out ... The Real Winner of SpaceX’s IPO: Mark Zuckerberg",
+    "url": "https://247wallst.com/investing/2026/05/20/the-real-winner-of-spacexs-ipo-mark-zuckerberg/",
+    "published_at": "2026-05-20T23:43:27Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "e07fa50386bd",
+    "title": "Nvidia-backed AI startup wants to solve AI’s ‘hard problem’",
+    "summary": "Jensen Huang is betting on a new AI lab that thinks the current chatbot frenzy is just the beginning. Nvidia (NVDA) has already emerged as one of the greatest winners of the artificial intelligence boom. Its chips now make up the backbone of most of the infrastructure powering modern AI, helping ...",
+    "url": "https://www.thestreet.com/investing/nvidia-backed-ai-startup-wants-to-solve-ais-hard-problem",
+    "published_at": "2026-05-20T23:37:00Z",
+    "source": "TheStreet",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "a571d47ab526",
+    "title": "You will soon be able to vote in Amazon shareholder meetings from a crypto wallet",
+    "summary": "If you hold a tokenized share of Amazon through Ondo Finance, you can now vote in Amazon's shareholder meetings directly from your crypto wallet. That was not possible six months ago. It is the kind of parity with traditional markets that the tokenized equity space has been promising for years, and ...",
+    "url": "https://www.thestreet.com/crypto/innovation/you-will-soon-be-able-to-vote-in-amazon-shareholder-meetings-from-a-crypto-wallet",
+    "published_at": "2026-05-20T23:12:57Z",
+    "source": "TheStreet",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "1b2d138919b5",
+    "title": "Should Amazon’s Tariff Lawsuit And Amazon Now AI Push Require Action From Amazon.com (AMZN) Investors?",
+    "summary": "In mid-May 2026, a proposed class-action lawsuit was filed in federal court in Seattle alleging Amazon unlawfully passed on later-invalidated IEEPA tariffs to customers on imported goods bought between February 2025 and February 2026, while separate investor advocates urged votes against four Amazon directors over the exclusion of shareholder proposals on issues including AI governance. At the same time, Amazon is pushing deeper into AI-enabled cloud and logistics with rapid expansion of its...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/amazon-tariff-lawsuit-amazon-now-231237320.html",
+    "published_at": "2026-05-20T23:12:37Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "2f59e3d1c1c4",
+    "title": "Jeff Bezos says Amazon's ‘Melania’ doc wasn't to gain Trump's favor",
+    "summary": "Jeff Bezos defended Amazon’s reported $75M “Melania” documentary deal, denying claims it was meant to influence President Trump.",
+    "url": "https://www.usatoday.com/story/news/politics/2026/05/20/jeff-bezos-denies-claims-melania-doc-was-for-trump/90182001007/",
+    "published_at": "2026-05-20T21:58:03Z",
+    "source": "USA TODAY",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "e08080609257",
+    "title": "4 important takeaways from Nvidia's earnings",
+    "summary": "In addition to the earnings release, Nvidia's CFO Colette Kress shared commentary that revealed four key developments in its business, beyond the company's first quarter earnings-per-share beat.",
+    "url": "https://finance.yahoo.com/sectors/technology/article/4-important-takeaways-from-nvidias-earnings-215437095.html",
+    "published_at": "2026-05-20T21:54:37Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "5730bb8c5c82",
+    "title": "Tech, Media & Telecom Roundup: Market Talk",
+    "summary": "Find insight on Nvidia, Google, Telus and more in the latest Market Talks covering Technology, Media and Telecom.",
+    "url": "https://www.wsj.com/tech/tech-media-telecom-roundup-market-talk-98552440?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-20T21:07:00Z",
+    "source": "The Wall Street Journal",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
     "id": "323173ae350b",
     "title": "Warren Buffett's Successor Greg Abel Just Dumped Amazon Stock: 2 AI Stocks He Is Still Bullish On",
     "summary": "Berkshire Hathaway's strategy hasn't changed; only the details have.",

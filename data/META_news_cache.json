@@ -1,5 +1,625 @@
 [
   {
+    "id": "f0eee02ffb70",
+    "title": "China toughens rules on outbound investment after Meta-Manus contention",
+    "summary": "BEIJING, June 1 (Reuters) - China issued sweeping new rules on Monday, widening regulators' powers to scrutinise overseas deals involving Chinese investors, technology, data and national security, a",
+    "url": "https://finance.yahoo.com/economy/policy/articles/china-toughens-rules-outbound-investment-023356554.html",
+    "published_at": "2026-06-01T02:38:46Z",
+    "source": "Reuters",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "487f5b5beb76",
+    "title": "China tightens overseas investment rules after blocking Meta-Manus deal",
+    "summary": "China issued sweeping new rules on Monday tightening control of overseas deals that involve Chinese investors, technology, data and national security, a month after Beijing ordered Meta to ‌unwind its acquisition of AI startup Manus.  The rules, published by the State Council, or cabinet, will take effect ‌from July 1.  One of the most significant articles requires authorisation for exports of restricted Chinese goods, technologies, services or related data.",
+    "url": "https://finance.yahoo.com/economy/policy/articles/china-toughens-rules-outbound-investment-023356324.html",
+    "published_at": "2026-06-01T02:33:56Z",
+    "source": "Reuters",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "60a076ccd179",
+    "title": "Meta Faces Digital Services Act Scrutiny On Financial Scam Controls",
+    "summary": "European consumer groups have filed coordinated complaints under the Digital Services Act against Meta Platforms, alleging insufficient action to curb financial scams on its services. The complaints call for a regulatory investigation and potential penalties from the European Commission, which could affect Meta's operations in a major market. Meta Platforms trades on the NasdaqGS under the ticker NasdaqGS:META, with a recent share price of about $632.51. For investors watching...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/meta-faces-digital-services-act-020417945.html",
+    "published_at": "2026-06-01T02:04:17Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "d6298ff454a0",
+    "title": "Corning Incorporated (GLW): Leopold Aschenbrenner Discloses New Holding",
+    "summary": "We just covered the From Fired Researcher to $13.7 Billion King: How Leopold Aschenbrenner Broke the Hedge Fund World and Corning Incorporated (NYSE:GLW) ranks 23rd on this list. Corning Incorporated (NYSE:GLW) is a new addition to the 13F portfolio of Situational Awareness LP. The fund declared a new stake in the company in filings for […]",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/corning-incorporated-glw-leopold-aschenbrenner-205513332.html",
+    "published_at": "2026-05-31T20:55:13Z",
+    "source": "Insider Monkey",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "3c4f91224992",
+    "title": "Meta's Subscription Push Could Add $13.5 Billion By 2028 Across Instagram, Facebook, WhatsApp",
+    "summary": "Meta Platforms Inc is expanding beyond its advertising roots by introducing paid subscriptions across Instagram, Facebook, WhatsApp, and Meta AI as the company looks to unlock new AI-driven revenue streams and deepen monetization of its massive global user base. Meta...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/metas-subscription-push-could-add-193314864.html",
+    "published_at": "2026-05-31T19:33:14Z",
+    "source": "Benzinga",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "7b0a22b5f973",
+    "title": "Meta Has a Plan to Monetize Its AI Investments. Its Underperforming Stock Needs It Badly.",
+    "summary": "Meta Platforms is rolling out subscriptions for its family of apps as well as AI services. The subscriptions could drive its long-term growth and help the company monetize its AI capex.",
+    "url": "https://www.barchart.com/story/news/2224189/meta-has-a-plan-to-monetize-its-ai-investments-its-underperforming-stock-needs-it-badly",
+    "published_at": "2026-05-31T18:00:02Z",
+    "source": "Barchart",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "cae352704a22",
+    "title": "Are social platforms going to charge all users for access?",
+    "summary": "Elon Musk and Mark Zuckerberg have historically disagreed about this, but rising artificial intelligence expenses may result in costly new subscription options.",
+    "url": "https://www.socialmediatoday.com/news/are-social-platforms-going-to-charge-all-users-for-access/821565/",
+    "published_at": "2026-05-31T17:32:37Z",
+    "source": "Social Media Today",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "5e90e586453d",
+    "title": "Meta Adds New Subscriptions, Zuckerberg Gets $7 Billion Richer",
+    "summary": "Meta Platforms announced new premium subscription plans for several of the company's social media platforms Wednesday. The move was well received by investors with shares trading higher on the news, helping to boost the wealth of CEO Mark Zuckerberg. Meta...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/meta-adds-subscriptions-zuckerberg-gets-173115263.html",
+    "published_at": "2026-05-31T17:31:15Z",
+    "source": "Benzinga",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "15e76a3b9df9",
+    "title": "Facebook and Instagram profiting from adverts promoting deadly ‘frog poison’ drug",
+    "summary": "Meta is profiting from adverts on Facebook and Instagram promoting a controversial “frog poison” detox that has been linked to a number of deaths.",
+    "url": "https://uk.finance.yahoo.com/news/facebook-instagram-profiting-adverts-promoting-154437839.html",
+    "published_at": "2026-05-31T15:44:37Z",
+    "source": "The Telegraph",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "7d4e757d8279",
+    "title": "IPOs are no longer Wall Street's starting line — they're the exit ramp: Chart of the Day",
+    "summary": "Wall Street used to get the growth story early. Now it often only gets the receipt.",
+    "url": "https://finance.yahoo.com/markets/article/ipos-are-no-longer-wall-streets-starting-line--theyre-the-exit-ramp-chart-of-the-day-114434009.html",
+    "published_at": "2026-05-31T11:44:34Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "17c3e72704e7",
+    "title": "Here’s Why Meta (META) is Among the 12 Most Profitable Stocks to Invest In",
+    "summary": "Meta Platforms, Inc. (NASDAQ:META) is one of the 12 Most Profitable Stocks to Invest In. On May 24, 2026, Meta Platforms, Inc. (NASDAQ:META) Technology chief Andrew Bosworth was reportedly working to transform the company’s workforce using AI, according to The Wall Street Journal’s Meghan Bobrowsky. In a companywide memo, Bosworth said Meta aims for agents […]",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/why-meta-meta-among-12-060531956.html",
+    "published_at": "2026-05-29T06:05:31Z",
+    "source": "Insider Monkey",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "bc22cf55e721",
+    "title": "Wiwynn Warns AI Supply Crunch Could Last Until 2027-2028",
+    "summary": "Server supplier says component shortages beyond memory chips may raise costs as AI spending accelerates.",
+    "url": "https://finance.yahoo.com/sectors/technology/articles/wiwynn-warns-ai-supply-crunch-221449458.html",
+    "published_at": "2026-05-28T22:14:49Z",
+    "source": "GuruFocus.com",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "27f3e8e2ccc0",
+    "title": "Apollo Shops $36 Billion Debt Deal to Buy Google Chips for Anthropic",
+    "summary": "(Bloomberg) -- Apollo Global Management Inc. and Blackstone Inc. are working to bring additional investors into a roughly $36 billion debt financing deal to help Anthropic PBC build out its AI infrastructure. Most Read from BloombergSingapore Hands Byju's Founder His First Ever Jail TermApple to Overhaul iOS 27 Siri, AI Features: Here's a First PeekIran’s Khamenei Says No Going Back for Middle East Rocked by WarCVS Returns Zepbound to Drug Plans After Lilly Slashes PriceUS, Iran Agree to 60-Day",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/apollo-shops-36-billion-debt-210011269.html",
+    "published_at": "2026-05-28T21:00:11Z",
+    "source": "Bloomberg",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "f1c23596847e",
+    "title": "Tech, Media & Telecom Roundup: Market Talk",
+    "summary": "Find insight on Meta Platforms, bitcoin, IBM and more in the latest Market Talks covering technology, media and telecom.",
+    "url": "https://www.wsj.com/business/tech-media-telecom-roundup-market-talk-02fe9317?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-28T20:58:00Z",
+    "source": "The Wall Street Journal",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "e8fb68d4cf22",
+    "title": "Zuck Says Meta Will Sell Its Excess Compute, Maybe",
+    "summary": "Meta's CEO floated a pivot into cloud computing at the annual shareholder meeting, doubling down on AI infrastructure with no clear return in sight.",
+    "url": "https://app.moby.co/home/news/news-zuck-says-meta-will-sell-its-excess-compute-maybe?utm_source=yahoo_finance&utm_medium=rss",
+    "published_at": "2026-05-28T20:50:12Z",
+    "source": "Moby",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "df4438c67e41",
+    "title": "Is AMD About to Pop Like Micron? Here’s Why You Shouldn’t Underestimate It",
+    "summary": "At $521.31, Advanced Micro Devices (NASDAQ:AMD) looks like a stock where the bullish setup still has room to run. The stock ripped roughly 25% in the week after Q1 earnings. Thus, Wall Street is still catching up to what the inference cycle means for the rare chipmaker selling both the CPU and the GPU at ... Is AMD About to Pop Like Micron? Here’s Why You Shouldn’t Underestimate It",
+    "url": "https://247wallst.com/investing/2026/05/28/is-amd-about-to-pop-like-micron-heres-why-you-shouldnt-underestimate-it/",
+    "published_at": "2026-05-28T20:15:15Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "24a8ce4e5d3d",
+    "title": "Meta Expands Subscriptions And Eyes AI Cloud As Valuation Draws Scrutiny",
+    "summary": "Meta Platforms (NasdaqGS:META) has launched new global subscription plans across Instagram, Facebook, WhatsApp, and Meta AI under a unified Meta One brand. The company is introducing recurring paid tiers for consumers and businesses, including access to premium features and paid chatbot functionality for Meta AI. At its annual shareholder meeting, Meta also signaled interest in offering excess AI computing capacity as a cloud service if internal demand leaves room. For investors watching...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/meta-expands-subscriptions-eyes-ai-200453568.html",
+    "published_at": "2026-05-28T20:04:53Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "e3407985b186",
+    "title": "Anthropic nears $1 trillion valuation ahead of its mega-IPO",
+    "summary": "Yahoo Finance Tech Editor Dan Howley comes on Market Domination to break down the day’s leading tech stories, including private AI developer Anthropic (ANTH.PVT) nearing a $1 trillion valuation after its latest funding round. The company is reportedly targeting a mega-IPO for late 2026.",
+    "url": "https://finance.yahoo.com/video/anthropic-nears-1-trillion-valuation-ahead-of-its-mega-ipo-195810141.html",
+    "published_at": "2026-05-28T19:58:10Z",
+    "source": "Yahoo Finance Video",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "c832a4ebb29c",
+    "title": "Mark Zuckerberg rolls out a bizarre new update for Meta users",
+    "summary": "Facebook, Instagram, and WhatsApp have been free since the day they launched. Billions of people built habits around that. On May 27, Mark Zuckerberg started changing it. The change is optional, and the core apps stay free. But the structure Meta is building around them is something the company has ...",
+    "url": "https://www.thestreet.com/technology/mark-zuckerberg-rolls-out-a-bizarre-new-update-for-meta-users",
+    "published_at": "2026-05-28T18:33:00Z",
+    "source": "TheStreet",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "65fede52c8cf",
+    "title": "Boston Seizes on California Billionaire Tax to Lure AI Jobs",
+    "summary": "(Bloomberg) -- The talent at some of America’s hottest artificial intelligence companies often passes through Boston-area universities before heading west to build billion-dollar businesses in Silicon Valley. Massachusetts business and political leaders say California’s proposed tax on billionaires is an opportunity to change that.Most Read from BloombergSingapore Hands Byju's Founder His First Ever Jail TermApple to Overhaul iOS 27 Siri, AI Features: Here's a First PeekIran’s Khamenei Says No G",
+    "url": "https://finance.yahoo.com/sectors/technology/articles/boston-seizes-california-billionaire-tax-120000210.html",
+    "published_at": "2026-05-28T18:00:14Z",
+    "source": "Bloomberg",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "419486e2179e",
+    "title": "What to make of Meta's Instagram, Facebook, WhatsApp subscriptions",
+    "summary": "Meta (META) is launching subscriptions for Instagram, Facebook, and WhatsApp. Yahoo Finance's Julie Hyman and Myles Udland discuss more in the video above.",
+    "url": "https://finance.yahoo.com/video/what-to-make-of-metas-instagram-facebook-whatsapp-subscriptions-135602560.html",
+    "published_at": "2026-05-28T13:56:02Z",
+    "source": "Yahoo Finance Video",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "8d4c8d3a298e",
+    "title": "Microsoft’s Defense Deal And Clean Energy Push Reframe Long-Term Valuation",
+    "summary": "Microsoft, ticker NasdaqGS:MSFT, is at the center of a new $9.7b, five year enterprise software consolidation contract with the U.S. Department of Defense. The company has also joined Amazon, Google, and Meta in launching the Data Center Innovation Initiative focused on clean energy and sustainable materials for data centers. These moves touch on U.S. government technology adoption, long term software standard setting, and the environmental profile of AI and cloud infrastructure. Microsoft...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/microsoft-defense-deal-clean-energy-031502009.html",
+    "published_at": "2026-05-28T03:15:02Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "5e821a64741d",
+    "title": "Meta Tests AI Subscriptions and Rolls Out New Paid Plans for Facebook, Instagram",
+    "summary": "The company is seeking to supplement its advertising business as the costs of its AI buildout mount.",
+    "url": "https://www.wsj.com/tech/meta-starts-rollout-of-subscriptions-for-facebook-instagram-9f00821f?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-28T02:16:00Z",
+    "source": "The Wall Street Journal",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "c9c40362a105",
+    "title": "Jensen Huang Joins Elite Tsinghua University Advisory Board That Includes Tim Cook And Elon Musk: Report",
+    "summary": "Nvidia Corp. (NASDAQ:NVDA) CEO Jensen Huang has reportedly agreed to join the advisory board of one of China's most prestigious universities. Nvidia CEO Joins Elite Tsinghua Advisory Board Huang accepted an invitation to join the advisory board of Tsinghua University School of Economics and Management, the Financial Times reported on Wednesday, citing people familiar with the matter. The board includes some of the world's most prominent business leaders. It has Apple Inc. (NASDAQ:AAPL) CEO Tim C",
+    "url": "https://finance.yahoo.com/sectors/technology/articles/jensen-huang-joins-elite-tsinghua-013840598.html",
+    "published_at": "2026-05-28T01:38:40Z",
+    "source": "Benzinga",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "eefffc2ca1d6",
+    "title": "Why Meta Platforms Stock Was a Winner on Wednesday",
+    "summary": "The company is going the premium route with Plus versions for its popular sites.",
+    "url": "https://www.fool.com/investing/2026/05/27/why-meta-platforms-stock-was-a-winner-on-wednesday/",
+    "published_at": "2026-05-27T23:05:21Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "34544a2bca97",
+    "title": "Meta’s Plan to Fund Its AI Ambitions? You.",
+    "summary": "Meta Platforms  stock was rising on Wednesday after the tech giant announced that it is introducing subscription plans for its social media apps and its Meta AI chatbot.  The move could help offset some of the costs of its massive spending on artificial intelligence.  Naomi Gleit, head of product at Meta, said in a video posted to Instagram on Wednesday that the company is starting to roll out paid subscription options to users of its social platforms.",
+    "url": "https://www.barrons.com/articles/meta-stock-price-ai-subscription-instagram-facebook-7601f5e2?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-27T22:04:00Z",
+    "source": "Barrons.com",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "75cb7f9b027e",
+    "title": "Amazon Strikes $6 Billion Deal With Snowflake for Agentic Computing Chips",
+    "summary": "The cloud-storage company joins Apple and Meta as one of AWS’s largest customers for CPU-based computing. Snowflake shares soared 35% after the closing bell.",
+    "url": "https://www.wsj.com/tech/amazon-strikes-6-billion-deal-with-snowflake-for-its-agentic-computing-chips-d04114d8?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-27T21:43:00Z",
+    "source": "The Wall Street Journal",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "29385521d22c",
+    "title": "Dow Closes At Record Highs On Iran Truce Optimism, While Nasdaq Snaps Four-Day Win Streak On Weak Chip Stocks —  META, BA, AAL, DY, VRRM In Focus",
+    "summary": "Iranian state media said the country is committed to restoring commercial traffic through the Strait of Hormuz.",
+    "url": "https://stocktwits.com/news-articles/markets/equity/dow-closes-at-record-highs-on-iran-truce-optimism-while-nasdaq-snaps-four-day-win-streak-on-weak-chip-stocks-meta-ba-aal-dy-vrrm-in-focus/cZggnpYRerv",
+    "published_at": "2026-05-27T21:42:47Z",
+    "source": "Stocktwits",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "d6d0a368a0e4",
+    "title": "Meta launches paid subscriptions for Instagram, Facebook, WhatsApp",
+    "summary": "Meta on Wednesday launched paid subscription plans for its flagship apps, marking a major push by the tech giant to diversify beyond its longtime reliance on advertising revenue.Meta in 2023 launched ad-free, paid versions of Facebook and Instagram in Europe to comply with EU data privacy legislation, giving users a choice between a free, ad-supported experience and a paid, ad-free one.\narp/md",
+    "url": "https://finance.yahoo.com/sectors/technology/articles/meta-launches-paid-subscriptions-instagram-212733317.html",
+    "published_at": "2026-05-27T21:27:33Z",
+    "source": "AFP",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "9c2a8ab50cd6",
+    "title": "Pope Leo XIV teams with Anthropic founder on bold AI warning",
+    "summary": "When the people building something stand next to the people warning about it, that usually means everyone in the room is worried about the same thing. For most of the past three years, the artificial intelligence conversation has split cleanly into two camps. The builders keep raising bigger ...",
+    "url": "https://www.thestreet.com/technology/pope-leo-xiv-teams-with-anthropic-founder-on-bold-ai-warning",
+    "published_at": "2026-05-27T21:17:00Z",
+    "source": "TheStreet",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "40da74c163cd",
+    "title": "Sector Update: Tech Stocks Fall Late Afternoon",
+    "summary": "Tech stocks were lower late Wednesday afternoon, with the State Street Technology Select Sector SPDR",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/sector-tech-stocks-fall-afternoon-193710272.html",
+    "published_at": "2026-05-27T19:37:10Z",
+    "source": "MT Newswires",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "e8bc3667208e",
+    "title": "AI just minted 19 new billionaires worth $59 billion",
+    "summary": "Money has a way of finding the people building tomorrow's tools before the rest of us notice. That was true in the dotcom boom, in the smartphone era, and again in the social media land grab a decade later. The AI boom looks different, at least so far. For the last three years, almost every story ...",
+    "url": "https://www.thestreet.com/technology/ai-just-minted-19-new-billionaires-worth-59-billion",
+    "published_at": "2026-05-26T01:03:00Z",
+    "source": "TheStreet",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "d712e14f6896",
+    "title": "Santa Clara Lawsuit Tests Meta’s AI Ad Model And Governance Balance",
+    "summary": "Santa Clara County filed a civil lawsuit against Meta Platforms (NasdaqGS:META), accusing it of knowingly profiting from scam ads that use AI systems. The suit targets Meta's advertising practices and claims the company prioritizes revenue over user safety. Alleged victims include seniors and small businesses that were defrauded through sophisticated scam campaigns. The case seeks financial penalties and broad changes to how Meta screens and serves ads on its platforms. Meta Platforms, the...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/santa-clara-lawsuit-tests-meta-001843072.html",
+    "published_at": "2026-05-26T00:18:43Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "6968496ecc03",
+    "title": "Bernie Sanders Slams Meta After 8,000 Layoffs And Asks: If Mark  Zuckerberg Will Lay Off 10% Of His Staff, What Will AI Do To American Workers?",
+    "summary": "On Wednesday, Sen. Bernie Sanders (I-Vt) raised concerns about artificial intelligence and job security after Meta Platforms, Inc. laid off roughly 8,000 employees while accelerating its multibillion-dollar AI expansion. Meta Layoffs Spark AI Job Loss Debate In a post on...",
+    "url": "https://finance.yahoo.com/economy/policy/articles/bernie-sanders-slams-meta-8-203046826.html",
+    "published_at": "2026-05-25T20:30:46Z",
+    "source": "Benzinga",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "fef9b8fa05d7",
+    "title": "Mark Zuckerberg sends another message to Meta employees",
+    "summary": "Most executives announcing layoffs lean on a familiar script. They talk about efficiency, strategic alignment, and the need to position the company for long-term growth. The language is careful. The emotion is managed. What Mark Zuckerberg wrote to employees on May 20 was something different. In a ...",
+    "url": "https://www.thestreet.com/employment/mark-zuckerberg-sends-another-message-to-meta-employees",
+    "published_at": "2026-05-25T20:23:00Z",
+    "source": "TheStreet",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "a9730ba9fcdc",
+    "title": "Missed Out on the Initial AI Rally? These 3 AI Stocks Are Just Getting Started.",
+    "summary": "There is still plenty of upside in the AI sector despite a recent run-up.",
+    "url": "https://www.fool.com/investing/2026/05/25/missed-out-on-the-initial-ai-rally-these-3-ai-stoc/",
+    "published_at": "2026-05-25T17:29:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "80501b254ed4",
+    "title": "Mark Zuckerberg May Already Have an AI Agent Sidekick — Could This Be the Future for CEOs?",
+    "summary": "Digital twins could soon go from science fiction to reality as the agentic wave takes off, colliding with deep personalization. Indeed, as AI gains greater access to our digital lives, as we allow it to look through emails, Slack messages, work tickets, codebases, social-media profiles, calendars, and contacts, at what point will AI act as ... Mark Zuckerberg May Already Have an AI Agent Sidekick — Could This Be the Future for CEOs?",
+    "url": "https://247wallst.com/investing/2026/05/25/mark-zuckerberg-may-soon-get-an-ai-agent-sidekick-could-this-be-the-future-for-ceos/",
+    "published_at": "2026-05-25T16:47:41Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "f1a712551e1f",
+    "title": "The AI Trade Might Be Grossly Underestimated — and It Could Be Time To Rethink How We View the Mag 7",
+    "summary": "It’s pretty hard to know what to believe when it comes to this ongoing AI revolution. The AI bubble calls have been growing louder for well over a year now. And while some folks, including the great Michael Burry of The Big Short fame, might feel as though we’re in the lead-up to the peak ... The AI Trade Might Be Grossly Underestimated — and It Could Be Time To Rethink How We View the Mag 7",
+    "url": "https://247wallst.com/investing/2026/05/25/the-ai-trade-might-be-grossly-underestimated-and-it-could-be-time-to-rethink-how-we-view-the-mag-7/",
+    "published_at": "2026-05-25T15:53:46Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "3f0c2ae66230",
+    "title": "3 Reasons Why Nebius Stock Is Reaching New Highs",
+    "summary": "Nebius stock is soaring as the company aggressively expands its AI cloud empire.",
+    "url": "https://www.barchart.com/story/news/2116504/3-reasons-why-nebius-stock-is-reaching-new-highs",
+    "published_at": "2026-05-25T15:00:02Z",
+    "source": "Barchart",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "1a2f73bb1fa1",
+    "title": "Meta urges Labour to burden Apple with age checks",
+    "summary": "Meta has urged Labour to enforce age verification checks directly on iPhone and Android smartphones amid a possible UK ban on child users.",
+    "url": "https://uk.finance.yahoo.com/news/meta-urges-labour-burden-apple-142724103.html",
+    "published_at": "2026-05-25T14:27:24Z",
+    "source": "The Telegraph",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "dbac4f38fb38",
+    "title": "How The Story Is Shifting For TaskUs (TASK) As AI Grows And Trust And Safety Slows",
+    "summary": "TaskUs is back in focus after the fair value estimate on the stock was trimmed from US$12.00 to US$9.50, a reduction of roughly 21% that resets expectations around what investors might be willing to pay. This shift lines up with recent analyst commentary that highlights client spending resets, pressure in Trust & Safety, and a mixed setup between legacy work and AI Services. As you read on, you will see how these moving pieces fit together and what to watch as the TaskUs story...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/story-shifting-taskus-task-ai-141055289.html",
+    "published_at": "2026-05-25T14:10:55Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "5dec61ec5cb6",
+    "title": "3 AI Stocks I Wouldn't Hesitate to Buy Now",
+    "summary": "There are several great AI stocks worth buying right now.",
+    "url": "https://www.fool.com/investing/2026/05/24/3-ai-stocks-i-wouldnt-hesitate-to-buy-now/",
+    "published_at": "2026-05-25T02:20:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "6b45cb93ceaf",
+    "title": "Meet Mark Zuckerberg’s Right-Hand Man Who’s Unleashing AI at Meta",
+    "summary": "Andrew Bosworth, Meta’s outspoken chief technology officer, has a new mission: transforming the company’s workforce using AI.",
+    "url": "https://www.wsj.com/tech/ai/meta-andrew-bosworth-ai-3df12d4f?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-25T00:00:00Z",
+    "source": "The Wall Street Journal",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "423107f5bc86",
+    "title": "His piano lessons strike a chord with kids. It's music to parents' ears.",
+    "summary": "This 32-year-old piano teacher's method won over kids. Now a tech maverick, a Shark Tank tycoon and a Hollywood composer are helping him go national.",
+    "url": "https://www.usatoday.com/story/money/2026/05/24/exclusive-new-piano-school-payam-music-wins-over-kids/88204957007/",
+    "published_at": "2026-05-24T23:55:42Z",
+    "source": "USA TODAY",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "21b181378aef",
+    "title": "Google Just Shared Bad News for Nvidia, and Even Worse News For CoreWeave and Nebius",
+    "summary": "Alphabet's latest side project could be a huge boost to this rapidly growing business.",
+    "url": "https://www.fool.com/investing/2026/05/24/google-just-shared-bad-news-for-nvidia-and-even-wo/",
+    "published_at": "2026-05-24T21:20:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "348dbed6bb96",
+    "title": "Wall Street Is Warming Back Up to CoreWeave Stock. Long-Term Demand Is Helping.",
+    "summary": "The firm expects the company to reach profitability by 2028.",
+    "url": "https://www.barchart.com/story/news/2109828/wall-street-is-warming-back-up-to-coreweave-stock-long-term-demand-is-helping",
+    "published_at": "2026-05-24T19:00:02Z",
+    "source": "Barchart",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "f7d64ff34c0d",
+    "title": "XOVR ETF: Watch Hyperscaler AI Capex Before Summer 2026 Earnings Season",
+    "summary": "The ERShares Private-Public Crossover ETF (NYSEARCA:XOVR) sits at an awkward crossroad heading into summer 2026. Shares trade near $19.08, down 5% year-to-date even as the public-side AI mega-caps it holds have ripped higher. That disconnect matters because XOVR is the rare ETF that pairs late-stage private growth (SpaceX is the publicly known anchor) with public ... XOVR ETF: Watch Hyperscaler AI Capex Before Summer 2026 Earnings Season",
+    "url": "https://247wallst.com/investing/2026/05/24/xovr-etf-watch-hyperscaler-ai-capex-before-summer-2026-earnings-season/",
+    "published_at": "2026-05-24T18:30:52Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "5cb7200e6b18",
+    "title": "1 Outstanding AI Stock You’ll Regret Ignoring 10 Years From Now",
+    "summary": "CoreWeave may still be in the early stages of its growth story.",
+    "url": "https://www.barchart.com/story/news/2109712/1-outstanding-ai-stock-youll-regret-ignoring-10-years-from-now",
+    "published_at": "2026-05-24T18:20:24Z",
+    "source": "Barchart",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "8b3031767828",
+    "title": "Unity And Meta Extend VR Partnership As Investors Weigh Execution Risk",
+    "summary": "Unity Software (NYSE:U) has extended and expanded its multi year partnership with Meta to continue providing core engine support for Meta’s virtual reality platform. The renewed agreement focuses on deeper integration between Unity’s development tools and Meta’s VR hardware, covering both gaming and enterprise use cases. This extension confirms Unity’s role as a key content creation platform for VR experiences across Meta’s ecosystem. Unity Software enters this renewed partnership with Meta...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/unity-meta-extend-vr-partnership-181121515.html",
+    "published_at": "2026-05-24T18:11:21Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "3be4f8decc4e",
+    "title": "Meta Platforms Will Be a $2 Trillion Company On This Date",
+    "summary": "Meta Platforms (NASDAQ:META | META Price Prediction) delivered a strong earnings beat, yet shares drift lower. Q1 2026 revenue jumped 33.08% to $56.311 billion, EPS came in at $10.44 versus a $6.6587 estimate, and CEO Mark Zuckerberg said the company is “on track to deliver personal superintelligence to billions of people.” Shares trade at $610.26 ... Meta Platforms Will Be a $2 Trillion Company On This Date",
+    "url": "https://247wallst.com/investing/2026/05/24/meta-platforms-will-be-a-2-trillion-company-on-this-date/",
+    "published_at": "2026-05-24T17:46:59Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "5b93139c6114",
+    "title": "The Broadcom Stock Paradox: Why a $2 Trillion Valuation Ignores the Base Economics of Custom Chips",
+    "summary": "Broadcom's nearly $2 trillion valuation is built on a dangerous misconception. While the market prices the company like a high-margin product monopoly similar to NVIDIA, its custom AI chip business may dilute overall profitability as the segment grows.",
+    "url": "https://www.barchart.com/story/news/2109077/the-broadcom-stock-paradox-why-a-2-trillion-valuation-ignores-the-base-economics-of-custom-chips",
+    "published_at": "2026-05-24T17:00:02Z",
+    "source": "Barchart",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "ed53a8bddf66",
+    "title": "AOC Demands EPA Probe After Residents Near Meta Data Center In Georgia Complain Of Murky Drinking Water: Cannot 'Take For Granted'",
+    "summary": "Earlier this week, Rep. Alexandria Ocasio-Cortez (D-N.Y.) called for federal investigations into the environmental impact of data center construction after residents near Meta Platforms, Inc.'s Georgia facility reported discolored well water, declining water pressure and appliance damage. AOC Raises Concerns...",
+    "url": "https://www.yahoo.com/news/politics/articles/aoc-demands-epa-probe-residents-163137166.html",
+    "published_at": "2026-05-24T16:31:37Z",
+    "source": "Benzinga",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "1006d4cd5ccf",
+    "title": "Is It Time To Reassess Meta Platforms (META) After The Recent Share Price Pullback?",
+    "summary": "If you are wondering whether Meta Platforms stock still offers value after its huge run over the last few years, the next sections will walk through what the current price might be implying. The stock has pulled back recently, with the share price down 1.9% over the last week, 9.8% over the last month, and 7.0% year to date, although it is still up 144.7% over three years and 86.1% over five years. Recent headlines have focused on Meta Platforms' ongoing investment in AI infrastructure and...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/time-reassess-meta-platforms-meta-043406947.html",
+    "published_at": "2026-05-21T04:34:06Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "bcae330d628e",
+    "title": "US energy storage additions hit a first-quarter record, report shows",
+    "summary": "U.S. energy storage developers installed 9.7 gigawatt-hours of new capacity in the first quarter of 2026, marking a record ‌high for the quarter, an industry report showed on Thursday.  Energy storage ‌capacity grew 32% in the quarter from a year ago despite federal actions the industry ​says are slowing clean energy development, the report by the Solar Energy Industries Association (SEIA) and Benchmark Mineral Intelligence said.  The SEIA said the demand is being driven by data centers, volatile electricity prices and disruptions to global gas and gas ‌turbine supplies.",
+    "url": "https://finance.yahoo.com/sectors/energy/articles/us-energy-storage-additions-hit-040410278.html",
+    "published_at": "2026-05-21T04:04:10Z",
+    "source": "Reuters",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "404465ceb536",
+    "title": "Zuckerberg warns 'success isn't a given' as 10% of Meta workforce laid off",
+    "summary": "Tech giant Meta has laid off 10% of its workforce - as chief executive Mark Zuckerberg warns that \"success isn't a given\".  Mr Zuckerberg announced the cuts in a company-wide memo on Wednesday, and also revealed that 7,000 employees would be transferred into AI roles as part of a larger restructure.  \"Success isn't a given,\" Mr Zuckerberg said.",
+    "url": "https://uk.finance.yahoo.com/news/zuckerberg-warns-success-isnt-given-034500893.html",
+    "published_at": "2026-05-21T03:45:00Z",
+    "source": "Sky News",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "b8ad091a409e",
+    "title": "Meta Doubles Down, Reassigns 7,000 Employees To AI Teams While Slashing 8,000 Jobs In Mark Zuckerberg's High-Stakes Push: Report",
+    "summary": "Meta Platforms, Inc. is reportedly reshaping its workforce around artificial intelligence by moving thousands of employees into new AI-focused divisions while simultaneously cutting roughly 8,000 jobs as CEO Mark Zuckerberg accelerates the company's massive AI ambitions. Meta's AI Restructuring Signals...",
+    "url": "https://finance.yahoo.com/sectors/technology/articles/meta-doubles-down-reassigns-7-003117606.html",
+    "published_at": "2026-05-21T00:31:17Z",
+    "source": "Benzinga",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "8bbc7ce26c65",
+    "title": "The Real Winner of SpaceX’s IPO: Mark Zuckerberg",
+    "summary": "Wall Street has spent the last six months questioning Mark Zuckerberg’s aggressive AI capital spending, with Meta Platforms (NASDAQ:META) raising its 2026 capex guidance to $125 to $145 billion after a Q1 in which revenue grew 33% year over year. While everyone debates whether Meta is overspending, a quieter filing from SpaceX just laid out ... The Real Winner of SpaceX’s IPO: Mark Zuckerberg",
+    "url": "https://247wallst.com/investing/2026/05/20/the-real-winner-of-spacexs-ipo-mark-zuckerberg/",
+    "published_at": "2026-05-20T23:43:27Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "5ee521a3ebcc",
+    "title": "Zuckerberg says he feels 'weight' of Meta layoffs",
+    "summary": "Meta began laying off roughly 8,000 employees Wednesday -- about 10 percent of its global workforce -- as co-founder and Chief Executive Mark Zuckerberg pushes to redirect resources toward an ambitious artificial intelligence agenda.In a memo to staff Wednesday, posted by Business Insider, Zuckerberg expressed thanks to departing employees and sought to reassure those remaining.",
+    "url": "https://finance.yahoo.com/sectors/technology/articles/zuckerberg-says-feels-weight-meta-220038606.html",
+    "published_at": "2026-05-20T22:00:38Z",
+    "source": "AFP",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "6938c27c0a5a",
+    "title": "Intuit Stock Falls on Earnings—and the Company Plans to Cut 17% of Its Workforce",
+    "summary": "Intuit  reported better-than-expected financial results for its crucial tax season Wednesday, while also announcing a round of layoffs.  Intuit  said it’s reducing its full-time workforce by 17%.  According to Layoffs.fyi, a website that tracks tech layoffs, 111,173 tech employees have lost their jobs in 2026.",
+    "url": "https://www.barrons.com/articles/intuit-earnings-stock-price-layoffs-a96cfca9?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-20T22:00:00Z",
+    "source": "Barrons.com",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "4d3f48963b45",
+    "title": "Anthropic revenue set to more than double to $10.9 billion in Q2",
+    "summary": "Investing.com -- Anthropic is projected to more than double its revenue from $4.8 billion in the first quarter to $10.9 billion in the second quarter, according to a report from the Wall Street Journal, citing figures shared during an ongoing funding round.",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/anthropic-revenue-set-more-double-212649753.html",
+    "published_at": "2026-05-20T21:26:49Z",
+    "source": "Investing.com",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "b63008cc4e94",
+    "title": "SpaceX’s Expected Moonshot Valuation",
+    "summary": "SpaceX, which is expected to target a valuation of more than $1.5 trillion at IPO, has a financial picture that is notably worse than any other mega-cap U.S. company.  Meta, valued in the same range SpaceX is targeting, had sales 11 times that last year and profits of $60 billion.  SpaceX, if ultimately valued at $1.5 trillion, would be valued at 80 times sales.",
+    "url": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-05-20-2026/card/spacex-s-expected-moonshot-valuation-N4kjDGNSs8meV6C1UhG6?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-20T21:22:00Z",
+    "source": "The Wall Street Journal",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "0f6ddbe51907",
+    "title": "Why embracing AI may be the key to career survival",
+    "summary": "Glassdoor Senior Economist Daniel Zhao joins Brooke DiPalma on Market Domination to discuss employee confidence as companies continue trimming headcount and accelerating AI-driven workplace changes. Zhao explains why workers who embrace AI tools and adapt their skill sets may be better positioned for long-term job security.",
+    "url": "https://finance.yahoo.com/video/why-embracing-ai-may-be-the-key-to-career-survival-195112832.html",
+    "published_at": "2026-05-20T19:51:12Z",
+    "source": "Yahoo Finance Video",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
     "id": "e34d211a6a54",
     "title": "Singapore Foreign Minister Builds Diplomatic Second Brain Using Using Claude, WhatsApp And A Raspberry Pi: Here's Why He Did It",
     "summary": "Over the weekend, Singaporean Foreign Minister Vivian Balakrishnan said he personally built a customized AI-powered diplomatic assistant to help manage the cognitive demands of global diplomacy. He used readily available tools, including Anthropic's Claude, Meta Platforms, Inc. WhatsApp integrations and...",

@@ -1,5 +1,665 @@
 [
   {
+    "id": "596e9b332403",
+    "title": "Nvidia Introduces First PCs Designed for AI Agents",
+    "summary": "The chips giant will work with manufacturers including Dell, Lenovo and HP to make the laptops, designed to support agentic computing.",
+    "url": "https://www.wsj.com/tech/ai/nvidia-introduces-first-pcs-designed-for-ai-agents-47445bcd?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-06-01T04:44:00Z",
+    "source": "The Wall Street Journal",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "7ba87d12419d",
+    "title": "Nvidia Enters Windows Laptop Market, Taking On Intel and AMD",
+    "summary": "(Bloomberg) -- Nvidia Corp. is entering the PC market with a new chip aimed at loosening the stranglehold of Intel Corp. technology in that arena and modernizing the machines for the AI era.Most Read from BloombergUS Says Deals With Iran for Safe Hormuz Transit Are ProhibitedStrait of Hormuz Ship Transits Are Rising Thanks to US HelpAmericans Injured in Iranian Missile Strike on Kuwaiti Air BaseAmericans Hurt in Kuwait as Trump Sends Mixed Signals on WarBerkshire Hathaway to Buy Taylor Morrison",
+    "url": "https://finance.yahoo.com/sectors/technology/articles/nvidia-enters-windows-laptop-market-042523745.html",
+    "published_at": "2026-06-01T04:25:23Z",
+    "source": "Bloomberg",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "f7e44f7c3cc6",
+    "title": "Nvidia Says Anthropic, OpenAI Among Big Users of New Vera Chip",
+    "summary": "(Bloomberg) -- Nvidia Corp. said Anthropic PBC, OpenAI and SpaceX are among the first big users of its upcoming microprocessor, securing key customers for its latest attempt to expand an already extensive footprint in AI data centers.Most Read from BloombergUS Says Deals With Iran for Safe Hormuz Transit Are ProhibitedStrait of Hormuz Ship Transits Are Rising Thanks to US HelpAmericans Injured in Iranian Missile Strike on Kuwaiti Air BaseAmericans Hurt in Kuwait as Trump Sends Mixed Signals on W",
+    "url": "https://finance.yahoo.com/sectors/technology/articles/nvidia-says-anthropic-openai-among-041102143.html",
+    "published_at": "2026-06-01T04:11:02Z",
+    "source": "Bloomberg",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "56584f21a2f1",
+    "title": "This Billion-Dollar Deal Propelled Dell’s (DELL) 43% Growth This Week",
+    "summary": "Dell Technologies Inc. (NYSE:DELL) is one of the 10 Stocks With Effortless 38-78% Gains. Dell Technologies climbed by 42.6 percent week-on-week, as investor optimism was fueled by its bagging of a new $10-billion contract with the US government, alongside a strong earnings performance in the first quarter of fiscal year 2027. In an announcement on […]",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/billion-dollar-deal-propelled-dell-030939766.html",
+    "published_at": "2026-06-01T03:09:39Z",
+    "source": "Insider Monkey",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "139441ae3e1f",
+    "title": "Nvidia Bets $6.5B on Photonics to Solve AI’s Next Big Bottleneck",
+    "summary": "Chipmaker Nvidia (NVDA) has committed at least $6.5 billion over the past three months to photonics companies, as it looks for ways to remove one of the biggest bottlenecks in AI infrastructure, according to CNBC. For context, photonics uses light to move data instead of electricity, which can make data transfer faster and more energy efficient. That matters because today’s AI systems depend on massive amounts of data moving between GPUs, memory, networking chips, servers, and data centers. Clai",
+    "url": "https://finance.yahoo.com/sectors/technology/articles/nvidia-bets-6-5b-photonics-030500764.html",
+    "published_at": "2026-06-01T03:05:00Z",
+    "source": "TipRanks",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "44e1ca7b6667",
+    "title": "BofA doubles down on cautious S&P 500 view for rest of 2026",
+    "summary": "There's a difference between owning the market and owning the companies inside it, and most savers never notice the gap until it costs them money. For more than a year, the gap hasn't mattered. The S&P 500 has climbed in a nearly straight line, printing record after record, and the laziest ...",
+    "url": "https://www.thestreet.com/investing/stocks/bofa-doubles-down-on-cautious-sp-500-view-for-rest-of-2026-fund",
+    "published_at": "2026-06-01T02:37:00Z",
+    "source": "TheStreet",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "bb6097dd93d0",
+    "title": "Microsoft Tightens AI Tools As Investors Focus On Outcome Based Adoption",
+    "summary": "Microsoft (NasdaqGS:MSFT) has reportedly tightened internal AI tool spending, canceling licenses for external AI coding assistants such as Claude Code. Engineers are being directed toward the company’s own Copilot CLI as part of a broader focus on internal AI products and cost control. Across the sector, AI evaluation is shifting toward outcome based metrics, highlighted by Amazon discontinuing its AI leaderboard in favor of impact focused measures. For you as an investor, this points to a...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/microsoft-tightens-ai-tools-investors-230707366.html",
+    "published_at": "2026-05-31T23:07:07Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "bf154e69f534",
+    "title": "Why This Fund Sold $35 Million of Bristow Group Amid a 40% Stock Surge",
+    "summary": "Bristow Group delivers aviation and mission-critical transport services to offshore energy, government, and commercial clients worldwide.",
+    "url": "https://www.fool.com/coverage/filings/2026/05/31/why-this-fund-sold-usd35-million-of-bristow-group-amid-a-40-stock-surge/",
+    "published_at": "2026-05-31T18:20:12Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "7b0a22b5f973",
+    "title": "Meta Has a Plan to Monetize Its AI Investments. Its Underperforming Stock Needs It Badly.",
+    "summary": "Meta Platforms is rolling out subscriptions for its family of apps as well as AI services. The subscriptions could drive its long-term growth and help the company monetize its AI capex.",
+    "url": "https://www.barchart.com/story/news/2224189/meta-has-a-plan-to-monetize-its-ai-investments-its-underperforming-stock-needs-it-badly",
+    "published_at": "2026-05-31T18:00:02Z",
+    "source": "Barchart",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "2b652ca80b99",
+    "title": "Amazon joins Microsoft in sending shocking message to employees",
+    "summary": "For the past two years, the message from Big Tech to its employees was simple: use more AI. The companies that used it most would win. The numbers would follow. The numbers have not followed. And now the message is changing. Amazon (AMZN) shut down an internal AI leaderboard called KiroRank on May ...",
+    "url": "https://www.thestreet.com/technology/amazon-joins-microsoft-in-sending-shocking-message-to-employees",
+    "published_at": "2026-05-31T17:17:00Z",
+    "source": "TheStreet",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "ca975d8e9d3c",
+    "title": "AI Bubble Debate Gets Real as Chip Stocks Rally Turns Historic",
+    "summary": "(Bloomberg) -- Chipmakers are by far the hottest stocks in the market, but their recent surge is lending urgency to the debate over whether investors are buying into an artificial-intelligence bubble that’s due to burst.Most Read from BloombergUS Says Deals With Iran for Safe Hormuz Transit Are ProhibitedStrait of Hormuz Ship Transits Are Rising Thanks to US HelpAmericans Injured in Iranian Missile Strike on Kuwaiti Air BaseAmericans Hurt in Kuwait as Trump Sends Mixed Signals on WarBerkshire Ha",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/ai-bubble-debate-gets-real-130007767.html",
+    "published_at": "2026-05-31T13:00:07Z",
+    "source": "Bloomberg",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "9fe1c700880b",
+    "title": "Big Tech companies are screwing the average investor — here's how",
+    "summary": "Time for some stock splits!",
+    "url": "https://finance.yahoo.com/markets/article/big-tech-companies-are-screwing-the-average-investor--heres-how-123000495.html",
+    "published_at": "2026-05-31T12:30:00Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "ad8ca772bfee",
+    "title": "S&P 500 Dividend Yield Hits 1.08%. The Lowest Payout Rate Since the 1800s Is a Retirement Red Flag.",
+    "summary": "The S&P 500 dividend yield has fallen to 1.08%, a level the index has not seen since the 1800s. For retirees who built their income plan around stock dividends, that number is the financial equivalent of finding out the well in the backyard has gone dry while the water bill keeps climbing. I’ve been writing ... S&P 500 Dividend Yield Hits 1.08%. The Lowest Payout Rate Since the 1800s Is a Retirement Red Flag.",
+    "url": "https://247wallst.com/personal-finance/2026/05/31/sp-500-dividend-yield-hits-1-08-the-lowest-payout-rate-since-the-1800s-is-a-retirement-red-flag/",
+    "published_at": "2026-05-31T12:26:47Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "6b38699eb1b2",
+    "title": "AI is turning energy into the hottest business in America",
+    "summary": "The AI boom is pushing companies across the economy — from tech giants to automakers — deep into the energy business.",
+    "url": "https://www.axios.com/2026/05/31/ai-energy-business-companies-storage-supplies#utm_source=yahoo_finance&utm_medium=partner&utm_campaign=subs-partner-yahoo-finance-AI",
+    "published_at": "2026-05-31T11:30:08Z",
+    "source": "Axios",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "f07b95b8c4ed",
+    "title": "Guidewire Software and Varonis Systems Shares Are Soaring, What You Need To Know",
+    "summary": "A number of stocks jumped in the afternoon session after Snowflake's impressive earnings results provided the clearer evidence that the \"SaaSpocalypse\" — a rolling selloff that had erased approximately $2 trillion from software market values since late 2025 on fears that AI would make subscription software obsolete — had been overstated for platforms sitting at the centre of AI workflows.",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/guidewire-software-varonis-systems-shares-052600034.html",
+    "published_at": "2026-05-29T05:26:00Z",
+    "source": "StockStory",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "4f5f70508618",
+    "title": "Why SoundHound AI (SOUN) Stock Is Up Today",
+    "summary": "Shares of voice AI technology company SoundHound AI (NASDAQ:SOUN) jumped 5.7% in the afternoon session after Snowflake's impressive earnings results provided clearer evidence that the \"SaaSpocalypse\" — a rolling selloff that had erased approximately $2 trillion from software market values since late 2025 on fears that AI would make subscription software obsolete — had been overstated for platforms sitting at the centre of AI workflows.",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/why-soundhound-ai-soun-stock-051800605.html",
+    "published_at": "2026-05-29T05:18:00Z",
+    "source": "StockStory",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "6539bc423ce4",
+    "title": "Oracle (ORCL) Shares Skyrocket, What You Need To Know",
+    "summary": "Shares of enterprise software giant Oracle (NYSE:ORCL) jumped 6.9% in the afternoon session after Snowflake's impressive earnings results provided the clearer evidence that the \"SaaSpocalypse\" — a rolling selloff that had erased approximately $2 trillion from software market values since late 2025 on fears that AI would make subscription software obsolete — had been overstated for platforms sitting at the centre of AI workflows.",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/oracle-orcl-shares-skyrocket-know-051000953.html",
+    "published_at": "2026-05-29T05:10:00Z",
+    "source": "StockStory",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "16112ef6f55d",
+    "title": "Workday and Doximity Shares Are Soaring, What You Need To Know",
+    "summary": "A number of stocks jumped in the afternoon session after Snowflake's impressive earnings results provided clearer evidence that the \"SaaSpocalypse\" — a rolling selloff that had erased approximately $2 trillion from software market values since late 2025 on fears that AI would make subscription software obsolete — had been overstated for platforms sitting at the centre of AI workflows.",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/workday-doximity-shares-soaring-know-050200003.html",
+    "published_at": "2026-05-29T05:02:00Z",
+    "source": "StockStory",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "da81a75e9954",
+    "title": "Why Shopify (SHOP) Stock Is Up Today",
+    "summary": "Shares of e-commerce platform Shopify (NASDAQ:SHOP) jumped 6.8% in the afternoon session after Snowflake's impressive earnings results provided clearer evidence that the \"SaaSpocalypse\" — a rolling selloff that had erased approximately $2 trillion from software market values since late 2025 on fears that AI would make subscription software obsolete — had been overstated for platforms sitting at the centre of AI workflows.",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/why-shopify-shop-stock-today-045400859.html",
+    "published_at": "2026-05-29T04:54:00Z",
+    "source": "StockStory",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "abb64639298a",
+    "title": "Dynatrace, Paycom, and Zeta Global Shares Skyrocket, What You Need To Know",
+    "summary": "A number of stocks jumped in the afternoon session after Snowflake's impressive earnings results provided clearer evidence that the \"SaaSpocalypse\" — a rolling selloff that had erased approximately $2 trillion from software market values since late 2025 on fears that AI would make subscription software obsolete — had been overstated for platforms sitting at the centre of AI workflows.",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/dynatrace-paycom-zeta-global-shares-044600588.html",
+    "published_at": "2026-05-29T04:46:00Z",
+    "source": "StockStory",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "61ca8a846cf2",
+    "title": "Rapid7, Unity, and C3.ai Shares Skyrocket, What You Need To Know",
+    "summary": "A number of stocks jumped in the afternoon session after Snowflake's impressive earnings results provided clearer evidence that the \"SaaSpocalypse\" — a rolling selloff that had erased approximately $2 trillion from software market values since late 2025 on fears that AI would make subscription software obsolete — had been overstated for platforms sitting at the centre of AI workflows.",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/rapid7-unity-c3-ai-shares-044600542.html",
+    "published_at": "2026-05-29T04:46:00Z",
+    "source": "StockStory",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "92163f60fa34",
+    "title": "Zscaler (ZS) Stock Is Up, What You Need To Know",
+    "summary": "Shares of cloud security platform Zscaler (NASDAQ:ZS) jumped 4.7% in the afternoon session after Snowflake's impressive earnings results provided clearer evidence that the \"SaaSpocalypse\" — a rolling selloff that had erased approximately $2 trillion from software market values since late 2025 on fears that AI would make subscription software obsolete — had been overstated for platforms sitting at the centre of AI workflows.",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/zscaler-zs-stock-know-043800496.html",
+    "published_at": "2026-05-29T04:38:00Z",
+    "source": "StockStory",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "43e707e3ad2f",
+    "title": "Domo, GitLab, and Tenable Stocks Trade Up, What You Need To Know",
+    "summary": "A number of stocks jumped in the afternoon session after Snowflake's impressive earnings results provided clearer evidence that the \"SaaSpocalypse\" — a rolling selloff that had erased approximately $2 trillion from software market values since late 2025 on fears that AI would make subscription software obsolete — had been overstated for platforms sitting at the centre of AI workflows.",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/domo-gitlab-tenable-stocks-trade-043000649.html",
+    "published_at": "2026-05-29T04:30:00Z",
+    "source": "StockStory",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "e95a4a32bdea",
+    "title": "Best 3 Blue Chip Stocks to Buy After a Market Pullback -- Including Microsoft (MSFT) Stock",
+    "summary": "One of these stocks sports a dividend yield topping 5%.",
+    "url": "https://www.fool.com/investing/2026/05/29/best-3-blue-chip-stocks-to-buy-after-this-weeks-ma/",
+    "published_at": "2026-05-29T04:20:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "8d4c8d3a298e",
+    "title": "Microsoft’s Defense Deal And Clean Energy Push Reframe Long-Term Valuation",
+    "summary": "Microsoft, ticker NasdaqGS:MSFT, is at the center of a new $9.7b, five year enterprise software consolidation contract with the U.S. Department of Defense. The company has also joined Amazon, Google, and Meta in launching the Data Center Innovation Initiative focused on clean energy and sustainable materials for data centers. These moves touch on U.S. government technology adoption, long term software standard setting, and the environmental profile of AI and cloud infrastructure. Microsoft...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/microsoft-defense-deal-clean-energy-031502009.html",
+    "published_at": "2026-05-28T03:15:02Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "c9c40362a105",
+    "title": "Jensen Huang Joins Elite Tsinghua University Advisory Board That Includes Tim Cook And Elon Musk: Report",
+    "summary": "Nvidia Corp. (NASDAQ:NVDA) CEO Jensen Huang has reportedly agreed to join the advisory board of one of China's most prestigious universities. Nvidia CEO Joins Elite Tsinghua Advisory Board Huang accepted an invitation to join the advisory board of Tsinghua University School of Economics and Management, the Financial Times reported on Wednesday, citing people familiar with the matter. The board includes some of the world's most prominent business leaders. It has Apple Inc. (NASDAQ:AAPL) CEO Tim C",
+    "url": "https://finance.yahoo.com/sectors/technology/articles/jensen-huang-joins-elite-tsinghua-013840598.html",
+    "published_at": "2026-05-28T01:38:40Z",
+    "source": "Benzinga",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "575b5228bc5e",
+    "title": "The Quiet AI Winner That Doesn't Show Up on Any Hot Stock List",
+    "summary": "This former telecom wreck now has $13 billion in AI contracts. Here's why it's still under the radar.",
+    "url": "https://www.fool.com/investing/2026/05/27/the-quiet-ai-winner/",
+    "published_at": "2026-05-28T01:01:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "19e2a71afa3c",
+    "title": "Why Dell Stock Is Rising After-Hours Today?",
+    "summary": "Dell Federal Systems, a unit of the company dedicated to serving the government, wins a US defense contract.",
+    "url": "https://stocktwits.com/news-articles/markets/equity/dell-defense-software-deal-boeing-navy-order-pentagon-microsoft/cZggqX1Rerx",
+    "published_at": "2026-05-27T23:59:34Z",
+    "source": "Stocktwits",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "674b9000b1af",
+    "title": "Marvell Technology Is Powering the AI Revolution—and Its Earnings Are Lifting the Stock",
+    "summary": "The data-center boom is still going strong for  Marvell Technology  The chip company reported better-than-expected first-quarter revenue and sees higher revenue than expected in the current quarter.  Marvell stock gained 6.5% in after-hours trading following the results.  Marvell reported revenue of $2.42 billion, compared with Wall Street estimates of $2.41 billion, according to FactSet.",
+    "url": "https://www.barrons.com/articles/marvell-earnings-stock-price-8ac956d4?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-27T22:27:00Z",
+    "source": "Barrons.com",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "835b4c6b3eb4",
+    "title": "Dell Technologies Gets $9.7 Billion Pentagon Contract",
+    "summary": "The agreement is meant to streamline and consolidate software acquisition across the Pentagon, intelligence community and Coast Guard.",
+    "url": "https://www.wsj.com/tech/dell-technologies-gets-9-7-billion-pentagon-contract-e6eb43cf?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-27T22:25:00Z",
+    "source": "The Wall Street Journal",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "974c0eaf3fbe",
+    "title": "Pentagon awards Microsoft $9.7 billion deal in bid to cut costs, end license sprawl",
+    "summary": "WASHINGTON, May 27 (Reuters) - The Pentagon on Wednesday announced a ‌five-year, $9.69 billion agreement to consolidate ‌Microsoft and other enterprise software licenses scattered across ​the military services, the intelligence community, and the U.",
+    "url": "https://finance.yahoo.com/sectors/technology/articles/pentagon-awards-microsoft-9-7-212421204.html",
+    "published_at": "2026-05-27T21:24:21Z",
+    "source": "Reuters",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "9c2a8ab50cd6",
+    "title": "Pope Leo XIV teams with Anthropic founder on bold AI warning",
+    "summary": "When the people building something stand next to the people warning about it, that usually means everyone in the room is worried about the same thing. For most of the past three years, the artificial intelligence conversation has split cleanly into two camps. The builders keep raising bigger ...",
+    "url": "https://www.thestreet.com/technology/pope-leo-xiv-teams-with-anthropic-founder-on-bold-ai-warning",
+    "published_at": "2026-05-27T21:17:00Z",
+    "source": "TheStreet",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "9c3306cd82e9",
+    "title": "Eli Lilly Stock Hits Record Highs, Becomes First Pharmaceutical Firm Worth $1 Trillion",
+    "summary": "Eli Lilly (LLY) stock has surged to new record highs of over $1,000 a share, cementing its position as one of the market's most dominant growth stories and the first pharmaceutical firm worth $1 trillion.",
+    "url": "https://finance.yahoo.com/sectors/healthcare/articles/eli-lilly-stock-hits-record-203900546.html",
+    "published_at": "2026-05-27T20:39:00Z",
+    "source": "Zacks",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "1dcdbdb63794",
+    "title": "HP tops revenue, profit estimates as AI PC and Windows 11 refresh boost demand",
+    "summary": "HP beat analysts' estimates for second-quarter revenue and profit on Wednesday, helped by strong demand for AI-optimized personal computers, but warned ‌that rising memory costs would pressure margins.  PC makers including HP, Dell Technologies and ‌China's Lenovo Group are navigating a shortage of memory chips as data center buildout is sucking up capacity and ​triggering price increases of smartphones and PCs.  CFO Karen Parkhill said HP \"took deliberate actions to lower memory costs\" by reconfiguring ‌products, sourcing cheaper components and ⁠prioritizing higher-margin units, while also adjusting prices to account for commodity increases.",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/hp-beats-revenue-profit-estimates-201653550.html",
+    "published_at": "2026-05-27T20:16:53Z",
+    "source": "Reuters",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "495dc009552d",
+    "title": "Is Nvidia the Most Underrated Dividend Growth Stock to Own?",
+    "summary": "Nvidia's dividend is going up by 2,400%.",
+    "url": "https://www.fool.com/investing/2026/05/25/is-nvidia-the-most-underrated-dividend-growth-stoc/",
+    "published_at": "2026-05-25T23:50:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "d432d3a9ccf1",
+    "title": "Ashton Kutcher Invested In OpenAI Early: $30 Million Bet Could Be Worth Billions At $1.5 Trillion IPO",
+    "summary": "Actor Ashton Kutcher is best known to many for his role on TV shows like \"That ‘70s Show\" and \"Two and a Half Men.\" To the finance world, Kutcher has built a reputation as a good investor with his Sound...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/ashton-kutcher-invested-openai-early-233058562.html",
+    "published_at": "2026-05-25T23:30:58Z",
+    "source": "Benzinga",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "e7863a1bdb94",
+    "title": "Why Microsoft's Split With OpenAI May Be Great for the Stock in the Long Run",
+    "summary": "Microsoft's customers often rely on more than just one model.",
+    "url": "https://www.fool.com/investing/2026/05/25/why-microsofts-split-with-openai-may-be-great-for/",
+    "published_at": "2026-05-25T23:20:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "ba2ba5f03d93",
+    "title": "Billionaire Bill Ackman Just Made a Massive Bet on Microsoft. Here's Why.",
+    "summary": "Ackman's hedge fund now owns 5,654,078 shares of Microsoft.",
+    "url": "https://www.fool.com/investing/2026/05/25/billionaire-bill-ackman-just-made-a-massive-bet-on/",
+    "published_at": "2026-05-25T20:18:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "1175892f81c0",
+    "title": "Intapp Says AI Is Driving Demand as Celeste Tackles Compliance Risks",
+    "summary": "Intapp (NASDAQ:INTA) executives said artificial intelligence is emerging as a demand driver for the company’s professional-services software platform, particularly as large law firms, accounting firms, consulting firms, investment banks and private capital firms look for compliant ways to automate w",
+    "url": "https://www.marketbeat.com/instant-alerts/intapp-says-ai-is-driving-demand-as-celeste-tackles-compliance-risks-2026-05-25/?utm_source=yahoofinance&utm_medium=yahoofinance",
+    "published_at": "2026-05-25T20:08:03Z",
+    "source": "MarketBeat",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "db461150dd55",
+    "title": "Microsoft CEO sends shocking message to employees",
+    "summary": "Microsoft CEO Satya Nadella revealed earlier this year that the company now writes up to 30% of its code using generative AI. The company has invested $13 billion in OpenAI. It built GitHub Copilot. It has made AI central to every product in its portfolio. On May 14, Microsoft (MSFT) sent thousands ...",
+    "url": "https://www.thestreet.com/technology/microsoft-ceo-sends-shocking-message-to-employees",
+    "published_at": "2026-05-25T19:37:00Z",
+    "source": "TheStreet",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "54b4fa3d8922",
+    "title": "This Tech Stock Is Down -- and Every Time That's Happened in the Past, It's Been a Gift",
+    "summary": "Microsoft stock rarely trades at such low valuation levels.",
+    "url": "https://www.fool.com/investing/2026/05/25/this-tech-stock-is-down-and-every-time-thats-happe/",
+    "published_at": "2026-05-25T17:11:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "ce4bdef9ec2b",
+    "title": "Is Now the Time to Add an International ETF to Your Core Holdings?",
+    "summary": "The best investors are always thinking about ways they can upgrade their portfolios.",
+    "url": "https://www.fool.com/investing/2026/05/25/now-time-add-international-etf-core-holdings/",
+    "published_at": "2026-05-25T16:20:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "b4039489bf40",
+    "title": "Your Chatbot Has a Long Memory. That Isn’t Always a Good Thing.",
+    "summary": "It may keep offering you advice based on information that may be dated—or wasn’t even about you in the first place.",
+    "url": "https://www.wsj.com/tech/ai/ai-memory-cd1de7f4?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-25T16:16:00Z",
+    "source": "The Wall Street Journal",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "ce6d56399b55",
+    "title": "Microsoft AI Growth Story Meets Revenue Scrutiny And Shifting Big Holders",
+    "summary": "Microsoft faces fresh questions over how it books AI related revenue, with critics focusing on the risk of round trip funding between its cloud business and AI startups such as OpenAI. The Gates Foundation Trust has fully exited a long running Microsoft position for non business reasons, while Pershing Square has taken a large new stake citing confidence in AI driven growth. Reports indicate Microsoft is in advanced talks to supply its in house Maia AI chips to Anthropic to cut reliance on...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/microsoft-ai-growth-story-meets-160858177.html",
+    "published_at": "2026-05-25T16:08:58Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "0e62c378a2fd",
+    "title": "IAC Conference Highlights People Inc. Pivot, AI Licensing Upside and MGM Bet",
+    "summary": "IAC (NASDAQ:IAC) is continuing its transformation from a holding company into People Incorporated, with executives describing the shift as a continuation of a strategy outlined earlier this year that includes asset sales, cost reductions and a sharper focus on People Inc. and MGM Resorts Internation",
+    "url": "https://www.marketbeat.com/instant-alerts/iac-conference-highlights-people-inc-pivot-ai-licensing-upside-and-mgm-bet-2026-05-25/?utm_source=yahoofinance&utm_medium=yahoofinance",
+    "published_at": "2026-05-25T06:02:10Z",
+    "source": "MarketBeat",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "77ece26bad7d",
+    "title": "Billionaire Bill Gates' Foundation Sold Its Microsoft Stake and Has 43% of Its $33 Billion Portfolio Invested in 2 Other Stocks",
+    "summary": "Microsoft has always been a standout stock for the foundation's portfolio.",
+    "url": "https://www.fool.com/investing/2026/05/25/billionaire-bill-gates-foundation-sold-its-microso/",
+    "published_at": "2026-05-25T05:20:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "bae5dc83662d",
+    "title": "Apple vs. Microsoft: What Their Revenue Trends Reveal for Investors",
+    "summary": "One tech giant delivers record-setting sales surges, while the other posts unwavering growth. Recent earnings reveal how each strategy plays out over time.",
+    "url": "https://www.fool.com/coverage/charts/2026/05/24/apple-vs-microsoft-what-their-revenue-trends-reveal-for-investors/",
+    "published_at": "2026-05-25T04:10:32Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "423107f5bc86",
+    "title": "His piano lessons strike a chord with kids. It's music to parents' ears.",
+    "summary": "This 32-year-old piano teacher's method won over kids. Now a tech maverick, a Shark Tank tycoon and a Hollywood composer are helping him go national.",
+    "url": "https://www.usatoday.com/story/money/2026/05/24/exclusive-new-piano-school-payam-music-wins-over-kids/88204957007/",
+    "published_at": "2026-05-24T23:55:42Z",
+    "source": "USA TODAY",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "f82436613e4d",
+    "title": "2 Quantum Computing Stocks That Are Further Along Than Anyone Is Giving Them Credit For",
+    "summary": "One of these players is a tech giant, while the other is a small pure-play quantum company.",
+    "url": "https://www.fool.com/investing/2026/05/24/2-quantum-computing-stocks-that-are-further-along/",
+    "published_at": "2026-05-24T22:30:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "cae4bee73a9d",
+    "title": "‘Expect Corrections and Don’t Rely on Hope’: Cramer’s Reality Check for a First-Time Homebuyer",
+    "summary": "Jim Cramer’s blunt line to a young first-time homebuyer on the May 22 episode of Mad Money: “Expect corrections and don’t rely on hope as an investing strategy.” The caller, a younger investor, had just used a significant portion of his investment assets as a down payment on his first home and asked how to ... ‘Expect Corrections and Don’t Rely on Hope’: Cramer’s Reality Check for a First-Time Homebuyer",
+    "url": "https://247wallst.com/personal-finance/2026/05/24/expect-corrections-and-dont-rely-on-hope-cramers-reality-check-for-a-first-time-homebuyer/",
+    "published_at": "2026-05-24T22:21:54Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "ee6b5bfdbedc",
+    "title": "This Billionaire Dumped Cloud Stocks for These New AI Stocks. Should Investors Follow Suit?",
+    "summary": "Philippe Laffont was busy buying Taiwan Semiconductor Manufacturing Company and ASML Holding stock in the first three months of the year.",
+    "url": "https://www.fool.com/investing/2026/05/24/this-billionaire-dumped-his-cloud-stocks-for-these/",
+    "published_at": "2026-05-24T21:38:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "5d8122539eda",
+    "title": "‘He Knows the Flaws Because He Knows the Man’: Why Elon Musk’s OpenAI Attack Is Really About xAI",
+    "summary": "Rashaad Bilal of Earn Your Leisure distilled the Musk-versus-Altman saga down to one sharp line: “He knows the flaws because he knows the man.” That framing reorients how investors should read every legal filing, every X post, and every interview Elon Musk aims at OpenAI. The litigation is a competitive weapon. xAI is the business ... ‘He Knows the Flaws Because He Knows the Man’: Why Elon Musk’s OpenAI Attack Is Really About xAI",
+    "url": "https://247wallst.com/investing/2026/05/24/he-knows-the-flaws-because-he-knows-the-man-why-elon-musks-openai-attack-is-really-about-xai/",
+    "published_at": "2026-05-24T20:47:22Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "77eca2d02b75",
+    "title": "AI Cost Crisis Emerges as Claude Usage and Agentic Coding Bills Spiral",
+    "summary": "The first cracks in the AI boom are starting to show, hitting select firms more than others, and this could only be the beginning.",
+    "url": "https://beincrypto.com/enterprise-ai-cost-crisis-microsoft-uber/",
+    "published_at": "2026-05-24T19:56:12Z",
+    "source": "BeInCrypto",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "348dbed6bb96",
+    "title": "Wall Street Is Warming Back Up to CoreWeave Stock. Long-Term Demand Is Helping.",
+    "summary": "The firm expects the company to reach profitability by 2028.",
+    "url": "https://www.barchart.com/story/news/2109828/wall-street-is-warming-back-up-to-coreweave-stock-long-term-demand-is-helping",
+    "published_at": "2026-05-24T19:00:02Z",
+    "source": "Barchart",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "c04aca06c4ce",
+    "title": "Palantir’s AI Surge Meets Market Correction. Buy the PLTR Stock Dip Now.",
+    "summary": "Palantir recently became one of the worst mega-cap performers YTD, but can the AI company ride out the storm?",
+    "url": "https://www.barchart.com/story/news/2109778/palantirs-ai-surge-meets-market-correction-buy-the-pltr-stock-dip-now",
+    "published_at": "2026-05-24T18:45:14Z",
+    "source": "Barchart",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "d4b3e1d92b06",
+    "title": "Is JPMorgan Chase a good long-term investment in 2026?",
+    "summary": "With a market cap of $803 billion, JPMorgan has been the biggest and most influential bank in the U.S. since 2011 (and the largest in the world since 2016), but its success lies light-years away from simple deposits and withdrawals. The visionary insights of its CEO, Jamie Dimon, and astounding ...",
+    "url": "https://www.thestreet.com/investing/stocks/is-jpmorgan-chase-a-good-long-term-investment",
+    "published_at": "2026-05-21T00:39:57Z",
+    "source": "TheStreet",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "8bbc7ce26c65",
+    "title": "The Real Winner of SpaceX’s IPO: Mark Zuckerberg",
+    "summary": "Wall Street has spent the last six months questioning Mark Zuckerberg’s aggressive AI capital spending, with Meta Platforms (NASDAQ:META) raising its 2026 capex guidance to $125 to $145 billion after a Q1 in which revenue grew 33% year over year. While everyone debates whether Meta is overspending, a quieter filing from SpaceX just laid out ... The Real Winner of SpaceX’s IPO: Mark Zuckerberg",
+    "url": "https://247wallst.com/investing/2026/05/20/the-real-winner-of-spacexs-ipo-mark-zuckerberg/",
+    "published_at": "2026-05-20T23:43:27Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "e07fa50386bd",
+    "title": "Nvidia-backed AI startup wants to solve AI’s ‘hard problem’",
+    "summary": "Jensen Huang is betting on a new AI lab that thinks the current chatbot frenzy is just the beginning. Nvidia (NVDA) has already emerged as one of the greatest winners of the artificial intelligence boom. Its chips now make up the backbone of most of the infrastructure powering modern AI, helping ...",
+    "url": "https://www.thestreet.com/investing/nvidia-backed-ai-startup-wants-to-solve-ais-hard-problem",
+    "published_at": "2026-05-20T23:37:00Z",
+    "source": "TheStreet",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "e08080609257",
+    "title": "4 important takeaways from Nvidia's earnings",
+    "summary": "In addition to the earnings release, Nvidia's CFO Colette Kress shared commentary that revealed four key developments in its business, beyond the company's first quarter earnings-per-share beat.",
+    "url": "https://finance.yahoo.com/sectors/technology/article/4-important-takeaways-from-nvidias-earnings-215437095.html",
+    "published_at": "2026-05-20T21:54:37Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "0aa8a139243d",
+    "title": "Nvidia Can Outgrow Hyperscaler CapEx: Jensen Huang",
+    "summary": "CEO Jensen Huang says that Nvidia's growth prospects go beyond the massive spending from hyperscalers.  Hyperscalers are the massive cloud providers, like Microsoft and Alphabet, that are spending hundreds of billions of dollars on AI.  The concern on Wall Street is that eventually these companies will eventually stop spending as much on Nvidia chips.",
+    "url": "https://www.barrons.com/livecoverage/nvidia-earnings-stock-price-ai-chips-jensen-huang/card/nvidia-can-outgrow-hyperscaler-capex-jensen-huang-tjjxkszK7NnUEcflh1T2?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-20T21:44:57Z",
+    "source": "Barrons.com",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "58505699ccd3",
+    "title": "Arm Surges on New $300 Price Target: ARM Stock Is at the ‘Center of the Renaissance’ in CPUs",
+    "summary": "Arm stock pushes higher as Bernstein initiates coverage with an “outperform” rating. Here’s why analyst David Dai sees ARM shares ripping higher from here as the year unfolds.",
+    "url": "https://www.barchart.com/story/news/2048345/arm-surges-on-new-300-price-target-arm-stock-is-at-the-center-of-the-renaissance-in-cpus",
+    "published_at": "2026-05-20T21:01:29Z",
+    "source": "Barchart",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "4a2fe5f33413",
+    "title": "Nvidia's Data Center Revenue Soars. It's Not Just From the 'Hyperscalers.'",
+    "summary": "Nvidia's first-quarter data center sales soared by 92% from last year to $75 billion, a new record.  Nvidia also changed how it breaks up data center sales in its reporting.  It's now showing how much of it comes from outside of the so-called \"hyperscalers\" of Amazon.com, Microsoft, Alphabet, and Meta Platforms.",
+    "url": "https://www.barrons.com/livecoverage/nvidia-earnings-stock-price-ai-chips-jensen-huang/card/nvidia-s-data-center-revenue-soars-it-s-not-just-from-the-hyperscalers--zmb2eRJUZAPxchkniyXm?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-20T20:36:00Z",
+    "source": "Barrons.com",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "751c7ceeb3bc",
+    "title": "Microsoft’s carbon-removal plans aren’t dead after all",
+    "summary": "Microsoft is responsible for over 90% of the carbon-removal market, and reports suggested the company was pausing purchases entirely. This new deal should help assuage the fears of CDR startups.",
+    "url": "https://finance.yahoo.com/sectors/energy/articles/microsoft-carbon-removal-plans-aren-203024641.html",
+    "published_at": "2026-05-20T20:30:24Z",
+    "source": "TechCrunch",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "67b081ff9e1e",
+    "title": "Fiduciary Family Office Dumps Its Entire $10.2 Million Stake in JIVE",
+    "summary": "JPMorgan International Value ETF provides global equity diversification with a value tilt and competitive yield across developed and emerging markets.",
+    "url": "https://www.fool.com/coverage/filings/2026/05/20/fiduciary-family-office-dumps-its-entire-usd10-2-million-stake-in-jive/",
+    "published_at": "2026-05-20T20:28:18Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "194062e4f166",
+    "title": "Sector Update: Financial Stocks Rise Late Afternoon",
+    "summary": "Financial stocks were higher in late Wednesday afternoon trading, with the NYSE Financial Index risi",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/sector-financial-stocks-rise-afternoon-195828037.html",
+    "published_at": "2026-05-20T19:58:28Z",
+    "source": "MT Newswires",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "4c8e7a165867",
+    "title": "Microsoft’s Global AI Data Center Push And What It Means For Investors",
+    "summary": "Microsoft (NasdaqGS:MSFT) is planning to open its largest data center in India in mid 2026 following a record US$17.5b investment. The company has announced additional large scale data center and AI infrastructure plans across Canada, Brazil, and Ireland. New partnerships, including Digitate's Agentic AI certification on Azure, are expanding the range of AI solutions available to enterprise customers. For investors tracking Microsoft (NasdaqGS:MSFT), these moves sit at the heart of its...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/microsoft-global-ai-data-center-062038315.html",
+    "published_at": "2026-05-20T06:20:38Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
     "id": "8c63c908bf9b",
     "title": "Bill Gates' Foundation Closes Microsoft Chapter, Offloads Last $3.2 Billion Stake",
     "summary": "The Bill & Melinda Gates Foundation has finalized its phased exit from Microsoft Corp. by selling its remaining stake in the tech giant. The Gates Foundation’s trust offloaded its final 7.7 million shares of Microsoft during the first quarter of...",

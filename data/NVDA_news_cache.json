@@ -1,5 +1,645 @@
 [
   {
+    "id": "596e9b332403",
+    "title": "Nvidia Introduces First PCs Designed for AI Agents",
+    "summary": "The chips giant will work with manufacturers including Dell, Lenovo and HP to make the laptops, designed to support agentic computing.",
+    "url": "https://www.wsj.com/tech/ai/nvidia-introduces-first-pcs-designed-for-ai-agents-47445bcd?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-06-01T04:44:00Z",
+    "source": "The Wall Street Journal",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "e1b92c0951c6",
+    "title": "Teva Pharmaceutical Industries Just Pulled Off One of Pharma's Most Impressive Comebacks",
+    "summary": "Teva's transformation is gaining momentum.",
+    "url": "https://www.fool.com/investing/2026/06/01/teva-pharmaceutical-industries-just-pulled-off-one/",
+    "published_at": "2026-06-01T04:35:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "7ba87d12419d",
+    "title": "Nvidia Enters Windows Laptop Market, Taking On Intel and AMD",
+    "summary": "(Bloomberg) -- Nvidia Corp. is entering the PC market with a new chip aimed at loosening the stranglehold of Intel Corp. technology in that arena and modernizing the machines for the AI era.Most Read from BloombergUS Says Deals With Iran for Safe Hormuz Transit Are ProhibitedStrait of Hormuz Ship Transits Are Rising Thanks to US HelpAmericans Injured in Iranian Missile Strike on Kuwaiti Air BaseAmericans Hurt in Kuwait as Trump Sends Mixed Signals on WarBerkshire Hathaway to Buy Taylor Morrison",
+    "url": "https://finance.yahoo.com/sectors/technology/articles/nvidia-enters-windows-laptop-market-042523745.html",
+    "published_at": "2026-06-01T04:25:23Z",
+    "source": "Bloomberg",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "8a39c24a1759",
+    "title": "New Fed Chair Kevin Warsh Has Big Plans. They Could End the Trump Bull Market.",
+    "summary": "New Federal Reserve Chair Kevin Warsh's plans for the Fed's balance sheet could quietly push borrowing costs higher.",
+    "url": "https://www.fool.com/investing/2026/06/01/new-fed-chair-kevin-warsh-has-big-plans-they-could/",
+    "published_at": "2026-06-01T04:20:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "f7e44f7c3cc6",
+    "title": "Nvidia Says Anthropic, OpenAI Among Big Users of New Vera Chip",
+    "summary": "(Bloomberg) -- Nvidia Corp. said Anthropic PBC, OpenAI and SpaceX are among the first big users of its upcoming microprocessor, securing key customers for its latest attempt to expand an already extensive footprint in AI data centers.Most Read from BloombergUS Says Deals With Iran for Safe Hormuz Transit Are ProhibitedStrait of Hormuz Ship Transits Are Rising Thanks to US HelpAmericans Injured in Iranian Missile Strike on Kuwaiti Air BaseAmericans Hurt in Kuwait as Trump Sends Mixed Signals on W",
+    "url": "https://finance.yahoo.com/sectors/technology/articles/nvidia-says-anthropic-openai-among-041102143.html",
+    "published_at": "2026-06-01T04:11:02Z",
+    "source": "Bloomberg",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "bf1e6d418a3d",
+    "title": "Insiders Are Buying This Nvidia-Backed $15 Stock Hand Over Fist. Should You?",
+    "summary": "Nvidia invested $1 billion into Nokia back in October.",
+    "url": "https://www.fool.com/investing/2026/05/31/insiders-are-buying-this-nvidia-backed-15-stock/",
+    "published_at": "2026-06-01T04:01:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "9422c016cf0d",
+    "title": "Dell Stock Is Impossible to Ignore Right Now. Here's What to Do With It.",
+    "summary": "The technology company has shocked most investors, but the crowd may have also gotten a little ahead of itself.",
+    "url": "https://www.fool.com/investing/2026/05/31/dell-stock-impossible-to-ignore-what-to-do-with-it/",
+    "published_at": "2026-06-01T03:50:22Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "f8d9a1afe417",
+    "title": "Broadcom Reports Earnings June 3. Time to Buy?",
+    "summary": "The chip designer heads into its report at an all-time high, with one number set to dominate the conversation.",
+    "url": "https://www.fool.com/investing/2026/05/31/broadcom-reports-earnings-june-3-time-to-buy/",
+    "published_at": "2026-06-01T03:23:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "8fd8885bc54c",
+    "title": "Boost Run (BRUN) Soars 42% in Shortened Trading Week Thanks to This Deal",
+    "summary": "Boost Run Inc. (NASDAQ:BRUN) is one of the 10 Stocks With Effortless 38-78% Gains. Boost Run climbed by 41.7 percent week-on-week, as investors increased their exposure to its stock after successfully clinching a new $472-million rental deal with Thinking Machines Lab. In a regulatory filing earlier in the week, Boost Run Inc. (NASDAQ:BRUN) said that […]",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/boost-run-brun-soars-42-030752379.html",
+    "published_at": "2026-06-01T03:07:52Z",
+    "source": "Insider Monkey",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "e627df4ba883",
+    "title": "Assessing Corsair Gaming (CRSR) Valuation After Its Expanded Push Into AI Workstations And Stream Deck AI Integration",
+    "summary": "Corsair Gaming (CRSR) has drawn fresh attention after its Elgato brand added Model Context Protocol support to Stream Deck. This update allows AI assistants like NVIDIA G Assist to trigger actions across users' PCs through configurable hardware keys. See our latest analysis for Corsair Gaming. The recent AI announcements appear to sit alongside strong momentum in the stock, with a 30 day share price return of 74.43% and a 1 year total shareholder return of 38.11%, even though the 3 and 5 year...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/assessing-corsair-gaming-crsr-valuation-030736783.html",
+    "published_at": "2026-06-01T03:07:36Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "706897637e31",
+    "title": "Dow Jones Futures, Oil Prices Rise As Trump Makes This Iran Move; Nvidia, Tesla Lead 5 Titans Near Buy Points",
+    "summary": "Crude oil prices rose Sunday as President Trump reportedly stiffened Iran deal terms. Nvidia, Tesla lead five titans near buy points.",
+    "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-iran-hopes-nvidia-tesla-stocks-near-buy-points/?src=A00220&yptr=yahoo",
+    "published_at": "2026-06-01T03:05:26Z",
+    "source": "Investor's Business Daily",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "9fe1c700880b",
+    "title": "Big Tech companies are screwing the average investor — here's how",
+    "summary": "Time for some stock splits!",
+    "url": "https://finance.yahoo.com/markets/article/big-tech-companies-are-screwing-the-average-investor--heres-how-123000495.html",
+    "published_at": "2026-05-31T12:30:00Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "7d4e757d8279",
+    "title": "IPOs are no longer Wall Street's starting line — they're the exit ramp: Chart of the Day",
+    "summary": "Wall Street used to get the growth story early. Now it often only gets the receipt.",
+    "url": "https://finance.yahoo.com/markets/article/ipos-are-no-longer-wall-streets-starting-line--theyre-the-exit-ramp-chart-of-the-day-114434009.html",
+    "published_at": "2026-05-31T11:44:34Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "1d0018b720aa",
+    "title": "Is NVIDIA (NVDA) the Most Profitable Stock to Invest In?",
+    "summary": "NVIDIA Corporation (NASDAQ:NVDA) is one of the 12 Most Profitable Stocks to Invest In. On May 23, 2026, NVIDIA Corporation (NASDAQ:NVDA) CEO Jensen Huang asked Super Micro Computer (SMCI) to tighten its compliance after Taiwan detained three people for allegedly making fraudulent declarations tied to AI servers made by Nvidia, Bloomberg’s Debby Wu reported. Huang […]",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/nvidia-nvda-most-profitable-stock-060618261.html",
+    "published_at": "2026-05-29T06:06:18Z",
+    "source": "Insider Monkey",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "fab2e68bd989",
+    "title": "For the third time this month, a chip giant has joined the $1 trillion club",
+    "summary": "SK Hynix became one of the few companies in the world with a $1 trillion market cap this week, as a global AI boom propels chip stocks to record levels.",
+    "url": "https://www.cnn.com/2026/05/29/business/sk-hynix-chips-trillion-dollar-club-intl-hnk",
+    "published_at": "2026-05-29T04:33:19Z",
+    "source": "CNN Business",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "e95a4a32bdea",
+    "title": "Best 3 Blue Chip Stocks to Buy After a Market Pullback -- Including Microsoft (MSFT) Stock",
+    "summary": "One of these stocks sports a dividend yield topping 5%.",
+    "url": "https://www.fool.com/investing/2026/05/29/best-3-blue-chip-stocks-to-buy-after-this-weeks-ma/",
+    "published_at": "2026-05-29T04:20:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "90a4ade2dba4",
+    "title": "Why Super Micro (SMCI) Stock Is Up Today",
+    "summary": "Shares of server solutions provider Super Micro (NASDAQ:SMCI) jumped 9% in the afternoon session after the company announced a new partnership with European AI cloud provider Verda and its successful collaboration with Taiwanese authorities to prevent its servers from being illegally diverted to China.",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/why-super-micro-smci-stock-035800064.html",
+    "published_at": "2026-05-29T03:58:00Z",
+    "source": "StockStory",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "6b6d1467de2c",
+    "title": "Nvidia Already is the GPU Giant. Now It's Aiming to Dominate in a New $200 Billion Market.",
+    "summary": "This move could trigger a new era of growth.",
+    "url": "https://www.fool.com/investing/2026/05/28/nvidia-already-is-the-gpu-giant-now-its-aiming-to/",
+    "published_at": "2026-05-28T22:30:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "bc22cf55e721",
+    "title": "Wiwynn Warns AI Supply Crunch Could Last Until 2027-2028",
+    "summary": "Server supplier says component shortages beyond memory chips may raise costs as AI spending accelerates.",
+    "url": "https://finance.yahoo.com/sectors/technology/articles/wiwynn-warns-ai-supply-crunch-221449458.html",
+    "published_at": "2026-05-28T22:14:49Z",
+    "source": "GuruFocus.com",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "d9e066b8317e",
+    "title": "MUU Becomes the Fourth Single-Stock ETF to Cross $5 Billion",
+    "summary": "<p>The leveraged Micron ETF has surged more than 700% this year.</p>",
+    "url": "http://www.etf.com/sections/features/muu-becomes-fourth-single-stock-etf-cross-5-billion?utm_source=yahoo-finance&utm_medium=rss&utm_campaign=yahoo-finance-rss",
+    "published_at": "2026-05-28T21:58:08Z",
+    "source": "etf.com",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "58575bb72e28",
+    "title": "Which Top 10 Crypto Has The Weakest 2026 Outlook?",
+    "summary": "Dogecoin (CRYPTO: DOGE) has the weakest outlook of any top-10 crypto in 2026. Today’s fresh U.S. strikes on Iran pulled the entire market lower, but DOGE was already in trouble. The token has spent four months stuck between $0.08 and $0.11, down 86% from its all-time high of $0.73 in May 2021. Unlike the rest ... Which Top 10 Crypto Has The Weakest 2026 Outlook?",
+    "url": "https://247wallst.com/investing/2026/05/28/which-top-10-crypto-has-the-weakest-2026-outlook/",
+    "published_at": "2026-05-28T21:55:36Z",
+    "source": "24/7 Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "0d854f28a387",
+    "title": "Inflation Just Spiked to the Highest Level in Almost 3 Years in the First Report Under New Fed Chair Kevin Warsh. But There Was Some Good News",
+    "summary": "The April reading of the personal consumption expenditures price index was released earlier today.",
+    "url": "https://www.fool.com/investing/2026/05/28/inflation-just-spiked-to-the-highest-level-in-almost-3-years-in-the-first-report-under-new-fed-chair-kevin-warsh-but-there-was-some-good-news/",
+    "published_at": "2026-05-28T21:53:42Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "b57219180f44",
+    "title": "Memory chip stocks just starting to show 'climactic top' moves",
+    "summary": "The rally in memory chip stocks has driven Micron Technology (MU) shares 25% higher in the last week as its market cap crossed into the $1 trillion threshold. Sandisk (SNDK) continues its warpath after skyrocketing 4,100% over the past 12 months. Zacks Investment Research senior stock strategist Andrew Rocco explains why he believes these memory chip stocks are at the beginning of their \"climactic blow-off top\" moves and the growth potential they have as per their applications for training AI models.",
+    "url": "https://finance.yahoo.com/video/memory-chip-stocks-just-starting-to-show-climactic-top-moves-195233603.html",
+    "published_at": "2026-05-28T19:52:33Z",
+    "source": "Yahoo Finance Video",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "5a6119686658",
+    "title": "Micron's AI boom is unprecedented for the memory trade: Chart of the Day",
+    "summary": "Micron's rally has blown past every major memory stock boom of the past three decades.",
+    "url": "https://finance.yahoo.com/markets/article/microns-ai-boom-is-unprecedented-for-the-memory-trade-chart-of-the-day-100000010.html",
+    "published_at": "2026-05-28T10:00:00Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "a955a6743c4d",
+    "title": "SoFi's Tech Platform Revenue Is the Quiet Story Behind the Stock",
+    "summary": "SoFi's scaling of its fintech business could create significant shareholder value.",
+    "url": "https://www.fool.com/investing/2026/05/28/sofis-tech-platform-revenue-is-the-quiet-story-beh/",
+    "published_at": "2026-05-28T04:50:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "a139a7f0e47e",
+    "title": "Foreign investors buy Japanese stocks for eighth week on AI rally",
+    "summary": "May 28 (Reuters) - Foreign investors bought Japanese stocks for the eighth straight week through May 23, as oil prices eased and AI-related shares rallied on robust demand outlook.",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/foreign-investors-buy-japanese-stocks-044253494.html",
+    "published_at": "2026-05-28T04:42:53Z",
+    "source": "Reuters",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "19cce6486829",
+    "title": "IREN (IREN) Is Up 28.7% After US$1.6 Billion Nvidia Blackwell AI Infrastructure Deal - What's Changed",
+    "summary": "Earlier this week, IREN Limited agreed to a roughly US$1.60 billion purchase of Dell systems using Nvidia’s Blackwell GPUs for its Childress, Texas data centers, aiming to support a previously announced five‑year US$3.40 billion managed AI cloud services contract and lift projected annualized run‑rate revenue from US$3.70 billion to US$4.40 billion by early 2027. The deal underlines how IREN’s access to next‑generation Nvidia hardware via Dell is becoming central to its effort to reposition...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/iren-iren-28-7-us-042607172.html",
+    "published_at": "2026-05-28T04:26:07Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "293be44410da",
+    "title": "Jerome Powell Stepped Down as Federal Reserve Chairman With a 7-Word Warning That Speaks Volumes for Stock Investors",
+    "summary": "How resilient will the economy be amid the current bout of inflation?",
+    "url": "https://www.fool.com/investing/2026/05/28/jerome-powell-stepped-down-as-federal-reserve-chai/",
+    "published_at": "2026-05-28T04:20:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "6d07524ed44a",
+    "title": "IREN Ltd (IREN) Soars 13.5% as Firm Ups ARR Outlook to $4.4B",
+    "summary": "IREN Ltd. (NASDAQ:IREN) is one of the 9 Stocks With Unbelievable Gains. IREN Ltd. saw its share prices grow by 13.48 percent on Wednesday to close at $67.84 apiece, as investor sentiment was boosted by the successful acquisition of Nvidia Blackwell systems—a move expected to bolster its annualized run-rate revenues (ARR) to $4.4 billion. In […]",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/iren-ltd-iren-soars-13-041211655.html",
+    "published_at": "2026-05-28T04:12:11Z",
+    "source": "Insider Monkey",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "f259b93065d4",
+    "title": "NVDA Stock Drops 10% From All-Time High Amid Fresh Risks From New Huawei AI Chip Tech",
+    "summary": "NVDA’s surprising underperformance has left retail traders frustrated.",
+    "url": "https://stocktwits.com/news-articles/markets/equity/nvda-stock-drops-10-from-all-time-high-amid-fresh-risks-from-new-huawei-ai-chip-tech/cZgiPVURes2",
+    "published_at": "2026-05-28T04:03:49Z",
+    "source": "Stocktwits",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "d835e3c5b9b3",
+    "title": "Nvidia Stock Has Struggled Over the Last Week. Here's What I Think Is Going On.",
+    "summary": "The chipmaker's blockbuster quarter wasn't enough to lift shares -- and a few specific concerns may explain why.",
+    "url": "https://www.fool.com/investing/2026/05/27/nvidia-stock-has-struggled-over-the-last-week-here/",
+    "published_at": "2026-05-28T04:01:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "7a962ed076ce",
+    "title": "SK Hynix and Micron lead AI boom, join trillion-dollar club",
+    "summary": "Yahoo Finance Tech Editor Dan Howley joins Host Josh Lipton on Market Domination to break down the day’s leading tech stories, including SK Hynix (000660.KS) joining the Trillion-dollar club and Micron Technology (MU) impressive growth in 2026.",
+    "url": "https://finance.yahoo.com/video/sk-hynix-and-micron-lead-ai-boom-join-trillion-dollar-club-203420020.html",
+    "published_at": "2026-05-27T20:34:20Z",
+    "source": "Yahoo Finance Video",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "a20f03654299",
+    "title": "The Micron stock price bubble explained in 2 numbers",
+    "summary": "The enthusiasm for Micron persists.",
+    "url": "https://finance.yahoo.com/markets/article/the-micron-stock-price-bubble-explained-in-2-numbers-134713072.html",
+    "published_at": "2026-05-27T13:47:13Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "4e7ad93ae2c0",
+    "title": "How does Micron stack up to Nvidia after reaching $1T market cap?",
+    "summary": "Memory chip maker Micron Technology (MU) and South Korean semiconductor company SK Hynix (000660.KS) both reached $1 trillion valuations in the latest phase of AI demand that is driving markets. Micron shares continue to surge in Wednesday's pre-market trading since UBS analysts raised their price target on the stock to $1,625. Morning Brief Host Julie Hyman and Yahoo Finance Head of News Myles Udland discuss Micron's latest market cap benchmark.",
+    "url": "https://finance.yahoo.com/video/how-does-micron-stack-up-to-nvidia-after-reaching-1t-market-cap-132828977.html",
+    "published_at": "2026-05-27T13:28:28Z",
+    "source": "Yahoo Finance Video",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "3805ed2545e4",
+    "title": "Michael Burry Goes After Nvidia Again — Flags ‘Temporary’ Demand, Customer Concentration Risks",
+    "summary": "The elevated AI-linked demand is driven by a combination of benchmarking, trace-harvesting, and \"tokenmaxxing,\" and would die down, Burry argued.",
+    "url": "https://stocktwits.com/news-articles/markets/equity/michael-burry-goes-after-nvidia-again-flags-temporary-demand-customer-concentration-risks/cZgareJRepg",
+    "published_at": "2026-05-26T05:14:09Z",
+    "source": "Stocktwits",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "f79fdd38fcde",
+    "title": "Before the Next Nvidia-Style Run, Here Are 3 AI Stocks Worth Watching",
+    "summary": "The next AI winners may come from the companies that help move data in AI data centers.",
+    "url": "https://www.fool.com/investing/2026/05/25/before-the-next-nvidia-style-run-here-are-3-ai-sto/",
+    "published_at": "2026-05-26T03:50:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "5b777a7b64ec",
+    "title": "2 Building Materials Stocks That Are Quietly Becoming Some of the Market's Best Opportunities",
+    "summary": "Armstrong World Industries and Carlisle Companies are outpacing other building materials stocks.",
+    "url": "https://www.fool.com/investing/2026/05/25/2-building-materials-stocks-that-are-quietly-becom/",
+    "published_at": "2026-05-26T03:20:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "0f598d5ed735",
+    "title": "Arm’s AGI CPUs Put AI Data Center Growth Story In Focus",
+    "summary": "Arm Holdings (NasdaqGS:ARM) has introduced its Arm AGI CPU platform, aimed at agentic AI workloads in data centers. Major cloud providers and hyperscalers, including Nvidia, are adopting the architecture, signaling broad industry support. Arm expanded its collaboration with Red Hat to deliver integrated AI hardware and software stacks for data center and hybrid cloud use. For investors watching AI infrastructure, NasdaqGS:ARM now sits at the center of a key shift as its designs gain...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/arm-agi-cpus-put-ai-030956427.html",
+    "published_at": "2026-05-26T03:09:56Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "6e5531bcdb74",
+    "title": "Is Green Thumb Becoming the \"Procter & Gamble of Cannabis\"?",
+    "summary": "Cannabis company Green Thumb is younger and in a different sector than consumer staples giant Procter & Gamble, but it's succeeding with similar methods.",
+    "url": "https://www.fool.com/investing/2026/05/25/is-green-thumb-becoming-the-procter-gamble-of-cann/",
+    "published_at": "2026-05-26T02:50:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "f71d52524752",
+    "title": "The 1 AI Stock I'd Put in a Time Capsule and Open in 2036",
+    "summary": "A speculative but compelling AI biotech investment can be built around Absci and its attempt to rewire drug discovery itself.",
+    "url": "https://www.fool.com/investing/2026/05/25/the-1-ai-stock-id-put-in-a-time-capsule-and-open-i/",
+    "published_at": "2026-05-26T02:20:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "87d492919bfa",
+    "title": "Why Fortinet (FTNT) Is Up 5.9% After Expanding NVIDIA‑Powered FortiAIGate AI Security Capabilities",
+    "summary": "Earlier in May 2026, Fortinet announced it is accelerating its FortiAIGate solution using NVIDIA’s AI platforms to secure real-time AI workloads across data centers and the cloud, with deployment options spanning on‑premises, hybrid, and edge environments. By combining NVIDIA’s GPU acceleration with FortiAIGate’s zero‑trust guardrails for large language models and autonomous agents, the partnership directly targets enterprises’ concerns around AI security, data sovereignty, and...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/why-fortinet-ftnt-5-9-020723041.html",
+    "published_at": "2026-05-26T02:07:23Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "10828a448e97",
+    "title": "This AI Stock Has Been Called Overvalued for 3 Years. The Bears Keep Losing.",
+    "summary": "The critics have missed out on substantial returns.",
+    "url": "https://www.fool.com/investing/2026/05/25/this-ai-stock-has-been-called-overvalued-for-3-yea/",
+    "published_at": "2026-05-26T02:05:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "35224412c0c3",
+    "title": "Coherent NVIDIA Pact Links AI Optics Growth With Stretched Valuation Metrics",
+    "summary": "Coherent (NYSE:COHR) announced a multi year partnership with NVIDIA that includes a planned US$2b investment. The agreement focuses on expanding optical component supply, research and development, and U.S. manufacturing capacity. The partnership is tied to growing AI driven demand for datacenter and communications products. Coherent operates in optical and laser technologies that are used in high speed communications, AI compute, and advanced manufacturing. The new agreement with NVIDIA...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/coherent-nvidia-pact-links-ai-010812806.html",
+    "published_at": "2026-05-26T01:08:12Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "e8bc3667208e",
+    "title": "AI just minted 19 new billionaires worth $59 billion",
+    "summary": "Money has a way of finding the people building tomorrow's tools before the rest of us notice. That was true in the dotcom boom, in the smartphone era, and again in the social media land grab a decade later. The AI boom looks different, at least so far. For the last three years, almost every story ...",
+    "url": "https://www.thestreet.com/technology/ai-just-minted-19-new-billionaires-worth-59-billion",
+    "published_at": "2026-05-26T01:03:00Z",
+    "source": "TheStreet",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "d5cc339f171b",
+    "title": "Better Gene-Editing Stock: CRISPR Therapeutics or Beam Therapeutics?",
+    "summary": "Are there significant gains ahead for one (or both) of these innovative biotechs?",
+    "url": "https://www.fool.com/investing/2026/05/25/better-gene-editing-stock-crispr-therapeutics-or-b/",
+    "published_at": "2026-05-26T00:55:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "5bbef98c6cad",
+    "title": "Is Litecoin a Better Buy Than Bitcoin Right Now?",
+    "summary": "This coin has survived for a long time, but can it ever thrive?",
+    "url": "https://www.fool.com/investing/2026/05/25/is-litecoin-a-better-buy-than-bitcoin-right-now/",
+    "published_at": "2026-05-25T05:35:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "b26eb3f84e83",
+    "title": "This $8 Stock Could Be Your Ticket to Millionaire Status",
+    "summary": "This former AI favorite has fallen from grace, but Wall Street could once again sing its praises.",
+    "url": "https://www.fool.com/investing/2026/05/25/this-8-stock-could-be-your-ticket-to-millionaire-s/",
+    "published_at": "2026-05-25T04:50:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "68dd2f8356e5",
+    "title": "Is the Stock Market Open Today? Here Are the Trading Hours for Memorial Day.",
+    "summary": "As millions of Americans hit the road for Memorial Day weekend, investors are welcoming the chance to slow down.  The holiday follows a chaotic week driven by quarterly earnings from artificial-intelligence giant  Nvidia  and a flurry of excitement around quantum computing stocks.  Is the Stock Market Open or Closed on Memorial Day?",
+    "url": "https://www.barrons.com/articles/stock-market-open-closed-today-memorial-day-hours-banks-post-office-ups-fedex-0faab8af?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-05-25T04:01:00Z",
+    "source": "Barrons.com",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "2f3deef75288",
+    "title": "3 Stocks I Plan to Hold for the Next 20 Years",
+    "summary": "These are great businesses that can compound wealth in your portfolio for many years, rewarding patience in the long term.",
+    "url": "https://www.fool.com/investing/2026/05/24/3-stocks-i-plan-to-hold-for-the-next-20-years/",
+    "published_at": "2026-05-25T03:50:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "a83d2bca3e29",
+    "title": "Is Cardano Too Cheap to Ignore Right Now?",
+    "summary": "Even at a heavily discounted price, Cardano could be a value trap.",
+    "url": "https://www.fool.com/investing/2026/05/24/is-crypto-too-cheap-to-ignore-right-now/",
+    "published_at": "2026-05-25T02:50:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "f1872fad15cc",
+    "title": "Why IMAX Stock Jumped This Week",
+    "summary": "The premium movie experience provider has put itself up for sale.",
+    "url": "https://www.fool.com/investing/2026/05/24/why-imax-stock-jumped-this-week/",
+    "published_at": "2026-05-25T02:21:35Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "5dec61ec5cb6",
+    "title": "3 AI Stocks I Wouldn't Hesitate to Buy Now",
+    "summary": "There are several great AI stocks worth buying right now.",
+    "url": "https://www.fool.com/investing/2026/05/24/3-ai-stocks-i-wouldnt-hesitate-to-buy-now/",
+    "published_at": "2026-05-25T02:20:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "ac9915699c13",
+    "title": "Nasdaq Rebound: 3 Stocks to Buy Before They Hit New All-Time Highs",
+    "summary": "These three stocks are well off their highs but could stage big rallies.",
+    "url": "https://www.fool.com/investing/2026/05/24/nasdaq-rebound-3-stocks-to-buy-before-they-hit-new/",
+    "published_at": "2026-05-25T02:05:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "6627bbbeae04",
+    "title": "Elon Musk wants to put data centers in space — here's what that could actually look like",
+    "summary": "SpaceX founder Elon Musk has said that he wants to put data centers in space for efficiency. One expert told Yahoo Finance how it would actually work.",
+    "url": "https://finance.yahoo.com/markets/article/elon-musk-wants-to-put-data-centers-in-space--heres-what-that-could-actually-look-like-143000204.html",
+    "published_at": "2026-05-24T14:30:00Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "1685523fdb2f",
+    "title": "Scenes from the Memorial Day investing road: Takeaways on Walmart, Nvidia, and GameStop",
+    "summary": "A big week for investors, let's not overlook it.",
+    "url": "https://finance.yahoo.com/markets/article/scenes-from-the-memorial-day-investing-road-takeaways-on-walmart-nvidia-and-gamestop-123000395.html",
+    "published_at": "2026-05-24T12:30:00Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "a4fad6f8acf8",
+    "title": "NVIDIA Corp (NVDA) Q1 2027 Earnings Call Highlights: Record Revenue and Strategic Expansion",
+    "summary": "NVIDIA Corp (NVDA) reports an impressive 85% year-over-year revenue growth, driven by data center demand and strategic market expansions.",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/nvidia-corp-nvda-q1-2027-050040683.html",
+    "published_at": "2026-05-21T05:00:40Z",
+    "source": "GuruFocus.com",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "3572ca0102d4",
+    "title": "Nvidia bets on new data center chips as sales outlook tops estimates",
+    "summary": "<body><p>STORY: Nvidia on Wednesday forecast second-quarter revenue above Wall Street expectations, and assured investors that new customers would let it maintain blockbuster rates of growth.&nbsp;</p><p>The world's most valuable company expects sales of around $91 billion, compared with estimates of about $87 billion.</p><p>For the first quarter, Nvidia reported revenue of $81.6 billion, also beating forecasts.</p><p>However, its shares dropped over 1% in extended trading, in a sign that investors believe Nvidia will face tougher competition.</p><p>That could come from U.S. rivals Intel and AMD, which are finding new demand for their chips in AI applications.&nbsp;</p><p>Nvidia CEO Jensen Huang told analysts his firm would grow faster than so-called \"hyperscale\" customers like Alphabet and Amazon.</p><p>He pointed to a new segment of smaller customers in its data center business that includes AI-specific cloud firms.</p><p>He added that the company's new \"Vera\" central processors give it access to a $200 billion market.</p><p>Huang said Nvidia expects $20 billion in revenue from the new silicon by the end of this fiscal year, in addition to the $1 trillion for existing Blackwell and Rubin chips by 2027.</p></body>",
+    "url": "https://finance.yahoo.com/video/nvidia-bets-data-center-chips-044442770.html",
+    "published_at": "2026-05-21T04:44:42Z",
+    "source": "Reuters Videos",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "51ad9c694ef9",
+    "title": "Is Nvidia a Buy After Their Latest Earnings Report?",
+    "summary": "Nvidia now sees sales growing an astounding 95% in the current quarter, and that's without any China sales.",
+    "url": "https://www.fool.com/investing/2026/05/21/is-nvidia-a-buy-after-their-latest-earnings-report/",
+    "published_at": "2026-05-21T04:20:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "6f61ac2762da",
+    "title": "Nvidia posts record quarter as AI demand surges, but muted guidance caps investor excitement",
+    "summary": "Nvidia Corp (NASDAQ:NVDA, XETRA:NVD) has delivered another blockbuster quarter, reporting record first-quarter revenue of US$81.6 billion, up 85% year-on-year, as demand for its artificial intelligence chips continued to dominate global data centre spending. Despite topping Wall Street...",
+    "url": "https://www.proactiveinvestors.com/companies/news/1092649/nvidia-posts-record-quarter-as-ai-demand-surges-but-muted-guidance-caps-investor-excitement-1092649.html",
+    "published_at": "2026-05-21T04:17:00Z",
+    "source": "Proactive",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "26a4a4c6e640",
+    "title": "Stock market today: Dow, S&P 500, Nasdaq futures slip as Wall Street shrugs off Nvidia earnings",
+    "summary": "US stock futures fell after Nvidia earnings failed to wow investors, and SpaceX took a big step toward its IPO.",
+    "url": "https://finance.yahoo.com/economy/live/stock-market-today-dow-sp-500-nasdaq-futures-slip-as-wall-street-shrugs-off-nvidia-earnings-232311657.html",
+    "published_at": "2026-05-20T23:23:11Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "eb5894d1cb5d",
+    "title": "Nvidia Q1 earnings results: Top takeaways",
+    "summary": "Nvidia (NVDA) released its first quarter results on Wednesday, outpacing adjusted earnings ($1.87 per share vs. Bloomberg estimates of $1.77) and revenue forecasts ($81.62 billion vs. estimates of $79.18 billion).Yahoo Finance Tech Editor Dan Howley shares his biggest takeaways from the print with Yahoo Finance's Brooke DiPalma.",
+    "url": "https://finance.yahoo.com/video/nvidia-q1-earnings-results-top-takeaways-213230096.html",
+    "published_at": "2026-05-20T21:32:30Z",
+    "source": "Yahoo Finance Video",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "090fa3d81fc8",
+    "title": "What analysts want to see from Nvidia earnings",
+    "summary": "Yahoo Finance Executive Editor is joined by Crossmark Global Investments Chief Market Strategist Victoria Fernandez to break down Nvidia (NVDA) ahead of earnings today, May 20.",
+    "url": "https://finance.yahoo.com/video/what-analysts-want-to-see-from-nvidia-earnings-141643596.html",
+    "published_at": "2026-05-20T14:16:43Z",
+    "source": "Yahoo Finance Video",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "0f4a74ed22ec",
+    "title": "Intel, Micron, and other semiconductor stocks extend bounce ahead of Nvidia earnings",
+    "summary": "Chip stocks bounced ahead of Nvidia earnings.",
+    "url": "https://finance.yahoo.com/markets/article/intel-micron-and-other-semiconductor-stocks-extend-bounce-ahead-of-nvidia-earnings-114957534.html",
+    "published_at": "2026-05-20T11:49:57Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "5fce27c48305",
+    "title": "Nvidia earnings: TSM's results may give 'a clue' on what to expect",
+    "summary": "Nvidia (NVDA) is rounding out the earnings season for the Magnificent Seven this week as the chipmaker prepares to release first quarter results this Wednesday, May 20. Bokeh Capital Partners founder and CIO Kimberly Forrest highlights what she expects to see from Nvidia's results, mentioning how Taiwan Semiconductor Manufacturing Company's (TSM) own results may hint at what's to come.",
+    "url": "https://finance.yahoo.com/video/nvidia-earnings-tsms-results-may-100000386.html",
+    "published_at": "2026-05-20T10:00:00Z",
+    "source": "Yahoo Finance Video",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
     "id": "5d63a1487604",
     "title": "Nvidia's Earnings Are Hours Away. Here Are 3 Things to Watch.",
     "summary": "The AI chipmaker's outlook for the quarter ahead, its Vera Rubin transition, and any fresh China commentary could matter more than the headline numbers.",
@@ -66,6 +706,16 @@
     "url": "https://finance.yahoo.com/news/live/stock-market-today-dow-sp-500-nasdaq-futures-dip-in-countdown-to-nvidia-earnings-222757467.html",
     "published_at": "2026-05-19T22:27:57Z",
     "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "3e435d6d7b64",
+    "title": "Is Wall Street still as bullish on Nvidia as other chip stocks?",
+    "summary": "With Nvidia (NVDA) set to report first quarter 2027 earnings results on Wednesday, are Wall Street investors as bullish around the AI chip stock as years prior? Yahoo Finance Senior Reporters Brooke DiPalma and Ines Ferré examine the latest note out from Evercore ISI gauging bullish investor sentiment on Nvidia compared to other major chip players.",
+    "url": "https://finance.yahoo.com/video/wall-street-still-bullish-nvidia-151500039.html",
+    "published_at": "2026-05-19T15:15:00Z",
+    "source": "Yahoo Finance Video",
     "sentiment_score": null,
     "sentiment_label": null
   },
@@ -445,6 +1095,16 @@
     "summary": "The AI trade lifted stocks on Thursday as all eyes were on the crucial Trump-Xi summit that kicked off in Beijing.",
     "url": "https://finance.yahoo.com/news/live/stock-market-today-dow-retakes-50000-level-sp-500-and-nasdaq-surge-to-fresh-records-as-ai-trade-roars-back-223230929.html",
     "published_at": "2026-05-13T22:32:30Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "5d7ea6f998df",
+    "title": "Nvidia tops Q1 estimates, offers upbeat outlook on strong chip sales",
+    "summary": "Nvidia reported its Q1 earning after the bell Wednesday.",
+    "url": "https://finance.yahoo.com/markets/stocks/article/nvidia-tops-q1-estimates-offers-upbeat-outlook-on-strong-chip-sales-191200548.html",
+    "published_at": "2026-05-13T19:12:00Z",
     "source": "Yahoo Finance",
     "sentiment_score": null,
     "sentiment_label": null
