@@ -3,7 +3,7 @@ import {
   View, Text, StyleSheet, ScrollView, RefreshControl,
   ActivityIndicator, TouchableOpacity, Switch, Alert,
 } from 'react-native';
-import api from '../api';
+import api, { readStaleCache, writeCache } from '../api';
 import { Colors, Typography } from '../theme';
 
 const SYMBOLS = ['AAPL', 'NVDA', 'MSFT', 'GOOGL', 'AMZN', 'TSLA', 'META'];
@@ -20,6 +20,17 @@ export default function DashboardScreen() {
   const [stratLoading, setStratLoading] = useState(false);
 
   const load = useCallback(async (sym = symbol) => {
+    // Step 1: show stale cache immediately so the spinner disappears instantly
+    const cached = await readStaleCache(`dashboard_${sym}`);
+    if (cached) {
+      if (cached.price)   setLivePrice(cached.price);
+      if (cached.pred)    setPrediction(cached.pred);
+      if (cached.auto)    setAutoTrade(cached.auto);
+      if (cached.acct)    setAccount(cached.acct);
+      setLoading(false);
+    }
+
+    // Step 2: fetch fresh data in background (all 4 in parallel)
     try {
       const [priceRes, predRes, autoRes, acctRes] = await Promise.all([
         api.get(`/api/portfolio/live-price?symbol=${sym}`).catch(() => null),
@@ -27,10 +38,16 @@ export default function DashboardScreen() {
         api.get('/api/auto-trade/status').catch(() => null),
         api.get('/api/broker/account').catch(() => null),
       ]);
-      if (priceRes) setLivePrice(priceRes.data);
-      if (predRes) setPrediction(predRes.data);
-      if (autoRes) setAutoTrade(autoRes.data);
-      if (acctRes) setAccount(acctRes.data);
+      const price = priceRes?.data ?? null;
+      const pred  = predRes?.data  ?? null;
+      const auto  = autoRes?.data  ?? null;
+      const acct  = acctRes?.data  ?? null;
+      if (price) setLivePrice(price);
+      if (pred)  setPrediction(pred);
+      if (auto)  setAutoTrade(auto);
+      if (acct)  setAccount(acct);
+      // Update cache (60 s for prices, 300 s for predictions)
+      await writeCache(`dashboard_${sym}`, { price, pred, auto, acct }, 300);
     } catch (_) {}
   }, [symbol]);
 

@@ -3,7 +3,7 @@ import {
   View, Text, StyleSheet, ScrollView, RefreshControl,
   ActivityIndicator, TouchableOpacity, Alert,
 } from 'react-native';
-import api from '../api';
+import api, { readStaleCache, writeCache } from '../api';
 import { Colors, Typography } from '../theme';
 
 export default function PortfolioScreen() {
@@ -15,6 +15,17 @@ export default function PortfolioScreen() {
   const [refreshing, setRefreshing] = useState(false);
 
   const load = useCallback(async () => {
+    // Show stale cache immediately
+    const cached = await readStaleCache('portfolio_screen');
+    if (cached) {
+      if (cached.summary)   setSummary(cached.summary);
+      if (cached.stats)     setStats(cached.stats);
+      if (cached.pred)      setPrediction(cached.pred);
+      if (cached.positions) setPositions(cached.positions);
+      setLoading(false);
+    }
+
+    // Fetch fresh data in parallel
     try {
       const [sumRes, statRes, predRes, posRes] = await Promise.all([
         api.get('/api/portfolio/summary').catch(() => null),
@@ -22,10 +33,15 @@ export default function PortfolioScreen() {
         api.get('/api/next-day-prediction?symbol=AAPL').catch(() => null),
         api.get('/api/broker/positions').catch(() => null),
       ]);
-      if (sumRes) setSummary(sumRes.data.summary || sumRes.data.raw);
-      if (statRes) setStats(statRes.data.detailed || null);
-      if (predRes) setPrediction(predRes.data);
-      if (posRes) setPositions(posRes.data || []);
+      const summary   = sumRes?.data?.summary  ?? sumRes?.data?.raw  ?? null;
+      const stats     = statRes?.data?.detailed ?? null;
+      const pred      = predRes?.data           ?? null;
+      const positions = posRes?.data            ?? [];
+      if (summary)          setSummary(summary);
+      if (stats)            setStats(stats);
+      if (pred)             setPrediction(pred);
+      if (posRes)           setPositions(positions);
+      await writeCache('portfolio_screen', { summary, stats, pred, positions }, 60);
     } catch (_) {}
   }, []);
 

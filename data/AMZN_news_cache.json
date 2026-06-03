@@ -1,5 +1,205 @@
 [
   {
+    "id": "b58a9687f0c6",
+    "title": "Garth Brooks Considers Sale of Music Catalog, Seeking Roughly $2 Billion",
+    "summary": "Country music star Garth Brooks is considering a sale of his catalog, eyeing roughly $2 billion for the rights to his songs and recordings, according to people familiar with the matter.  Brooks, an album sales and touring juggernaut, is seeking a price that would be among the largest deals for an individual artist or group’s catalog.  The country superstar has been entertaining a transaction for a few years and recently told some investors that he’s one of a few artists of his level of fame who hasn’t sold and is considering it, one of the people familiar with the matter said.",
+    "url": "https://www.wsj.com/business/media/garth-brooks-considers-sale-of-music-catalog-seeking-roughly-2-billion-c80c2af2?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-06-03T00:00:00Z",
+    "source": "The Wall Street Journal",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "f47aeb9e1542",
+    "title": "Cheap Stocks, Nervous Market, Big Opportunity: Where to Put $10,000 Right Now",
+    "summary": "If you're looking to invest big, Amazon and Meta Platforms look like top choices.",
+    "url": "https://www.fool.com/investing/2026/06/02/cheap-stocks-nervous-market-big-opportunity-where/",
+    "published_at": "2026-06-02T23:50:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "4386836eb271",
+    "title": "SpaceX Valuation Could Put Company in Top Seven by Market Cap",
+    "summary": "$1.75 trillion That is the valuation being considered by SpaceX in its blockbuster initial public offering planned for next week. That number could change a lot in coming days, but if it holds it would make Elon Musk’s rocket maker the seventh-largest U.",
+    "url": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-06-02-2026/card/spacex-valuation-could-put-company-in-top-seven-by-market-cap-4L5cPJB6wsFRIAlDaOWt?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-06-02T22:30:04Z",
+    "source": "The Wall Street Journal",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "2b518bbc140d",
+    "title": "Bank of America resets Nvidia stock forecast after key event",
+    "summary": "Nvidia (NVDA) stock closed the June 1 trading session up 6.26% at $224.36. The stock is now up about 20.3% year to date, at the time of writing, Tuesday morning, June 2. Meanwhile, the SPDR S&P 500 Index (SPY) is up about 11.24% in the same period. While Nvidia was expected to outpace the ...",
+    "url": "https://www.thestreet.com/investing/stocks/bank-of-america-reiterates-buy-rating-nvidia-stock-forecast",
+    "published_at": "2026-06-02T22:17:00Z",
+    "source": "TheStreet",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "f8f605dfa28a",
+    "title": "Affirm vs. Klarna: Which Technology Stock Is a Better Buy in 2026?",
+    "summary": "Affirm leans on U.S. retail partnerships and strong cash flow, while Klarna expands globally with nearly a million merchants but posts ongoing net losses.",
+    "url": "https://www.fool.com/coverage/better-buy/2026/06/02/affirm-vs-klarna-which-technology-stock-is-a-better-buy-in-2026/",
+    "published_at": "2026-06-02T22:06:25Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "900351a05c34",
+    "title": "Amazon is putting groceries at the center of Prime Day 2026",
+    "summary": "Amazon is putting a spotlight on groceries this Prime Day , reflecting its broader push to become a bigger destination for shoppers' everyday spending, not just occasional big-ticket purchases.",
+    "url": "https://www.axios.com/2026/06/02/amazon-prime-day-2026-dates-grocery-push#utm_source=yahoo_finance&utm_medium=partner&utm_campaign=subs-partner-yahoo-finance-AI",
+    "published_at": "2026-06-02T21:13:04Z",
+    "source": "Axios",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "24f8135da144",
+    "title": "Stock Market Today: Dow, S&P 500 Extend Win Streaks; Apple Rises, Nvidia Sinks",
+    "summary": "Stock Market Today: The Dow Jones index climbs Tuesday with U.S.-Iran talks ongoing. Celestica shows a giant move. Nvidia falls.",
+    "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-sp500-nasdaq-us-iran-talks-marvell-stock-mrvl/?src=A00220&yptr=yahoo",
+    "published_at": "2026-06-02T20:25:18Z",
+    "source": "Investor's Business Daily",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "c5dfc6fa87e8",
+    "title": "Bad News for Alphabet Stock Is Good News for Copper Investors",
+    "summary": "Copper soared while  Alphabet  stock sank; both things were related.  The Google parent’s stock sank because of an $80 billion equity raise that included preferred stock and  Berkshire Hathaway  No one saw it coming, part of the reason for the reaction.  Alphabet needs the money to spend even more on AI and meet what it calls “unprecedented customer demand.”",
+    "url": "https://www.barrons.com/articles/alphabet-stock-copper-ai-capex-8a7f170b?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-06-02T20:20:00Z",
+    "source": "Barrons.com",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "802a0cc90eaf",
+    "title": "Marvell stock soars as Nvidia CEO calls chipmaker 'the next trillion-dollar company'",
+    "summary": "Marvell stock jumped after Nvidia CEO Jensen Huang called the custom chipmaker 'the next trillion-dollar company.'",
+    "url": "https://finance.yahoo.com/markets/stocks/article/marvell-stock-soars-as-nvidia-ceo-calls-chipmaker-the-next-trillion-dollar-company-130932917.html",
+    "published_at": "2026-06-02T13:09:32Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "c1bfa3704400",
+    "title": "AI is carrying the S&P 500 rally: Chart of the Day",
+    "summary": "The S&P 500's rebound looks a lot thinner once AI enablers are stripped out.",
+    "url": "https://finance.yahoo.com/markets/article/ai-is-carrying-the-sp-500-rally-chart-of-the-day-100000546.html",
+    "published_at": "2026-06-02T10:00:00Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "a8c7bdabdb32",
+    "title": "Amazon moves Prime Day back to June, keeps it a four-day event",
+    "summary": "Amazon.com will host its annual Prime Day sales event from June 23 to June 26 after launching the event in July for the ‌past five years, citing major holidays and sporting events as factors in its decision.  Prime Day ‌is one of Amazon's biggest sales events of the year, and helped drive $24.1 billion in U.S. online spending in 2025 when ​it extended the event to four days from two, according to data from Adobe Analytics.  The e-commerce company considers U.S. and global events, religious holidays and bank holidays when choosing the dates for Prime Day each year.",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/amazon-moves-prime-day-back-050648289.html",
+    "published_at": "2026-06-02T05:06:48Z",
+    "source": "Reuters",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "1246abef80c9",
+    "title": "Amazon sets the stage for its first Prime Day in June since 2021",
+    "summary": "Amazon announces dates for its annual Prime Day summer savings event.",
+    "url": "https://finance.yahoo.com/sectors/technology/article/amazon-sets-the-stage-for-its-first-prime-day-in-june-since-2021-050000112.html",
+    "published_at": "2026-06-02T05:00:00Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "c42948f255db",
+    "title": "Jim Cramer Discusses Amazon.com (AMZN) & Rocket Explosion",
+    "summary": "We recently published Jim Cramer Warned About Market Manipulation & Discussed These 22 Stocks. Amazon.com, Inc. (NASDAQ:AMZN) is one of the stocks discussed by Jim Cramer. eCommerce and cloud computing giant Amazon.com, Inc. (NASDAQ:AMZN)’s shares are up by 32% over the past year and by 19% year-to-date. Bank of America discussed the firm on May […]",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-discusses-amazon-com-042958733.html",
+    "published_at": "2026-06-02T04:29:58Z",
+    "source": "Insider Monkey",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "ddaea3e6f1b5",
+    "title": "Blue Origin launch pad repairs could take 'serious time', NASA chief tells CNBC",
+    "summary": "Damage to a Blue Origin launch pad from the spectacular explosion of the company's giant New Glenn rocket ‌during a test firing of its engines last week will \"take ‌some serious time\" to repair, NASA Administrator Jared Isaacman told CNBC on Monday.  The mishap came ⁠at a critical time for the Blue Origin rocket and Amazon satellite ventures of billionaire Jeff Bezos, who is seeking to compete on a more ​equal footing ​with Elon Musk's SpaceX, the world's ​leading private space launch service.  Company ‌and industry sources said over the weekend that the explosion had left the launch pad \"practically destroyed\" and in need of repairs that engineers expect will disrupt operations for at least six months.",
+    "url": "https://finance.yahoo.com/sectors/technology/articles/blue-origin-launch-pad-repairs-020902157.html",
+    "published_at": "2026-06-02T02:09:02Z",
+    "source": "Reuters",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "37008e8102f2",
+    "title": "TSMC executive drops blunt message on AI chip’s next frontier",
+    "summary": "Wall Street has spent years pricing AI chip stocks on one core assumption: raw computing power wins. More transistors, more speed, more performance. That was the race, and investors bid up names including Nvidia (NVDA), Taiwan Semiconductor Manufacturing Company (TSM), and Broadcom (AVGO) ...",
+    "url": "https://www.thestreet.com/investing/stocks/tsmc-says-energy-efficiency-is-ai-chips-next-frontier",
+    "published_at": "2026-06-02T01:03:00Z",
+    "source": "TheStreet",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "071dfaa3ce26",
+    "title": "Bank of America reiterates Amazon stock forecast at tipping point",
+    "summary": "Amazon (AMZN) stock is up about 14.63% year to date, at the time of writing, Monday afternoon, June 1. Meanwhile, the SPDR S&P 500 Index (SPY) is up about 11.01% in the same period. And while Amazon has just slightly outpaced the S&P 500, it has also outpaced all but two Magnificent 7 ...",
+    "url": "https://www.thestreet.com/investing/stocks/bank-of-america-reiterates-amazon-stock-forecast",
+    "published_at": "2026-06-02T00:37:00Z",
+    "source": "TheStreet",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "78d347c32c3a",
+    "title": "Amazon (AMZN) Ranks Among Stocks Most Bought by Hedge Funds in Q1 2026",
+    "summary": "Amazon.com, Inc. (NASDAQ:AMZN) is one of the 12 Stocks Most Bought by Hedge Funds in Q1 2026. On May 27, UBS reiterated its Buy rating on Amazon.com, Inc. (NASDAQ:AMZN) with a price target of $333. The research firm updated its methodology for estimating AWS segment revenue after previously overestimating its Q1 2026 forecast. UBS now […]",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/amazon-amzn-ranks-among-stocks-230116621.html",
+    "published_at": "2026-06-01T23:01:16Z",
+    "source": "Insider Monkey",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "eccea397b471",
+    "title": "Here’s what’s worth streaming in June 2026 on Netflix, Hulu, HBO Max and more",
+    "summary": "HBO’s ‘House of the Dragon,’ Hulu’s ‘The Bear’ and Apple’s ‘Cape Fear’ will try to compete with the World Cup",
+    "url": "https://www.marketwatch.com/story/heres-whats-worth-streaming-in-june-2026-on-netflix-hulu-hbo-max-and-more-7c73c539",
+    "published_at": "2026-06-01T22:40:00Z",
+    "source": "MarketWatch",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "3b44eb1e8030",
+    "title": "Jeff Bezos, Jensen Huang and SoftBank CEO Spotlight AI’s Biggest Debates",
+    "summary": "AI-linked firms raised about $380 billion in 2026. Bezos, Huang, and Son frame the bubble versus productivity debate.",
+    "url": "https://beincrypto.com/bezos-huang-ai-capital-debate/",
+    "published_at": "2026-06-01T22:06:13Z",
+    "source": "BeInCrypto",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "26d6abdcbb71",
+    "title": "Meta, Alphabet, Amazon, and Microsoft are getting hooked on debt to fuel AI boom",
+    "summary": "Debt is becoming a big tool in the Big Tech arsenal.",
+    "url": "https://finance.yahoo.com/markets/article/meta-alphabet-amazon-and-microsoft-are-getting-hooked-on-debt-to-fuel-ai-boom-140111460.html",
+    "published_at": "2026-06-01T14:01:11Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
     "id": "f7e44f7c3cc6",
     "title": "Nvidia Says Anthropic, OpenAI Among Big Users of New Vera Chip",
     "summary": "(Bloomberg) -- Nvidia Corp. said Anthropic PBC, OpenAI and SpaceX are among the first big users of its upcoming microprocessor, securing key customers for its latest attempt to expand an already extensive footprint in AI data centers.Most Read from BloombergUS Says Deals With Iran for Safe Hormuz Transit Are ProhibitedStrait of Hormuz Ship Transits Are Rising Thanks to US HelpAmericans Injured in Iranian Missile Strike on Kuwaiti Air BaseAmericans Hurt in Kuwait as Trump Sends Mixed Signals on W",

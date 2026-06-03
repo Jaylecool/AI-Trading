@@ -1,5 +1,235 @@
 [
   {
+    "id": "612412db3209",
+    "title": "Morning Bid: Marvell, a fitting name for the latest AI darling",
+    "summary": "A look at the day ahead in European and global markets from Tom Westbrook Notwithstanding fresh hostilities in the Middle East, AI shares drove equity markets in Asia to new records on Wednesday.",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/morning-bid-marvell-fitting-name-043542710.html",
+    "published_at": "2026-06-03T04:35:42Z",
+    "source": "Reuters",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "369b8736f7dc",
+    "title": "Aptiv (APTV) Is Up 25.7% After Deepening NVIDIA Edge AI Partnership – Has The Bull Case Changed?",
+    "summary": "On 2 June 2026, Aptiv PLC announced an expanded collaboration with NVIDIA to evolve Jetson platforms, including next-generation Jetson Thor, into commercially supported, production-ready edge AI systems with long-term security, lifecycle management, and Linux support across industries such as industrial automation, robotics, aerospace and defense, automotive, and telecommunications. A distinctive element of this announcement is Aptiv’s plan to provide Cyber Resilience Act ready Yocto...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/aptiv-aptv-25-7-deepening-043125601.html",
+    "published_at": "2026-06-03T04:31:25Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "35a911a34495",
+    "title": "Why Coherent (COHR) Is Up 11.9% After Nvidia’s AI Optics Deal And Equity Investment",
+    "summary": "In recent days, Coherent Corp. reported strong growth in its Data Center & Communications segment and secured a multibillion‑dollar AI datacenter infrastructure partnership with Nvidia, which also took an equity stake to support expanded photonics capacity. These developments coincided with broader enthusiasm for optical networking after Nvidia CEO Jensen Huang highlighted high‑speed optical connectivity as critical for AI data centers. An especially important detail for investors is that...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/why-coherent-cohr-11-9-043123374.html",
+    "published_at": "2026-06-03T04:31:23Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "907a4f674681",
+    "title": "Walmart+: The Shopping Edge That Leads to 4X More Spending",
+    "summary": "The retailer figured out how to generate recurring revenue and get people to spend more.",
+    "url": "https://www.fool.com/investing/2026/06/02/walmart-stock-the-shopping-edge-that-leads-to-4x-m/",
+    "published_at": "2026-06-03T03:48:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "ea47ef198deb",
+    "title": "Why Figma Stock Jumped 44% in May",
+    "summary": "Figma continued to deliver strong results despite broader fears about disruption.",
+    "url": "https://www.fool.com/investing/2026/06/02/why-figma-stock-jumped-44-in-may/",
+    "published_at": "2026-06-03T03:28:59Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "19b547a4c92a",
+    "title": "Why Alphabet Stock Fell Today",
+    "summary": "AI isn't cheap.",
+    "url": "https://www.fool.com/investing/2026/06/02/why-alphabet-stock-fell-today/",
+    "published_at": "2026-06-03T03:16:18Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "ee46c7146cd3",
+    "title": "'Nobody wants to be left behind' in AI adoption: HPE CEO on Q2 earnings",
+    "summary": "Hewlett Packard Enterprise (HPE) is holding onto major gains ahead of Tuesday's close after topping fiscal second quarter estimates for adjusted earnings ($0.79 per share vs. forecasts of $0.54) and revenue ($10.68 billion vs. forecasts of $9.74 billion).  The tech company's stock moves are driven by the growth of its AI server business, now being considered a new contender in the AI infrastructure race. HPE CEO Antonio Neri sits down with Yahoo Finance Executive Editor Brian Sozzi to talk more about the earnings results, 2027 guidance, AI infrastructure, and supply constraints. This was HPE's biggest earnings beat seen since 2018, on top of record revenue.",
+    "url": "https://finance.yahoo.com/video/nobody-wants-left-behind-ai-193657066.html",
+    "published_at": "2026-06-02T19:36:57Z",
+    "source": "Yahoo Finance Video",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "291d7af22b15",
+    "title": "AI must 'accelerate the core' of your business: Snowflake CEO",
+    "summary": "Snowflake (SNOW) CEO Sridhar Ramaswamy sits down with Yahoo Finance Executive Editor Brian Sozzi to explain how the software company has leveraged artificial intelligence (AI) to avoid the SaaSpocalypse and come out ahead amid the AI boom.",
+    "url": "https://finance.yahoo.com/video/ai-must-accelerate-core-business-140722316.html",
+    "published_at": "2026-06-02T14:07:22Z",
+    "source": "Yahoo Finance Video",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "802a0cc90eaf",
+    "title": "Marvell stock soars as Nvidia CEO calls chipmaker 'the next trillion-dollar company'",
+    "summary": "Marvell stock jumped after Nvidia CEO Jensen Huang called the custom chipmaker 'the next trillion-dollar company.'",
+    "url": "https://finance.yahoo.com/markets/stocks/article/marvell-stock-soars-as-nvidia-ceo-calls-chipmaker-the-next-trillion-dollar-company-130932917.html",
+    "published_at": "2026-06-02T13:09:32Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "c1bfa3704400",
+    "title": "AI is carrying the S&P 500 rally: Chart of the Day",
+    "summary": "The S&P 500's rebound looks a lot thinner once AI enablers are stripped out.",
+    "url": "https://finance.yahoo.com/markets/article/ai-is-carrying-the-sp-500-rally-chart-of-the-day-100000546.html",
+    "published_at": "2026-06-02T10:00:00Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "f85dd50959e7",
+    "title": "3 Reasons Why Sandisk Stock Can Still Go Higher",
+    "summary": "Despite the stock's steep rise over the past year, the memory specialist's valuation isn't unreasonable.",
+    "url": "https://www.fool.com/investing/2026/06/02/3-reasons-why-sandisk-stock-can-still-go-higher/",
+    "published_at": "2026-06-02T05:51:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "b011f2c1a8ea",
+    "title": "The Market Overreacted to the DEA's Marijuana Rescheduling -- Here's What It Means for Canopy Growth Stock Now",
+    "summary": "The move only shifted a certain category of weed.",
+    "url": "https://www.fool.com/investing/2026/06/02/the-market-overreacted-to-the-deas-marijuana-resch/",
+    "published_at": "2026-06-02T05:35:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "594148a4e724",
+    "title": "Super Micro Pushes Deeper Into AI Factories With Verda Europe Rollout",
+    "summary": "Super Micro Computer (NasdaqGS:SMCI) has introduced new AI data center solutions, including Data Center Building Block Solutions Blueprints for NVIDIA Vera Rubin. The company also released 12 new server platforms built on Intel Xeon 6+ processors, aimed at next generation AI workloads and high density deployments. Super Micro announced a large scale partnership with Verda to roll out its advanced AI systems across Europe, targeting sustainable, high performance cloud infrastructure. The new...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/super-micro-pushes-deeper-ai-050801628.html",
+    "published_at": "2026-06-02T05:08:01Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "4a10d630f46d",
+    "title": "Is the SpaceX IPO Destined to Flop? This Historical Indicator Has an 86% Success Rate and Offers a Clear Answer.",
+    "summary": "SpaceX may be impressive, but investors should also weigh the downside risk.",
+    "url": "https://www.fool.com/investing/2026/06/02/is-the-spacex-ipo-destined-to-flop-this-historical/",
+    "published_at": "2026-06-02T05:05:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "df13b78b6454",
+    "title": "Iovance Stock Has Been Hammered. Is This the Buying Opportunity Aggressive Investors Have Been Waiting For?",
+    "summary": "Tread carefully, but certain factors make this speculative biotech play stand out.",
+    "url": "https://www.fool.com/investing/2026/06/02/iovance-stock-has-been-hammered-is-this-the-buying/",
+    "published_at": "2026-06-02T04:35:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "cd39ff600226",
+    "title": "Jim Cramer Can’t Understand Why NVIDIA (NVDA) Won’t Go Up",
+    "summary": "We recently published Jim Cramer Warned About Market Manipulation & Discussed These 22 Stocks. NVIDIA Corporation (NASDAQ:NVDA) is one of the stocks discussed by Jim Cramer. AI GPU giant NVIDIA Corporation (NASDAQ:NVDA) is one of Jim Cramer’s favorite stocks even though the shares have remained lackluster this year. Year-to-date, the stock is up by a […]",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-t-understand-why-043117175.html",
+    "published_at": "2026-06-02T04:31:17Z",
+    "source": "Insider Monkey",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "5787cfa138d1",
+    "title": "Tesla Faces China FSD Lawsuit As Robotics Competition Tests Valuation",
+    "summary": "Tesla (NasdaqGS:TSLA) is facing a new class-action lawsuit in China alleging false advertising and consumer fraud related to its Full Self-Driving feature. The case challenges how Tesla markets FSD in one of its most important international markets and could influence regulatory scrutiny and consumer sentiment. At the same time, OpenAI, led by Sam Altman, has launched a dedicated robotics division focused on humanoid robots, while Nvidia is accelerating its own robotics efforts. These moves...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/tesla-faces-china-fsd-lawsuit-042744410.html",
+    "published_at": "2026-06-02T04:27:44Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "2c1b95df6891",
+    "title": "Qualcomm (QCOM) Loses 8.8% on Nvidia Competition Fears",
+    "summary": "Qualcomm Inc. (NASDAQ:QCOM) is one of the 10 Stocks Entering June in the Wrong Direction. Qualcomm snapped a two-day winning streak on Monday, shedding 8.78 percent to finish at $228.99 apiece, as investors resorted to profit-taking following the previous trading day’s record high, while digesting the impact of Nvidia Corp.’s foray into the devices market. […]",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/qualcomm-qcom-loses-8-8-042400633.html",
+    "published_at": "2026-06-02T04:24:00Z",
+    "source": "Insider Monkey",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "d7b2340b4380",
+    "title": "Fluence (FLNC) Strengthens Foothold in AI, Soars 44%",
+    "summary": "Fluence Energy Inc. (NASDAQ:FLNC) is one of the 10 Stocks Entering June on Fire. Fluence Energy saw its share prices climb by 43.80 percent on Monday to close at $27.15 apiece, as investors cheered its increasing role in the artificial intelligence sector with its role in the development of a next-generation platform to support the […]",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/fluence-flnc-strengthens-foothold-ai-041853580.html",
+    "published_at": "2026-06-02T04:18:53Z",
+    "source": "Insider Monkey",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "3e8b30e31e6d",
+    "title": "AMC, FLNC, HUBC Stocks Emerge Among Top Daily Gainers: What Fueled The Rally?",
+    "summary": "AMC Entertainment, Fluence Energy, and Hub Cyber Security were among the market’s top gainers on Monday, posting double-digit growth.",
+    "url": "https://stocktwits.com/news-articles/markets/equity/amc-flnc-hubc-stocks-emerge-among-top-daily-gainers/cZ0iN80Revs",
+    "published_at": "2026-06-02T04:13:50Z",
+    "source": "Stocktwits",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "bbd9ad91cd28",
+    "title": "Top market stories to watch Tuesday, June 2",
+    "summary": "Asking for a Trend Host Josh Lipton shares the top stories to keep an eye out for on Tuesday, June 2, including key earnings reports and the latest from Computex in Taiwan.",
+    "url": "https://finance.yahoo.com/video/top-market-stories-watch-tuesday-230000756.html",
+    "published_at": "2026-06-01T23:00:00Z",
+    "source": "Yahoo Finance Video",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "1b63104798d1",
+    "title": "The real winners of Nvidia's new AI superchip",
+    "summary": "Bokeh Capital Partners Founder and Chief Investment Officer Kimberly Forrest joins Julie Hyman on Market Catalysts to discuss Nvidia's (NVDA) new superchip, its role in the AI race, and who will use the chip.",
+    "url": "https://finance.yahoo.com/video/real-winners-nvidias-ai-superchip-150231000.html",
+    "published_at": "2026-06-01T15:02:31Z",
+    "source": "Yahoo Finance Video",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "ff7dc7be995a",
+    "title": "The value Nvidia's new chips will add to Windows PCs",
+    "summary": "Nvidia stock (NVDA) cruises higher to start off Monday trading after CEO Jensen Huang revealed its new N1X and RTX Spark chips at Computex Taipei 2026 over the weekend. Yahoo Finance Tech Editor Dan Howley highlights what these new chips could add to Nvidia's specs for personal computer designs.",
+    "url": "https://finance.yahoo.com/video/value-nvidias-chips-add-windows-142208000.html",
+    "published_at": "2026-06-01T14:22:08Z",
+    "source": "Yahoo Finance Video",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
     "id": "596e9b332403",
     "title": "Nvidia Introduces First PCs Designed for AI Agents",
     "summary": "The chips giant will work with manufacturers including Dell, Lenovo and HP to make the laptops, designed to support agentic computing.",

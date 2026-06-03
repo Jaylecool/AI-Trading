@@ -3,7 +3,7 @@ import {
   View, Text, StyleSheet, FlatList,
   RefreshControl, ActivityIndicator, TouchableOpacity,
 } from 'react-native';
-import api from '../api';
+import api, { readStaleCache, writeCache } from '../api';
 import { Colors } from '../theme';
 
 const TABS = ['History', 'Live Orders'];
@@ -17,13 +17,23 @@ export default function OrdersScreen() {
   const [refreshing, setRefreshing] = useState(false);
 
   const loadHistory = useCallback(async () => {
+    // Show stale cache first
+    const cached = await readStaleCache('orders_history');
+    if (cached) {
+      if (cached.trades)  setTrades(cached.trades);
+      if (cached.summary) setSummary(cached.summary);
+      setLoading(false);
+    }
     try {
       const [trRes, sumRes] = await Promise.all([
         api.get('/api/trades/history?limit=50').catch(() => null),
         api.get('/api/portfolio/summary').catch(() => null),
       ]);
-      if (trRes) setTrades(trRes.data.trades || []);
-      if (sumRes) setSummary(sumRes.data.summary || sumRes.data.raw || null);
+      const trades  = trRes?.data?.trades ?? [];
+      const summary = sumRes?.data?.summary ?? sumRes?.data?.raw ?? null;
+      if (trRes)  setTrades(trades);
+      if (sumRes) setSummary(summary);
+      await writeCache('orders_history', { trades, summary }, 60);
     } catch (_) {}
   }, []);
 

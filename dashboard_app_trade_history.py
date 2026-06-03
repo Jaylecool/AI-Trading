@@ -1,5 +1,5 @@
 
-from flask import Flask, request, jsonify, send_file
+from flask import Flask, request, jsonify, send_file, make_response
 from flask_cors import CORS
 import json
 import os
@@ -12,6 +12,8 @@ from datetime import datetime, timedelta
 import pandas as pd
 import numpy as np
 import uuid
+import gzip as _gzip
+import functools
 from flask.json.provider import DefaultJSONProvider
 
 # Flask 3.x JSON provider that replaces NaN / ±Inf with null everywhere in responses
@@ -102,6 +104,92 @@ def _validate_symbol(symbol: str) -> bool:
 # Keyed by symbol. Each entry: {'data': <dict>, 'expires': <datetime>}
 # TTL: 5 min during market hours (9:30–16:00 ET weekdays), 60 min otherwise.
 _prediction_cache: dict = {}
+
+# ── Shared live-price cache ───────────────────────────────────────────────────
+# Populated by a background thread every 60 s using a single batch yf.download()
+# call instead of N individual Ticker.history() calls per request.
+# _live_price_cache: scalar stats (price, 52w high/low, etc.)
+# _yf_hist_cache:    full 1-year OHLCV DataFrame per symbol — used by the
+#                    prediction endpoint so it never makes a network call
+#                    on a cache hit.
+_live_price_cache: dict = {}
+_yf_hist_cache:    dict = {}   # symbol -> pd.DataFrame (1y daily OHLCV)
+_live_price_lock = threading.Lock()
+
+def _refresh_live_prices():
+    """Background thread: batch-fetch all symbol prices every 60 seconds.
+    Uses a single yf.download() call for all symbols (much faster than N
+    individual Ticker.history() calls).  Stores 52-week stats so endpoints
+    can be served entirely from cache without per-request network I/O."""
+    import yfinance as yf
+    # Initial short sleep so the server is fully up before the first fetch
+    time.sleep(5)
+    while True:
+        try:
+            syms = ' '.join(SUPPORTED_SYMBOLS)
+            # Fetch 1 year of daily data for 52-week stats; one network round-trip
+            df = yf.download(syms, period='1y', interval='1d',
+                             group_by='ticker', auto_adjust=True,
+                             progress=False, threads=True)
+            now = datetime.now()
+            with _live_price_lock:
+                for sym in SUPPORTED_SYMBOLS:
+                    try:
+                        if len(SUPPORTED_SYMBOLS) == 1:
+                            sym_df = df
+                        else:
+                            sym_df = df[sym]
+                        closes = sym_df['Close'].dropna()
+                        highs  = sym_df['High'].dropna()
+                        lows   = sym_df['Low'].dropna()
+                        vols   = sym_df['Volume'].dropna()
+                        if len(closes) >= 1:
+                            _live_price_cache[sym] = {
+                                'price':      float(closes.iloc[-1]),
+                                'prev_close': float(closes.iloc[-2]) if len(closes) >= 2 else float(closes.iloc[-1]),
+                                'day_high':   float(highs.iloc[-1]) if not highs.empty else None,
+                                'day_low':    float(lows.iloc[-1])  if not lows.empty  else None,
+                                'high_52w':   float(highs.max())    if not highs.empty else None,
+                                'low_52w':    float(lows.min())     if not lows.empty  else None,
+                                'volume':     int(vols.iloc[-1])    if not vols.empty  else None,
+                                'updated':    now,
+                            }
+                            # Store full OHLCV DataFrame — prediction endpoint reads this
+                            # instead of making a separate yfinance network call
+                            _yf_hist_cache[sym] = sym_df.dropna(how='all').copy()
+                    except Exception as _exc:
+                        logger.debug(f'[PRICE-CACHE] {sym} skipped: {_exc}')
+            logger.info(f'[PRICE-CACHE] Refreshed prices for {list(_live_price_cache.keys())}')
+        except Exception as e:
+            logger.warning(f'[PRICE-CACHE] Batch refresh failed: {e}')
+        time.sleep(60)
+
+def get_cached_price(symbol: str):
+    """Return (price, prev_close) from cache, or None if not yet populated."""
+    with _live_price_lock:
+        entry = _live_price_cache.get(symbol)
+    if entry:
+        return entry['price'], entry['prev_close']
+    return None, None
+
+# ── Gzip compression helper ───────────────────────────────────────────────────
+def gzip_response(f):
+    """Decorator: gzip-compress JSON responses when client supports it."""
+    @functools.wraps(f)
+    def decorated(*args, **kwargs):
+        resp = f(*args, **kwargs)
+        # Only compress actual Response objects with JSON content
+        if not isinstance(resp, tuple):
+            if 'gzip' in request.headers.get('Accept-Encoding', ''):
+                if hasattr(resp, 'get_data'):
+                    data = resp.get_data()
+                    compressed = _gzip.compress(data, compresslevel=6)
+                    if len(compressed) < len(data):  # only if smaller
+                        resp.set_data(compressed)
+                        resp.headers['Content-Encoding'] = 'gzip'
+                        resp.headers['Content-Length'] = len(compressed)
+        return resp
+    return decorated
 
 def _prediction_cache_ttl() -> int:
     """Return cache TTL in seconds based on whether the market is open."""
@@ -290,6 +378,11 @@ def initialize_portfolio(backtest_file: str = os.path.join(cfg.RESULTS_DIR, 'bac
     Per-user portfolios are created lazily on first access."""
     global streaming_service, alert_system, notification_service
 
+    # Start the shared live-price background refresh thread
+    _price_thread = threading.Thread(target=_refresh_live_prices, daemon=True, name='PriceCache')
+    _price_thread.start()
+    print("Live-price background cache started")
+
     # Initialize streaming service with YAHOO FINANCE (LIVE DATA)
     streaming_service = get_streaming_service(data_source=DataSourceType.YAHOO_FINANCE)
     for sym in SUPPORTED_SYMBOLS:
@@ -464,29 +557,27 @@ def get_portfolio_summary():
     try:
         ctx = _user_state(session['user_id'])
         tracker = ctx['tracker']
-        
-        # Update market prices for accurate position valuation
-        try:
-            import yfinance as yf
-            for sym in SUPPORTED_SYMBOLS:
-                try:
-                    _ph = yf.Ticker(sym).history(period='2d')['Close'].dropna()
-                    if not _ph.empty:
-                        tracker.portfolio.update_market_price(sym, float(_ph.iloc[-1]))
-                except (KeyError, IndexError, ValueError) as exc:
-                    logger.debug(f"Could not fetch price for {sym}: {exc}")
-        except ImportError:
-            logger.warning("yfinance not available – skipping live price update")
-        
+
+        # Update market prices from the shared background cache (no per-request
+        # yfinance call — the background thread refreshes prices every 60 s).
+        with _live_price_lock:
+            cache_snapshot = dict(_live_price_cache)
+        for sym, entry in cache_snapshot.items():
+            tracker.portfolio.update_market_price(sym, entry['price'])
+
         metrics = tracker.get_portfolio_summary()
         formatted = PortfolioVisualizer.format_portfolio_summary(metrics)
-        
+
         return jsonify({
             'status': 'success',
             'summary': formatted,
-            'raw': metrics
+            'raw': metrics,
+            'prices_updated_at': max(
+                (e['updated'].isoformat() for e in cache_snapshot.values()),
+                default=None
+            ),
         })
-    
+
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
@@ -612,66 +703,67 @@ def get_equity_curve():
 
 @app.route('/api/portfolio/live-price', methods=['GET'])
 def get_live_price():
-    """Get current stock price with recent history"""
+    """Get current stock price — served from the shared background price cache.
+    Falls back to a direct yfinance call if the cache has not yet been populated
+    (e.g. within the first 5 seconds of startup)."""
+    symbol = request.args.get('symbol', 'AAPL')
+    if symbol not in SUPPORTED_SYMBOLS:
+        return jsonify({'error': f'Unsupported symbol: {symbol}'}), 400
+
+    # Fast path: serve from cache
+    with _live_price_lock:
+        entry = _live_price_cache.get(symbol)
+
+    if entry:
+        price   = entry['price']
+        prev_cl = entry['prev_close']
+        change  = round(price - prev_cl, 2)
+        chg_pct = round((change / prev_cl * 100) if prev_cl else 0, 2)
+        return jsonify({
+            'status':         'success',
+            'symbol':         symbol,
+            'timestamp':      entry['updated'].isoformat(),
+            'current_price':  price,
+            'previous_close': prev_cl,
+            'change':         change,
+            'change_percent': chg_pct,
+            'day_high':       entry.get('day_high'),
+            'day_low':        entry.get('day_low'),
+            'high_52w':       entry.get('high_52w'),
+            'low_52w':        entry.get('low_52w'),
+            'volume':         entry.get('volume'),
+            'currency':       'USD',
+            'from_cache':     True,
+        })
+
+    # Slow fallback (only fires before the first background refresh completes)
     try:
         import yfinance as yf
-        
-        symbol = request.args.get('symbol', 'AAPL')
-        if symbol not in SUPPORTED_SYMBOLS:
-            return jsonify({'error': f'Unsupported symbol: {symbol}'}), 400
-        
         ticker = yf.Ticker(symbol)
-        
-        # Get current and recent prices
-        hist = ticker.history(period='1y')
-        info = ticker.info if hasattr(ticker, 'info') else {}
-        
-        if not hist.empty:
-            # Use last non-NaN close (yfinance may append a partial row for today)
-            _close_valid = hist['Close'].dropna()
-            if _close_valid.empty:
-                return jsonify({'error': 'No valid price data'}), 500
-            current_price = float(_close_valid.iloc[-1])
-            current = hist.loc[_close_valid.index[-1]]
-            
-            # Previous close
-            previous_price = float(_close_valid.iloc[-2]) if len(_close_valid) > 1 else current_price
-            
-            # Price change
-            change = current_price - previous_price
-            change_percent = (change / previous_price * 100) if previous_price != 0 else 0
-            
-            # High/Low for the day
-            day_high = float(current['High'])
-            day_low = float(current['Low'])
-            
-            # 52-week high/low
-            high_52w = float(hist['High'].max())
-            low_52w = float(hist['Low'].min())
-            
-            # Volume
-            volume = int(current['Volume'])
-            
-            return jsonify({
-                'status': 'success',
-                'symbol': symbol,
-                'timestamp': datetime.now().isoformat(),
-                'current_price': current_price,
-                'previous_close': previous_price,
-                'change': round(change, 2),
-                'change_percent': round(change_percent, 2),
-                'day_high': round(day_high, 2),
-                'day_low': round(day_low, 2),
-                'high_52w': round(high_52w, 2),
-                'low_52w': round(low_52w, 2),
-                'volume': volume,
-                'currency': 'USD'
-            })
-        else:
+        hist = ticker.history(period='5d')
+        if hist.empty:
             return jsonify({'error': 'No data available'}), 500
-    
-    except ImportError:
-        return jsonify({'error': 'yfinance not installed'}), 500
+        closes = hist['Close'].dropna()
+        price  = float(closes.iloc[-1])
+        prev_cl = float(closes.iloc[-2]) if len(closes) > 1 else price
+        change  = round(price - prev_cl, 2)
+        chg_pct = round((change / prev_cl * 100) if prev_cl else 0, 2)
+        return jsonify({
+            'status':         'success',
+            'symbol':         symbol,
+            'timestamp':      datetime.now().isoformat(),
+            'current_price':  price,
+            'previous_close': prev_cl,
+            'change':         change,
+            'change_percent': chg_pct,
+            'day_high':       round(float(hist['High'].iloc[-1]), 2),
+            'day_low':        round(float(hist['Low'].iloc[-1]), 2),
+            'high_52w':       None,
+            'low_52w':        None,
+            'volume':         int(hist['Volume'].iloc[-1]),
+            'currency':       'USD',
+            'from_cache':     False,
+        })
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
@@ -1554,6 +1646,7 @@ def auto_trade_cycle():
                 pe_horizon_signals = {}   # {'daily': 'BULLISH', 'weekly': ..., 'monthly': ...}
                 pe_confluence_buy  = False  # True only when daily+weekly both BULLISH
                 pe_confluence_sell = False  # True only when daily+weekly both BEARISH
+                horizons_data      = {}    # populated below; written to _prediction_cache
                 try:
                     # Build pe_df from the already-computed features_df (250 rows, full
                     # indicators from yfinance). The local indicator CSVs may have very few
@@ -1637,6 +1730,27 @@ def auto_trade_cycle():
                       f"M={pe_horizon_signals.get('monthly','?')} "
                       f"| Confluence Buy={pe_confluence_buy} "
                       f"| Forecast: ${forecast_price:.2f} vs Current: ${current_price:.2f}")
+
+                # Cache prediction result so API requests return instantly.
+                # The auto-trader already computes the full ML+PredictionEngine
+                # pipeline every 60 s; storing it here means /api/next-day-prediction
+                # never needs to re-run the pipeline on a user stock-switch.
+                try:
+                    _prediction_cache[symbol] = {
+                        'data': {
+                            'forecast_price':   round(float(forecast_price), 2) if forecast_price is not None else None,
+                            'current_price':    round(float(current_price), 2),
+                            'confidence_level': None,  # not computed in auto-trader
+                            'signal':           pe_signal,
+                            'symbol':           symbol,
+                            'model':            'ML Ensemble (LR+RF+GB)' if trained_models.get(symbol) else 'trend-based',
+                            'data_source':      'yahoo_finance',
+                            'horizons':         horizons_data if horizons_data else None,
+                        },
+                        'expires': datetime.utcnow() + timedelta(seconds=_prediction_cache_ttl()),
+                    }
+                except Exception:
+                    pass  # never let a cache write break the trading loop
 
                 # 5. Check open positions for this symbol for stop-loss / take-profit / trailing-stop exits
                 positions_to_close = []
@@ -1746,8 +1860,14 @@ def auto_trade_cycle():
                     print(f"[AUTO-TRADE] User {uid}: CIRCUIT BREAKER — portfolio at ${portfolio_value:.0f} ({portfolio_loss_pct:+.1%}), pausing buys")
                 elif pe_confluence_buy and pe_signal == 'BULLISH' and not has_symbol_position and len(open_positions) < params.max_concurrent_positions:
                     # Only enter when daily + weekly BOTH confirm BULLISH (confluence gate)
+                    # Pass the *weekly* forecast price to TradingRules so the price-appreciation
+                    # gate sees a 5-day return (~1-3%) rather than the 1-day ML return (~0.2-0.3%).
+                    # The 1-day return is often at or below the strategy buy_threshold (0.2-0.5%),
+                    # causing every confluence signal to be silently rejected even though the
+                    # weekly view already justifies the entry.
+                    tr_forecast = weekly_hz.get('forecast_price', forecast_price) if weekly_hz else forecast_price
                     buy_signal, buy_conf, buy_reason = trading_rules.get_buy_signal(
-                        forecast_price, current_price, market_data, daily_volatility
+                        tr_forecast, current_price, market_data, daily_volatility
                     )
 
                     # NO BYPASS — only trade when TradingRules confirms the signal
@@ -1805,7 +1925,8 @@ def auto_trade_cycle():
                             print(f"[AUTO-TRADE] User {uid}: {symbol} buy signal but insufficient cash (need ${shares * current_price:.0f}, have ${available_cash:.0f})")
                     else:
                         appreciation = (forecast_price - current_price) / current_price
-                        print(f"[AUTO-TRADE] User {uid}: {symbol} no confirmed buy signal | PE: BULLISH | TradingRules: {'YES' if buy_signal else 'NO'} conf={buy_conf:.2f} | Forecast: ${forecast_price:.2f} ({appreciation:+.2%})")
+                        w_appr = (tr_forecast - current_price) / current_price
+                        print(f"[AUTO-TRADE] User {uid}: {symbol} no confirmed buy signal | PE: BULLISH | TradingRules: {'YES' if buy_signal else 'NO'} conf={buy_conf:.2f} | 1d: ${forecast_price:.2f} ({appreciation:+.2%}) | 5d: ${tr_forecast:.2f} ({w_appr:+.2%}) | {buy_reason}")
                 elif pe_signal == 'BULLISH' and not pe_confluence_buy and not has_symbol_position:
                     d_s = pe_horizon_signals.get('daily','?')
                     w_s = pe_horizon_signals.get('weekly','?')
@@ -1958,12 +2079,20 @@ def get_next_day_prediction():
         cached = _prediction_cache.get(symbol)
         if cached and cached['expires'] > datetime.utcnow():
             return jsonify(cached['data'])
-        
-        # Fetch 1 year of data (need 200+ days for SMA_200 warmup)
-        ticker = yf.Ticker(symbol)
-        hist = ticker.history(period='1y')
-        
-        if hist.empty:
+
+        # ── Use background-cached OHLCV DataFrame when available ─────────────
+        # The background price thread fetches 1y of data every 60 s and stores it
+        # in _yf_hist_cache.  Reading from there avoids a per-request network call
+        # (~0.5-2 s saved on every cache miss).
+        with _live_price_lock:
+            hist = _yf_hist_cache.get(symbol)
+
+        if hist is None or hist.empty:
+            # Fallback: direct fetch (only needed before the first background cycle)
+            ticker = yf.Ticker(symbol)
+            hist = ticker.history(period='1y')
+
+        if hist is None or hist.empty:
             raise ValueError("No data returned from Yahoo Finance")
         
         _close_series = hist['Close'].dropna()

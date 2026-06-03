@@ -1,5 +1,215 @@
 [
   {
+    "id": "f47aeb9e1542",
+    "title": "Cheap Stocks, Nervous Market, Big Opportunity: Where to Put $10,000 Right Now",
+    "summary": "If you're looking to invest big, Amazon and Meta Platforms look like top choices.",
+    "url": "https://www.fool.com/investing/2026/06/02/cheap-stocks-nervous-market-big-opportunity-where/",
+    "published_at": "2026-06-02T23:50:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "820e6332ad5a",
+    "title": "Meta Employee Backlash Puts AI Data Privacy And Investor Risks In Focus",
+    "summary": "Meta Platforms (NasdaqGS:META) faces fresh employee backlash over plans to collect detailed computer usage data to train its internal AI systems. After internal protests, Meta is revising the program to let staff pause monitoring and request exemptions from the data collection tools. Rights groups are raising privacy concerns, including the possibility of future disputes in Europe over how such data is gathered and used. For you as an investor, this sits at the intersection of Meta's core...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/meta-employee-backlash-puts-ai-231217644.html",
+    "published_at": "2026-06-02T23:12:17Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "2b518bbc140d",
+    "title": "Bank of America resets Nvidia stock forecast after key event",
+    "summary": "Nvidia (NVDA) stock closed the June 1 trading session up 6.26% at $224.36. The stock is now up about 20.3% year to date, at the time of writing, Tuesday morning, June 2. Meanwhile, the SPDR S&P 500 Index (SPY) is up about 11.24% in the same period. While Nvidia was expected to outpace the ...",
+    "url": "https://www.thestreet.com/investing/stocks/bank-of-america-reiterates-buy-rating-nvidia-stock-forecast",
+    "published_at": "2026-06-02T22:17:00Z",
+    "source": "TheStreet",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "b276bfc686ce",
+    "title": "Western Union, Visa, PayPal, Meta: why major payments giants are racing to Solana",
+    "summary": "Kyle Samani, co-founder of Forward, breaks down his latest deal on the main stage at Solana, a minority stake in Henri, a reinsurance RWA yielding 12-13%, funded by a Galaxy debt facility at 3.5%. He makes the case for why Solana has quietly become the dominant chain for institutional payments, tokenized equities, and real world assets. From Western Union and Visa to Meta and PayPal, the biggest names in finance are all building on the same rails. Plus, why he thinks most altcoins are bleeding out, Ethereum L2s are in trouble, and why this bear market might be the best investing opportunity in crypto right now.",
+    "url": "http://videos.coindesk.com/previews/n07F2dhz",
+    "published_at": "2026-06-02T21:06:16Z",
+    "source": "CoinDesk",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "165764da063b",
+    "title": "UBS joins Meta in sending shocking message to employees",
+    "summary": "Three years after brokering one of the most consequential emergency acquisitions in banking history, UBS is still working through what that deal cost in human terms. The latest bill arrived on May 29. Hundreds of employees across Europe, the Middle East, and Africa found out their jobs were gone. ...",
+    "url": "https://www.thestreet.com/employment/ubs-joins-meta-in-laying-off-employees",
+    "published_at": "2026-06-02T21:03:00Z",
+    "source": "TheStreet",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "9de278c27cae",
+    "title": "Ahead of Broadcom Earnings, Here’s What Barchart Data Says Comes Next for AVGO Stock",
+    "summary": "Broadcom stock has already had a meteoric run ahead of Q2 earnings on June 3, but options traders believe AVGO shares will push higher after the quarterly print.",
+    "url": "https://www.barchart.com/story/news/2268202/ahead-of-broadcom-earnings-heres-what-barchart-data-says-comes-next-for-avgo-stock",
+    "published_at": "2026-06-02T20:44:04Z",
+    "source": "Barchart",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "c5dfc6fa87e8",
+    "title": "Bad News for Alphabet Stock Is Good News for Copper Investors",
+    "summary": "Copper soared while  Alphabet  stock sank; both things were related.  The Google parent’s stock sank because of an $80 billion equity raise that included preferred stock and  Berkshire Hathaway  No one saw it coming, part of the reason for the reaction.  Alphabet needs the money to spend even more on AI and meet what it calls “unprecedented customer demand.”",
+    "url": "https://www.barrons.com/articles/alphabet-stock-copper-ai-capex-8a7f170b?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-06-02T20:20:00Z",
+    "source": "Barrons.com",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "5f7b48bd6df0",
+    "title": "Alphabet Is Selling $80 Billion of Stock to Feed Its AI Ambitions—and the Rest of Big Tech May Follow",
+    "summary": "Alphabet plans to raise $80 billion through equity sales to fund its 2026 and 2027 capital expenditures.",
+    "url": "https://www.barrons.com/articles/alphabet-google-stock-sale-ai-funding-meta-041c029b?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-06-02T20:09:00Z",
+    "source": "Barrons.com",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "83d3a52a92a2",
+    "title": "Exclusive-Meta scales back plan for internal mouse-tracking tech, citing staff concerns",
+    "summary": "Meta is dialing back elements of its plan to collect employee mouse movements, keystrokes and other actions ‌for use as AI training data, it said in an ‌internal memo on Tuesday, following weeks of angry pushback from staffers.  New controls will allow ​employees to pause the data collection for up to 30 minutes at a time and request exemptions from the initiative, according to the memo, authored by Stephane Kasriel, a vice president in Meta's AI model-building Superintelligence Labs ‌unit.  A Meta spokesperson declined to comment.",
+    "url": "https://finance.yahoo.com/sectors/technology/articles/exclusive-meta-scales-back-ai-200217489.html",
+    "published_at": "2026-06-02T20:02:17Z",
+    "source": "Reuters",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "6fd98cfb23e3",
+    "title": "SpaceX, OpenAI & Anthropic IPOs: Investors should ask one question",
+    "summary": "Morning Brief host Julie Hyman is joined by Yahoo Finance Tech Editor Dan Howley and Investopedia Editor-in-Chief Caleb Silver to discuss the key question investors should be asking about upcoming IPOs from companies like SpaceX (SPAX.PVT), Anthropic (ANTH.PVT), and OpenAI (OPAI.PVT), and whether retail investors are ready to buy into the hype.",
+    "url": "https://finance.yahoo.com/video/spacex-openai-anthropic-ipos-investors-141627771.html",
+    "published_at": "2026-06-02T14:16:27Z",
+    "source": "Yahoo Finance Video",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "c1bfa3704400",
+    "title": "AI is carrying the S&P 500 rally: Chart of the Day",
+    "summary": "The S&P 500's rebound looks a lot thinner once AI enablers are stripped out.",
+    "url": "https://finance.yahoo.com/markets/article/ai-is-carrying-the-sp-500-rally-chart-of-the-day-100000546.html",
+    "published_at": "2026-06-02T10:00:00Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "04c39f7d8438",
+    "title": "A Look At Snap (SNAP) Valuation After Meta Hires Key Content Partnerships Executive",
+    "summary": "Snap (SNAP) has come under fresh scrutiny after Meta hired Jim Shepherd, the company’s former senior director of global content partnerships, to lead creator and content initiatives for its growing wearables business. See our latest analysis for Snap. The latest 1-day share price return of 2.63% and 90-day share price return of 11.62% sit against a year-to-date share price decline of 27.92% and a 5-year total shareholder return decline of 90.45%. This points to short term momentum but a weak...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/look-snap-snap-valuation-meta-031313164.html",
+    "published_at": "2026-06-02T03:13:13Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "2a127e0e1bce",
+    "title": "META Stock Still Trails Mag 7 Peers Even After New Subscriptions, Layoffs, Cloud Plans — Retail Sniffs Buying Opportunity",
+    "summary": "Meta shares fell sharply on Monday without a clear trigger, while retail sentiment moved up.",
+    "url": "https://stocktwits.com/news-articles/markets/equity/meta-stock-still-trails-mag-7-peers-even-after-new-subscriptions-layoffs-cloud-plans-retail-sniffs-buying-opportunity/cZ0ikQtRevF",
+    "published_at": "2026-06-02T02:47:55Z",
+    "source": "Stocktwits",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "37008e8102f2",
+    "title": "TSMC executive drops blunt message on AI chip’s next frontier",
+    "summary": "Wall Street has spent years pricing AI chip stocks on one core assumption: raw computing power wins. More transistors, more speed, more performance. That was the race, and investors bid up names including Nvidia (NVDA), Taiwan Semiconductor Manufacturing Company (TSM), and Broadcom (AVGO) ...",
+    "url": "https://www.thestreet.com/investing/stocks/tsmc-says-energy-efficiency-is-ai-chips-next-frontier",
+    "published_at": "2026-06-02T01:03:00Z",
+    "source": "TheStreet",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "071dfaa3ce26",
+    "title": "Bank of America reiterates Amazon stock forecast at tipping point",
+    "summary": "Amazon (AMZN) stock is up about 14.63% year to date, at the time of writing, Monday afternoon, June 1. Meanwhile, the SPDR S&P 500 Index (SPY) is up about 11.01% in the same period. And while Amazon has just slightly outpaced the S&P 500, it has also outpaced all but two Magnificent 7 ...",
+    "url": "https://www.thestreet.com/investing/stocks/bank-of-america-reiterates-amazon-stock-forecast",
+    "published_at": "2026-06-02T00:37:00Z",
+    "source": "TheStreet",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "36464c9e41a2",
+    "title": "META Valuation Remains Attractive, Says Wolfe",
+    "summary": "Meta Platforms, Inc. (NASDAQ:META) is one of the 12 Stocks Most Bought by Hedge Funds in Q1 2026. On May 21, Wolfe Research reiterated its Outperform rating on Meta Platforms, Inc. (NASDAQ:META) with a price target of $800, pointing to an attractive valuation despite worries about the company’s capital expenditure levels. Wolfe Research pointed out […]",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/meta-valuation-remains-attractive-says-230321313.html",
+    "published_at": "2026-06-01T23:03:21Z",
+    "source": "Insider Monkey",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "4a483177dfc7",
+    "title": "3 Trillion-Dollar AI Stocks to Buy Now, According to Wall Street",
+    "summary": "The valuations of artificial intelligence (AI) companies are surging, but their growth is more than just hype.",
+    "url": "https://www.fool.com/investing/2026/06/01/trillion-dollar-ai-stocks-to-buy-now-wall-street/",
+    "published_at": "2026-06-01T21:20:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "a1528970144b",
+    "title": "CoreWeave-Tied Data Center Seeks $850 Million Junk Bond Sale",
+    "summary": "(Bloomberg) -- A data center tied to CoreWeave Inc. is set to get funding from a $850 million junk-bond sale by Elk Grove Village Property LLC, which joins a wave of high-yield issuers tapping debt markets to fund artificial intelligence infrastructure.Most Read from BloombergRussia Finance Officials Tell Putin War Spending Is UnaffordableUS Says Deals With Iran for Safe Hormuz Transit Are ProhibitedBerkshire Hathaway to Buy Taylor Morrison for $6.8 BillionAlphabet to Raise $80 Billion in Equity",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/coreweave-tied-data-center-seeks-182851007.html",
+    "published_at": "2026-06-01T20:51:12Z",
+    "source": "Bloomberg",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "e20a1908529d",
+    "title": "Credo Technology Stock Sinks. Why 157% Revenue Growth Isn’t Enough for the AI Era.",
+    "summary": "Credo Technology stock declines despite better-than-expected earnings. The stock has rallied 157% since bottoming at the end of March.",
+    "url": "https://www.barrons.com/articles/credo-technology-earnings-stock-price-cf919da4?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-06-01T20:45:00Z",
+    "source": "Barrons.com",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "4a43ffd5cc0a",
+    "title": "Meta Is Launching Chatbot Subscriptions. META Stock Bulls Need a Way to Justify AI Costs.",
+    "summary": "Meta’s AI ambitions are getting expensive, and now Zuckerberg is betting chatbot subscriptions and layoffs to convince that AI spending spree will eventually pay off.",
+    "url": "https://www.barchart.com/story/news/2243305/meta-is-launching-chatbot-subscriptions-meta-stock-bulls-need-a-way-to-justify-ai-costs",
+    "published_at": "2026-06-01T20:31:48Z",
+    "source": "Barchart",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "26d6abdcbb71",
+    "title": "Meta, Alphabet, Amazon, and Microsoft are getting hooked on debt to fuel AI boom",
+    "summary": "Debt is becoming a big tool in the Big Tech arsenal.",
+    "url": "https://finance.yahoo.com/markets/article/meta-alphabet-amazon-and-microsoft-are-getting-hooked-on-debt-to-fuel-ai-boom-140111460.html",
+    "published_at": "2026-06-01T14:01:11Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
     "id": "f0eee02ffb70",
     "title": "China toughens rules on outbound investment after Meta-Manus contention",
     "summary": "BEIJING, June 1 (Reuters) - China issued sweeping new rules on Monday, widening regulators' powers to scrutinise overseas deals involving Chinese investors, technology, data and national security, a",

@@ -226,12 +226,19 @@ class PredictionEngine:
                     return 'NEUTRAL', 0.3
                 elif rsi > 70 and ml_confidence < 0.65:
                     return 'NEUTRAL', 0.3
-                # Require short-term uptrend (price > SMA20) AND 1/3 tech agreement
+                # Require short-term uptrend (price > SMA20)
                 sma20 = indicators.get('bb_middle', current_price)
                 in_short_uptrend = current_price > sma20
-                confirmation = tech_bullish >= 1  # at least 1/3 tech indicators bullish
-                if not confirmation or not in_short_uptrend:
-                    return 'NEUTRAL', 0.35  # insufficient confirmation
+                if not in_short_uptrend:
+                    return 'NEUTRAL', 0.35
+                # Tech confirmation: technicals must NOT strongly contradict ML.
+                # Requiring tech_bullish >= 1 (RSI<30, BB<0.3, or MACD rising) was
+                # blocking every signal in healthy uptrends where RSI sits at 50–65
+                # and price is in the middle of the BB band — exactly the conditions
+                # a trend-following ML buy should fire in.  Instead, only block when
+                # 2+ of the 3 tech indicators are outright BEARISH.
+                if tech_bearish >= 2:
+                    return 'NEUTRAL', 0.35  # strong technical contradiction
                 conf = ml_confidence
                 return 'BULLISH', min(conf, 1.0)
 
@@ -700,16 +707,19 @@ class PredictionEngine:
                          + 0.30 * mom10d
                          + 0.20 * (ml_return_1d * 5 * 0.70))
 
-        # Signal requires 4/6 indicators to agree (consistent with monthly horizon).
-        # 5/6 was too restrictive — it blocked weekly BULLISH even when daily was strongly
-        # bullish, causing the confluence gate to never fire for most stocks.
-        if w_bull >= 4:
+        # Signal requires 3/6 indicators to agree.
+        # 4/6 was too restrictive — in a consolidating uptrend (after a strong rally)
+        # MACD often flattens/turns negative while price stays above SMA20/SMA50 and RSI
+        # stays in the 50–70 zone, giving only 3 bull votes and blocking every entry.
+        # 3/6 means: if price is above both SMAs AND RSI is healthy AND ML agrees,
+        # that's already a valid BULLISH setup even if MACD is temporarily flat.
+        if w_bull >= 3:
             weekly_signal = 'BULLISH'
             # Confidence scales with votes and ADX (higher in trending market)
-            weekly_conf = min(0.90, 0.55 + (w_bull - 3) * 0.07 + adx_strength * 0.10)
-        elif w_bear >= 4:
+            weekly_conf = min(0.90, 0.50 + (w_bull - 2) * 0.07 + adx_strength * 0.10)
+        elif w_bear >= 3:
             weekly_signal = 'BEARISH'
-            weekly_conf = min(0.90, 0.55 + (w_bear - 3) * 0.07 + adx_strength * 0.10)
+            weekly_conf = min(0.90, 0.50 + (w_bear - 2) * 0.07 + adx_strength * 0.10)
         else:
             weekly_signal = 'NEUTRAL'
             weekly_conf = 0.40

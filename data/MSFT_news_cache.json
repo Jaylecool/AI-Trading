@@ -1,5 +1,205 @@
 [
   {
+    "id": "d0f6efa785f9",
+    "title": "NVIDIA Expands Beyond GPUs With RTX Spark And Vera AI Platforms",
+    "summary": "NVIDIA (NasdaqGS:NVDA) introduced the RTX Spark superchip for Windows PCs, aimed at bringing agentic AI capabilities directly to consumer and professional devices. The company also announced Vera CPUs for data centers, targeting new AI workloads for hyperscalers and enterprises. RTX Spark is tied to a partnership with Microsoft and MediaTek, while Vera connects to fresh ecosystem support across data center, robotics, and edge platforms. NVIDIA highlighted new supply chain partners, open...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/nvidia-expands-beyond-gpus-rtx-031010370.html",
+    "published_at": "2026-06-03T03:10:10Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "661e8b3e08a7",
+    "title": "S&P 500, Nasdaq, Dow Futures Ease After Another Record Close As AI Momentum Cushions Iran's Expanding Strikes: MRVL, AVGO, MSFT, PANW In Focus",
+    "summary": "U.S. President Donald Trump said in a post on Truth Social on Tuesday that the U.S. and Iran deal negotiations are ongoing, dismissing reports of strained relations between the two countries.",
+    "url": "https://stocktwits.com/news-articles/markets/equity/sp500-nasdaq-dow-futures-ease-after-another-record-close-ai-momentum-cushions-iran-strikes/cZ0SoqTReDV",
+    "published_at": "2026-06-03T01:41:05Z",
+    "source": "Stocktwits",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "9b3623b09f68",
+    "title": "Dan Ives Says ‘Market Is Mispricing’ MSFT Stock — Here’s Why",
+    "summary": "Wedbush’s Dan Ives stays bullish on Microsoft, Alphabet and the broader AI trade, calling current market sentiment an underestimation of the next phase of Big Tech growth.",
+    "url": "https://stocktwits.com/news-articles/markets/equity/why-dan-ives-says-market-is-mispricing-microsoft-stock/cZ00hf9ReDl",
+    "published_at": "2026-06-02T23:22:37Z",
+    "source": "Stocktwits",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "8e11b59f202c",
+    "title": "Billionaire Bill Gates' Foundation Dumped Microsoft but Loaded Up on This Dividend Champion",
+    "summary": "The Microsoft founder's foundation recently added this healthcare stock to its portfolio.",
+    "url": "https://www.fool.com/investing/2026/06/02/billionaire-bill-gates-foundation-dumped-microsoft/",
+    "published_at": "2026-06-02T22:50:00Z",
+    "source": "Motley Fool",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "d04ee4d01d48",
+    "title": "NVIDIA Unveils RTX Spark: A Closer Look",
+    "summary": "NVIDIA and Microsoft are back in the headlines following the unveiling of a recent 'superchip', namely RTX Spark, which is designed to completely reinvent Windows PCs for the AI era.",
+    "url": "https://finance.yahoo.com/sectors/technology/articles/nvidia-unveils-rtx-spark-closer-223500842.html",
+    "published_at": "2026-06-02T22:35:00Z",
+    "source": "Zacks",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "4386836eb271",
+    "title": "SpaceX Valuation Could Put Company in Top Seven by Market Cap",
+    "summary": "$1.75 trillion That is the valuation being considered by SpaceX in its blockbuster initial public offering planned for next week. That number could change a lot in coming days, but if it holds it would make Elon Musk’s rocket maker the seventh-largest U.",
+    "url": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-06-02-2026/card/spacex-valuation-could-put-company-in-top-seven-by-market-cap-4L5cPJB6wsFRIAlDaOWt?siteid=yhoof2&yptr=yahoo",
+    "published_at": "2026-06-02T22:30:04Z",
+    "source": "The Wall Street Journal",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "2b518bbc140d",
+    "title": "Bank of America resets Nvidia stock forecast after key event",
+    "summary": "Nvidia (NVDA) stock closed the June 1 trading session up 6.26% at $224.36. The stock is now up about 20.3% year to date, at the time of writing, Tuesday morning, June 2. Meanwhile, the SPDR S&P 500 Index (SPY) is up about 11.24% in the same period. While Nvidia was expected to outpace the ...",
+    "url": "https://www.thestreet.com/investing/stocks/bank-of-america-reiterates-buy-rating-nvidia-stock-forecast",
+    "published_at": "2026-06-02T22:17:00Z",
+    "source": "TheStreet",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "9170f4d9010d",
+    "title": "S&P 500, Nasdaq, Dow Rise To Record Highs As Strong Tech Gains Outpower US-Iran War Uncertainty — MSFT, UBER, MRVL, HPE, MSTR Stocks In Focus",
+    "summary": "President Donald Trump denied reports that communications between the United States and Iran had stalled, calling the claims “fake news.”",
+    "url": "https://stocktwits.com/news-articles/markets/equity/s-and-p-500-nasdaq-dow-rise-to-record-highs-as-strong-tech-gains-outpower-us-iran-war-uncertainty-msft-uber-mrvl-hpe-mstr-stocks-in-focus/cZ00XX8ReDS",
+    "published_at": "2026-06-02T22:08:53Z",
+    "source": "Stocktwits",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "a390b3bf6a48",
+    "title": "Microsoft is turning to AI to combat cyber threats",
+    "summary": "Microsoft is leaning on AI to help it fight back against hackers.",
+    "url": "https://finance.yahoo.com/markets/article/microsoft-is-turning-to-ai-to-combat-cyber-threats-181500134.html",
+    "published_at": "2026-06-02T18:15:00Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "802a0cc90eaf",
+    "title": "Marvell stock soars as Nvidia CEO calls chipmaker 'the next trillion-dollar company'",
+    "summary": "Marvell stock jumped after Nvidia CEO Jensen Huang called the custom chipmaker 'the next trillion-dollar company.'",
+    "url": "https://finance.yahoo.com/markets/stocks/article/marvell-stock-soars-as-nvidia-ceo-calls-chipmaker-the-next-trillion-dollar-company-130932917.html",
+    "published_at": "2026-06-02T13:09:32Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "2c1b95df6891",
+    "title": "Qualcomm (QCOM) Loses 8.8% on Nvidia Competition Fears",
+    "summary": "Qualcomm Inc. (NASDAQ:QCOM) is one of the 10 Stocks Entering June in the Wrong Direction. Qualcomm snapped a two-day winning streak on Monday, shedding 8.78 percent to finish at $228.99 apiece, as investors resorted to profit-taking following the previous trading day’s record high, while digesting the impact of Nvidia Corp.’s foray into the devices market. […]",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/qualcomm-qcom-loses-8-8-042400633.html",
+    "published_at": "2026-06-02T04:24:00Z",
+    "source": "Insider Monkey",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "1e941e5f5aa9",
+    "title": "Why Is Nvidia (NVDA) Stock Soaring Today",
+    "summary": "Shares of leading designer of graphics chips Nvidia (NASDAQ:NVDA) jumped 6.3% in the afternoon session after over 150 million shares traded hands (well above average) as CEO Jensen Huang's keynote at Computex in Taipei delivered two major announcements.",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/why-nvidia-nvda-stock-soaring-034451515.html",
+    "published_at": "2026-06-02T03:44:51Z",
+    "source": "StockStory",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "aab8d8bf2d6e",
+    "title": "Microsoft And Nvidia RTX Spark Puts AI PCs In Investor Focus",
+    "summary": "Nvidia and Microsoft have launched the RTX Spark AI superchip for Windows PCs, targeting AI powered personal computing. Spark enabled Windows devices from Microsoft, Dell, HP, Lenovo and others are expected to arrive this fall. The partnership aims to support local AI, personal agents running directly on devices, and new security features. For investors watching NasdaqGS:MSFT, the RTX Spark launch adds a fresh angle to the Windows story by linking the operating system directly to on device...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/microsoft-nvidia-rtx-spark-puts-021129168.html",
+    "published_at": "2026-06-02T02:11:29Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "5e28d231e7e1",
+    "title": "Nvidia Expands Into CPUs As AI Partnerships Grow And Valuation Stretches",
+    "summary": "Nvidia (NasdaqGS:NVDA) announced the RTX Spark superchip platform for Windows PCs and the Vera CPU for data centers, expanding into CPU markets that have traditionally centered on other large chip suppliers. The company introduced open source physical AI tools and agentic AI platforms, including Agent Toolkit, Cosmos, Alpamayo, Isaac Groot for robotics, and Vera Rubin for AI factories. Nvidia also disclosed new partnerships with Microsoft, MediaTek, Dell, TSMC, Uber, VinFast, and Foxconn,...",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/nvidia-expands-cpus-ai-partnerships-021042415.html",
+    "published_at": "2026-06-02T02:10:42Z",
+    "source": "Simply Wall St.",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "071dfaa3ce26",
+    "title": "Bank of America reiterates Amazon stock forecast at tipping point",
+    "summary": "Amazon (AMZN) stock is up about 14.63% year to date, at the time of writing, Monday afternoon, June 1. Meanwhile, the SPDR S&P 500 Index (SPY) is up about 11.01% in the same period. And while Amazon has just slightly outpaced the S&P 500, it has also outpaced all but two Magnificent 7 ...",
+    "url": "https://www.thestreet.com/investing/stocks/bank-of-america-reiterates-amazon-stock-forecast",
+    "published_at": "2026-06-02T00:37:00Z",
+    "source": "TheStreet",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "896ec000c865",
+    "title": "Morgan Stanley resets Microsoft stock price target",
+    "summary": "Big tech companies spend enormous sums of money all the time. They buy back stock, pay dividends, make acquisitions, and write checks that would make a defense contractor blush. Most of that spending is legible to investors. You can model it, forecast it, and plug it into a spreadsheet. But there ...",
+    "url": "https://www.thestreet.com/investing/stocks/morgan-stanley-resets-microsoft-stock-price-target",
+    "published_at": "2026-06-01T23:17:00Z",
+    "source": "TheStreet",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "2459bf15bb77",
+    "title": "Morgan Stanley Discusses Microsoft (MSFT) AI Revenue Outlook",
+    "summary": "Microsoft Corporation (NASDAQ:MSFT) is one of the 12 Stocks Most Bought by Hedge Funds in Q1 2026. On May 27, Morgan Stanley, in a note to clients, discussed whether Wall Street is fully valuing the scale of future AI revenues at Microsoft Corporation (NASDAQ:MSFT) and whether investors are underestimating how much monetization the company’s fast-growing […]",
+    "url": "https://finance.yahoo.com/markets/stocks/articles/morgan-stanley-discusses-microsoft-msft-230125802.html",
+    "published_at": "2026-06-01T23:01:25Z",
+    "source": "Insider Monkey",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "3c4309eb6bc3",
+    "title": "Nvidia partners with Microsoft on new RTX Spark laptops",
+    "summary": "Nvidia CEO Jensen Huang introduces the new RTX Spark laptop lineup powered by the Blackwell RTX GPU. This is a major collaboration with Microsoft and other industry partners to reinvent the personal computer for the AI era.",
+    "url": "https://finance.yahoo.com/video/nvidia-partners-microsoft-rtx-spark-181807437.html",
+    "published_at": "2026-06-01T18:18:07Z",
+    "source": "Yahoo Finance Video",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "ff7dc7be995a",
+    "title": "The value Nvidia's new chips will add to Windows PCs",
+    "summary": "Nvidia stock (NVDA) cruises higher to start off Monday trading after CEO Jensen Huang revealed its new N1X and RTX Spark chips at Computex Taipei 2026 over the weekend. Yahoo Finance Tech Editor Dan Howley highlights what these new chips could add to Nvidia's specs for personal computer designs.",
+    "url": "https://finance.yahoo.com/video/value-nvidias-chips-add-windows-142208000.html",
+    "published_at": "2026-06-01T14:22:08Z",
+    "source": "Yahoo Finance Video",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
+    "id": "26d6abdcbb71",
+    "title": "Meta, Alphabet, Amazon, and Microsoft are getting hooked on debt to fuel AI boom",
+    "summary": "Debt is becoming a big tool in the Big Tech arsenal.",
+    "url": "https://finance.yahoo.com/markets/article/meta-alphabet-amazon-and-microsoft-are-getting-hooked-on-debt-to-fuel-ai-boom-140111460.html",
+    "published_at": "2026-06-01T14:01:11Z",
+    "source": "Yahoo Finance",
+    "sentiment_score": null,
+    "sentiment_label": null
+  },
+  {
     "id": "596e9b332403",
     "title": "Nvidia Introduces First PCs Designed for AI Agents",
     "summary": "The chips giant will work with manufacturers including Dell, Lenovo and HP to make the laptops, designed to support agentic computing.",

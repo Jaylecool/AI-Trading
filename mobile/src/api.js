@@ -33,4 +33,40 @@ api.interceptors.response.use(async (response) => {
   return response;
 });
 
+// ─── Response cache helpers ───────────────────────────────────────────────────
+// Lightweight AsyncStorage-backed cache with TTL.  Used by screens to show
+// stale data instantly while fresh data loads in the background.
+
+const CACHE_PREFIX = '@api_cache/';
+
+export async function readCache(key) {
+  try {
+    const raw = await AsyncStorage.getItem(CACHE_PREFIX + key);
+    if (!raw) return null;
+    const { data, expires } = JSON.parse(raw);
+    if (Date.now() > expires) return null;   // expired
+    return data;
+  } catch {
+    return null;
+  }
+}
+
+export async function writeCache(key, data, ttlSeconds) {
+  try {
+    const payload = JSON.stringify({ data, expires: Date.now() + ttlSeconds * 1000 });
+    await AsyncStorage.setItem(CACHE_PREFIX + key, payload);
+  } catch { /* ignore storage errors */ }
+}
+
+export async function readStaleCache(key) {
+  /** Return cached data even if expired (for stale-while-revalidate). */
+  try {
+    const raw = await AsyncStorage.getItem(CACHE_PREFIX + key);
+    if (!raw) return null;
+    return JSON.parse(raw).data;
+  } catch {
+    return null;
+  }
+}
+
 export default api;
